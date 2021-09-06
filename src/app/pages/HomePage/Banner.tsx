@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  min-height: 150rem;
+  min-height: 130rem;
   position: relative;
 `;
 
@@ -39,6 +39,7 @@ const TextWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10rem;
 `;
 
 const Title = styled(TitleLib)`
