@@ -11,45 +11,44 @@ import 'react-app-polyfill/stable';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import FontFaceObserver from 'fontfaceobserver';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import { ViewportProvider } from './utils/viewport';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { App } from 'app';
+// Import root app
+import { App } from 'src/app';
 
 import { HelmetProvider } from 'react-helmet-async';
 
-import { configureAppStore } from 'store/configureStore';
+import { configureAppStore } from 'src/store/configureStore';
 
-import { ThemeProvider } from 'styles/theme/ThemeProvider';
-
-import reportWebVitals from 'reportWebVitals';
+import reportWebVitals from 'src/reportWebVitals';
 
 // Initialize languages
 import './locales/i18n';
 
-// Observe loading of Inter (to remove 'Inter', remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
-
-// When Inter is loaded, add a font-family using Inter to the body
-openSansObserver.load().then(() => {
-  document.body.classList.add('fontLoaded');
-});
-
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
+const client = new ApolloClient({
+  uri: 'https://api.thegraph.com/subgraphs/name/paulrberg/create-eth-app',
+});
+
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider>
-      <HelmetProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </HelmetProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ApolloProvider client={client}>
+        <ViewportProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </ViewportProvider>
+      </ApolloProvider>
+    </HelmetProvider>
   </Provider>,
   MOUNT_NODE,
 );

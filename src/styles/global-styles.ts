@@ -1,36 +1,84 @@
 import { createGlobalStyle } from 'styled-components';
-import { StyleConstants } from './StyleConstants';
-/* istanbul ignore next */
+import AcromRegular from 'src/styles/fonts/Acrom-Regular.woff';
+import AcromBold from 'src/styles/fonts/Acrom-Bold.woff';
+import AcromLight from 'src/styles/fonts/Acrom-Light.woff';
+
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Acrom';
+    src: url(${AcromRegular}) format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Acrom-Bold';
+    src: url(${AcromBold}) format('woff');
+    font-weight: bold;
+  }
+  @font-face {
+    font-family: 'Acrom-Light';
+    src: url(${AcromLight}) format('woff');
+    font-weight: bold;
+  }
+
   html,
   body {
-    height: 100%;
-    width: 100%;
-    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+
+    // This defines what 1rem is
+    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+
+    /* @include respond(phone) {
+      font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    } */
+
+    @media screen and (max-width: 450px) {
+      font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    }
+
+    /* @include respond(tab-land) {
+      // width < 1200?
+      font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+    } */
+
+    @media screen and (min-width: 450px) and (max-width: 768px) {
+      font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+    }
+
+    /* @include respond(tab-port) {
+      // width < 900?
+      font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    }
+
+    @include respond(desktop) {
+      font-size: 62.5%; //1rem = 12, 12/16
+    }
+
+    @include respond(big-desktop) {
+      font-size: 62.5%; //1rem = 12, 12/16
+    } */
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    padding-top: ${StyleConstants.NAV_BAR_HEIGHT};
-    background-color: ${p => p.theme.background};
+    font-family: Acrom;
+    min-height: 100%;
+    min-width: 100%;
+    overflow-x: hidden;
   }
 
-  body.fontLoaded {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  #root {
+    width: 100%;
+    height: 100%;
   }
-  
+
   p,
   label {
     line-height: 1.5em;
   }
 
-  input, select, button {
+  input, select {
     font-family: inherit;
     font-size: inherit;
-  }
-
-  .icon {
-    width: 1.5rem;
-    height: 1.5rem;
   }
 `;

@@ -2,11 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,12 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./",
+    "outDir": "./build",
+    "rootDir": "./src"
   },
-  "include": [
-    "src",
-    "internals/startingTemplate/**/*"
-  ]
+  "include": ["src", "src/styles/fonts"],
+  "exclude": ["node_modules", "build"]
 }
