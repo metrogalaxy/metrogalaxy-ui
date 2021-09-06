@@ -5,7 +5,7 @@ import { Logo } from 'src/app/components/Logo';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { MenuItem } from './MenuItem';
 import { MenuButton } from './MenuButton';
-import { mediaQuery, ScreenSize, ScreenSizeNumber } from 'src/styles/media';
+import { mediaQuery, ScreenSize } from 'src/styles/media';
 import MenuIconImg from './assets/menu_icon.png';
 
 enum MENU_ITEMS_ID {
