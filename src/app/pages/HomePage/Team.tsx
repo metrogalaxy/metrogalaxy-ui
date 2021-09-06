@@ -52,7 +52,7 @@ const listIteamDefault: TeamInfo[] = [
 ];
 
 export function Team() {
-  const [listTeam, setListTeam] = React.useState<TeamInfo[]>(listIteamDefault);
+  const [listTeam] = React.useState<TeamInfo[]>(listIteamDefault);
 
   const listTeamComponent = listTeam.map((item, index) => (
     <Col key={index}>
