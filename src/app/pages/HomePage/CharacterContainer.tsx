@@ -49,7 +49,7 @@ const defaultImgArr: CharacterPanelProps[] = [
 
 export function CharacterContainer() {
   const { width } = useViewport();
-  const [imgArr, setImgArr] = useState<CharacterPanelProps[]>(defaultImgArr);
+  const [imgArr] = useState<CharacterPanelProps[]>(defaultImgArr);
 
   const imgArrComponents = imgArr.map((item, index) => (
     <Carousel.Item key={index}>

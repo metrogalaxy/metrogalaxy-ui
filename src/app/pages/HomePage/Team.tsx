@@ -46,13 +46,13 @@ const listIteamDefault: TeamInfo[] = [
   {
     name: 'Quang Le',
     description:
-      'Ut non enim fermentum, aliquet dolor eget, vulputate ante. Donec iaculis consequat vehicula. Vestibulum consequat mauris',
+      'Blockchain expert. Ut non enim fermentum, aliquet dolor eget, vulputate ante. Donec iaculis consequat vehicula. Vestibulum consequat mauris',
     avatarUrl: AvatarImg,
   },
 ];
 
 export function Team() {
-  const [listTeam, setListTeam] = React.useState<TeamInfo[]>(listIteamDefault);
+  const [listTeam] = React.useState<TeamInfo[]>(listIteamDefault);
 
   const listTeamComponent = listTeam.map((item, index) => (
     <Col

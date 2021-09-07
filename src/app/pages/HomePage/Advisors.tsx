@@ -34,8 +34,7 @@ const listAdvisorsDefault: AdvisorInfo[] = [
 ];
 
 export function Advisors() {
-  const [listAdvisors, setListAdvisors] =
-    React.useState<AdvisorInfo[]>(listAdvisorsDefault);
+  const [listAdvisors] = React.useState<AdvisorInfo[]>(listAdvisorsDefault);
 
   const listAdvisorComponents = listAdvisors.map((item, index) => (
     <Col
