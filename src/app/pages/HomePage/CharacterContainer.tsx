@@ -59,48 +59,86 @@ export function CharacterContainer() {
     </Carousel.Item>
   ));
 
-  const isTablet = width <= ScreenSizeNumber.TABLET;
+  const isTablet = width <= ScreenSizeNumber.MD;
 
   return (
     <Layout>
       <Background />
       <Wrapper>
-        <Title>The Metroverse Citizen</Title>
-        <SubTitle>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
-          sollicitudin ultricies. Nam viverra urna quis vulputate pulvinar.
+        <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
+          The Metroverse Citizen
+        </Title>
+        <SubTitle
+          data-aos="fade-up"
+          data-aos-once="true"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+        >
+          Acquire your own unique avatar, customizable. A character is
+          represented by a ERC-721 NFT, acts as digital identity for user in The
+          Metroverse.
         </SubTitle>
         {!isTablet && (
           <CharacterGrid>
             <Row>
-              <Col>
+              <Col
+                data-aos="flip-up"
+                data-aos-once="true"
+                data-aos-duration="1500"
+                data-aos-delay="200"
+              >
                 <CharacterPanel bgColor={ColorPanel.Orange}>
                   <CharacterImg url={CharacterImgLib} />
                 </CharacterPanel>
               </Col>
-              <Col>
+              <Col
+                data-aos="flip-up"
+                data-aos-once="true"
+                data-aos-duration="1500"
+                data-aos-delay="400"
+              >
                 <CharacterPanel bgColor={ColorPanel.Grey}>
                   <CharacterImg url={CharacterImgLib} />
                 </CharacterPanel>
               </Col>
-              <Col>
+              <Col
+                data-aos="flip-up"
+                data-aos-once="true"
+                data-aos-duration="1500"
+                data-aos-delay="600"
+              >
                 <CharacterPanel bgColor={ColorPanel.Green}>
                   <CharacterImg url={CharacterImgLib} />
                 </CharacterPanel>
               </Col>
             </Row>
             <Row className="mt-4">
-              <Col>
+              <Col
+                data-aos="flip-up"
+                data-aos-once="true"
+                data-aos-duration="1500"
+                data-aos-delay="800"
+              >
                 <CharacterPanel bgColor={ColorPanel.Green}>
                   <CharacterImg url={CharacterImgLib} />
                 </CharacterPanel>
               </Col>
-              <Col>
+              <Col
+                data-aos="flip-up"
+                data-aos-once="true"
+                data-aos-duration="1500"
+                data-aos-delay="1000"
+              >
                 <CharacterPanel bgColor={ColorPanel.Orange}>
                   <CharacterImg url={CharacterImgLib} />
                 </CharacterPanel>
               </Col>
-              <Col>
+              <Col
+                data-aos="flip-up"
+                data-aos-once="true"
+                data-aos-duration="1500"
+                data-aos-delay="1200"
+              >
                 <CharacterPanel bgColor={ColorPanel.Grey}>
                   <CharacterImg url={CharacterImgLib} />
                 </CharacterPanel>
@@ -118,7 +156,7 @@ export function CharacterContainer() {
 
 const Layout = styled(LayoutLib)`
   margin-top: 30rem;
-  ${mediaQuery.greaterThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.greaterThan(ScreenSize.LG)`
     margin-top: 60rem;
   `}
 `;
@@ -134,7 +172,7 @@ const Background = styled.div`
   z-index: -2;
   transform: skewY(-5deg);
 
-  ${mediaQuery.greaterThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.greaterThan(ScreenSize.LG)`
     top: -100rem;
     height: calc(100% + 110rem);
   `}

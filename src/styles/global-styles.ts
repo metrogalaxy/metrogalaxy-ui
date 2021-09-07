@@ -29,35 +29,13 @@ export const GlobalStyle = createGlobalStyle`
     // This defines what 1rem is
     font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
 
-    /* @include respond(phone) {
-      font-size: 50%; //1 rem = 8px, 8/16 = 50%
-    } */
-
     @media screen and (max-width: 450px) {
       font-size: 50%; //1 rem = 8px, 8/16 = 50%
     }
 
-    /* @include respond(tab-land) {
-      // width < 1200?
-      font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
-    } */
-
     @media screen and (min-width: 450px) and (max-width: 768px) {
       font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
     }
-
-    /* @include respond(tab-port) {
-      // width < 900?
-      font-size: 50%; //1 rem = 8px, 8/16 = 50%
-    }
-
-    @include respond(desktop) {
-      font-size: 62.5%; //1rem = 12, 12/16
-    }
-
-    @include respond(big-desktop) {
-      font-size: 62.5%; //1rem = 12, 12/16
-    } */
   }
 
   body {
@@ -81,4 +59,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     font-size: inherit;
   }
+
+  
 `;

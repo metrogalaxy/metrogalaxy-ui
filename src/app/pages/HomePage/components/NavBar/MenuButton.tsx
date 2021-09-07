@@ -23,8 +23,14 @@ const Wrapper = styled(Nav.Item)`
   cursor: pointer;
   text-align: center;
 
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
       margin: 0;
       padding: 1.5rem 1.5rem;
   `}
+
+  &:hover {
+    background: ${ColorConstants.PRIMARY};
+    color: ${ColorConstants.PRIMARY_BLACK};
+    border-color: transparent;
+  }
 `;

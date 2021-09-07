@@ -55,11 +55,11 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  ${mediaQuery.greaterThan(ScreenSize.LAPTOP_LARGE)`
+  ${mediaQuery.greaterThan(ScreenSize.XL)`
     width: 85%;
   `}
 
-  ${mediaQuery.lessThan(ScreenSize.PHONE)`
+  ${mediaQuery.lessThan(ScreenSize.SM)`
     flex-direction: column;
   `}
 `;
@@ -108,6 +108,10 @@ const Link = styled.div`
   color: ${ColorConstants.WHITE};
   opacity: 0.6;
   margin-bottom: 0.5rem;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const Col = styled(ColLib)`

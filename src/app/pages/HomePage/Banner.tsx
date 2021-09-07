@@ -6,14 +6,37 @@ import { VideoIntro } from './VideoIntro';
 import BackgroundImage from './assets/homepage_bg.png';
 import BackgroundTwoImage from './assets/bg_2.png';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
+import { ColorConstants } from 'src/styles/StyleConstants';
+import ArrowRightIcon from './assets/arrow-right.svg';
 
 export function Banner() {
   return (
     <Wrapper>
       <TextWrapper>
-        <Title>An Decentralized Virtual Open World</Title>
-        <PrimaryButton>Become The Metroverse Citizen</PrimaryButton>
-        <SubTitle>Read Whitepaper Here</SubTitle>
+        <Title
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          data-aos-once="true"
+        >
+          An Decentralized Open World
+        </Title>
+        <PrimaryButton
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          data-aos-once="true"
+        >
+          Become The Metroverse Citizen
+        </PrimaryButton>
+        <SubTitle
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          data-aos-delay="400"
+          data-aos-once="true"
+        >
+          Read Whitepaper Here
+          <Icon src={ArrowRightIcon} />
+        </SubTitle>
       </TextWrapper>
       <Background />
       <VideoIntro />
@@ -53,8 +76,10 @@ const Title = styled(TitleLib)`
 `;
 
 const SubTitle = styled.div`
-  font-size: 2rem;
-  line-height: 2.4rem;
+  font-family: 'Acrom';
+  font-size: 1.8rem;
+  color: ${ColorConstants.WHITE};
+  line-height: 2.2rem;
   margin-top: 3rem;
   cursor: pointer;
 `;
@@ -63,14 +88,18 @@ const Background = styled.div`
   background-image: url(${BackgroundImage}), url(${BackgroundTwoImage});
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
-  background-position: center top -1.6rem, center top;
+  background-position: center top -1.5rem, center top;
   height: 100%;
   width: 100%;
   position: absolute;
   z-index: -1;
 
-  ${mediaQuery.greaterThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.greaterThan(ScreenSize.LG)`
     height: calc(100% + 60rem);
-    background-position: center top -5rem, center top;
+    background-position: center bottom 6rem, center bottom 2rem;
   `}
+`;
+
+const Icon = styled.img`
+  margin-left: 0.51rem;
 `;

@@ -10,12 +10,23 @@ export function Land() {
   return (
     <Layout>
       <Background />
-      <Title>Land</Title>
-      <SubTitle>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
-        sollicitudin ultricies. Nam viverra urna quis vulputate pulvinar.{' '}
+      <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
+        Land
+      </Title>
+      <SubTitle
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+        data-aos-delay="200"
+      >
+        Own your private land, then set it up in style.
       </SubTitle>
-      <Figure>
+      <Figure
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+        data-aos-delay="400"
+      >
         <Figure.Image src={LandImg} />
       </Figure>
       <PrimaryButton>Buy your own land</PrimaryButton>

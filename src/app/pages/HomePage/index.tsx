@@ -24,7 +24,7 @@ export function HomePage() {
       <Land />
       <Features />
       <Roadmap />
-      <Advisors />
+      <Advisors />/
       <Team />
       <Footer />
     </Wrapper>

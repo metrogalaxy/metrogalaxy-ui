@@ -12,4 +12,9 @@ export const PrimaryButton = styled.div`
   padding: 2rem 4.8rem;
   cursor: pointer;
   text-align: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 6%);
+  }
 `;

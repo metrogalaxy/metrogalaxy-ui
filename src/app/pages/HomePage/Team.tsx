@@ -55,7 +55,12 @@ export function Team() {
   const [listTeam, setListTeam] = React.useState<TeamInfo[]>(listIteamDefault);
 
   const listTeamComponent = listTeam.map((item, index) => (
-    <Col key={index}>
+    <Col
+      key={index}
+      data-aos="flip-right"
+      data-aos-once="true"
+      data-aos-duration="1500"
+    >
       <Avatar
         title={item.name}
         description={item.description}
@@ -66,7 +71,9 @@ export function Team() {
   return (
     <Layout>
       <Background />
-      <Title>Team</Title>
+      <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
+        Team
+      </Title>
       <Row xs={2} sm={3}>
         {listTeamComponent}
       </Row>

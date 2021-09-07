@@ -23,13 +23,13 @@ const Box = styled.div`
   height: 100%;
   position: relative;
 
-  ${mediaQuery.lessThan(ScreenSize.PHONE)`
+  ${mediaQuery.lessThan(ScreenSize.SM)`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   `}
 
-  ${mediaQuery.between(ScreenSize.PHONE, ScreenSize.TABLET)`
+  ${mediaQuery.between(ScreenSize.SM, ScreenSize.MD)`
   `}
 `;

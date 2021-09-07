@@ -19,8 +19,15 @@ export function Features() {
     <Layout>
       <Background />
       <Wrapper>
-        <Title>Features</Title>
-        <Box>
+        <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
+          Features
+        </Title>
+        <Box
+          data-aos="fade-up"
+          data-aos-once="true"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+        >
           <FeatureOne>
             <FeatureLogo url={FeatureOneLogo} top={`1%`} left={`15%`} />
             <TextWrapper top={`35%`} left={`35%`}>
@@ -84,7 +91,7 @@ const Box = styled.div`
   min-height: 100rem;
 
   position: relative;
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     margin-top: 5rem;
   `}
 `;
@@ -115,7 +122,7 @@ const TextWrapper = styled('div')<{ top: any; left: any }>`
   top: ${p => p.top};
   left: ${p => p.left};
 
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     position: relative;
     top: 0;
     left: 0;
@@ -136,7 +143,7 @@ const FeatureLogo = styled('div')<{ url: string; top: any; left: any }>`
   top: ${p => p.top};
   left: ${p => p.left};
 
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     position: relative;
     top: 0;
     left: 0;
@@ -149,7 +156,7 @@ const featurePanelCss = css`
   background-repeat: no-repeat;
   background-size: contain;
 
-  ${mediaQuery.lessThan(ScreenSize.PHONE)`
+  ${mediaQuery.lessThan(ScreenSize.SM)`
     position: relative;
     background-image: none;
     top: 0;
@@ -161,7 +168,7 @@ const featurePanelCss = css`
     justify-content: center;
   `}
 
-  ${mediaQuery.between(ScreenSize.PHONE, ScreenSize.TABLET)`
+  ${mediaQuery.between(ScreenSize.SM, ScreenSize.MD)`
     position: relative;
     background-image: none;
     top: 0;
@@ -183,7 +190,7 @@ const FeatureOne = styled(FeaturePanelLib)`
   z-index: 5;
 
   ${featurePanelCss}
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     background-color: #7852DF;
   `}
 `;
@@ -197,7 +204,7 @@ const FeatureTwo = styled(FeaturePanelLib)`
   z-index: 4;
 
   ${featurePanelCss}
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     background-color: #21A78E;
   `}
 `;
@@ -210,12 +217,12 @@ const FeatureThree = styled(FeaturePanelLib)`
   width: 65rem;
   z-index: 3;
 
-  ${mediaQuery.lessThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.lessThan(ScreenSize.LG)`
     width: 62rem;
   `}
 
   ${featurePanelCss}
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     background-color: #D29C34;
   `}
 `;
@@ -228,7 +235,7 @@ const FeatureFour = styled(FeaturePanelLib)`
   width: 80rem;
   z-index: 2;
 
-  ${mediaQuery.lessThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.lessThan(ScreenSize.XL)`
     width: 75rem;
 
     div:nth-child(1) {
@@ -237,7 +244,7 @@ const FeatureFour = styled(FeaturePanelLib)`
   `}
 
   ${featurePanelCss}
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     background-color: #C76EB4;
     div:nth-child(1) {
       margin-left: 0;

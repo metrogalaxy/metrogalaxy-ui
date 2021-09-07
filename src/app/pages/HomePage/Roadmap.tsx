@@ -9,8 +9,15 @@ export function Roadmap() {
   return (
     <Layout>
       <Background />
-      <Title>Roadmap</Title>
-      <Figure>
+      <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
+        Roadmap
+      </Title>
+      <Figure
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+        data-aos-delay="200"
+      >
         <Figure.Image src={RoadmapImg} />
       </Figure>
     </Layout>

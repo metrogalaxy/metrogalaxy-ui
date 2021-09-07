@@ -6,21 +6,13 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 
 interface MenuItemProps {
   id: string;
-  selectedId: string;
   children?: string;
 }
 
-const MENU_ITEM_SELECTED_UNDERLINE = '#B8F040';
-
 export function MenuItem(props: MenuItemProps) {
-  const isSelected: boolean =
-    props.id !== undefined && props.selectedId === props.id;
   return (
     <Wrapper>
-      <Nav.Link eventKey={props.id}>
-        {props.children}
-        {isSelected && <Underline />}
-      </Nav.Link>
+      <Nav.Link eventKey={props.id}>{props.children}</Nav.Link>
     </Wrapper>
   );
 }
@@ -39,28 +31,25 @@ const Wrapper = styled('div')`
     padding: 1rem 2.5rem !important;
   }
 
-  .active {
-    background-color: rgba(6, 51, 86, 0.5) !important;
-    border-color: none !important;
+  a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #b8f040;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  a:hover:after {
+    width: 50%;
+    left: 25%;
   }
 
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     background-color: transparent !important;
     padding: 1rem 2.5rem;
-  `}
-`;
-
-const Underline = styled('div')`
-  position: absolute;
-  bottom: 0;
-  left: 25%;
-  width: 50%;
-  height: 0.3rem;
-  background-color: ${MENU_ITEM_SELECTED_UNDERLINE};
-  box-shadow: 0px 2px 6px rgba(201, 255, 86, 0.71);
-  border-radius: 10px;
-
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
-    display: none;
   `}
 `;

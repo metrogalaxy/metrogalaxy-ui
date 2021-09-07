@@ -63,26 +63,29 @@
 
 import { generateMedia } from 'styled-media-query';
 
+export enum ScreenSizeNumber {
+  XS = 480,
+  SM = 576,
+  MD = 768,
+  LG = 992,
+  XL = 1200,
+  XXL = 1400,
+}
+
 export const mediaQuery = generateMedia({
-  phone: '450px',
-  tablet: '768px',
-  laptop: '1024px',
-  laptop_large: '1440px',
-  laptop_huge: '1920px',
+  xs: `${ScreenSizeNumber.XS}px`,
+  sm: `${ScreenSizeNumber.SM}px`,
+  md: `${ScreenSizeNumber.MD}px`,
+  lg: `${ScreenSizeNumber.LG}px`,
+  xl: `${ScreenSizeNumber.XL}px`,
+  xxl: `${ScreenSizeNumber.XXL}px`,
 });
 
 export enum ScreenSize {
-  PHONE = 'phone',
-  TABLET = 'tablet',
-  LAPTOP = 'laptop',
-  LAPTOP_LARGE = 'laptop_large',
-  LAPTOP_HUGE = 'laptop_huge',
-}
-
-export enum ScreenSizeNumber {
-  PHONE = 450,
-  TABLET = 768,
-  LAPTOP = 1024,
-  LAPTOP_LARGE = 1440,
-  LAPTOP_HUGE = 1920,
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
+  XXL = 'xxl',
 }

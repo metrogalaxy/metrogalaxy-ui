@@ -6,13 +6,19 @@ import { mediaQuery, ScreenSize } from 'src/styles/media';
 
 export function VideoIntro() {
   return (
-    <Layout>
+    <Layout
+      data-aos="fade-down"
+      data-aos-duration="1000"
+      data-aos-delay="900"
+      data-aos-once="true"
+    >
       <Wrapper>
         <Video />
         <Title>Welcome to the next generation of open world</Title>
         <Content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
-          sollicitudin ultricies. Nam viverra urna quis vulputate pulvinar
+          Become anyone, doing anything you like in the open world. Metroverse
+          is a gamify NFT social platform for user to socialize, show NFT,
+          discover the game and create your own virtual life.
         </Content>
       </Wrapper>
     </Layout>
@@ -23,7 +29,7 @@ const Layout = styled(LayoutLib)`
   position: absolute;
   bottom: -20rem;
 
-  ${mediaQuery.greaterThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.greaterThan(ScreenSize.LG)`
     bottom: -50rem;
   `}
 `;
@@ -37,12 +43,13 @@ const Wrapper = styled.div`
   border-radius: 2rem;
   padding: 6rem;
 
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
      padding: 3rem;
   `}
 
-  ${mediaQuery.lessThan(ScreenSize.LAPTOP)`
-    max-width: 80rem;
+  ${mediaQuery.greaterThan(ScreenSize.LG)`
+    max-width: 120rem;
+    min-width: 100rem;
   `}
 `;
 
@@ -54,7 +61,7 @@ const Video = styled.div`
   background-repeat: no-repeat;
   border-radius: 2rem;
 
-  ${mediaQuery.lessThan(ScreenSize.PHONE)`
+  ${mediaQuery.lessThan(ScreenSize.SM)`
     min-height: 25rem;
   `}
 `;

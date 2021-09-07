@@ -14,10 +14,13 @@ import { Provider } from 'react-redux';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { ViewportProvider } from './utils/viewport';
+import AOS from 'aos';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'aos/dist/aos.css';
+import 'aos/dist/aos.js';
 
 // Import root app
 import { App } from 'src/app';
@@ -37,6 +40,9 @@ const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 const client = new ApolloClient({
   uri: 'https://api.thegraph.com/subgraphs/name/paulrberg/create-eth-app',
 });
+
+// init animation on scroll
+AOS.init();
 
 ReactDOM.render(
   <Provider store={store}>

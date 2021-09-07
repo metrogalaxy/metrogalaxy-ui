@@ -38,7 +38,12 @@ export function Advisors() {
     React.useState<AdvisorInfo[]>(listAdvisorsDefault);
 
   const listAdvisorComponents = listAdvisors.map((item, index) => (
-    <Col key={index}>
+    <Col
+      key={index}
+      data-aos="flip-right"
+      data-aos-once="true"
+      data-aos-duration="1500"
+    >
       <Avatar
         title={item.name}
         description={item.description}
@@ -49,7 +54,9 @@ export function Advisors() {
   return (
     <Layout>
       <Background />
-      <Title>Advisors</Title>
+      <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
+        Advisors
+      </Title>
       <Row xs={2} sm={3}>
         {listAdvisorComponents}
       </Row>

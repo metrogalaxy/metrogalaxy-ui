@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import { useViewport } from 'src/app/hooks/useViewport';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Logo } from 'src/app/components/Logo';
 import { ColorConstants } from 'src/styles/StyleConstants';
@@ -9,41 +10,26 @@ import { mediaQuery, ScreenSize, ScreenSizeNumber } from 'src/styles/media';
 import MenuIconImg from './assets/menu_icon.png';
 
 enum MENU_ITEMS_ID {
-  Home = 'home',
-  Character = 'character',
-  Features = 'features',
+  Marketplace = 'marketplace',
+  Staking = 'staking',
+  Land = 'land',
 }
 
 export function NavBar() {
-  const [selectedId, setSelectedId] = React.useState<string>(
-    MENU_ITEMS_ID.Home,
-  );
-
-  function handleMenuItemClick(selectedKey) {
-    if (selectedKey !== selectedId) {
-      setSelectedId(selectedKey);
-      return;
-    }
-  }
+  const { width } = useViewport();
 
   return (
     <Wrapper>
       <Menu collapseOnSelect expand="lg">
         <Navbar.Brand href="/">
-          <Logo />
+          <Logo hideText={width < ScreenSizeNumber.MD} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" as={MenuIcon} />
         <MenuCollapse id="responsive-navbar-nav">
-          <Nav onSelect={handleMenuItemClick} activeKey={selectedId}>
-            <MenuItem id={MENU_ITEMS_ID.Home} selectedId={selectedId}>
-              Home
-            </MenuItem>
-            <MenuItem id={MENU_ITEMS_ID.Character} selectedId={selectedId}>
-              Character
-            </MenuItem>
-            <MenuItem id={MENU_ITEMS_ID.Features} selectedId={selectedId}>
-              Features
-            </MenuItem>
+          <Nav>
+            <MenuItem id={MENU_ITEMS_ID.Marketplace}>Marketplace</MenuItem>
+            <MenuItem id={MENU_ITEMS_ID.Staking}>Staking</MenuItem>
+            <MenuItem id={MENU_ITEMS_ID.Land}>Land</MenuItem>
           </Nav>
           <MenuButton>Join Us Now</MenuButton>
         </MenuCollapse>
@@ -62,7 +48,7 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: center;
 
-  ${mediaQuery.lessThan(ScreenSize.LAPTOP)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     display: block;
   `}
 `;
@@ -76,11 +62,11 @@ const Menu = styled(Navbar)`
   padding: 3rem 6rem;
   width: 100%;
 
-  ${mediaQuery.lessThan(ScreenSize.TABLET)`
+  ${mediaQuery.lessThan(ScreenSize.MD)`
     padding: 2rem 3rem;
   `}
 
-  ${mediaQuery.greaterThan(ScreenSize.LAPTOP_LARGE)`
+  ${mediaQuery.greaterThan(ScreenSize.XXL)`
     width: 85%;
   `}
 `;

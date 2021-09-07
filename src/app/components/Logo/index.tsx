@@ -2,16 +2,21 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import MetroverseImg from './assets/metroverse_logo.png';
 import { ColorConstants } from 'src/styles/StyleConstants';
-import { mediaQuery, ScreenSize } from 'src/styles/media';
 
-export function Logo() {
+interface LogoProps {
+  hideText?: boolean;
+}
+
+export function Logo(props: LogoProps) {
   return (
     <Wrapper>
       <LogoImg />
-      <LogoTextWrapper>
-        <LogoText color={ColorConstants.WHITE}>Metro</LogoText>
-        <LogoText color={ColorConstants.MAIN_GREEN}>Verse</LogoText>
-      </LogoTextWrapper>
+      {!props.hideText && (
+        <LogoTextWrapper>
+          <LogoText color={ColorConstants.WHITE}>Metro</LogoText>
+          <LogoText color={ColorConstants.MAIN_GREEN}>Verse</LogoText>
+        </LogoTextWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -46,10 +51,6 @@ const LogoTextWrapper = styled.div`
   margin-left: 0.6rem;
   text-shadow: 0px 2.13888px 6.41665px rgba(0, 0, 0, 0.25);
   letter-spacing: -0.05em;
-
-  ${mediaQuery.lessThan(ScreenSize.PHONE)`
-    display: none;
-  `}
 `;
 
 const LogoText = styled.span`
