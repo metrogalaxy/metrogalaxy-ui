@@ -34,7 +34,7 @@ const LogoImg = styled.div`
   background-repeat: no-repeat;
   background-color: ${ColorConstants.WHITE};
   border-radius: 50%;
-  border: 0.35rem solid ${ColorConstants.MAIN_BLUE};
+  border: 0.35rem solid ${ColorConstants.MAIN_GREEN};
   width: 6rem;
   height: 6rem;
   padding: 0.6rem 0.3rem;

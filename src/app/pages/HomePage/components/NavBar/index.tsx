@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import { useViewport } from 'src/app/hooks/useViewport';
+import { useViewport } from 'src/app/hooks';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Logo } from 'src/app/components/Logo';
 import { ColorConstants } from 'src/styles/StyleConstants';

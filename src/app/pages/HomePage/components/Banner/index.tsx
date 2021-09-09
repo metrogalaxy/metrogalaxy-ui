@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import { Image as ImageLib } from 'react-bootstrap';
 import { PrimaryButton } from 'src/app/components/Button';
 import { Title as TitleLib } from 'src/app/components/Title';
 import { VideoIntro } from './VideoIntro';
@@ -8,6 +9,10 @@ import BackgroundTwoImage from './assets/bg_2.png';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import ArrowRightIcon from './assets/arrow-right.svg';
+import AirBallon from './assets/air_ballon.png';
+import CarOne from './assets/car4.png';
+import CarTwo from './assets/car5.png';
+import { FloatingKeyframe } from 'src/styles/animation';
 
 export function Banner() {
   return (
@@ -39,6 +44,15 @@ export function Banner() {
         </SubTitle>
       </TextWrapper>
       <Background />
+      <Image src={AirBallon} top="10%" left="10%" />
+      <Image src={CarOne} top="25%" $delay="1s" $hideOn={ScreenSize.MD} />
+      <Image
+        src={CarTwo}
+        top="50%"
+        right="10%"
+        $delay="0.5s"
+        $hideOn={ScreenSize.MD}
+      />
       <VideoIntro />
     </Wrapper>
   );
@@ -102,4 +116,29 @@ const Background = styled.div`
 
 const Icon = styled.img`
   margin-left: 0.51rem;
+`;
+
+interface ImageProps {
+  top?: string;
+  left?: string;
+  right?: string;
+  $delay?: string;
+  $hideOn?: ScreenSize;
+}
+
+const Image = styled(ImageLib)<ImageProps>`
+  position: absolute;
+  top: ${p => p.top};
+  left: ${p => p.left};
+  right: ${p => p.right};
+
+  animation: ${FloatingKeyframe} 3s ease-in-out infinite;
+  animation-delay: ${p => (p.$delay ? p.$delay : '0')};
+
+  ${p =>
+    p.$hideOn
+      ? mediaQuery.lessThan(p.$hideOn)`
+    display: none;
+  `
+      : ''}
 `;
