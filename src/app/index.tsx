@@ -15,20 +15,22 @@ import { GlobalStyle } from 'src/styles/global-styles';
 import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
+import FavIcon from './assets/favicon.png';
 
 export function App() {
   const { i18n } = useTranslation();
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - The Metroverse"
+        titleTemplate="%s | The Metroverse"
         defaultTitle="The Metroverse"
         htmlAttributes={{ lang: i18n.language }}
       >
         <meta
           name="description"
-          content="The Metroverse - Decentralized Virtual Open World"
+          content="The Metroverse - Decentralized Open World"
         />
+        <link rel="icon" type="image/png" href={FavIcon} sizes="16x16" />
       </Helmet>
 
       <Switch>
