@@ -113,6 +113,14 @@ const CharacterGrid = styled('div')`
   width: 100%;
   height: 100%;
   margin: 5rem 0rem 10rem;
+
+  ${mediaQuery.lessThan(ScreenSize.SM)`
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  `}
 `;
 
 const Figure = styled(FigureLib)`

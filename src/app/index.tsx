@@ -28,7 +28,7 @@ export function App() {
       >
         <meta
           name="description"
-          content="The Metroverse - Decentralized Open World"
+          content="The Metroverse | Decentralized Open World"
         />
         <link rel="icon" type="image/png" href={FavIcon} sizes="16x16" />
       </Helmet>
