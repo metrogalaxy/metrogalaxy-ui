@@ -67,7 +67,14 @@ export function CharacterContainer() {
             {imgArrComponents}
           </Carousel>
         </CharacterGrid>
-        <PrimaryButton>Get your own Metronions</PrimaryButton>
+        <PrimaryButton
+          data-aos="fade-up"
+          data-aos-once="true"
+          data-aos-duration="1000"
+          data-aos-delay="350"
+        >
+          Get your own Metronions
+        </PrimaryButton>
       </Wrapper>
     </Layout>
   );

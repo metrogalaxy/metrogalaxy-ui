@@ -5,10 +5,11 @@ import { PrimaryButton } from 'src/app/components/Button';
 import { Title as TitleLib } from 'src/app/components/Title';
 import { VideoIntro } from './VideoIntro';
 import { WavyBackground } from './WavyBackground';
-import BackgroundImage from './assets/homepage_bg.png';
+import BackgroundImage from './assets/homepage_bg-min.png';
 // import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import ArrowRightIcon from './assets/arrow-right.svg';
+import { mediaQuery, ScreenSize } from 'src/styles/media';
 // import { FloatingKeyframe } from 'src/styles/animation';
 
 export function Banner() {
@@ -120,6 +121,10 @@ const Background = styled.div`
   width: 100%;
   position: absolute;
   z-index: -3;
+
+  ${mediaQuery.lessThan(ScreenSize.LG)`
+    background-attachment: scroll;
+  `}
 `;
 
 const Icon = styled.img`

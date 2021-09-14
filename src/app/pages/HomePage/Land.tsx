@@ -4,7 +4,7 @@ import { Figure as FigureLib } from 'react-bootstrap';
 import { Layout } from 'src/app/components/Layout';
 import { Title, SubTitle as SubTitleLib } from 'src/app/components/Title';
 import { PrimaryButton as PrimaryButtonLib } from 'src/app/components/Button';
-import LandImg from './assets/land.svg';
+import LandImg from './assets/land.png';
 
 export function Land() {
   return (
@@ -25,11 +25,18 @@ export function Land() {
         data-aos="fade-up"
         data-aos-once="true"
         data-aos-duration="1000"
-        data-aos-delay="400"
+        data-aos-delay="300"
       >
         <Figure.Image src={LandImg} />
       </Figure>
-      <PrimaryButton>Buy your own land</PrimaryButton>
+      <PrimaryButton
+        data-aos="fade-up"
+        data-aos-once="true"
+        data-aos-duration="1000"
+        data-aos-delay="350"
+      >
+        Buy your own land
+      </PrimaryButton>
     </Layout>
   );
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Figure } from 'react-bootstrap';
-import VideoIntroImage from './assets/video_intro.png';
+import VideoIntroImage from './assets/video_intro-min.png';
 import { Layout as LayoutLib } from 'src/app/components/Layout';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 
