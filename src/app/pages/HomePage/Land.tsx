@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Figure as FigureLib } from 'react-bootstrap';
 import { Layout } from 'src/app/components/Layout';
 import { Title, SubTitle as SubTitleLib } from 'src/app/components/Title';
-import { PrimaryButton } from 'src/app/components/Button';
+import { PrimaryButton as PrimaryButtonLib } from 'src/app/components/Button';
 import LandImg from './assets/land.svg';
 
 export function Land() {
@@ -39,11 +39,27 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: calc(100% + 40rem);
+  height: 100%;
   position: absolute;
-  top: -30rem;
+  top: 0;
+  left: 0;
   z-index: -3;
-  transform: skewY(3deg);
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -3;
+    background: #3b8661;
+    transform-origin: bottom left;
+    -ms-transform: skewY(3deg);
+    -webkit-transform: skewY(3deg);
+    transform: skewY(3deg);
+  }
 `;
 
 const Figure = styled(FigureLib)`
@@ -52,4 +68,8 @@ const Figure = styled(FigureLib)`
 
 const SubTitle = styled(SubTitleLib)`
   max-width: 100rem;
+`;
+
+const PrimaryButton = styled(PrimaryButtonLib)`
+  margin-bottom: 5rem;
 `;

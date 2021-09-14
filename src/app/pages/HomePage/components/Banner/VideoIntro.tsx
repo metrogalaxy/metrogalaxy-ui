@@ -9,9 +9,9 @@ export function VideoIntro() {
   return (
     <Layout data-aos="fade-down" data-aos-duration="1000" data-aos-once="true">
       <Wrapper>
-        <Figure>
+        <FigureWrapper>
           <Figure.Image src={VideoIntroImage} />
-        </Figure>
+        </FigureWrapper>
         <TextWrapper>
           <Title>Welcome to the next generation of open world</Title>
           <Content>
@@ -27,10 +27,13 @@ export function VideoIntro() {
 
 const Layout = styled(LayoutLib)`
   position: absolute;
-  bottom: -20rem;
+  bottom: -30rem;
+  min-width: 96rem;
+  margin: 0;
 
-  ${mediaQuery.greaterThan(ScreenSize.LG)`
-    bottom: -50rem;
+  ${mediaQuery.lessThan(ScreenSize.LG)`
+    min-width: 0;
+    width: 100%
   `}
 `;
 
@@ -41,7 +44,7 @@ const Wrapper = styled.div`
   background: #f3fdff;
   box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.25);
   border-radius: 2rem;
-  padding: 6rem;
+  padding: 4rem;
 
   ${mediaQuery.lessThan(ScreenSize.MD)`
      padding: 3rem;
@@ -68,4 +71,12 @@ const Content = styled.div`
   line-height: 2.4rem;
   color: #7d7d7d;
   margin-top: 2rem;
+`;
+
+const FigureWrapper = styled(Figure)`
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
 `;

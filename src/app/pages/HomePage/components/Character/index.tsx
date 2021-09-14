@@ -21,8 +21,6 @@ export function CharacterContainer() {
     </Figure>
   ));
 
-  console.log(imgArrComponents);
-
   const responsive = {
     mobile: {
       breakpoint: { max: ScreenSizeNumber.SM, min: 0 },
@@ -41,7 +39,7 @@ export function CharacterContainer() {
       <Background />
       <Wrapper>
         <Title data-aos="fade-up" data-aos-once="true" data-aos-duration="1000">
-          The Metroverse Citizen
+          The Metronions
         </Title>
         <SubTitle
           data-aos="fade-up"
@@ -49,9 +47,9 @@ export function CharacterContainer() {
           data-aos-duration="1000"
           data-aos-delay="200"
         >
-          Acquire your own unique avatar, customizable. A character is
-          represented by a ERC-721 NFT, acts as digital identity for user in The
-          Metroverse.
+          Acquire your own unique Metronion as your digital identity in The
+          Metroverse. As The Metroverse’s citizens, The Metronions can do
+          amazing things in the open world.
         </SubTitle>
         <CharacterGrid
           data-aos="fade-up"
@@ -69,17 +67,14 @@ export function CharacterContainer() {
             {imgArrComponents}
           </Carousel>
         </CharacterGrid>
-        <PrimaryButton>Get your own character</PrimaryButton>
+        <PrimaryButton>Get your own Metronions</PrimaryButton>
       </Wrapper>
     </Layout>
   );
 }
 
 const Layout = styled(LayoutLib)`
-  margin-top: 30rem;
-  ${mediaQuery.greaterThan(ScreenSize.LG)`
-    margin-top: 60rem;
-  `}
+  margin: 0;
 `;
 
 const Background = styled.div`
@@ -87,16 +82,27 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: calc(100% + 60rem);
+  height: 100%;
   position: absolute;
-  top: -50rem;
+  top: 0;
+  left: 0;
   z-index: -2;
-  transform: skewY(-5deg);
 
-  ${mediaQuery.greaterThan(ScreenSize.LG)`
-    top: -100rem;
-    height: calc(100% + 110rem);
-  `}
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    background: #595959;
+    transform-origin: bottom right;
+    -ms-transform: skewY(-2deg);
+    -webkit-transform: skewY(-2deg);
+    transform: skewY(-2deg);
+  }
 `;
 
 const Wrapper = styled.div`
@@ -107,12 +113,14 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 30rem;
+  margin-bottom: 10rem;
 `;
 
 const CharacterGrid = styled('div')`
   width: 100%;
   height: 100%;
-  margin: 5rem 0rem 10rem;
+  margin: 5rem 0rem 9rem;
 
   ${mediaQuery.lessThan(ScreenSize.SM)`
     li {

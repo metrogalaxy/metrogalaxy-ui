@@ -10,6 +10,7 @@ export const Title = styled.h1`
   text-transform: capitalize;
   text-align: center;
   color: ${ColorConstants.WHITE};
+  margin-top: 10rem;
 `;
 
 export const SubTitle = styled.h2`
@@ -19,5 +20,5 @@ export const SubTitle = styled.h2`
   line-height: 2.4rem;
   text-align: center;
   color: ${ColorConstants.WHITE};
-  margin: 6rem 1rem 0;
+  margin: 5rem 1rem 0;
 `;

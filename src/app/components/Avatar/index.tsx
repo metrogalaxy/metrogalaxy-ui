@@ -13,7 +13,7 @@ interface AvatarProps {
 export function Avatar(props: AvatarProps) {
   return (
     <Wrapper>
-      <Figure.Image src={props.avatarUrl} />
+      <FigureImage src={props.avatarUrl} />
       <Figure.Caption>
         <Title>{props.title}</Title>
         <Description>{props.description}</Description>
@@ -24,6 +24,7 @@ export function Avatar(props: AvatarProps) {
 
 const Wrapper = styled(Figure)`
   text-align: center;
+  width: 100%;
   max-width: 28rem;
   margin: 0 3.2rem;
 `;
@@ -42,4 +43,9 @@ const Description = styled.div`
   font-size: 1.6rem;
   line-height: 2.4rem;
   margin-top: 1rem;
+`;
+
+const FigureImage = styled(Figure.Image)`
+  width: 100%;
+  height: auto;
 `;

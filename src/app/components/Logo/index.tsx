@@ -1,22 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import MetroverseImg from './assets/metroverse_logo.png';
+import MetroverseImg from './assets/logo.png';
+import { Image } from 'react-bootstrap';
 import { ColorConstants } from 'src/styles/StyleConstants';
 
-interface LogoProps {
-  hideText?: boolean;
-}
-
-export function Logo(props: LogoProps) {
+export function Logo() {
   return (
     <Wrapper>
-      <LogoImg />
-      {!props.hideText && (
-        <LogoTextWrapper>
-          <LogoText color={ColorConstants.WHITE}>Metro</LogoText>
-          <LogoText color={ColorConstants.MAIN_GREEN}>Verse</LogoText>
-        </LogoTextWrapper>
-      )}
+      <Image src={MetroverseImg} />
+      <LogoTextWrapper>
+        <LogoText color={ColorConstants.WHITE}>Metro</LogoText>
+        <LogoText color={ColorConstants.MAIN_GREEN}>Verse</LogoText>
+      </LogoTextWrapper>
     </Wrapper>
   );
 }
@@ -24,20 +19,6 @@ export function Logo(props: LogoProps) {
 const Wrapper = styled('div')`
   display: flex;
   cursor: pointer;
-`;
-
-const LogoImg = styled.div`
-  background-image: url(${MetroverseImg});
-  background-position: top center;
-  background-size: cover;
-  background-origin: content-box;
-  background-repeat: no-repeat;
-  background-color: ${ColorConstants.WHITE};
-  border-radius: 50%;
-  border: 0.35rem solid ${ColorConstants.MAIN_GREEN};
-  width: 6rem;
-  height: 6rem;
-  padding: 0.6rem 0.3rem;
 `;
 
 const LogoTextWrapper = styled.div`

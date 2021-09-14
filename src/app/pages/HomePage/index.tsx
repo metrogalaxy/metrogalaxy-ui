@@ -7,8 +7,8 @@ import { CharacterContainer } from './components/Character';
 import { Features } from './components/Features';
 import { Roadmap } from './Roadmap';
 import { Land } from './Land';
-import { Advisors } from './Advisors';
-import { Team } from './Team';
+import { Advisors } from './components/Advisors';
+import { Team } from './components/Team';
 import { Footer } from './components/Footer';
 
 export function HomePage() {
@@ -24,7 +24,7 @@ export function HomePage() {
       <Land />
       <Features />
       <Roadmap />
-      <Advisors />/
+      <Advisors />
       <Team />
       <Footer />
     </Wrapper>
@@ -33,4 +33,5 @@ export function HomePage() {
 
 const Wrapper = styled.div`
   position: relative;
+  width: 100%;
 `;

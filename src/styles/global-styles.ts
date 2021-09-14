@@ -25,6 +25,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+    display: block;
+    /* overscroll-behavior-x: none; */
 
     // This defines what 1rem is
     font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
@@ -40,14 +42,10 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: Acrom;
-    min-height: 100%;
-    min-width: 100%;
-    overflow-x: hidden;
-  }
-
-  #root {
+    height: 100vh;
     width: 100%;
-    height: 100%;
+    overflow-x: hidden;
+
   }
 
   p,

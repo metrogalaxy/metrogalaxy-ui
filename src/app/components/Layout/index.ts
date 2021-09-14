@@ -6,5 +6,4 @@ export const Layout = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 20rem;
 `;

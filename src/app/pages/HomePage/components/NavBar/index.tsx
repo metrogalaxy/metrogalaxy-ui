@@ -1,12 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import { useViewport } from 'src/app/hooks';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Logo } from 'src/app/components/Logo';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { MenuItem } from './MenuItem';
 import { MenuButton } from './MenuButton';
-import { mediaQuery, ScreenSize, ScreenSizeNumber } from 'src/styles/media';
+import { mediaQuery, ScreenSize } from 'src/styles/media';
 import MenuIconImg from './assets/menu_icon.png';
 
 enum MENU_ITEMS_ID {
@@ -16,13 +15,11 @@ enum MENU_ITEMS_ID {
 }
 
 export function NavBar() {
-  const { width } = useViewport();
-
   return (
     <Wrapper>
       <Menu collapseOnSelect expand="lg">
         <Navbar.Brand href="/">
-          <Logo hideText={width < ScreenSizeNumber.MD} />
+          <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" as={MenuIcon} />
         <MenuCollapse id="responsive-navbar-nav">
@@ -61,6 +58,7 @@ const Menu = styled(Navbar)`
   justify-content: space-between;
   padding: 3rem 6rem;
   width: 100%;
+  position: relative;
 
   ${mediaQuery.lessThan(ScreenSize.MD)`
     padding: 2rem 3rem;
