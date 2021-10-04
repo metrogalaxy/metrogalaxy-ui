@@ -115,7 +115,7 @@ const Background = styled.div`
   background-image: url(${BackgroundImage});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-attachment: fixed;
   height: 100%;
   width: 100%;

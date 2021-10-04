@@ -6,15 +6,22 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 
 interface MenuItemProps {
   id: string;
+  activeId: string;
   route?: string;
   children?: string;
 }
 
 export function MenuItem(props: MenuItemProps) {
+  const isActive = props.id === props.activeId;
   return (
     <Wrapper>
       {props.route && (
-        <Link className="link-wrapper" to={props.route}>
+        <Link
+          className={
+            isActive ? 'link-wrapper link-wrapper-active' : 'link-wrapper'
+          }
+          to={props.route}
+        >
           {props.children}
         </Link>
       )}
@@ -24,38 +31,24 @@ export function MenuItem(props: MenuItemProps) {
 }
 
 const Wrapper = styled('div')`
-  font-weight: bold;
+  font-family: 'Acrom-Bold';
   text-transform: uppercase;
   cursor: pointer;
   position: relative;
   text-align: center;
+  letter-spacing: -0.02em;
 
   .link-wrapper {
     color: ${ColorConstants.WHITE} !important;
     background-color: transparent;
-    border-radius: 10rem;
     padding: 1rem 2.5rem !important;
     text-decoration: none;
   }
-
-  .link-wrapper:after {
-    background: none repeat scroll 0 0 transparent;
-    bottom: -0.5em;
-    content: '';
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: #b8f040;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-  }
-  .link-wrapper:hover:after {
-    width: 50%;
-    left: 25%;
+  .link-wrapper-active {
+    color: ${ColorConstants.MAIN_GREEN} !important;
   }
 
-  ${mediaQuery.lessThan(ScreenSize.MD)`
+  ${mediaQuery.lessThan(ScreenSize.XL)`
     background-color: transparent !important;
     padding: 1rem 2.5rem;
   `}
