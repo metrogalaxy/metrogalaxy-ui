@@ -11,8 +11,15 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import ArrowRightIcon from './assets/arrow-right.svg';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 // import { FloatingKeyframe } from 'src/styles/animation';
+import { useHistory } from 'react-router-dom';
 
 export function Banner() {
+  const history = useHistory();
+
+  const onNavigateMetronionPage = () => {
+    history.push('/metronion');
+  };
+
   return (
     <Wrapper>
       <TextWrapper>
@@ -29,6 +36,7 @@ export function Banner() {
           data-aos-duration="1000"
           data-aos-delay="200"
           data-aos-once="true"
+          onClick={onNavigateMetronionPage}
         >
           Become The Metroverse Citizen
         </PrimaryButton>
@@ -115,7 +123,7 @@ const Background = styled.div`
   background-image: url(${BackgroundImage});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-attachment: fixed;
   height: 100%;
   width: 100%;

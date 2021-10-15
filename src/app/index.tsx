@@ -13,12 +13,14 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from 'src/styles/global-styles';
 
 import { HomePage } from './pages/HomePage/Loadable';
+import { Land, Marketplace, Metronion, Staking } from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import FavIcon from './assets/favicon.png';
 
 export function App() {
   const { i18n } = useTranslation();
+
   return (
     <BrowserRouter>
       <Helmet
@@ -35,6 +37,10 @@ export function App() {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/metronion" component={Metronion} />
+        <Route exact path="/marketplace" component={Marketplace} />
+        <Route exact path="/staking" component={Staking} />
+        <Route exact path="/land" component={Land} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

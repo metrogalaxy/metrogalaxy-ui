@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { ViewportProvider } from './utils/viewport';
+import { DAppProvider, Config } from '@usedapp/core';
 import AOS from 'aos';
 
 // Use consistent styling
@@ -30,6 +31,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { configureAppStore } from 'src/store/configureStore';
 
 import reportWebVitals from 'src/reportWebVitals';
+import ENV from 'src/app/config/env';
 
 // Initialize languages
 import './locales/i18n';
@@ -44,13 +46,23 @@ const client = new ApolloClient({
 // init animation on scroll
 AOS.init();
 
+const config: Config = {
+  readOnlyChainId: ENV.CHAIN_ID,
+  readOnlyUrls: {
+    [ENV.CHAIN_ID]: ENV.NODE_URL,
+  },
+  supportedChains: [ENV.CHAIN_ID],
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <HelmetProvider>
       <ApolloProvider client={client}>
         <ViewportProvider>
           <React.StrictMode>
-            <App />
+            <DAppProvider config={config}>
+              <App />
+            </DAppProvider>
           </React.StrictMode>
         </ViewportProvider>
       </ApolloProvider>

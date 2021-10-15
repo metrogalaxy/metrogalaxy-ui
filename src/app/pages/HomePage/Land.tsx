@@ -5,8 +5,14 @@ import { Layout } from 'src/app/components/Layout';
 import { Title, SubTitle as SubTitleLib } from 'src/app/components/Title';
 import { PrimaryButton as PrimaryButtonLib } from 'src/app/components/Button';
 import LandImg from './assets/land.png';
+import { useHistory } from 'react-router-dom';
 
 export function Land() {
+  const history = useHistory();
+  const onNavigateLandPage = () => {
+    history.push('/land');
+  };
+
   return (
     <Layout>
       <Background />
@@ -34,6 +40,7 @@ export function Land() {
         data-aos-once="true"
         data-aos-duration="1000"
         data-aos-delay="350"
+        onClick={onNavigateLandPage}
       >
         Buy your own land
       </PrimaryButton>

@@ -7,8 +7,8 @@ import { CharacterContainer } from './components/Character';
 import { Features } from './components/Features';
 import { Roadmap } from './Roadmap';
 import { Land } from './Land';
-import { Advisors } from './components/Advisors';
-import { Team } from './components/Team';
+// import { Advisors } from './components/Advisors';
+// import { Team } from './components/Team';
 import { Footer } from './components/Footer';
 
 export function HomePage() {
@@ -24,8 +24,8 @@ export function HomePage() {
       <Land />
       <Features />
       <Roadmap />
-      <Advisors />
-      <Team />
+      {/* <Advisors /> */}
+      {/* <Team /> */}
       <Footer />
     </Wrapper>
   );
