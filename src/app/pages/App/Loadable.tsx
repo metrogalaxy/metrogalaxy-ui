@@ -5,16 +5,25 @@ import { LoadingBackground } from './components/Background';
 export const Metronion = lazyLoad(
   () => import('./Metronion'),
   module => module.Metronion,
+  {
+    fallback: <LoadingBackground />,
+  },
 );
 
 export const Marketplace = lazyLoad(
   () => import('./Marketplace'),
   module => module.Marketplace,
+  {
+    fallback: <LoadingBackground />,
+  },
 );
 
 export const Staking = lazyLoad(
   () => import('./Staking'),
   module => module.Staking,
+  {
+    fallback: <LoadingBackground />,
+  },
 );
 
 export const Land = lazyLoad(

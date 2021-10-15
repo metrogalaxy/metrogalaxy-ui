@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import BackgroundImg from './assets/background.png';
+import { LoadingSpinner } from 'src/app/components/Loading';
 
 export const Background = styled.div`
   background-image: url(${BackgroundImg});
@@ -18,6 +19,9 @@ export function LoadingBackground() {
   return (
     <Wrapper>
       <Background />
+      <div className="loading-bg-fullscreen">
+        <LoadingSpinner />
+      </div>
     </Wrapper>
   );
 }
@@ -25,4 +29,12 @@ export function LoadingBackground() {
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
+
+  .loading-bg-fullscreen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;

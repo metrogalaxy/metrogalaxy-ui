@@ -2,11 +2,15 @@ import { ethers } from 'ethers';
 import BaseWalletService from './BaseWalletService';
 declare const window: any;
 
+const ErrorMetamaskNotInstalled = 'Metamask is not installed';
+
 export default class MetamaskService extends BaseWalletService {
   constructor(props?: any) {
     super(props);
     this.ethereum = window.ethereum;
-    this.provider = new ethers.providers.Web3Provider(this.ethereum, 'any');
+    if (this.ethereum) {
+      this.provider = new ethers.providers.Web3Provider(this.ethereum, 'any');
+    }
   }
 
   // addNewChain = async (chanId: ChainID) => {
@@ -28,31 +32,38 @@ export default class MetamaskService extends BaseWalletService {
   //   });
   // };
 
-  addNewChain = async (chainId: number) => {
-    await this.ethereum.request({
-      method: 'wallet_addEthereumChain',
-      params: [
-        {
-          chainId: ethers.utils.hexValue(chainId),
-        },
-      ],
-    });
+  addNewChain = async (chainId: number): Promise<Error> => {
+    if (this.ethereum) {
+      await this.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: ethers.utils.hexValue(chainId),
+          },
+        ],
+      });
+    }
+    return new Error(ErrorMetamaskNotInstalled);
   };
 
-  switchChain = async (chainId: number): Promise<string> => {
-    try {
-      await this.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: ethers.utils.hexValue(chainId) }],
-      });
-    } catch (error) {
-      console.log(error);
-      return error?.message;
-      // if (error?.code === 4902) {
-      //   await this.addNewChain(chainId);
-      // }
+  switchChain = async (chainId: number): Promise<Error> => {
+    if (this.ethereum) {
+      try {
+        await this.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: ethers.utils.hexValue(chainId) }],
+        });
+      } catch (error) {
+        console.log(error);
+        if (error?.code === 4902) {
+          return await this.addNewChain(chainId);
+        } else {
+          return new Error(error!.message);
+        }
+      }
     }
-    return '';
+
+    return new Error(ErrorMetamaskNotInstalled);
   };
 
   getCurrentChainId = async (): Promise<number> => {
@@ -60,6 +71,10 @@ export default class MetamaskService extends BaseWalletService {
       const network = await this.provider.getNetwork();
       return network.chainId;
     }
-    return Number(this.ethereum.networkVersion);
+
+    if (this.ethereum) {
+      return Number(this.ethereum.networkVersion);
+    }
+    return 0;
   };
 }

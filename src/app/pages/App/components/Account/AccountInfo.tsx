@@ -40,7 +40,6 @@ export function AccountInfo() {
         {formattedBalance && account && (
           <React.Fragment>
             <div className="balance">{formattedBalance} ETH</div>
-
             <div className="account">{formattedAddress}</div>
           </React.Fragment>
         )}
@@ -78,7 +77,7 @@ const Wrapper = styled.div`
   }
 
   .balance {
-    padding-right: 13rem;
+    padding-right: 12rem;
   }
 
   .account {

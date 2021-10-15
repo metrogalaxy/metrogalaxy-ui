@@ -41,8 +41,13 @@ const Wrapper = styled('div')`
   .link-wrapper {
     color: ${ColorConstants.WHITE} !important;
     background-color: transparent;
-    padding: 1rem 2.5rem !important;
+    padding: 1rem 2.5rem;
     text-decoration: none;
+
+    ${mediaQuery.lessThan(ScreenSize.XL)`
+      background-color: transparent !important;
+      padding: 0 !important;
+    `}
   }
   .link-wrapper-active {
     color: ${ColorConstants.MAIN_GREEN} !important;

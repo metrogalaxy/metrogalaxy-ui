@@ -55,7 +55,7 @@ const Wrapper = styled('div')`
     left: 25%;
   }
 
-  ${mediaQuery.lessThan(ScreenSize.MD)`
+  ${mediaQuery.lessThan(ScreenSize.XL)`
     background-color: transparent !important;
     padding: 1rem 2.5rem;
   `}

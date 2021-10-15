@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Helmet } from 'react-helmet-async';
 import { Row, Col } from 'react-bootstrap';
-import { NavBar, NAV_BAR_ITEMS_ID } from 'src/app/components/NavBar';
+import { NavBar, NAV_BAR_ITEMS_ID } from 'src/app/pages/App/components/NavBar';
 import { Background } from '../components/Background';
 import { Layout, TitleLayout } from '../components/Layout';
 import TitleIcon from './assets/title_icon.svg';

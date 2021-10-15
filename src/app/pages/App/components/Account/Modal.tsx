@@ -73,11 +73,9 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
       return;
     }
     setIsConnecting(true);
-    const errString = await metamaskService.switchChain(
-      config.readOnlyChainId!,
-    );
-    if (errString) {
-      setError(new Error(errString));
+    const err = await metamaskService.switchChain(config.readOnlyChainId!);
+    if (err) {
+      setError(err);
     } else {
       setCurrentChainId(config.readOnlyChainId!);
     }

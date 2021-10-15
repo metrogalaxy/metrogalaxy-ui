@@ -6,7 +6,7 @@ import MenuIconImg from 'src/app/assets/menu_icon.png';
 import { Logo } from 'src/app/components/Logo';
 import { MenuItem } from './MenuItem';
 import { ColorConstants } from 'src/styles/StyleConstants';
-import { Account } from 'src/app/components/Account';
+import { Account } from 'src/app/pages/App/components/Account';
 
 export enum NAV_BAR_ITEMS_ID {
   Metronion = 'metronion',
@@ -79,7 +79,7 @@ const Menu = styled(Navbar)`
   font-size: 1.6rem;
   line-height: 1.9rem;
   color: ${ColorConstants.WHITE};
-  padding: 2rem 6rem;
+  padding: 2rem 4rem;
   width: 100%;
 
   ${mediaQuery.lessThan(ScreenSize.MD)`

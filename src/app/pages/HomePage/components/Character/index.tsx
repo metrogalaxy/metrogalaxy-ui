@@ -8,6 +8,7 @@ import { Layout as LayoutLib } from 'src/app/components/Layout';
 import { PrimaryButton } from 'src/app/components/Button';
 import { mediaQuery, ScreenSize, ScreenSizeNumber } from 'src/styles/media';
 import { importAll } from './utils';
+import { useHistory } from 'react-router-dom';
 
 // import all images in the assets directory
 const imagesArr = importAll(
@@ -15,6 +16,12 @@ const imagesArr = importAll(
 );
 
 export function CharacterContainer() {
+  const history = useHistory();
+
+  const onNavigateMetronionPage = () => {
+    history.push('/metronion');
+  };
+
   const imgArrComponents = imagesArr.map((item, index) => (
     <Figure key={index}>
       <Figure.Image src={item.path} />
@@ -72,6 +79,7 @@ export function CharacterContainer() {
           data-aos-once="true"
           data-aos-duration="1000"
           data-aos-delay="350"
+          onClick={onNavigateMetronionPage}
         >
           Get your own Metronions
         </PrimaryButton>
