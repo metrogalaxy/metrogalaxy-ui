@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { Form } from 'react-bootstrap';
-import { PrimaryButton } from 'src/app/components/Button';
+import { PrimaryButton, DisabledButton } from 'src/app/components/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useEthers } from '@usedapp/core';
 import Decimal from 'decimal.js';
 
 const UNIT_PRICE = 0.1;
@@ -15,6 +16,7 @@ interface IFormInput {
 export function MintBox() {
   let totalAmount = new Decimal(0);
   const { register, handleSubmit, watch, formState } = useForm<IFormInput>();
+  const { account } = useEthers();
   const watchedAmount = watch('amount', '');
   const onSubmit: SubmitHandler<IFormInput> = _ => {
     console.log('total amount: ' + totalAmount.toString());
@@ -58,9 +60,16 @@ export function MintBox() {
               <div className="text-error">Amount should be in range 1 to 5</div>
             )}
           </div>
-          <PrimaryButton className="button" onClick={handleSubmit(onSubmit)}>
-            Mint
-          </PrimaryButton>
+          {!account && (
+            <DisabledButton className="button">
+              Please Connect Wallet
+            </DisabledButton>
+          )}
+          {account && (
+            <PrimaryButton className="button" onClick={handleSubmit(onSubmit)}>
+              Mint
+            </PrimaryButton>
+          )}
         </div>
       </Box>
     </Wrapper>

@@ -20,6 +20,7 @@ import FavIcon from './assets/favicon.png';
 
 export function App() {
   const { i18n } = useTranslation();
+
   return (
     <BrowserRouter>
       <Helmet

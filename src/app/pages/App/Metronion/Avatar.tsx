@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Image } from 'react-bootstrap';
-import AvatarImg from './assets/avatar.png';
+import AvatarImg from './assets/avatar.gif';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 
 export function Avatar() {
@@ -22,6 +22,8 @@ const Wrapper = styled.div`
     width: 100%;
     max-width: 32rem;
     max-height: 44rem;
+
+    border-radius: 2rem;
   }
 
   ${mediaQuery.lessThan(ScreenSize.LG)`
