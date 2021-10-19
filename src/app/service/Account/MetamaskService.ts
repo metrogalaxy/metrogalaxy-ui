@@ -53,7 +53,7 @@ export default class MetamaskService extends BaseWalletService {
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: ethers.utils.hexValue(chainId) }],
         });
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
         if (error?.code === 4902) {
           return await this.addNewChain(chainId);

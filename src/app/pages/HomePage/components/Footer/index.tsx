@@ -4,6 +4,7 @@ import { Row, Col as ColLib } from 'react-bootstrap';
 import { Logo } from 'src/app/components/Logo';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { ColorConstants } from 'src/styles/StyleConstants';
+import { TELEGRAM_URL, TWITTER_URL } from 'src/app/config/constants';
 
 export function Footer() {
   return (
@@ -22,8 +23,12 @@ export function Footer() {
           </Col>
           <Col>
             <Title>Social</Title>
-            <Link>Telegram</Link>
-            <Link>Twitter</Link>
+            <Link href={TELEGRAM_URL} target="_blank">
+              Telegram
+            </Link>
+            <Link href={TWITTER_URL} target="_blank">
+              Twitter
+            </Link>
             <Link>Discord</Link>
             <Link>Medium</Link>
           </Col>
@@ -99,7 +104,7 @@ const Title = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Link = styled.div`
+const Link = styled.a`
   cursor: pointer;
   font-family: 'Acrom-Light';
   font-size: 1.4rem;
@@ -108,9 +113,12 @@ const Link = styled.div`
   color: ${ColorConstants.WHITE};
   opacity: 0.6;
   margin-bottom: 0.5rem;
+  text-decoration: none;
+  display: block;
 
   &:hover {
     opacity: 1;
+    color: ${ColorConstants.WHITE};
   }
 `;
 

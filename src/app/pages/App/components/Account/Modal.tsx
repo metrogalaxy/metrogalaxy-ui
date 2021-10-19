@@ -14,6 +14,9 @@ import {
 } from 'src/app/service/Account/utils';
 import MetamaskService from 'src/app/service/Account/MetamaskService';
 import { GetChainName } from 'src/app/config/constants';
+import { useDispatch } from 'react-redux';
+import { useAccountSlice } from './slice';
+import { useAccount } from 'src/app/hooks';
 
 interface IImportWalletModalProps {
   isShow: boolean;
@@ -25,41 +28,19 @@ const metamaskService = new MetamaskService();
 export function ImportWalletModal(props: IImportWalletModalProps) {
   const [error, setError] = React.useState<Error>();
   const [isConnecting, setIsConnecting] = React.useState(false);
-  const [currentChainId, setCurrentChainId] = React.useState(0);
-  const { activate, deactivate } = useEthers();
+  const { account: accountUseEthers, activate } = useEthers();
   const config = useConfig();
-
-  React.useEffect(() => {
-    const fetchChainId = async () => {
-      const chainId = await metamaskService.getCurrentChainId();
-      console.log('Set initial chain id: ', chainId);
-      setCurrentChainId(chainId);
-    };
-
-    fetchChainId();
-  });
+  const dispatch = useDispatch();
+  const { actions } = useAccountSlice();
+  const { currentChainId, logout } = useAccount();
 
   // Subscribe chain changed
   React.useEffect(() => {
-    const chainIDHander = (chainId: number) => {
-      console.log('Chain changed: ', chainId);
-      setCurrentChainId(chainId);
+    const chainIDHander = () => {
       setError(undefined);
     };
     metamaskService.subscribeChainChanged(chainIDHander);
   }, []);
-
-  // Subscribe account changed
-  React.useEffect(() => {
-    const accountHandler = (account: string) => {
-      console.log('Account changed: ', account);
-    };
-    metamaskService.subscribeAccountChanged(accountHandler);
-  });
-
-  const logout = async () => {
-    await deactivate();
-  };
 
   const handleModalExit = () => {
     setError(undefined);
@@ -69,7 +50,7 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
    * Handle switching chain to configured chainID
    */
   const switchChain = async () => {
-    if (currentChainId === config.readOnlyChainId!) {
+    if (currentChainId === Number(config.readOnlyChainId!)) {
       return;
     }
     setIsConnecting(true);
@@ -77,7 +58,9 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
     if (err) {
       setError(err);
     } else {
-      setCurrentChainId(config.readOnlyChainId!);
+      if (config.readOnlyChainId) {
+        dispatch(actions.setCurrentChainId(Number(config.readOnlyChainId!)));
+      }
     }
     setIsConnecting(false);
   };
@@ -100,16 +83,22 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
   const _activateConnector = async (connector: AbstractConnector) => {
     setIsConnecting(true);
     let isError = false;
+
     try {
       await activate(connector, undefined, true);
-    } catch (error) {
+    } catch (error: any) {
       setError(new Error(error?.message));
-      logout();
+      await logout();
       isError = true;
     }
 
+    console.log('AccountUseEthers ' + accountUseEthers);
+
     if (!isError) {
       props.handleClose();
+      if (accountUseEthers) {
+        dispatch(actions.setAccount(accountUseEthers));
+      }
     }
     setIsConnecting(false);
   };

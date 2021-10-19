@@ -15,6 +15,9 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { ViewportProvider } from './utils/viewport';
 import { DAppProvider, Config } from '@usedapp/core';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import { LoadingScreen } from 'src/app/components/Loading';
 import AOS from 'aos';
 
 // Use consistent styling
@@ -54,16 +57,20 @@ const config: Config = {
   supportedChains: [ENV.CHAIN_ID],
 };
 
+let persistor = persistStore(store);
+
 ReactDOM.render(
   <Provider store={store}>
     <HelmetProvider>
       <ApolloProvider client={client}>
         <ViewportProvider>
-          <React.StrictMode>
-            <DAppProvider config={config}>
-              <App />
-            </DAppProvider>
-          </React.StrictMode>
+          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+            <React.StrictMode>
+              <DAppProvider config={config}>
+                <App />
+              </DAppProvider>
+            </React.StrictMode>
+          </PersistGate>
         </ViewportProvider>
       </ApolloProvider>
     </HelmetProvider>

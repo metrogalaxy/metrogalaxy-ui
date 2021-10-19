@@ -4,7 +4,7 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import { Form } from 'react-bootstrap';
 import { PrimaryButton, DisabledButton } from 'src/app/components/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEthers } from '@usedapp/core';
+import { useAccount } from 'src/app/hooks';
 import Decimal from 'decimal.js';
 
 const UNIT_PRICE = 0.1;
@@ -16,10 +16,10 @@ interface IFormInput {
 export function MintBox() {
   let totalAmount = new Decimal(0);
   const { register, handleSubmit, watch, formState } = useForm<IFormInput>();
-  const { account } = useEthers();
+  const { isActivated } = useAccount();
   const watchedAmount = watch('amount', '');
   const onSubmit: SubmitHandler<IFormInput> = _ => {
-    console.log('total amount: ' + totalAmount.toString());
+    // console.log('total amount: ' + totalAmount.toString());
   };
 
   const amountIsValid =
@@ -60,12 +60,12 @@ export function MintBox() {
               <div className="text-error">Amount should be in range 1 to 5</div>
             )}
           </div>
-          {!account && (
+          {!isActivated && (
             <DisabledButton className="button">
               Please Connect Wallet
             </DisabledButton>
           )}
-          {account && (
+          {isActivated && (
             <PrimaryButton className="button" onClick={handleSubmit(onSubmit)}>
               Mint
             </PrimaryButton>

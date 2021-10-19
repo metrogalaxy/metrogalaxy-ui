@@ -6,10 +6,11 @@ import { mediaQuery, ScreenSize } from 'src/styles/media';
 
 interface MenuButtonProps {
   children: string;
+  onClick?: () => any;
 }
 
 export function MenuButton(props: MenuButtonProps) {
-  return <Wrapper>{props.children}</Wrapper>;
+  return <Wrapper onClick={props.onClick}>{props.children}</Wrapper>;
 }
 
 const Wrapper = styled(Nav.Item)`

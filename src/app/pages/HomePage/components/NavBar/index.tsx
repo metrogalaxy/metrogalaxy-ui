@@ -7,6 +7,7 @@ import { MenuItem } from './MenuItem';
 import { MenuButton } from './MenuButton';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import MenuIconImg from 'src/app/assets/menu_icon.png';
+import { TELEGRAM_URL } from 'src/app/config/constants';
 
 enum MENU_ITEMS_ID {
   Metronion = 'metronion',
@@ -16,6 +17,9 @@ enum MENU_ITEMS_ID {
 }
 
 export function NavBar() {
+  const openTelegramGroup = () => {
+    window.open(TELEGRAM_URL);
+  };
   return (
     <Wrapper>
       <Menu collapseOnSelect expand="xl">
@@ -38,7 +42,7 @@ export function NavBar() {
               Land
             </MenuItem>
           </Nav>
-          <MenuButton>Join Us Now</MenuButton>
+          <MenuButton onClick={openTelegramGroup}>Join Us Now</MenuButton>
         </MenuCollapse>
       </Menu>
     </Wrapper>
