@@ -23,6 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled(Nav.Item)`
+  font-size: 1.6rem;
   text-transform: capitalize;
   background-color: transparent;
   color: ${ColorConstants.MAIN_GREEN};

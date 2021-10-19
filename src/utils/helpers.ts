@@ -5,9 +5,15 @@ export function formatAddress(address: string, first = 10, last = -4) {
   return `${address.slice(0, first)}...${address.slice(last)}`;
 }
 
-export function formatNumber(number: any, precision = 0) {
-  if (!number) return 0;
-  if (number > 0 && number < 1) return toMeaningfulNumber(+number);
+/**
+ *
+ * @param number Number in string of number
+ * @param precision numbers of decimals
+ * @returns formatted number in string format
+ */
+export function formatNumber(number: string | number, precision = 0): string {
+  if (!number) return '0';
+  if (number > 0 && number < 1) return toMeaningfulNumber(+number, precision);
 
   let bigNumber = new BigNumber(number);
   let formattedNumber = bigNumber.toFormat(precision);
@@ -20,8 +26,7 @@ export function formatNumber(number: any, precision = 0) {
   return formattedNumber;
 }
 
-export function toMeaningfulNumber(number: number): number {
-  const meaningfulNumber = number.toFixed(20).match(/^-?\d*\.?0*\d{0,4}/);
-  if (!meaningfulNumber) return 0;
-  return +meaningfulNumber[0];
+export function toMeaningfulNumber(number: number, precision: number): string {
+  let bigNumber = new BigNumber(number);
+  return bigNumber.toFixed(precision);
 }

@@ -58,9 +58,11 @@ export function NavBar(props: NavBarProps) {
               Land
             </MenuItem>
           </Nav>
-          <Account />
         </MenuCollapse>
       </Menu>
+      <AccountWrapper>
+        <Account />
+      </AccountWrapper>
     </Wrapper>
   );
 }
@@ -72,6 +74,21 @@ const Wrapper = styled.div`
   background-color: rgba(5, 15, 26, 0.8);
   border-bottom: 2px solid rgba(98, 228, 127, 0.3);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  ${mediaQuery.lessThan(ScreenSize.XL)`
+    flex-direction: column;
+  `}
+`;
+
+const AccountWrapper = styled.div`
+  padding: 2rem 4rem 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${mediaQuery.lessThan(ScreenSize.XL)`
+    padding: 0 4rem 2rem;
+  `}
 `;
 
 const Menu = styled(Navbar)`
@@ -80,7 +97,6 @@ const Menu = styled(Navbar)`
   line-height: 1.9rem;
   color: ${ColorConstants.WHITE};
   padding: 2rem 4rem;
-  width: 100%;
 
   ${mediaQuery.lessThan(ScreenSize.MD)`
     padding: 2rem 3rem;

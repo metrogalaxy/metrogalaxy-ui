@@ -1,14 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import { useEthers, useEtherBalance, useConfig } from '@usedapp/core';
 import { ethers } from 'ethers';
+import { useConfig, useEtherBalance } from '@usedapp/core';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
 import { GetEtherscanUrl } from 'src/app/config/constants';
+import { useAccount } from 'src/app/hooks';
 
 export function AccountInfo() {
-  const { account, deactivate } = useEthers();
+  const { account, logout } = useAccount();
   const config = useConfig();
   const [isOpenDropwdown, setOpenDropdown] = React.useState(false);
   const wrapperRef = React.useRef(null);
@@ -18,7 +19,7 @@ export function AccountInfo() {
   let formattedBalance;
   if (ethBalance) {
     formattedBalance = ethers.utils.formatEther(ethBalance);
-    formattedBalance = formatNumber(formattedBalance, 3);
+    formattedBalance = formatNumber(formattedBalance, 4);
   }
 
   const openDropdown = () => {
@@ -27,8 +28,8 @@ export function AccountInfo() {
 
   useOnClickOutside(wrapperRef, () => setOpenDropdown(false));
 
-  const disconnect = () => {
-    deactivate();
+  const disconnect = async () => {
+    await logout();
   };
 
   const etherscanBaseUrl = GetEtherscanUrl(config.readOnlyChainId!);
@@ -37,7 +38,7 @@ export function AccountInfo() {
   return (
     <Wrapper ref={wrapperRef}>
       <div className="account-wrapper" onClick={openDropdown}>
-        {formattedBalance && account && (
+        {formattedBalance && (
           <React.Fragment>
             <div className="balance">{formattedBalance} ETH</div>
             <div className="account">{formattedAddress}</div>
@@ -61,9 +62,13 @@ export function AccountInfo() {
 }
 
 const Wrapper = styled.div`
+  font-family: 'Acrom';
+  font-size: 1.6rem;
+  color: ${ColorConstants.WHITE};
   width: 100%;
   height: 100%;
-  max-width: 30rem;
+  min-width: 29rem;
+  max-width: 32rem;
   position: relative;
 
   .account-wrapper {
