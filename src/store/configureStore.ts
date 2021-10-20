@@ -9,14 +9,7 @@ import {
 } from '@reduxjs/toolkit';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
-import {
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import persistState from 'redux-localstorage';
 
 import { createReducer } from './reducers';
 
@@ -33,18 +26,12 @@ export function configureAppStore() {
       createReducer,
       runSaga,
     }),
+    persistState('account'),
   ] as StoreEnhancer[];
 
   const store = configureStore({
     reducer: createReducer(),
-    middleware: [
-      ...getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }),
-      ...middlewares,
-    ],
+    middleware: [...getDefaultMiddleware(), ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });

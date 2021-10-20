@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { ethers } from 'ethers';
-import { useConfig, useEtherBalance } from '@usedapp/core';
+import { useConfig, useEtherBalance, useEthers } from '@usedapp/core';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
@@ -9,7 +9,8 @@ import { GetEtherscanUrl } from 'src/app/config/constants';
 import { useAccount } from 'src/app/hooks';
 
 export function AccountInfo() {
-  const { account, logout } = useAccount();
+  const { logout } = useAccount();
+  const { account } = useEthers();
   const config = useConfig();
   const [isOpenDropwdown, setOpenDropdown] = React.useState(false);
   const wrapperRef = React.useRef(null);

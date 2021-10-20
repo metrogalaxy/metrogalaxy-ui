@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { useAccountSlice } from 'src/app/pages/App/components/Account/slice';
 
 interface useAccountReturn {
-  account: string | null;
   currentChainId: number;
   isActivated: boolean;
   logout: () => Promise<void>;
@@ -19,7 +18,7 @@ interface useAccountReturn {
  * logout: function to logout the wallet
  */
 export function useAccount(): useAccountReturn {
-  const { deactivate } = useEthers();
+  const { deactivate, account } = useEthers();
   const { actions } = useAccountSlice();
   const config = useConfig();
   const dispatch = useDispatch();
@@ -27,26 +26,23 @@ export function useAccount(): useAccountReturn {
 
   const logout = async (): Promise<void> => {
     await deactivate();
-    dispatch(actions.setAccount(null));
+    dispatch(actions.setIsConnected(false));
     return;
   };
 
   let isActivated = false;
   if (
-    accountState.account &&
+    account &&
+    accountState.isConnected &&
     accountState.currentChainId &&
     accountState.currentChainId === config.readOnlyChainId
   ) {
     isActivated = true;
   }
 
-  // console.log('account ' + account);
-
   return {
-    account: accountState.account,
     currentChainId: accountState.currentChainId,
     isActivated: isActivated,
-
     logout: logout,
   };
 }

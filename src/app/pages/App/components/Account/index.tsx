@@ -3,10 +3,9 @@ import styled from 'styled-components/macro';
 import { ConnectWalletButton } from './Button';
 import { ImportWalletModal } from './Modal';
 import { AccountInfo } from './AccountInfo';
-import { useAccount } from 'src/app/hooks';
 import { useAccountSlice } from './slice';
 import { useDispatch } from 'react-redux';
-import { useEthers } from '@usedapp/core';
+import { useAccount } from 'src/app/hooks';
 
 import MetamaskService from 'src/app/service/Account/MetamaskService';
 
@@ -14,10 +13,9 @@ const metamaskService = new MetamaskService();
 
 export function Account() {
   const [isShowModal, setIsShowModal] = React.useState(false);
-  const { isActivated, account } = useAccount();
   const dispatch = useDispatch();
   const { actions } = useAccountSlice();
-  const { account: accountUseEthers } = useEthers();
+  const { isActivated } = useAccount();
 
   // get initial chain id
   React.useEffect(() => {
@@ -41,22 +39,13 @@ export function Account() {
   }, []);
 
   // Subscribe account changed, only subscribe to account which connected
-  React.useEffect(() => {
-    const accountHandler = (account: string) => {
-      console.log('Account changed: ' + account);
-      dispatch(actions.setAccount(account));
-    };
-    metamaskService.subscribeAccountChanged(accountHandler);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // if metamask account is disconnected, then set state for account to null
-  React.useEffect(() => {
-    if (account && !accountUseEthers) {
-      dispatch(actions.setAccount(null));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accountUseEthers]);
+  // React.useEffect(() => {
+  //   const accountHandler = (account: string) => {
+  //     console.log('Account changed: ' + account);
+  //   };
+  //   metamaskService.subscribeAccountChanged(accountHandler);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const loadWeb3Modal = () => {
     setIsShowModal(true);

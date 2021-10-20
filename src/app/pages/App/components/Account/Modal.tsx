@@ -28,7 +28,7 @@ const metamaskService = new MetamaskService();
 export function ImportWalletModal(props: IImportWalletModalProps) {
   const [error, setError] = React.useState<Error>();
   const [isConnecting, setIsConnecting] = React.useState(false);
-  const { account: accountUseEthers, activate } = useEthers();
+  const { activate } = useEthers();
   const config = useConfig();
   const dispatch = useDispatch();
   const { actions } = useAccountSlice();
@@ -92,13 +92,9 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
       isError = true;
     }
 
-    console.log('AccountUseEthers ' + accountUseEthers);
-
     if (!isError) {
+      dispatch(actions.setIsConnected(true));
       props.handleClose();
-      if (accountUseEthers) {
-        dispatch(actions.setAccount(accountUseEthers));
-      }
     }
     setIsConnecting(false);
   };
