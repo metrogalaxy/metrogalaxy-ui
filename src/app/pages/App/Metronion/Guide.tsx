@@ -28,7 +28,7 @@ export function Guide() {
             <ul>
               <li>Each wallet can mint up to 5 Metronions</li>
               <li>Each Metronion costs 0.1 ETH</li>
-              <li>All Metronions are going to be revealed on Oct 31 2021</li>
+              {/* <li>All Metronions are going to be revealed on Oct 31 2021</li> */}
             </ul>
           </div>
         </div>

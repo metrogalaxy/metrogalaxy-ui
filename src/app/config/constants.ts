@@ -11,6 +11,7 @@ export const ChainIdToName: Record<number, string> = {
 const ChainIdToEtherscanBaseUrl: Record<number, string> = {
   1: 'https://etherscan.com/',
   2: 'https://ropsten.etherscan.com/',
+  56: 'https://bscscan.com/',
 };
 
 export function GetChainName(chainId: number): string {

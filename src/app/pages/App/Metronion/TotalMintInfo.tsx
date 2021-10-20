@@ -14,7 +14,7 @@ export function TotalMintInfo() {
         <div className="text-wrapper">
           <div className="title">Total Metronions Minted</div>
           <div className="text">
-            <span className="text--highlight">10,000</span>
+            <span className="text--highlight">0</span>
             <span>/10,000</span>
           </div>
         </div>

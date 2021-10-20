@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import { keyframes } from 'styled-components';
 import { ethers } from 'ethers';
 import { useConfig, useEtherBalance, useEthers } from '@usedapp/core';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
@@ -7,6 +8,7 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
 import { GetEtherscanUrl } from 'src/app/config/constants';
 import { useAccount } from 'src/app/hooks';
+import ENV from 'src/app/config/env';
 
 export function AccountInfo() {
   const { logout } = useAccount();
@@ -41,7 +43,9 @@ export function AccountInfo() {
       <div className="account-wrapper" onClick={openDropdown}>
         {formattedBalance && (
           <React.Fragment>
-            <div className="balance">{formattedBalance} ETH</div>
+            <div className="balance">
+              {formattedBalance} {ENV.CHAIN_TOKEN}
+            </div>
             <div className="account">{formattedAddress}</div>
           </React.Fragment>
         )}
@@ -50,7 +54,7 @@ export function AccountInfo() {
         <div className="dropdown">
           <div className="dropdown--item">
             <a href={etherscanUrl} target="_blank" rel="noreferrer">
-              View on Etherscan
+              View on {ENV.CHAIN_EXPLORER_NAME}
             </a>
           </div>
           <div className="dropdown--item" onClick={disconnect}>
@@ -61,6 +65,17 @@ export function AccountInfo() {
     </Wrapper>
   );
 }
+
+const FadeInKeyframe = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+`;
 
 const Wrapper = styled.div`
   font-family: 'Acrom';
@@ -107,6 +122,8 @@ const Wrapper = styled.div`
     text-align: center;
     left: 50%;
     transform: translate(-50%, 0);
+
+    animation: ${FadeInKeyframe} 0.2s ease-out;
 
     &:after {
       position: absolute;
