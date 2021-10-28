@@ -16,6 +16,8 @@ import { ApolloProvider } from 'react-apollo';
 import { ViewportProvider } from './utils/viewport';
 import { DAppProvider, Config } from '@usedapp/core';
 import AOS from 'aos';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -36,12 +38,19 @@ import ENV from 'src/app/config/env';
 // Initialize languages
 import './locales/i18n';
 
+if (process.env.REACT_APP_ENABLE_MOCK_API === 'true') {
+  const { worker } = require('./mocks/browser');
+  worker.start();
+}
+
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 const client = new ApolloClient({
   uri: 'https://api.thegraph.com/subgraphs/name/paulrberg/create-eth-app',
 });
+
+const queryClient = new QueryClient();
 
 // init animation on scroll
 AOS.init();
@@ -61,7 +70,12 @@ ReactDOM.render(
         <ViewportProvider>
           <React.StrictMode>
             <DAppProvider config={config}>
-              <App />
+              <QueryClientProvider client={queryClient}>
+                <App />
+                {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
+                  <ReactQueryDevtools initialIsOpen={false} />
+                )}
+              </QueryClientProvider>
             </DAppProvider>
           </React.StrictMode>
         </ViewportProvider>

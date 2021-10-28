@@ -3,6 +3,7 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import styled from 'styled-components/macro';
 import BookmarkIcon from './assets/bookmark.png';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
+import ENV from 'src/app/config/env';
 
 export function Guide() {
   return (
@@ -27,7 +28,10 @@ export function Guide() {
           <div className="notice">
             <ul>
               <li>Each wallet can mint up to 5 Metronions</li>
-              <li>Each Metronion costs 0.1 ETH</li>
+              <li>
+                Each Metronion costs {ENV.METRONION_UNIT_PRICE}{' '}
+                {ENV.CHAIN_TOKEN}
+              </li>
               {/* <li>All Metronions are going to be revealed on Oct 31 2021</li> */}
             </ul>
           </div>

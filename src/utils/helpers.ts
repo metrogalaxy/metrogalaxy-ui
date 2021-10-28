@@ -28,5 +28,19 @@ export function formatNumber(number: string | number, precision = 0): string {
 
 export function toMeaningfulNumber(number: number, precision: number): string {
   let bigNumber = new BigNumber(number);
+  if (bigNumber.dp() < precision) {
+    return bigNumber.toString();
+  }
+
   return bigNumber.toFixed(precision);
+}
+
+export function getEnumKey(enumInput: any, value: string): string {
+  const result = Object.keys(enumInput).find(item => {
+    return enumInput[item] === value;
+  });
+  if (result) {
+    return result;
+  }
+  return '';
 }

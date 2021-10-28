@@ -5,4 +5,5 @@ export interface IEnv {
   CHAIN_TOKEN: string;
   CHAIN_EXPLORER_NAME: string;
   MINT_DATE: Date;
+  METRONION_UNIT_PRICE: number;
 }

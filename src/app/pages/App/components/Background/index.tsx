@@ -7,6 +7,7 @@ export const Background = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
   position: absolute;
   z-index: -3;
   top: 0;

@@ -13,7 +13,13 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from 'src/styles/global-styles';
 
 import { HomePage } from './pages/HomePage/Loadable';
-import { Land, Marketplace, Metronion, Staking } from './pages/App/Loadable';
+import {
+  Land,
+  Marketplace,
+  Metronion,
+  Staking,
+  Inventory,
+} from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import FavIcon from './assets/favicon.png';
@@ -41,6 +47,7 @@ export function App() {
         <Route exact path="/marketplace" component={Marketplace} />
         <Route exact path="/staking" component={Staking} />
         <Route exact path="/land" component={Land} />
+        <Route exact path="/inventory" component={Inventory} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

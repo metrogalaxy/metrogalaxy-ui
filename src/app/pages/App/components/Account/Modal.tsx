@@ -4,7 +4,6 @@ import { Modal, Row, Col, Image } from 'react-bootstrap';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import MetamaskImg from './assets/metamask.png';
 import WalletConnectImg from './assets/wallet_connect.png';
-import EthereumImg from './assets/ethereum.png';
 import TickImg from './assets/tick.svg';
 import { useEthers, useConfig } from '@usedapp/core';
 import { AbstractConnector } from '@web3-react/abstract-connector';
@@ -17,6 +16,17 @@ import { GetChainName } from 'src/app/config/constants';
 import { useDispatch } from 'react-redux';
 import { useAccountSlice } from './slice';
 import { useAccount } from 'src/app/hooks';
+import ENV from 'src/app/config/env';
+
+let IconComp;
+switch (ENV.CHAIN_TOKEN) {
+  case 'ETH':
+    IconComp = require('./assets/ETH.png').default;
+    break;
+  case 'BNB':
+    IconComp = require('./assets/BNB.png').default;
+    break;
+}
 
 interface IImportWalletModalProps {
   isShow: boolean;
@@ -122,7 +132,7 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
               } ${isCorrectChain ? 'wallet-option-active' : ''}`}
               onClick={switchChain}
             >
-              <Image className="icon" src={EthereumImg} />
+              <Image className="icon" src={IconComp} />
               <div className="text">{chainName}</div>
             </div>
           </Col>
