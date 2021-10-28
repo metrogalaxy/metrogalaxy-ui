@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectInventory } from './slice/selectors';
 import { useInventorySlice } from './slice';
 import { MetronionPanel } from '../components/MetronionPanel';
+import { Pagination } from '../components/MetronionPanel/Pagination';
+import { METRONION_PANEL_LIMITS_PER_PAGE } from 'src/app/config/constants';
 
 export function ItemPanel() {
   const { isActivated } = useAccount();
@@ -29,6 +31,18 @@ export function ItemPanel() {
     dispatch(actions.setPage(page));
   };
 
+  let isShowPagination = false;
+  if (data && data.count > METRONION_PANEL_LIMITS_PER_PAGE) {
+    isShowPagination = true;
+  }
+  if (
+    data &&
+    data.items.length < METRONION_PANEL_LIMITS_PER_PAGE &&
+    query.id !== ''
+  ) {
+    isShowPagination = false;
+  }
+
   return (
     <Wrapper>
       {isActivated && data && (
@@ -43,11 +57,13 @@ export function ItemPanel() {
               )}
               onReset={reset}
             >
-              <MetronionPanel
-                items={data.items}
-                count={data.count}
-                handlePageChange={handlePageChange}
-              />
+              <MetronionPanel items={data.items} count={data.count} />
+              {isShowPagination && (
+                <Pagination
+                  count={data.count}
+                  handlePageChange={handlePageChange}
+                />
+              )}
             </ErrorBoundary>
           )}
         </QueryErrorResetBoundary>

@@ -3,14 +3,11 @@ import styled from 'styled-components/macro';
 import { FetchMetronionItem } from 'src/app/service/API/inventory';
 import { MetronionCard } from './MetronionCard';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-import { Pagination } from './Pagination';
-import { METRONION_PANEL_LIMITS_PER_PAGE } from 'src/app/config/constants';
 import { ColorConstants } from 'src/styles/StyleConstants';
 
 interface MetronionPanelProp {
   items: FetchMetronionItem[];
   count: number;
-  handlePageChange: (page: number) => any;
 }
 
 export function MetronionPanel(props: MetronionPanelProp) {
@@ -30,12 +27,6 @@ export function MetronionPanel(props: MetronionPanelProp) {
       <Box>
         {listItems.length > 0 && listItems}
         {listItems.length === 0 && <Warning>No Metronions</Warning>}
-        {props.count > METRONION_PANEL_LIMITS_PER_PAGE && (
-          <Pagination
-            count={props.count}
-            handlePageChange={props.handlePageChange}
-          />
-        )}
       </Box>
     </Wrapper>
   );
@@ -59,6 +50,7 @@ const Box = styled.div`
 `;
 
 const Warning = styled.div`
+  width: 100%;
   font-family: 'Acrom';
   font-size: 1.8rem;
   line-height: 2.2rem;
