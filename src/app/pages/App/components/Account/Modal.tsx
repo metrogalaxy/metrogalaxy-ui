@@ -16,17 +16,7 @@ import { GetChainName } from 'src/app/config/constants';
 import { useDispatch } from 'react-redux';
 import { useAccountSlice } from './slice';
 import { useAccount } from 'src/app/hooks';
-import ENV from 'src/app/config/env';
-
-let IconComp;
-switch (ENV.CHAIN_TOKEN) {
-  case 'ETH':
-    IconComp = require('./assets/ETH.png').default;
-    break;
-  case 'BNB':
-    IconComp = require('./assets/BNB.png').default;
-    break;
-}
+import { IconComponent } from 'src/app/components/CurrencyLogo';
 
 interface IImportWalletModalProps {
   isShow: boolean;
@@ -132,7 +122,7 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
               } ${isCorrectChain ? 'wallet-option-active' : ''}`}
               onClick={switchChain}
             >
-              <Image className="icon" src={IconComp} />
+              <IconComponent className="icon" />
               <div className="text">{chainName}</div>
             </div>
           </Col>

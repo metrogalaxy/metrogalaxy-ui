@@ -3,7 +3,7 @@ import { createSlice } from 'src/utils/@reduxjs/toolkit';
 import { useInjectReducer } from 'src/utils/redux-injectors';
 import { InventoryState } from './types';
 import { METRONION_PANEL_LIMITS_PER_PAGE } from 'src/app/config/constants';
-import { FetchMetronionQuery } from 'src/app/service/API/inventory';
+import { FetchInventoryQuery } from 'src/app/service/API/inventory';
 import { SortType } from 'src/app/pages/App/components/FilterBox';
 import { getEnumKey } from 'src/utils/helpers';
 
@@ -19,7 +19,7 @@ const slice = createSlice({
   name: 'inventory',
   initialState,
   reducers: {
-    setQuery(state, action: PayloadAction<FetchMetronionQuery>) {
+    setQuery(state, action: PayloadAction<FetchInventoryQuery>) {
       state.address = action.payload.address;
       state.id = action.payload.id;
       state.sort = action.payload.sort;

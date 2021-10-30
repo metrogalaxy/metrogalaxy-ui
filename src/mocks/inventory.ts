@@ -1,6 +1,6 @@
 import { HttpStatusCode } from './constants';
 import { newErrorResponse, generateArray } from './utils';
-import { FetchMetronionItem } from 'src/app/service/API/inventory';
+import { FetchInventoryItem } from 'src/app/service/API/inventory';
 import MetronionImage from './assets/Boy_1.png';
 import BigNumber from 'bignumber.js';
 
@@ -11,7 +11,7 @@ enum SortType {
   HighestPrice = 'HighestPrice',
 }
 
-function generateItems(address: string): FetchMetronionItem[] {
+function generateItems(address: string): FetchInventoryItem[] {
   return generateArray(1, 10).map(item => ({
     id: item.toString(),
     owner: address,

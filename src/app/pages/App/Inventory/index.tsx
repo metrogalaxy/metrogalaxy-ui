@@ -7,7 +7,7 @@ import { Background } from '../components/Background';
 import { Layout, TitleLayout } from '../components/Layout';
 import { lazyLoad } from 'src/utils/loadable';
 import { LoadingSpinnerWrapper } from 'src/app/components/Loading';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import ArrorImg from './assets/arrow.png';
 import { Filter } from './Filter';

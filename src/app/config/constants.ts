@@ -4,6 +4,7 @@ export const TWITTER_URL = 'https://twitter.com/metroverse_io';
 export const ADMIN_EMAIL = 'captain@metroverse.io';
 
 export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
+export const MAX_METRONION_COUNT = 10000;
 
 export const ChainIdToName: Record<number, string> = {
   1: 'ETH Mainnet',
@@ -29,4 +30,14 @@ export function GetEtherscanUrl(chainId: number): string {
     return ChainIdToEtherscanBaseUrl[chainId];
   }
   return 'https://etherscan.com/';
+}
+
+export enum AttributeType {
+  Body = 'body',
+  Hair = 'hair',
+  Face = 'face',
+  Top = 'top',
+  Bottom = 'bottom',
+  Accessories = 'accessories',
+  Equipment = 'equipment',
 }

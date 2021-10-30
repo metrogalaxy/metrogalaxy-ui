@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { useEthers } from '@usedapp/core';
 import { useAccount } from 'src/app/hooks';
-import { useFetchMetronions } from 'src/app/service/API/inventory';
+import { useFetchInventory } from 'src/app/service/API/inventory';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from 'react-query';
 import { ErrorComponent } from './Error';
@@ -21,7 +21,7 @@ export function ItemPanel() {
   const { actions } = useInventorySlice();
   const query = useSelector(selectInventory);
 
-  const { data } = useFetchMetronions(query, {
+  const { data } = useFetchInventory(query, {
     enabled: isActivated && account && query.address !== '',
     staleTime: 2000,
     suspense: true,
@@ -80,6 +80,7 @@ const Wrapper = styled.div`
   ${mediaQuery.lessThan(ScreenSize.LG)`
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   `}

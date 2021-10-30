@@ -1,20 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Image } from 'react-bootstrap';
-import ENV from 'src/app/config/env';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { formatNumber } from 'src/utils/helpers';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-
-let IconComp;
-switch (ENV.CHAIN_TOKEN) {
-  case 'ETH':
-    IconComp = require('./assets/ETH.png').default;
-    break;
-  case 'BNB':
-    IconComp = require('./assets/BNB.png').default;
-    break;
-}
+import { useHistory } from 'react-router-dom';
+import { IconComponent } from 'src/app/components/CurrencyLogo';
 
 interface MetronionCardProps {
   id: string;
@@ -23,15 +14,20 @@ interface MetronionCardProps {
 }
 
 export function MetronionCard(props: MetronionCardProps) {
+  const history = useHistory();
   const price = formatNumber(props.price, 4);
 
+  const openMetronionInfoPage = () => {
+    history.push(`/metronion/${props.id}`);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={openMetronionInfoPage}>
       <Image className="metronion-card--image" src={props.url} />
       <div className="metronion-card--info">
         <div className="metronion-card--title">Metronion #{props.id}</div>
         <div className="metronion-card--price-info">
-          <Image className="metronion-card--icon" src={IconComp} />
+          <IconComponent className="metronion-card--icon" />
           <span className="metronion-card--price">{price}</span>
         </div>
       </div>

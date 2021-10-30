@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 
-export interface FetchMetronionQuery {
+export interface FetchInventoryQuery {
   address: string;
   id?: string;
   sort?: string;
@@ -9,26 +9,26 @@ export interface FetchMetronionQuery {
   limit?: number;
 }
 
-export interface FetchMetronionItem {
+export interface FetchInventoryItem {
   id: string;
   owner: string;
   url: string;
   price: string;
 }
 
-export interface FetchMetronionResponse {
+export interface FetchInventoryResponse {
   count: number;
-  items: FetchMetronionItem[];
+  items: FetchInventoryItem[];
 }
 
-interface FetchMetronionCountResponse {
+interface FetchInventoryCountResponse {
   count: number;
 }
-export const useFetchMetronions = (
-  query: FetchMetronionQuery,
+export const useFetchInventory = (
+  query: FetchInventoryQuery,
   options?: any,
 ) => {
-  return useQuery<FetchMetronionResponse, Error>(
+  return useQuery<FetchInventoryResponse, Error>(
     [
       '/api/inventory',
       query.address,
@@ -37,7 +37,7 @@ export const useFetchMetronions = (
       query.page,
       query.limit,
     ],
-    async (): Promise<FetchMetronionResponse> => {
+    async (): Promise<FetchInventoryResponse> => {
       let endpoint = `/api/inventory?address=${query.address}&page=${query.page}&limit=${query.limit}`;
       if (query.id) {
         endpoint += `&id=${query.id}`;
@@ -45,19 +45,19 @@ export const useFetchMetronions = (
       if (query.sort) {
         endpoint += `&sort=${query.sort}`;
       }
-      const { data } = await axios.get<FetchMetronionResponse>(endpoint);
+      const { data } = await axios.get<FetchInventoryResponse>(endpoint);
       return data;
     },
     options,
   );
 };
 
-export const useFetchMetronionsCount = (address: string, options?: any) => {
-  return useQuery<FetchMetronionCountResponse, Error>(
+export const useFetchInventoryCount = (address: string, options?: any) => {
+  return useQuery<FetchInventoryCountResponse, Error>(
     ['/api/inventory/count', address],
-    async (): Promise<FetchMetronionCountResponse> => {
+    async (): Promise<FetchInventoryCountResponse> => {
       let endpoint = `/api/inventory/count?address=${address}`;
-      const { data } = await axios.get<FetchMetronionCountResponse>(endpoint);
+      const { data } = await axios.get<FetchInventoryCountResponse>(endpoint);
       return data;
     },
     options,

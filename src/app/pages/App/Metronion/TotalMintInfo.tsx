@@ -4,6 +4,7 @@ import MintInfoIcon from './assets/mint_info_icon.png';
 import { Image } from 'react-bootstrap';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
+import { MAX_METRONION_COUNT } from 'src/app/config/constants';
 
 export function TotalMintInfo() {
   return (
@@ -15,7 +16,7 @@ export function TotalMintInfo() {
           <div className="title">Total Metronions Minted</div>
           <div className="text">
             <span className="text--highlight">0</span>
-            <span>/10,000</span>
+            <span>/{MAX_METRONION_COUNT}</span>
           </div>
         </div>
       </Box>

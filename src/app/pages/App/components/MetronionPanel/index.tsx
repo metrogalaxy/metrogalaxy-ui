@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import { FetchMetronionItem } from 'src/app/service/API/inventory';
+import { FetchInventoryItem } from 'src/app/service/API/inventory';
 import { MetronionCard } from './MetronionCard';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { ColorConstants } from 'src/styles/StyleConstants';
 
 interface MetronionPanelProp {
-  items: FetchMetronionItem[];
+  items: FetchInventoryItem[];
   count: number;
 }
 

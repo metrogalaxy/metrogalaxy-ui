@@ -23,6 +23,7 @@ import {
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import FavIcon from './assets/favicon.png';
+import { MetronionInfo } from './pages/App/MetronionInfo';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -48,6 +49,7 @@ export function App() {
         <Route exact path="/staking" component={Staking} />
         <Route exact path="/land" component={Land} />
         <Route exact path="/inventory" component={Inventory} />
+        <Route path="/metronion/:id" component={MetronionInfo} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

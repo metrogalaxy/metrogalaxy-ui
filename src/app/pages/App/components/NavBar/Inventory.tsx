@@ -4,8 +4,8 @@ import { Image } from 'react-bootstrap';
 import InventoryIcon from './assets/inventory_icon.png';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-import { useHistory } from 'react-router';
-import { useFetchMetronionsCount } from 'src/app/service/API/inventory';
+import { useHistory } from 'react-router-dom';
+import { useFetchInventoryCount } from 'src/app/service/API/inventory';
 import { useEthers } from '@usedapp/core';
 import { useAccount } from 'src/app/hooks';
 
@@ -17,7 +17,7 @@ export function Inventory() {
     history.push('/inventory');
   };
 
-  const { data } = useFetchMetronionsCount(account!, {
+  const { data } = useFetchInventoryCount(account!, {
     enabled: isActivated,
   });
 
