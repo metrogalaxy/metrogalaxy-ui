@@ -11,8 +11,19 @@ import { Guide } from './Guide';
 import { Avatar } from './Avatar';
 import { MintBox } from './MintBox';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
+import { MINT_DATE } from 'src/app/config/constants';
+import { useTimer } from 'react-timer-hook';
+import { Countdown } from './Countdown';
 
 export function Metronion() {
+  let { isRunning } = useTimer({
+    expiryTimestamp: MINT_DATE,
+  });
+
+  if (MINT_DATE.getTime() - Date.now() <= 0) {
+    isRunning = false;
+  }
+
   return (
     <Wrapper>
       <Helmet>
@@ -31,7 +42,8 @@ export function Metronion() {
             </Col>
             <Col sm={12} lg={8} className="col-layout col-layout-flex">
               <Avatar />
-              <MintBox />
+              {!isRunning && <MintBox />}
+              {isRunning && <Countdown />}
             </Col>
           </Row>
         </MainLayout>
