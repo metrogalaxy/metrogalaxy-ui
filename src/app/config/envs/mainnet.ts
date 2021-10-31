@@ -7,6 +7,7 @@ const env: IEnv = {
   NODE_URL: `https://mainnet.infura.io/v3/${INFURA_ID}`,
   CHAIN_TOKEN: 'ETH',
   CHAIN_EXPLORER_NAME: 'Etherscan',
+  MINT_DATE: new Date(1639144800000), // December 10, 2021 21:00:00 UTC+7
 };
 
 export default env;

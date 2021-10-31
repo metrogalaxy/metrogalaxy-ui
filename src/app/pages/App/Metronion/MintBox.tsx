@@ -19,7 +19,7 @@ export function MintBox() {
   const { isActivated } = useAccount();
   const watchedAmount = watch('amount', '');
   const onSubmit: SubmitHandler<IFormInput> = _ => {
-    // console.log('total amount: ' + totalAmount.toString());
+    console.log('total amount: ' + totalAmount.toString());
   };
 
   const amountIsValid =

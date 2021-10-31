@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-import { MINT_DATE } from 'src/app/config/constants';
+import ENV from 'src/app/config/env';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { useTimer } from 'react-timer-hook';
 
 export function Countdown() {
   const { seconds, minutes, hours, days } = useTimer({
-    expiryTimestamp: MINT_DATE,
+    expiryTimestamp: ENV.MINT_DATE,
   });
 
   return (
@@ -21,7 +21,7 @@ export function Countdown() {
           <div className="countdown-time-box">{seconds}S</div>
         </div>
         <div className="countdown--sub-title">Starting Time</div>
-        <div className="countdown--date">{MINT_DATE.toLocaleString()}</div>
+        <div className="countdown--date">{ENV.MINT_DATE.toLocaleString()}</div>
       </Box>
     </Wrapper>
   );

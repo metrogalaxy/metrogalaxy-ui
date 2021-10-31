@@ -4,4 +4,5 @@ export interface IEnv {
   NODE_URL: string;
   CHAIN_TOKEN: string;
   CHAIN_EXPLORER_NAME: string;
+  MINT_DATE: Date;
 }

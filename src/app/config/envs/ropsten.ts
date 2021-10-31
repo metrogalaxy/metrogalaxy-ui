@@ -7,6 +7,7 @@ const env: IEnv = {
   NODE_URL: `https://ropsten.infura.io/v3/${INFURA_ID}`,
   CHAIN_TOKEN: 'ETH',
   CHAIN_EXPLORER_NAME: 'Etherscan',
+  MINT_DATE: new Date(0),
 };
 
 export default env;

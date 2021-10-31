@@ -11,16 +11,16 @@ import { Guide } from './Guide';
 import { Avatar } from './Avatar';
 import { MintBox } from './MintBox';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-import { MINT_DATE } from 'src/app/config/constants';
+import ENV from 'src/app/config/env';
 import { useTimer } from 'react-timer-hook';
 import { Countdown } from './Countdown';
 
 export function Metronion() {
   let { isRunning } = useTimer({
-    expiryTimestamp: MINT_DATE,
+    expiryTimestamp: ENV.MINT_DATE,
   });
 
-  if (MINT_DATE.getTime() - Date.now() <= 0) {
+  if (ENV.MINT_DATE.getTime() - Date.now() <= 0) {
     isRunning = false;
   }
 
