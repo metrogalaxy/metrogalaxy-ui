@@ -4,7 +4,7 @@ import { Figure as FigureLib } from 'react-bootstrap';
 import { Layout } from 'src/app/components/Layout';
 import { Title, SubTitle as SubTitleLib } from 'src/app/components/Title';
 import { PrimaryButton as PrimaryButtonLib } from 'src/app/components/Button';
-import LandImg from './assets/land.png';
+import LandImg from './assets/land-min.png';
 import { useHistory } from 'react-router-dom';
 
 export function Land() {
@@ -33,7 +33,7 @@ export function Land() {
         data-aos-duration="1000"
         data-aos-delay="300"
       >
-        <Figure.Image src={LandImg} />
+        <Figure.Image className="figure--image" src={LandImg} />
       </Figure>
       <PrimaryButton
         data-aos="fade-up"
@@ -78,6 +78,10 @@ const Background = styled.div`
 
 const Figure = styled(FigureLib)`
   margin: 8rem 0;
+
+  .figure--image {
+    border-radius: 2rem;
+  }
 `;
 
 const SubTitle = styled(SubTitleLib)`

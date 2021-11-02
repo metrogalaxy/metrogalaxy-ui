@@ -4,7 +4,11 @@ import { Row, Col as ColLib } from 'react-bootstrap';
 import { Logo } from 'src/app/components/Logo';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { ColorConstants } from 'src/styles/StyleConstants';
-import { TELEGRAM_URL, TWITTER_URL } from 'src/app/config/constants';
+import {
+  TELEGRAM_URL,
+  TWITTER_URL,
+  ADMIN_EMAIL,
+} from 'src/app/config/constants';
 
 export function Footer() {
   return (
@@ -34,7 +38,9 @@ export function Footer() {
           </Col>
           <Col>
             <Title>Resources</Title>
-            <Link>Contact Us</Link>
+            <Link href={`mailto:${ADMIN_EMAIL}`} target="_blank">
+              Contact Us
+            </Link>
             <Link>Disclaimer</Link>
             <Link>Term of Service</Link>
             <Link>Official Token</Link>
