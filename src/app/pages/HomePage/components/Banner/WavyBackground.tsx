@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   }
 
   .layer-1 .shape-fill {
-    fill: #595959;
+    fill: #354853;
   }
 
   .layer-2 {

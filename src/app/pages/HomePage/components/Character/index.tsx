@@ -93,7 +93,7 @@ const Layout = styled(LayoutLib)`
 `;
 
 const Background = styled.div`
-  background-color: #595959;
+  background-color: #354853;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
@@ -112,7 +112,7 @@ const Background = styled.div`
     top: 0;
     left: 0;
     z-index: -2;
-    background: #595959;
+    background: #354853;
     transform-origin: bottom right;
     -ms-transform: skewY(-2deg);
     -webkit-transform: skewY(-2deg);
