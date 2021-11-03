@@ -7,6 +7,8 @@ import { Logo } from 'src/app/components/Logo';
 import { MenuItem } from './MenuItem';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { Account } from 'src/app/pages/App/components/Account';
+import { Inventory } from './Inventory';
+import { useAccount } from 'src/app/hooks';
 
 export enum NAV_BAR_ITEMS_ID {
   Metronion = 'metronion',
@@ -20,6 +22,7 @@ interface NavBarProps {
 }
 
 export function NavBar(props: NavBarProps) {
+  const { isActivated } = useAccount();
   return (
     <Wrapper>
       <Menu collapseOnSelect expand="xl">
@@ -63,6 +66,7 @@ export function NavBar(props: NavBarProps) {
       <AccountWrapper>
         <Account />
       </AccountWrapper>
+      {isActivated && <Inventory />}
     </Wrapper>
   );
 }
@@ -74,6 +78,7 @@ const Wrapper = styled.div`
   background-color: rgba(5, 15, 26, 0.8);
   border-bottom: 2px solid rgba(98, 228, 127, 0.3);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
 
   ${mediaQuery.lessThan(ScreenSize.XL)`
     flex-direction: column;

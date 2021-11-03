@@ -7,11 +7,11 @@ export const Layout = styled.div`
   max-width: 140rem;
   margin: auto;
 
-  ${mediaQuery.lessThan(ScreenSize.SM)`
-    padding: 3rem 0 0;
+  ${mediaQuery.lessThan(ScreenSize.LG)`
+    padding: 6rem 0 0;
   `}
 
-  ${mediaQuery.between(ScreenSize.SM, ScreenSize.XL)`
+  ${mediaQuery.between(ScreenSize.LG, ScreenSize.XL)`
     padding: 3rem;
   `}
 `;

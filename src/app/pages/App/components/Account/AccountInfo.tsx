@@ -118,6 +118,7 @@ const Wrapper = styled.div`
     border-radius: 1rem;
     padding: 1.2rem 2.4rem;
     position: absolute;
+    z-index: 2;
     top: calc(100% + 16px);
     text-align: center;
     left: 50%;

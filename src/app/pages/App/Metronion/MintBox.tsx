@@ -6,8 +6,7 @@ import { PrimaryButton, DisabledButton } from 'src/app/components/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAccount } from 'src/app/hooks';
 import Decimal from 'decimal.js';
-
-const UNIT_PRICE = 0.1;
+import ENV from 'src/app/config/env';
 
 interface IFormInput {
   amount: string;
@@ -15,6 +14,7 @@ interface IFormInput {
 
 export function MintBox() {
   let totalAmount = new Decimal(0);
+  const unitPrice = ENV.METRONION_UNIT_PRICE;
   const { register, handleSubmit, watch, formState } = useForm<IFormInput>();
   const { isActivated } = useAccount();
   const watchedAmount = watch('amount', '');
@@ -28,7 +28,7 @@ export function MintBox() {
     Number(watchedAmount) <= 5;
 
   if (amountIsValid) {
-    totalAmount = new Decimal(watchedAmount).mul(UNIT_PRICE);
+    totalAmount = new Decimal(watchedAmount).mul(unitPrice);
   }
 
   return (
@@ -52,9 +52,13 @@ export function MintBox() {
             })}
           />
           <div className="price">
-            <div>Unit price: {UNIT_PRICE} ETH</div>
+            <div>
+              Unit price: {unitPrice} {ENV.CHAIN_TOKEN}
+            </div>
             {amountIsValid && (
-              <div>You have to pay: {totalAmount.toString()} ETH</div>
+              <div>
+                You have to pay: {totalAmount.toString()} {ENV.CHAIN_TOKEN}
+              </div>
             )}
             {!amountIsValid && formState.isDirty && (
               <div className="text-error">Amount should be in range 1 to 5</div>

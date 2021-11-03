@@ -7,13 +7,22 @@ import { mediaQuery, ScreenSize } from 'src/styles/media';
 interface TitleLayoutProps {
   iconSrc?: string;
   children?: React.ReactNode;
+  onClick?: () => any;
 }
 
 export function TitleLayout(props: TitleLayoutProps) {
   return (
     <Wrapper>
       <Box>
-        {props.iconSrc && <Image className="icon" src={props.iconSrc} />}
+        {props.iconSrc && (
+          <Image
+            className={`icon ${
+              typeof props.onClick === 'function' ? 'icon-pointer' : ''
+            }`}
+            src={props.iconSrc}
+            onClick={props.onClick}
+          />
+        )}
         {props.children}
       </Box>
     </Wrapper>
@@ -39,5 +48,9 @@ const Box = styled.div`
 
   .icon {
     margin-right: 1rem;
+  }
+
+  .icon-pointer {
+    cursor: pointer;
   }
 `;

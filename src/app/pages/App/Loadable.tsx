@@ -33,3 +33,11 @@ export const Land = lazyLoad(
     fallback: <LoadingBackground />,
   },
 );
+
+export const Inventory = lazyLoad(
+  () => import('./Inventory'),
+  module => module.Inventory,
+  {
+    fallback: <LoadingBackground />,
+  },
+);

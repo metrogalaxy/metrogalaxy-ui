@@ -1,4 +1,5 @@
 import { AccountState } from 'src/app/pages/App/components/Account/slice/types';
+import { InventoryState } from 'src/app/pages/App/Inventory/slice/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -7,5 +8,6 @@ import { AccountState } from 'src/app/pages/App/components/Account/slice/types';
 */
 export interface RootState {
   account?: AccountState;
+  inventory?: InventoryState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }
