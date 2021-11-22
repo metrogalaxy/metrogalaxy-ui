@@ -1,13 +1,17 @@
 import { ColorConstants } from 'src/styles/StyleConstants';
 import styled from 'styled-components/macro';
+import { Button } from 'react-bootstrap';
 
-export const PrimaryButton = styled.div`
+export const PrimaryButton = styled(Button)`
+  width: fit-content;
   font-family: 'Acrom-Bold';
   font-weight: bold;
   font-size: 2rem;
   line-height: 2.4rem;
+  color: rgb(33, 37, 41);
   background: ${ColorConstants.MAIN_GREEN};
   /* border: 3px solid rgba(255, 255, 255, 0.18); */
+  border: none;
   box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.25);
   border-radius: 10rem;
   padding: 2rem 4.8rem;
@@ -15,8 +19,20 @@ export const PrimaryButton = styled.div`
   text-align: center;
 
   &:hover {
-    transform: translateY(-2px);
+    color: rgb(33, 37, 41);
     box-shadow: 0 3px 6px 0 rgb(0 0 0 / 6%);
+    background: ${ColorConstants.MAIN_GREEN};
+  }
+
+  &:active {
+    color: rgb(33, 37, 41);
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 6%);
+    background: ${ColorConstants.MAIN_GREEN};
+  }
+
+  &:disabled {
+    color: rgb(33, 37, 41);
+    background: ${ColorConstants.MAIN_GREEN};
   }
 `;
 

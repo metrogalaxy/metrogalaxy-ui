@@ -1,0 +1,18 @@
+import { IEnv } from './interface';
+
+const env: IEnv = {
+  CHAIN_ID: 97,
+  CHAIN_NAME: 'BSC Testnet',
+  NODE_URL: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
+  CHAIN_TOKEN: 'BNB',
+  CHAIN_EXPLORER_NAME: 'Bscscan',
+  PRIVATE_SALE_TIME: new Date(1637492700 * 1000), // Nov 20, 2021 21h UTC+7
+  PUBLIC_SALE_TIME: new Date(1637493000 * 1000), // Nov 22, 2021 21h UTC+7
+  END_SALE_TIME: new Date(1637493300 * 1000), // Nov 24, 2021 21h UTC+7
+  METRONION_UNIT_PRICE: 0.1,
+  METRONION_NFT_CONTRACT: '0xc739FA2D3be642d4F346E0110fD12296e73978A3',
+  METRONION_SALE_CONTRACT: '0x9d2147D772a57034bBbD28ffBC259216fDA18120',
+  CURRENT_METRONION_VERSION_ID: 0,
+};
+
+export default env;

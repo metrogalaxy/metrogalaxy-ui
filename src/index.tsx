@@ -18,12 +18,14 @@ import { DAppProvider, Config } from '@usedapp/core';
 import AOS from 'aos';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { StyledToastedContainer } from 'src/app/components/Toast';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
 import 'aos/dist/aos.js';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import root app
 import { App } from 'src/app';
@@ -72,6 +74,7 @@ ReactDOM.render(
             <DAppProvider config={config}>
               <QueryClientProvider client={queryClient}>
                 <App />
+                <StyledToastedContainer />
                 {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
                   <ReactQueryDevtools initialIsOpen={false} />
                 )}

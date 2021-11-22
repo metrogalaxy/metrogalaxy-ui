@@ -5,17 +5,23 @@ export const ADMIN_EMAIL = 'captain@metroverse.io';
 
 export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
 export const MAX_METRONION_COUNT = 10000;
+export const METRONION_PRIVATE_CAP = 1;
+export const METRONION_PUBLIC_CAP = 5;
 
 export const ChainIdToName: Record<number, string> = {
   1: 'ETH Mainnet',
   3: 'ETH Ropsten',
   56: 'BSC Mainnet',
+  97: 'BSC Testnet',
+  31337: 'Hardhat',
 };
 
 const ChainIdToEtherscanBaseUrl: Record<number, string> = {
   1: 'https://etherscan.com/',
   2: 'https://ropsten.etherscan.com/',
   56: 'https://bscscan.com/',
+  97: 'https://testnet.bscscan.com/',
+  31337: 'https://testnet.bscscan.com/',
 };
 
 export function GetChainName(chainId: number): string {

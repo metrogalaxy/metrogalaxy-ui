@@ -5,8 +5,21 @@ import { Image } from 'react-bootstrap';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { MAX_METRONION_COUNT } from 'src/app/config/constants';
+import ENV from 'src/app/config/env';
+import { useEthers } from '@usedapp/core';
+import { Web3Provider } from '@ethersproject/providers';
+import { useGetSaleRecord } from 'src/app/service/web3';
 
 export function TotalMintInfo() {
+  const { library } = useEthers();
+  const provider = library as Web3Provider;
+  const { data: saleRecord } = useGetSaleRecord(
+    provider,
+    ENV.CURRENT_METRONION_VERSION_ID,
+  );
+
+  const totalSold = saleRecord ? saleRecord.totalSold : 0;
+
   return (
     <Wrapper>
       <Box>
@@ -15,7 +28,7 @@ export function TotalMintInfo() {
         <div className="text-wrapper">
           <div className="title">Total Metronions Minted</div>
           <div className="text">
-            <span className="text--highlight">0</span>
+            <span className="text--highlight">{totalSold}</span>
             <span>/{MAX_METRONION_COUNT}</span>
           </div>
         </div>

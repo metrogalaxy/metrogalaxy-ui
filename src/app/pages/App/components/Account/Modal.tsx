@@ -5,7 +5,7 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import MetamaskImg from './assets/metamask.png';
 import WalletConnectImg from './assets/wallet_connect.png';
 import TickImg from './assets/tick.svg';
-import { useEthers, useConfig } from '@usedapp/core';
+import { useEthers } from '@usedapp/core';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import {
   NewWalletConnector,
@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { useAccountSlice } from './slice';
 import { useAccount } from 'src/app/hooks';
 import { IconComponent } from 'src/app/components/CurrencyLogo';
+import ENV from 'src/app/config/env';
 
 interface IImportWalletModalProps {
   isShow: boolean;
@@ -29,7 +30,6 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
   const [error, setError] = React.useState<Error>();
   const [isConnecting, setIsConnecting] = React.useState(false);
   const { activate } = useEthers();
-  const config = useConfig();
   const dispatch = useDispatch();
   const { actions } = useAccountSlice();
   const { currentChainId, logout } = useAccount();
@@ -50,16 +50,16 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
    * Handle switching chain to configured chainID
    */
   const switchChain = async () => {
-    if (currentChainId === Number(config.readOnlyChainId!)) {
+    if (currentChainId === Number(ENV.CHAIN_ID)) {
       return;
     }
     setIsConnecting(true);
-    const err = await metamaskService.switchChain(config.readOnlyChainId!);
+    const err = await metamaskService.switchChain(ENV.CHAIN_ID);
     if (err) {
       setError(err);
     } else {
-      if (config.readOnlyChainId) {
-        dispatch(actions.setCurrentChainId(Number(config.readOnlyChainId!)));
+      if (ENV.CHAIN_ID) {
+        dispatch(actions.setCurrentChainId(Number(ENV.CHAIN_ID)));
       }
     }
     setIsConnecting(false);
@@ -99,8 +99,8 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
     setIsConnecting(false);
   };
 
-  const isCorrectChain = currentChainId === config.readOnlyChainId;
-  const chainName = GetChainName(config.readOnlyChainId!);
+  const isCorrectChain = currentChainId === ENV.CHAIN_ID;
+  const chainName = GetChainName(ENV.CHAIN_ID);
 
   return (
     <ModalWrapper

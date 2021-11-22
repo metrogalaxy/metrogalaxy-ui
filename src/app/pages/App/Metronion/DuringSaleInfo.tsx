@@ -3,36 +3,32 @@ import styled from 'styled-components/macro';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { useTimer } from 'react-timer-hook';
-import { Round } from './index';
 
-interface CountdownProps {
-  deadline: Date;
-  round?: Round;
+interface DuringSaleInfoProps {
+  title: string;
+  nextRoundTitle: string;
+  nextRoundDate: Date;
+  subtitle?: string;
 }
 
-export function Countdown(props: CountdownProps) {
+export function DuringSaleInfo(props: DuringSaleInfoProps) {
   const { seconds, minutes, hours, days } = useTimer({
-    expiryTimestamp: props.deadline,
+    expiryTimestamp: props.nextRoundDate,
   });
 
   return (
     <Wrapper>
       <Box>
-        <div className="countdown--line">
-          <div className="countdown--title">{props.round} Starts In</div>
-          <div className="countdown--time-box-wrapper">
-            <div className="countdown-time-box">{days}D</div>
-            <div className="countdown-time-box">{hours}H</div>
-            <div className="countdown-time-box">{minutes}M</div>
-            <div className="countdown-time-box">{seconds}S</div>
-          </div>
+        <div className="countdown--title">{props.nextRoundTitle}</div>
+        <div className="countdown--time-box-wrapper">
+          <div className="countdown-time-box">{days}D</div>
+          <div className="countdown-time-box">{hours}H</div>
+          <div className="countdown-time-box">{minutes}M</div>
+          <div className="countdown-time-box">{seconds}S</div>
         </div>
-        <div>
-          <div className="countdown--title">Start Time</div>
-          <div className="countdown--date">
-            {props.deadline.toDateString()},{' '}
-            {props.deadline.toLocaleTimeString()}
-          </div>
+        <div className="countdown--date">
+          {props.nextRoundDate.toDateString()},{' '}
+          {props.nextRoundDate.toLocaleTimeString()}
         </div>
       </Box>
     </Wrapper>
@@ -62,7 +58,7 @@ const Box = styled.div`
   justify-content: flex-start;
   position: relative;
   width: 100%;
-  min-width: 36rem;
+  max-width: 36rem;
   margin-bottom: 2rem;
 
   font-family: 'Acrom';
@@ -73,13 +69,17 @@ const Box = styled.div`
   text-transform: capitalize;
   color: ${ColorConstants.WHITE_SECONDARY};
 
-  ${mediaQuery.lessThan(ScreenSize.LG)`
-  `}
-
   .countdown--title {
     font-family: 'Acrom-Bold';
     text-transform: uppercase;
     margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .countdown--sub-title-sale-ended {
+    font-family: 'Acrom';
+    text-transform: none;
+    margin-top: 3rem;
     letter-spacing: -0.02em;
   }
 
@@ -88,11 +88,12 @@ const Box = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 2rem;
   }
 
   .countdown--date {
     font-family: 'Acrom-Bold';
-    color: ${ColorConstants.MAIN_GREEN};
+    color: rgba(247, 255, 248, 0.5);
   }
 
   .countdown-time-box {
@@ -102,9 +103,5 @@ const Box = styled.div`
     width: 6.5rem;
     margin-right: 0.5rem;
     text-align: center;
-  }
-
-  .countdown--line {
-    margin-bottom: 3rem;
   }
 `;

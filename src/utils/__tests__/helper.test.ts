@@ -20,4 +20,15 @@ test('format number', () => {
 
   a = 0.01;
   expect(formatNumber(a, 4)).toBe('0.01');
+
+  a = 100000;
+  expect(formatNumber(a, 4)).toBe('100,000');
+
+  a = 999999;
+  expect(formatNumber(a, 4)).toBe('999,999');
+
+  a = 1000000;
+  expect(formatNumber(a, 4)).toBe('1.00e+6');
+  a = 1234567;
+  expect(formatNumber(a, 4)).toBe('1.23e+6');
 });

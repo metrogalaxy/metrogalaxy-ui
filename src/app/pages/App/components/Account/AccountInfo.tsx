@@ -2,8 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { keyframes } from 'styled-components';
 import { ethers } from 'ethers';
-import { useConfig, useEtherBalance, useEthers } from '@usedapp/core';
-import { formatAddress, formatNumber } from 'src/utils/helpers';
+import { useEtherBalance, useEthers, shortenIfAddress } from '@usedapp/core';
+import { formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
 import { GetEtherscanUrl } from 'src/app/config/constants';
@@ -13,12 +13,10 @@ import ENV from 'src/app/config/env';
 export function AccountInfo() {
   const { logout } = useAccount();
   const { account } = useEthers();
-  const config = useConfig();
   const [isOpenDropwdown, setOpenDropdown] = React.useState(false);
   const wrapperRef = React.useRef(null);
 
   const ethBalance = useEtherBalance(account);
-  const formattedAddress = formatAddress(account!, 4, -3);
   let formattedBalance;
   if (ethBalance) {
     formattedBalance = ethers.utils.formatEther(ethBalance);
@@ -35,7 +33,7 @@ export function AccountInfo() {
     await logout();
   };
 
-  const etherscanBaseUrl = GetEtherscanUrl(config.readOnlyChainId!);
+  const etherscanBaseUrl = GetEtherscanUrl(ENV.CHAIN_ID);
   const etherscanUrl = `${etherscanBaseUrl}/address/${account}`;
 
   return (
@@ -46,7 +44,7 @@ export function AccountInfo() {
             <div className="balance">
               {formattedBalance} {ENV.CHAIN_TOKEN}
             </div>
-            <div className="account">{formattedAddress}</div>
+            <div className="account">{shortenIfAddress(account)}</div>
           </React.Fragment>
         )}
       </div>
@@ -81,10 +79,8 @@ const Wrapper = styled.div`
   font-family: 'Acrom';
   font-size: 1.6rem;
   color: ${ColorConstants.WHITE};
-  width: 100%;
+  width: 33rem;
   height: 100%;
-  min-width: 29rem;
-  max-width: 32rem;
   position: relative;
 
   .account-wrapper {
@@ -102,6 +98,7 @@ const Wrapper = styled.div`
   }
 
   .account {
+    height: calc(100% + 4px);
     background: rgba(98, 228, 127, 0.1);
     border: 2px solid #1e7054;
     border-radius: 5rem;
@@ -109,6 +106,9 @@ const Wrapper = styled.div`
     position: absolute;
     top: -2px;
     right: -2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .dropdown {

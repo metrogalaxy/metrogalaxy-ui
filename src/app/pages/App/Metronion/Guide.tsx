@@ -27,11 +27,12 @@ export function Guide() {
           <div className="line-dashed"></div>
           <div className="notice">
             <ul>
-              <li>Each wallet can mint up to 5 Metronions</li>
               <li>
                 Each Metronion costs {ENV.METRONION_UNIT_PRICE}{' '}
                 {ENV.CHAIN_TOKEN}
               </li>
+              <li>You can buy up to 1 Metronion in Private Sale</li>
+              <li>You can buy up to 5 Metronions in Public Sale</li>
               {/* <li>All Metronions are going to be revealed on Oct 31 2021</li> */}
             </ul>
           </div>

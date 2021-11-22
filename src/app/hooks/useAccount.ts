@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import { selectAccount } from 'src/app/pages/App/components/Account/slice/selectors';
-import { useConfig, useEthers } from '@usedapp/core';
+import { useEthers } from '@usedapp/core';
 import { useDispatch } from 'react-redux';
 import { useAccountSlice } from 'src/app/pages/App/components/Account/slice';
+import ENV from 'src/app/config/env';
 
 interface useAccountReturn {
   currentChainId: number;
@@ -20,7 +21,6 @@ interface useAccountReturn {
 export function useAccount(): useAccountReturn {
   const { deactivate, account } = useEthers();
   const { actions } = useAccountSlice();
-  const config = useConfig();
   const dispatch = useDispatch();
   const accountState = useSelector(selectAccount);
 
@@ -35,7 +35,7 @@ export function useAccount(): useAccountReturn {
     account &&
     accountState.isConnected &&
     accountState.currentChainId &&
-    accountState.currentChainId === config.readOnlyChainId
+    accountState.currentChainId === ENV.CHAIN_ID
   ) {
     isActivated = true;
   }
