@@ -5,29 +5,31 @@ import InventoryIcon from './assets/inventory_icon.png';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { useHistory } from 'react-router-dom';
-import { useFetchInventoryCount } from 'src/app/service/API/inventory';
+// import { useFetchInventoryCount } from 'src/app/service/API/inventory';
+import { useFetchMetronionBalance } from 'src/app/service/web3';
 import { useEthers } from '@usedapp/core';
 import { useAccount } from 'src/app/hooks';
+import { Web3Provider } from '@ethersproject/providers';
 
 export function Inventory() {
-  const { account } = useEthers();
+  const { account, library } = useEthers();
+  const provider = library as Web3Provider;
   const { isActivated } = useAccount();
+
   const history = useHistory();
   const openInventoryPage = () => {
     history.push('/inventory');
   };
 
-  const { data } = useFetchInventoryCount(account!, {
-    enabled: isActivated,
+  const { data } = useFetchMetronionBalance(provider, account!, {
+    enabled: isActivated && account !== undefined && account !== null,
   });
 
   return (
     <Wrapper onClick={openInventoryPage}>
       <Image className="inventory-icon" src={InventoryIcon} />
       <div className="inventory-text">Inventory</div>
-      {data && (
-        <div className="inventory-text inventory-number">{data.count}</div>
-      )}
+      {data && <div className="inventory-text inventory-number">{data}</div>}
     </Wrapper>
   );
 }

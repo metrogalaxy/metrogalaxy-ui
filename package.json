@@ -7,6 +7,7 @@
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
+    "@typechain/ethers-v5": "8.0.3",
     "@types/fontfaceobserver": "0.0.6",
     "@types/jest": "26.0.23",
     "@types/node": "14.6.4",
@@ -109,7 +110,8 @@
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
     "prepare": "husky install",
-    "deploy:netlify": "netlify deploy --prod --dir ./build"
+    "deploy:netlify": "netlify deploy --prod --dir ./build",
+    "typechain": "./node_modules/typechain/dist/cli/cli.js --target ethers-v5 --out-dir src/app/contracts src/abi/*.json"
   },
   "browserslist": {
     "production": [
@@ -158,7 +160,7 @@
     "dotenv-webpack": "7.0.3",
     "ethereum-waffle": "3.4.0",
     "msw": "0.35.0",
-    "typechain": "6.0.2"
+    "typechain": "6.0.3"
   },
   "msw": {
     "workerDirectory": "public"

@@ -1,7 +1,9 @@
 import { useQuery } from 'react-query';
 import { Web3Provider } from '@ethersproject/providers';
-import { fetchSaleConfig, SaleConfig, UserSaleRecord } from './';
 import {
+  fetchSaleConfig,
+  SaleConfig,
+  UserSaleRecord,
   getSaleRecord,
   getUserRecord,
   isWhitelistedAddress,

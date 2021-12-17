@@ -8,17 +8,17 @@ import { MAX_METRONION_COUNT } from 'src/app/config/constants';
 import ENV from 'src/app/config/env';
 import { useEthers } from '@usedapp/core';
 import { Web3Provider } from '@ethersproject/providers';
-import { useGetSaleRecord } from 'src/app/service/web3';
+import { useTotalSupplyWithVersionId } from 'src/app/service/web3';
 
 export function TotalMintInfo() {
   const { library } = useEthers();
   const provider = library as Web3Provider;
-  const { data: saleRecord } = useGetSaleRecord(
+  const { data: totalMinted } = useTotalSupplyWithVersionId(
     provider,
     ENV.CURRENT_METRONION_VERSION_ID,
   );
 
-  const totalSold = saleRecord ? saleRecord.totalSold : 0;
+  const totalSold = totalMinted ? totalMinted : 0;
 
   return (
     <Wrapper>
