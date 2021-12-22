@@ -18,12 +18,16 @@ import { DAppProvider, Config } from '@usedapp/core';
 import AOS from 'aos';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { ChakraProvider } from '@chakra-ui/react';
+import { theme } from 'src/theme';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
 import 'aos/dist/aos.js';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 // Import root app
 import { App } from 'src/app';
@@ -71,10 +75,12 @@ ReactDOM.render(
           <React.StrictMode>
             <DAppProvider config={config}>
               <QueryClientProvider client={queryClient}>
-                <App />
-                {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
-                  <ReactQueryDevtools initialIsOpen={false} />
-                )}
+                <ChakraProvider theme={theme}>
+                  <App />
+                  {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
+                    <ReactQueryDevtools initialIsOpen={false} />
+                  )}
+                </ChakraProvider>
               </QueryClientProvider>
             </DAppProvider>
           </React.StrictMode>

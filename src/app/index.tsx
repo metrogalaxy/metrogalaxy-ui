@@ -12,12 +12,13 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import { GlobalStyle } from 'src/styles/global-styles';
 
-import { HomePage } from './pages/HomePage/Loadable';
-import { Land, Marketplace, Metronion, Staking } from './pages/App/Loadable';
+// import { Land, Marketplace, Metronion, Staking } from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import FavIcon from './assets/favicon.png';
-// import { MetronionInfo } from './pages/App/MetronionInfo';
+import { LandingPage } from './pages/LandingPage';
+import { ComingSoon } from './pages/App/ComingSoon';
+import { Tokenomics } from './pages/LandingPage/Tokenomics';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -37,11 +38,12 @@ export function App() {
       </Helmet>
 
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/metronion" component={Metronion} />
-        <Route exact path="/marketplace" component={Marketplace} />
-        <Route exact path="/staking" component={Staking} />
-        <Route exact path="/land" component={Land} />
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/metronion" component={ComingSoon} />
+        <Route exact path="/marketplace" component={ComingSoon} />
+        <Route exact path="/staking" component={ComingSoon} />
+        <Route exact path="/land" component={ComingSoon} />
+        <Route exact path="/tokenomic" component={Tokenomics} />
         {/* <Route exact path="/inventory" component={Inventory} />
         <Route path="/metronion/:id" component={MetronionInfo} /> */}
         <Route component={NotFoundPage} />

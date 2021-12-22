@@ -27,17 +27,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     display: block;
     /* overscroll-behavior-x: none; */
-
-    // This defines what 1rem is
-    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
-
-    @media screen and (max-width: 450px) {
-      font-size: 50%; //1 rem = 8px, 8/16 = 50%
-    }
-
-    @media screen and (min-width: 450px) and (max-width: 768px) {
-      font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
-    }
   }
 
   body {
@@ -58,5 +47,12 @@ export const GlobalStyle = createGlobalStyle`
     font-size: inherit;
   }
 
-  
+  .width-100-percent {
+    canvas, div {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    width: 100%;
+    height: 100%;
+  }
 `;
