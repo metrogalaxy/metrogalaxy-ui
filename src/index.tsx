@@ -19,7 +19,7 @@ import AOS from 'aos';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from 'src/theme';
+import { theme, Fonts } from 'src/theme';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -76,6 +76,7 @@ ReactDOM.render(
             <DAppProvider config={config}>
               <QueryClientProvider client={queryClient}>
                 <ChakraProvider theme={theme}>
+                  <Fonts />
                   <App />
                   {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
                     <ReactQueryDevtools initialIsOpen={false} />

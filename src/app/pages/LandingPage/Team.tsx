@@ -108,6 +108,7 @@ export function Team() {
                 flex="1 0 21%"
                 fontSize={{ base: 'sm', md: 'lg' }}
                 textAlign="center"
+                key={name}
               >
                 <Avatar
                   src={avatar}

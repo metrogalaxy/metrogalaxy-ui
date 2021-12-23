@@ -63,6 +63,10 @@ const components = {
 };
 
 export const theme = extendTheme({
+  fonts: {
+    heading: 'Acrom',
+    body: 'Acrom',
+  },
   colors: {
     gray: {
       100: '#99ADBF',
@@ -93,3 +97,5 @@ export const theme = extendTheme({
     },
   },
 });
+
+export * from './Fonts';
