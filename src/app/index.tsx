@@ -13,7 +13,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 // import { Land, Marketplace, Metronion, Staking } from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
-import FavIcon from './assets/favicon.png';
+import FavIcon from 'src/app/assets/favicon.png';
 import { LandingPage } from './pages/LandingPage';
 import { ComingSoon } from './pages/App/ComingSoon';
 import { Tokenomics } from './pages/LandingPage/Tokenomics';

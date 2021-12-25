@@ -1,5 +1,9 @@
 import { extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { Button } from './components/button';
+import { Link } from './components/link';
+import { Modal } from './components/modal';
+import { Text } from './components/text';
 
 const breakpoints = createBreakpoints({
   xs: '480px',
@@ -12,56 +16,10 @@ const breakpoints = createBreakpoints({
 });
 
 const components = {
-  Button: {
-    baseStyle: {
-      borderRadius: '6rem',
-      _focus: {
-        boxShadow: 'none',
-      },
-    },
-    sizes: {
-      sm: {
-        padding: '1rem 2rem',
-        height: '2.5rem',
-      },
-      md: {
-        padding: '1.25rem 2.25rem',
-        height: '3.5rem',
-      },
-    },
-    variants: {
-      outline: {
-        border: '2px solid',
-        borderColor: 'green.200',
-        color: 'green.200',
-        _hover: {
-          bgColor: 'green.200',
-          color: 'gray.500',
-        },
-      },
-      solid: {
-        border: '2px solid',
-        borderColor: 'green.200',
-        bgColor: 'green.200',
-        color: 'gray.500',
-        _hover: {
-          bgColor: 'transparent',
-          color: 'green.200',
-        },
-      },
-    },
-  },
-  Link: {
-    baseStyle: {
-      _hover: {
-        textDecoration: 'none',
-        color: 'transparent',
-      },
-      _focus: {
-        boxShadow: 'none',
-      },
-    },
-  },
+  Button,
+  Link,
+  Modal,
+  Text,
 };
 
 export const theme = extendTheme({
@@ -87,6 +45,10 @@ export const theme = extendTheme({
     green: {
       100: '#1BB486',
       200: '#62E47F',
+      300: '#1E7054',
+    },
+    red: {
+      100: '#F44336',
     },
     blue: {
       100: '#2589C7',
@@ -142,6 +104,9 @@ export const theme = extendTheme({
         lg: 'lg',
       },
     },
+  },
+  shadows: {
+    outline: 'none',
   },
 });
 

@@ -7,7 +7,7 @@ import ComingSoonImg from 'src/app/assets/app/coming_soon.webp';
 export function ComingSoon() {
   return (
     <Box w="full" height="100vh">
-      <NavBar />
+      <NavBar isShowConnectWallet={true} />
       <Box
         w="full"
         height="100%"

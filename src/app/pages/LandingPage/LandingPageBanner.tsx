@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Box, Button, Center, useMediaQuery } from '@chakra-ui/react';
+import { Box, Button, Center } from '@chakra-ui/react';
 import BannerImg from './assets/banner.webp';
 import { TELEGRAM_URL } from 'src/app/config/constants';
+import { useButtonSize } from 'src/app/hooks/useSize';
 
 export function LandingPageBanner() {
-  const [isMobile] = useMediaQuery('(max-width: 576px)');
-
   const joinUs = () => {
     window.open(TELEGRAM_URL, '_blank');
   };
@@ -33,7 +32,7 @@ export function LandingPageBanner() {
         <Button
           onClick={joinUs}
           variant="solid"
-          size={isMobile ? 'sm' : 'md'}
+          size={useButtonSize()}
           borderColor="gray.200"
           boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
           _hover={{

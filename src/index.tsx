@@ -27,6 +27,7 @@ import 'aos/dist/aos.css';
 import 'aos/dist/aos.js';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'focus-visible/dist/focus-visible';
 
 // Import root app
 import { App } from 'src/app';
@@ -65,7 +66,6 @@ const config: Config = {
   readOnlyUrls: {
     [ENV.CHAIN_ID]: ENV.NODE_URL,
   },
-  supportedChains: [ENV.CHAIN_ID],
 };
 
 ReactDOM.render(

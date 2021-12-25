@@ -9,15 +9,28 @@ export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
 export const MAX_METRONION_COUNT = 10000;
 
 export const ChainIdToName: Record<number, string> = {
-  1: 'ETH Mainnet',
-  3: 'ETH Ropsten',
-  56: 'BSC Mainnet',
+  43113: 'Avalanche Fuji Testnet',
+  43114: 'Avalanche Mainnet',
 };
 
 const ChainIdToEtherscanBaseUrl: Record<number, string> = {
-  1: 'https://etherscan.com/',
-  2: 'https://ropsten.etherscan.com/',
-  56: 'https://bscscan.com/',
+  43113: 'https://testnet.snowtrace.io/',
+  43114: 'https://snowtrace.io/',
+};
+
+const ChainIdToCurrency: Record<number, string> = {
+  43113: 'AVAX',
+  43114: 'AVAX',
+};
+
+const ChainIdToRpcUrl: Record<number, string> = {
+  43113: 'https://api.avax-test.network/ext/bc/C/rpc',
+  43114: 'https://api.avax.network/ext/bc/C/rpc',
+};
+
+const ChainIdToCurrencyName: Record<number, string> = {
+  43113: 'Avalanche',
+  43114: 'Avalanche',
 };
 
 export function GetChainName(chainId: number): string {
@@ -27,11 +40,49 @@ export function GetChainName(chainId: number): string {
   return '';
 }
 
-export function GetEtherscanUrl(chainId: number): string {
+export function GetChainRpcUrl(chainId: number): string {
+  if (ChainIdToRpcUrl[chainId]) {
+    return ChainIdToRpcUrl[chainId];
+  }
+  return '';
+}
+
+export function GetExplorerUrl(chainId: number): string {
   if (ChainIdToEtherscanBaseUrl[chainId]) {
     return ChainIdToEtherscanBaseUrl[chainId];
   }
-  return 'https://etherscan.com/';
+  return '';
+}
+
+export function GetExplorerAddressLink(
+  chainId: number,
+  account: string,
+): string {
+  if (ChainIdToEtherscanBaseUrl[chainId]) {
+    return ChainIdToEtherscanBaseUrl[chainId] + `address/${account}`;
+  }
+  return '';
+}
+
+export function GetExplorerTransactionLink(chainId: number, txHash: string) {
+  if (ChainIdToEtherscanBaseUrl[chainId]) {
+    return ChainIdToEtherscanBaseUrl[chainId] + `tx/${txHash}`;
+  }
+  return '';
+}
+
+export function GetChainCurrency(chainId: number): string {
+  if (ChainIdToCurrency[chainId]) {
+    return ChainIdToCurrency[chainId];
+  }
+  return '';
+}
+
+export function GetChainCurrencyName(chainId: number): string {
+  if (ChainIdToCurrencyName[chainId]) {
+    return ChainIdToCurrencyName[chainId];
+  }
+  return '';
 }
 
 export enum AttributeType {

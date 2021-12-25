@@ -1,4 +1,4 @@
-import { AccountState } from 'src/app/pages/App/components/Account/slice/types';
+import { AccountState } from 'src/app/components/Account/slice/types';
 import { InventoryState } from 'src/app/pages/App/Inventory/slice/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 

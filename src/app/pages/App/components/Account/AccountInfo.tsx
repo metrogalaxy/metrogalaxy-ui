@@ -6,7 +6,7 @@ import { useConfig, useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
-import { GetEtherscanUrl } from 'src/app/config/constants';
+import { GetExplorerAddressLink } from 'src/app/config/constants';
 import { useAccount } from 'src/app/hooks';
 import ENV from 'src/app/config/env';
 
@@ -35,8 +35,7 @@ export function AccountInfo() {
     await logout();
   };
 
-  const etherscanBaseUrl = GetEtherscanUrl(config.readOnlyChainId!);
-  const etherscanUrl = `${etherscanBaseUrl}/address/${account}`;
+  const etherscanUrl = GetExplorerAddressLink(ENV.CHAIN_ID, account || '');
 
   return (
     <Wrapper ref={wrapperRef}>

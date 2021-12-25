@@ -4,6 +4,7 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { slide as Menu } from 'react-burger-menu';
 import { Logo } from 'src/app/components/Logo';
 import { Link as RouterLink } from 'react-router-dom';
+import { Account } from 'src/app/components/Account';
 
 var styles = {
   bmBurgerButton: {
@@ -36,7 +37,6 @@ var styles = {
     display: 'flex',
     justifyContent: 'center',
     height: 50,
-    borderBottom: '1px solid #333',
     alignItems: 'center',
   },
   bmOverlay: {
@@ -44,7 +44,11 @@ var styles = {
   },
 };
 
-export function NavBar() {
+interface INavBarProps {
+  isShowConnectWallet?: boolean;
+}
+
+export function NavBar(props: INavBarProps) {
   return (
     <Flex
       as="nav"
@@ -83,10 +87,10 @@ export function NavBar() {
         </Stack>
       </Flex>
       <Flex>
-        <Box display={{ base: 'none', xl: 'block' }}>
-          <LinkComponent to="/about">About Us</LinkComponent>
-        </Box>
         <Flex alignItems="center">
+          <Box display={{ base: 'none', xl: 'block' }}>
+            {props.isShowConnectWallet && <Account />}
+          </Box>
           <Box display={{ base: 'block', xl: 'none' }}>
             <Menu
               right
@@ -102,7 +106,11 @@ export function NavBar() {
               </LinkComponentMobile>
               <LinkComponentMobile to="/staking">Staking</LinkComponentMobile>
               <LinkComponentMobile to="/land">Land</LinkComponentMobile>
-              <LinkComponentMobile to="/about">About Us</LinkComponentMobile>
+              {props.isShowConnectWallet && (
+                <Box mt={10}>
+                  <Account />
+                </Box>
+              )}
             </Menu>
           </Box>
         </Flex>
