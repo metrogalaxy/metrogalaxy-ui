@@ -16,6 +16,9 @@ export function formatNumber(number: string | number, precision = 0): string {
   if (number > 0 && number < 1) return toMeaningfulNumber(+number, precision);
 
   let bigNumber = new BigNumber(number);
+  if (bigNumber.comparedTo(1000000) >= 0) {
+    return bigNumber.toExponential(2);
+  }
   let formattedNumber = bigNumber.toFormat(precision);
   const numberParts = formattedNumber.split('.');
 
