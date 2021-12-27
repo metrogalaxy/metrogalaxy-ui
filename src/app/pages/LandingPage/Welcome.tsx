@@ -6,7 +6,7 @@ export function Welcome() {
   return (
     <Container
       maxW="container.lg"
-      py={{ base: 16, lg: 32 }}
+      py={{ base: 16 }}
       px={{ base: 8 }}
       bg="gray.400"
     >

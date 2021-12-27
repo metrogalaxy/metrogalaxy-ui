@@ -56,7 +56,7 @@ export function MetronionIntro() {
 
   return (
     <Box bg="gray.200">
-      <Container maxW="container.md" py={{ base: 16, lg: 32 }} px={{ base: 8 }}>
+      <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
         <Box textAlign="center" pl={{ base: 0, lg: 16 }}>
           <Text
             color="white.200"

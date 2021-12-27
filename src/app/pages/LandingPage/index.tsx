@@ -6,6 +6,7 @@ import { Welcome } from './Welcome';
 import { MetronionIntro } from './MetronionIntro';
 import { Features } from './Features';
 import { Roadmap } from './Roadmap';
+import { Team } from './Team';
 import { Box, Container, Text, Grid, Image } from '@chakra-ui/react';
 import MoonKnightImg from './assets/backers/moonknight.webp';
 import FaralandImg from './assets/backers/faraland.webp';
@@ -25,13 +26,9 @@ export function LandingPage() {
       <MetronionIntro />
       <Features />
       <Roadmap />
+      <Team />
       {/* Backers */}
-      <Box
-        py={{ base: 8, lg: 32 }}
-        px={{ base: 8 }}
-        bg="gray.500"
-        textAlign="center"
-      >
+      <Box py={{ base: 16 }} px={{ base: 8 }} bg="gray.500" textAlign="center">
         <Container maxW="container.lg" pb="16">
           <Box w="100%" pt={{ base: 10, md: 0 }}>
             <Text
@@ -61,12 +58,7 @@ export function LandingPage() {
         </Container>
       </Box>
       {/* Secured By */}
-      <Box
-        py={{ base: 8, lg: 32 }}
-        px={{ base: 8 }}
-        bg="gray.400"
-        textAlign="center"
-      >
+      <Box py={{ base: 16 }} px={{ base: 8 }} bg="gray.400" textAlign="center">
         <Container maxW="container.lg" pb="16">
           <Box w="100%" pt={{ base: 10, md: 0 }}>
             <Text

@@ -14,7 +14,7 @@ export function Roadmap() {
   const [isMobile] = useMediaQuery('(max-width: 576px)');
 
   return (
-    <Box py={{ base: 8, lg: 32 }} px={{ base: 8 }} bg="gray.200">
+    <Box py={{ base: 16 }} px={{ base: 8 }} bg="gray.200">
       <Container maxW="container.lg">
         <Flex direction="column" w="100%" margin="0 auto" textAlign="center">
           <Text

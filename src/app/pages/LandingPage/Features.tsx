@@ -53,13 +53,13 @@ export function Features() {
               interacting with NPCs, play mini-games, etc.) as well as interact
               with other players (e.g. chat, play together, etc.) given the
               right conditions. Completing quests and mini-games will earn you
-              various rewards in NFT!s
+              various rewards in NFTs!
             </Text>
           </Container>
         </Box>
       </Box>
       {/* Create To Earn */}
-      <Box py={{ base: 16, lg: 32 }} px={{ base: 8 }} bg="gray.400">
+      <Box py={{ base: 16, xl: 32 }} px={{ base: 8 }} bg="gray.400">
         <Container maxW="container.xl">
           <Grid
             templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}

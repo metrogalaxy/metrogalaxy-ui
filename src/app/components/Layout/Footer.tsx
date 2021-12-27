@@ -39,7 +39,7 @@ export function Footer() {
               <Text color="white.200" fontWeight="bold" mb="6">
                 About
               </Text>
-              <CustomLink href="/about">About Us</CustomLink>
+              {/* <CustomLink href="/about">About Us</CustomLink> */}
               <CustomLink href="/tokenomic" target="_self">
                 Token Metrics
               </CustomLink>

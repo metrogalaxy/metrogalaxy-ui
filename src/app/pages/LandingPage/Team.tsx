@@ -56,7 +56,8 @@ const team = [
     avatar: TeamImage5,
     position: 'Game Developer Lead',
     name: 'Giang Nguyen',
-    description: 'Senior game developer with experience in Unity development',
+    description:
+      'Senior game developer with 6 years experience working with Unity. Have built projects which achieve 10+ millions downloads on AppStore and Google Play Store.',
   },
   // {
   //   avatar: TeamImage6,
