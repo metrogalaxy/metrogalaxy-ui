@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectAccount } from 'src/app/pages/App/components/Account/slice/selectors';
-import { useConfig, useEthers } from '@usedapp/core';
+import { useConfig, useEthers } from '@quangkeu1995/dappcore';
 import { useDispatch } from 'react-redux';
 import { useAccountSlice } from 'src/app/pages/App/components/Account/slice';
 

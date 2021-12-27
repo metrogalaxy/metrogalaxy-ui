@@ -17,6 +17,7 @@ import FavIcon from './assets/favicon.png';
 import { LandingPage } from './pages/LandingPage';
 import { ComingSoon } from './pages/App/ComingSoon';
 import { Tokenomics } from './pages/LandingPage/Tokenomics';
+import { AboutUs } from './pages/LandingPage/AboutUs';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -24,13 +25,13 @@ export function App() {
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s | The Metroverse"
-        defaultTitle="The Metroverse"
+        titleTemplate="%s | The MetroGalaxy"
+        defaultTitle="The MetroGalaxy"
         htmlAttributes={{ lang: i18n.language }}
       >
         <meta
           name="description"
-          content="The Metroverse | Decentralized Open World"
+          content="The MetroGalaxy | Decentralized Open World"
         />
         <link rel="icon" type="image/png" href={FavIcon} sizes="16x16" />
       </Helmet>
@@ -42,6 +43,7 @@ export function App() {
         <Route exact path="/staking" component={ComingSoon} />
         <Route exact path="/land" component={ComingSoon} />
         <Route exact path="/tokenomic" component={Tokenomics} />
+        <Route exact path="/about" component={AboutUs} />
         {/* <Route exact path="/inventory" component={Inventory} />
         <Route path="/metronion/:id" component={MetronionInfo} /> */}
         <Route component={NotFoundPage} />

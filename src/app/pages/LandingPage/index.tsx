@@ -6,7 +6,6 @@ import { Welcome } from './Welcome';
 import { MetronionIntro } from './MetronionIntro';
 import { Features } from './Features';
 import { Roadmap } from './Roadmap';
-import { Team } from './Team';
 import { Box, Container, Text, Grid, Image } from '@chakra-ui/react';
 import MoonKnightImg from './assets/backers/moonknight.webp';
 import FaralandImg from './assets/backers/faraland.webp';
@@ -26,7 +25,6 @@ export function LandingPage() {
       <MetronionIntro />
       <Features />
       <Roadmap />
-      <Team />
       {/* Backers */}
       <Box
         py={{ base: 8, lg: 32 }}

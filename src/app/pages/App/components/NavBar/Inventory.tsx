@@ -6,7 +6,7 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
 import { useHistory } from 'react-router-dom';
 import { useFetchInventoryCount } from 'src/app/service/API/inventory';
-import { useEthers } from '@usedapp/core';
+import { useEthers } from '@quangkeu1995/dappcore';
 import { useAccount } from 'src/app/hooks';
 
 export function Inventory() {

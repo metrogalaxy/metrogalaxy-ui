@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FilterBox, FormData } from '../components/FilterBox';
 import { useDispatch } from 'react-redux';
 import { useInventorySlice } from './slice';
-import { useEthers } from '@usedapp/core';
+import { useEthers } from '@quangkeu1995/dappcore';
 import { SortType } from '../components/FilterBox';
 import { getEnumKey } from 'src/utils/helpers';
 import { useAccount } from 'src/app/hooks';

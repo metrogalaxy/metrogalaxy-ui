@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { keyframes } from 'styled-components';
 import { ethers } from 'ethers';
-import { useConfig, useEtherBalance, useEthers } from '@usedapp/core';
+import { useConfig, useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';

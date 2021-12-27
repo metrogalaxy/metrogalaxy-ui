@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-import { useEthers } from '@usedapp/core';
+import { useEthers } from '@quangkeu1995/dappcore';
 import { useAccount } from 'src/app/hooks';
 import { useFetchInventory } from 'src/app/service/API/inventory';
 import { ErrorBoundary } from 'react-error-boundary';

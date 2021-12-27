@@ -1,6 +1,8 @@
 export const INFURA_ID = '5e95a0d24c4548f5bc89ee9dc2930380';
 export const TELEGRAM_URL = 'https://t.me/joinchat/6iQZttQ_1ZYyN2U1';
 export const TWITTER_URL = 'https://twitter.com/metrogalaxy_io';
+export const MEDIUM_URL = 'https://medium.com/@metrogalaxy';
+export const DISCORD_URL = 'https://discord.gg/HyEEZAgJ';
 export const ADMIN_EMAIL = 'captain@metrogalaxy.io';
 
 export const METRONION_PANEL_LIMITS_PER_PAGE = 6;

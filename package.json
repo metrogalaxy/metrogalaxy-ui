@@ -9,6 +9,7 @@
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
+    "@quangkeu1995/dappcore": "0.7.2",
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",

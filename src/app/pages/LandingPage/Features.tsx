@@ -15,16 +15,17 @@ export function Features() {
   return (
     <Box>
       {/* Live Your Virtual Life */}
-      <Box
-        bgImage={IslandImg}
-        w="full"
-        height={{ base: '1200px' }}
-        bgSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
-        position="relative"
-        overflow="hidden"
-      >
+      <Box w="full" height={{ base: '1200px' }} position="relative">
+        <Box
+          bgImage={IslandImg}
+          w="full"
+          height="100%"
+          bgSize="cover"
+          backgroundPosition="center"
+          backgroundRepeat="no-repeat"
+          overflow="hidden"
+          opacity={0.7}
+        />
         <Box
           w="full"
           position="absolute"

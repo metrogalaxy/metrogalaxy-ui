@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { ViewportProvider } from './utils/viewport';
-import { DAppProvider, Config } from '@usedapp/core';
+import { DAppProvider, Config } from '@quangkeu1995/dappcore';
 import AOS from 'aos';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';

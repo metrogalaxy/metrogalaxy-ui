@@ -83,19 +83,6 @@ export function NavBar() {
           </Stack>
         </Flex>
         <Flex>
-          {/* <Stack
-            direction={{ base: 'column', xl: 'row' }}
-            display={{ base: 'none', xl: 'flex' }}
-            width={{ base: 'full', xl: 'auto' }}
-            spacing={{ base: 5, xl: 10 }}
-            alignItems="center"
-            flexGrow={1}
-            mt={{ base: 4, xl: 0 }}
-          >
-            <Button variant="outline" onClick={joinUs}>
-              Join Us Now
-            </Button>
-          </Stack> */}
           <Flex alignItems="center">
             <Box display={{ base: 'block', xl: 'none' }}>
               <Menu

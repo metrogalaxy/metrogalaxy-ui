@@ -5,6 +5,8 @@ import {
   TELEGRAM_URL,
   TWITTER_URL,
   ADMIN_EMAIL,
+  MEDIUM_URL,
+  DISCORD_URL,
 } from 'src/app/config/constants';
 
 export function Footer() {
@@ -37,7 +39,7 @@ export function Footer() {
               <Text color="white.200" fontWeight="bold" mb="6">
                 About
               </Text>
-              <CustomLink>Whitepaper</CustomLink>
+              <CustomLink href="/about">About Us</CustomLink>
               <CustomLink href="/tokenomic" target="_self">
                 Token Metrics
               </CustomLink>
@@ -52,8 +54,8 @@ export function Footer() {
               </Text>
               <CustomLink href={TELEGRAM_URL}>Telegram</CustomLink>
               <CustomLink href={TWITTER_URL}>Twitter</CustomLink>
-              <CustomLink>Discord</CustomLink>
-              <CustomLink>Medium</CustomLink>
+              <CustomLink href={DISCORD_URL}>Discord</CustomLink>
+              <CustomLink href={MEDIUM_URL}>Medium</CustomLink>
             </Flex>
             <Flex
               direction="column"

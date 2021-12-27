@@ -5,7 +5,7 @@ import { ColorConstants } from 'src/styles/StyleConstants';
 import MetamaskImg from './assets/metamask.png';
 import WalletConnectImg from './assets/wallet_connect.png';
 import TickImg from './assets/tick.svg';
-import { useEthers, useConfig } from '@usedapp/core';
+import { useEthers, useConfig } from '@quangkeu1995/dappcore';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import {
   NewWalletConnector,
