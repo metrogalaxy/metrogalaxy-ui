@@ -20,6 +20,7 @@ import G2Image from './assets/metronion/G2.webp';
 import G3Image from './assets/metronion/G3.webp';
 import G4Image from './assets/metronion/G4.webp';
 import G5Image from './assets/metronion/G5.webp';
+import BgImg from './assets/metronion_intro.webp';
 
 const MetronionImages = [
   B1Image,
@@ -55,22 +56,27 @@ export function MetronionIntro() {
   };
 
   return (
-    <Box bg="gray.200">
+    <Box
+      bg="blue.100"
+      bgImg={BgImg}
+      bgSize={{
+        base: 'cover',
+        lg: 'auto 1000px',
+        xl: 'auto 1200px',
+      }}
+      backgroundPosition="top left"
+      backgroundRepeat="no-repeat"
+      position="relative"
+      overflow="hidden"
+      pt={{ md: 16 }}
+      height={{
+        lg: '980px',
+      }}
+    >
       <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
         <Box textAlign="center" pl={{ base: 0, lg: 16 }}>
-          <Text
-            color="white.200"
-            fontSize={{ base: '3xl', md: '4xl' }}
-            fontWeight="bold"
-          >
-            Become our citizen, become a Metronion
-          </Text>
-          <Text
-            color="white.100"
-            mt="10"
-            textAlign="justify"
-            fontSize={{ base: 'md', md: 'lg' }}
-          >
+          <Text textStyle="h1">Become our citizen, become a Metronion</Text>
+          <Text textStyle="paragraph" mt="10" textAlign="justify">
             Mint yourself into the world by acquiring a Metronion NFT. All
             Metronions come with basic accessories (like clothes) that can be
             changed and are reflected directly in the Metronion’s design in the
@@ -93,6 +99,12 @@ export function MetronionIntro() {
             variant="solid"
             mt={10}
             size={isMobile ? 'sm' : 'md'}
+            borderColor="gray.200"
+            boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
+            _hover={{
+              color: 'green.200',
+              bgColor: 'gray.500',
+            }}
             onClick={openPageMetronion}
           >
             Get Your Own Metronion

@@ -7,6 +7,8 @@ const breakpoints = createBreakpoints({
   md: '768px',
   lg: '960px',
   xl: '1200px',
+  '2xl': '1600px',
+  '3xl': '2400px',
 });
 
 const components = {
@@ -70,10 +72,13 @@ export const theme = extendTheme({
   colors: {
     gray: {
       100: '#99ADBF',
-      300: '#203040',
       200: '#142433',
+      300: '#203040',
       400: '#0B1926',
       500: '#050F1A',
+    },
+    grayBlur: {
+      100: 'rgba(20, 36, 51, 0.9)',
     },
     white: {
       100: '#F6FFF8BF',
@@ -82,6 +87,10 @@ export const theme = extendTheme({
     green: {
       100: '#1BB486',
       200: '#62E47F',
+    },
+    blue: {
+      100: '#2589C7',
+      200: '#0D5180',
     },
   },
   breakpoints,
@@ -93,6 +102,44 @@ export const theme = extendTheme({
       },
       '*': {
         fontFamily: 'Acrom',
+      },
+    },
+  },
+  textStyles: {
+    h1: {
+      color: 'white.200',
+      fontFamily: 'Acrom',
+      fontWeight: 'bold',
+      fontSize: {
+        base: '3xl',
+        lg: '4xl',
+      },
+      textTransform: 'cappitalize',
+      lineHeight: {
+        base: '42px',
+        lg: '50px',
+      },
+    },
+    h2: {
+      color: 'white.200',
+      fontFamily: 'Acrom',
+      fontWeight: 'bold',
+      fontSize: {
+        base: 'xl',
+        lg: '2xl',
+      },
+      textTransform: 'cappitalize',
+      lineHeight: {
+        base: '36px',
+        lg: '42px',
+      },
+    },
+    paragraph: {
+      color: 'white.100',
+      fontFamily: 'Acrom',
+      fontSize: {
+        base: 'md',
+        lg: 'lg',
       },
     },
   },

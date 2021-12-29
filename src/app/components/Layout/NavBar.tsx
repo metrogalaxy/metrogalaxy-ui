@@ -46,65 +46,68 @@ var styles = {
 
 export function NavBar() {
   return (
-    <Box>
-      <Flex
-        as="nav"
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-        width="full"
-        bg="gray.200"
-        color="white"
-        position="absolute"
-        zIndex="100"
-        borderBottom="2px solid"
-        borderBottomColor="green.200"
-        px={{ base: 4, xl: 8 }}
-        py="5"
-      >
-        <Flex>
-          <Link href="/" mr="10">
-            <Logo />
-          </Link>
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      width="full"
+      bg="grayBlur.100"
+      color="white"
+      position="absolute"
+      zIndex="100"
+      borderBottom="2px solid"
+      borderBottomColor="green.200"
+      boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
+      px={{ base: 4, xl: 8 }}
+      py="5"
+    >
+      <Flex>
+        <Link href="/" mr="10">
+          <Logo />
+        </Link>
 
-          <Stack
-            direction={{ base: 'column', xl: 'row' }}
-            display={{ base: 'none', xl: 'flex' }}
-            width={{ base: 'full', xl: 'auto' }}
-            spacing={{ base: 5, xl: 10 }}
-            alignItems="center"
-            flexGrow={1}
-            mt={{ base: 4, xl: 0 }}
-          >
-            <LinkComponent to="/metronion">Metronions</LinkComponent>
-            <LinkComponent to="/marketplace">Marketplace</LinkComponent>
-            <LinkComponent to="/staking">Staking</LinkComponent>
-            <LinkComponent to="/land">Land</LinkComponent>
-          </Stack>
-        </Flex>
-        <Flex>
-          <Flex alignItems="center">
-            <Box display={{ base: 'block', xl: 'none' }}>
-              <Menu
-                right
-                styles={styles}
-                customBurgerIcon={<HamburgerIcon />}
-                customCrossIcon={<CloseIcon />}
-              >
-                <LinkComponentMobile to="/metronion">
-                  Metronions
-                </LinkComponentMobile>
-                <LinkComponentMobile to="/marketplace">
-                  Marketplace
-                </LinkComponentMobile>
-                <LinkComponentMobile to="/staking">Staking</LinkComponentMobile>
-                <LinkComponentMobile to="/land">Land</LinkComponentMobile>
-              </Menu>
-            </Box>
-          </Flex>
+        <Stack
+          direction={{ base: 'column', xl: 'row' }}
+          display={{ base: 'none', xl: 'flex' }}
+          width={{ base: 'full', xl: 'auto' }}
+          spacing={{ base: 5, xl: 10 }}
+          alignItems="center"
+          flexGrow={1}
+          mt={{ base: 4, xl: 0 }}
+        >
+          <LinkComponent to="/metronion">Metronions</LinkComponent>
+          <LinkComponent to="/marketplace">Marketplace</LinkComponent>
+          <LinkComponent to="/staking">Staking</LinkComponent>
+          <LinkComponent to="/land">Land</LinkComponent>
+        </Stack>
+      </Flex>
+      <Flex>
+        <Box display={{ base: 'none', xl: 'block' }}>
+          <LinkComponent to="/about">About Us</LinkComponent>
+        </Box>
+        <Flex alignItems="center">
+          <Box display={{ base: 'block', xl: 'none' }}>
+            <Menu
+              right
+              styles={styles}
+              customBurgerIcon={<HamburgerIcon />}
+              customCrossIcon={<CloseIcon />}
+            >
+              <LinkComponentMobile to="/metronion">
+                Metronions
+              </LinkComponentMobile>
+              <LinkComponentMobile to="/marketplace">
+                Marketplace
+              </LinkComponentMobile>
+              <LinkComponentMobile to="/staking">Staking</LinkComponentMobile>
+              <LinkComponentMobile to="/land">Land</LinkComponentMobile>
+              <LinkComponentMobile to="/about">About Us</LinkComponentMobile>
+            </Menu>
+          </Box>
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
 

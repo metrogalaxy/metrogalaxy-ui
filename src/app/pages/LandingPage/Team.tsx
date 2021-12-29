@@ -75,22 +75,28 @@ const team = [
     name: 'Vu Nguyen Duy',
     linkedIn: 'https://www.linkedin.com/in/nguyen-duy-vu-28b81b149/',
     description:
-      'Senior visual designer with experience in game design and UI/UX.',
+      'An experienced leader in game development with excellent management skills and a strong artistic eye. He has hands-on experience of game projects on e-wallet in Malaysia, in which he has the leading role in managing marketing design, concept art game, and visual design. ',
   },
   {
     avatar: TeamImage9,
     position: 'Game Artist',
     name: 'Linh Nguyen Thu',
+    description:
+      'She is a passionate artist with her love of game, anime and manga. She started drawing because she likes to see the world in a different angle. She hopes her works encourage people freely explore themselves.',
   },
   {
     avatar: TeamImage10,
     position: 'Game Artist',
     name: 'Anh Mac Van',
+    description:
+      'She started drawing when she was 2 years old. At that time, she drawn on everything, even the furniture in her parents house. Until now, being a mom of 3 kids she still continues to draw. She never ran out of love for drawing.',
   },
   {
     avatar: TeamImage11,
     position: 'Game Artist',
     name: 'Ngan Pham',
+    description:
+      '8 years experience in Artwork digital and game artist. She has a keen interest in video games and cares about their artistry that ensures the release of beautiful, innovative games.',
   },
 ];
 

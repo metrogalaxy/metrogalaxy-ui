@@ -17,7 +17,7 @@ import FavIcon from './assets/favicon.png';
 import { LandingPage } from './pages/LandingPage';
 import { ComingSoon } from './pages/App/ComingSoon';
 import { Tokenomics } from './pages/LandingPage/Tokenomics';
-// import { AboutUs } from './pages/LandingPage/AboutUs';
+import { AboutUs } from './pages/LandingPage/AboutUs';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -43,7 +43,7 @@ export function App() {
         <Route exact path="/staking" component={ComingSoon} />
         <Route exact path="/land" component={ComingSoon} />
         <Route exact path="/tokenomic" component={Tokenomics} />
-        {/* <Route exact path="/about" component={AboutUs} /> */}
+        <Route exact path="/about" component={AboutUs} />
         {/* <Route exact path="/inventory" component={Inventory} />
         <Route path="/metronion/:id" component={MetronionInfo} /> */}
         <Route component={NotFoundPage} />
