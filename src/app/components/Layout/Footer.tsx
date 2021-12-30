@@ -17,19 +17,19 @@ export function Footer() {
           direction={{ base: 'column', md: 'row' }}
           w="100%"
           margin="0 auto"
-          textAlign="center"
           justify="space-between"
           alignItems={{ base: 'center', md: 'flex-start' }}
         >
           <Box mb={8}>
             <Logo />
-            <Text color="white.100" align="center" mt={1}>
+            <Text color="white.100" textAlign="start" mt={1} pl="54px">
               @MetroGalaxy
             </Text>
           </Box>
           <Grid
             templateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
             gap={{ base: 1, md: 6 }}
+            textAlign="center"
           >
             <Flex
               direction="column"

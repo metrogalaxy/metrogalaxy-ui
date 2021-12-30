@@ -21,26 +21,32 @@ export function City() {
         position="absolute"
         left="50%"
         transform="translateX(-50%) translateY(-50%)"
-        bgColor="grayBlur.100"
-        color="white"
-        border="2px solid"
-        borderColor="green.200"
-        boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
-        borderRadius="40px"
-        py={{
-          base: 4,
-        }}
-        px={{
-          base: 6,
-        }}
       >
-        <Text
-          fontFamily="Acrom-Bold"
-          color="white.200"
-          fontSize={{ base: '14px', md: '16px' }}
+        <Box
+          bgColor="grayBlur.100"
+          color="white"
+          border="2px solid"
+          borderColor="green.200"
+          boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
+          borderRadius="40px"
+          py={{
+            base: 4,
+          }}
+          px={{
+            base: 6,
+          }}
+          data-aos="flip-up"
+          data-aos-delay="200"
+          data-aos-duration="1000"
         >
-          MetroGalaxy City
-        </Text>
+          <Text
+            fontFamily="Acrom-Bold"
+            color="white.200"
+            fontSize={{ base: '14px', md: '16px' }}
+          >
+            MetroGalaxy City
+          </Text>
+        </Box>
       </Box>
     </Box>
   );

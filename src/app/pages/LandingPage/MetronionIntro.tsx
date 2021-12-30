@@ -75,8 +75,16 @@ export function MetronionIntro() {
     >
       <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
         <Box textAlign="center" pl={{ base: 0, lg: 16 }}>
-          <Text textStyle="h1">Become our citizen, become a Metronion</Text>
-          <Text textStyle="paragraph" mt="10" textAlign="justify">
+          <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
+            Become our citizen, become a Metronion
+          </Text>
+          <Text
+            textStyle="paragraph"
+            mt="10"
+            textAlign="justify"
+            data-aos="fade-right"
+            data-aos-duration="700"
+          >
             Mint yourself into the world by acquiring a Metronion NFT. All
             Metronions come with basic accessories (like clothes) that can be
             changed and are reflected directly in the Metronion’s design in the
@@ -87,7 +95,12 @@ export function MetronionIntro() {
         </Box>
       </Container>
       <Container maxW="container.xl" pb="16">
-        <Box textAlign="center" px="4">
+        <Box
+          textAlign="center"
+          px="4"
+          data-aos="flip-down"
+          data-aos-duration="900"
+        >
           <Slider {...settings}>
             {MetronionImages.map((item, index) => (
               <MetronionItem key={index} src={item} />
@@ -106,6 +119,8 @@ export function MetronionIntro() {
               bgColor: 'gray.500',
             }}
             onClick={openPageMetronion}
+            data-aos="fade-up"
+            data-aos-duration="900"
           >
             Get Your Own Metronion
           </Button>

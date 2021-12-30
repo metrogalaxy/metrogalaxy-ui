@@ -52,8 +52,20 @@ export function Features() {
             px={{ base: 8 }}
           >
             <Container maxW="container.xl" pb="16">
-              <Text textStyle="h1">Live Your Virtual Life</Text>
-              <Text textStyle="paragraph" mt="10" textAlign="justify">
+              <Text
+                textStyle="h1"
+                data-aos="fade-right"
+                data-aos-duration="500"
+              >
+                Live Your Virtual Life
+              </Text>
+              <Text
+                textStyle="paragraph"
+                mt="10"
+                textAlign="justify"
+                data-aos="fade-right"
+                data-aos-duration="700"
+              >
                 The world of MetroGalaxy consists of various areas and maps,
                 each with a unique and immersive design. You can interact with
                 different elements in each area (e.g. entering a building,
@@ -138,23 +150,48 @@ export function Features() {
             gap={{ base: 2, md: 6 }}
           >
             <Box w="100%" textAlign="left">
-              <Text textStyle="h1">Create to Earn</Text>
-              <Text textStyle="paragraph" mt="10">
+              <Text
+                textStyle="h1"
+                data-aos="fade-right"
+                data-aos-duration="500"
+              >
+                Create to Earn
+              </Text>
+              <Text
+                textStyle="paragraph"
+                mt="10"
+                data-aos="fade-right"
+                data-aos-duration="700"
+              >
                 In the future phases of development, the community will have the
                 means to be true builders behind the world of MetroGalaxy.
               </Text>
-              <Text textStyle="paragraph" mt="10">
+              <Text
+                textStyle="paragraph"
+                mt="10"
+                data-aos="fade-right"
+                data-aos-duration="900"
+              >
                 MetroGalaxy will have tools that support creators in a variety
                 of ways:
               </Text>
-              <UnorderedList textStyle="paragraph">
+              <UnorderedList
+                textStyle="paragraph"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
                 <ListItem>Create Metronion accessories (NFT) </ListItem>
                 <ListItem>Create decorations (NFT) for land NFTs </ListItem>
                 <ListItem>Build your own maps and map assets</ListItem>
                 <ListItem>Design NPC questlines</ListItem>
                 <ListItem>Etc.</ListItem>
               </UnorderedList>
-              <Text textStyle="paragraph" mt="10">
+              <Text
+                textStyle="paragraph"
+                mt="10"
+                data-aos="fade-right"
+                data-aos-duration="1200"
+              >
                 All contributors will be rewarded, and the more users use your
                 assets, the more you get rewarded. The possibilities are
                 endless.
@@ -166,6 +203,8 @@ export function Features() {
                 width="full"
                 height="auto"
                 mt={{ base: 10, md: 0 }}
+                data-aos="fade-left"
+                data-aos-duration="500"
               />
             </Box>
           </Grid>

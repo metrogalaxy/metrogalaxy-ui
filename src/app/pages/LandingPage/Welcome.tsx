@@ -25,18 +25,32 @@ export function Welcome() {
             src={WelcomeImg}
             alt="WelcomeImg"
             mb="10"
+            className="cssanimation hu__hu__"
           />
           <Box
             textAlign={{ base: 'center', lg: 'left' }}
             pl={{ base: 0, lg: 16 }}
           >
-            <Text textStyle="h1">Welcome to MetroGalaxy</Text>
-            <Text textStyle="h2" mt="16">
+            <Text textStyle="h1" data-aos="fade-left" data-aos-duration="500">
+              Welcome to MetroGalaxy
+            </Text>
+            <Text
+              textStyle="h2"
+              mt="16"
+              data-aos="fade-left"
+              data-aos-duration="700"
+            >
               Decentralized Metaverse <br />
               and Gamified Online Virtual World
             </Text>
             <Box position="relative" zIndex="2">
-              <Text textStyle="paragraph" mt="10" textAlign="justify">
+              <Text
+                textStyle="paragraph"
+                mt="10"
+                textAlign="justify"
+                data-aos="fade-left"
+                data-aos-duration="900"
+              >
                 MetroGalaxy is a metaverse project that uniquely blends a social
                 platform together with an online virtual game that lets you
                 role-play as anyone you want, do anything you like in an

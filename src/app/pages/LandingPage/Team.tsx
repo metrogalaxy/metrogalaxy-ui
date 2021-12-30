@@ -33,7 +33,7 @@ const team = [
   // },
   {
     avatar: TeamImage2,
-    position: 'CTO, Co-founder',
+    position: 'Founder',
     name: 'Quang Nguyen',
     linkedIn: 'https://www.linkedin.com/in/le-quang-nguyen-a42120135/',
     description: `Full-stack engineer with 3 years experience in blockchain field. 

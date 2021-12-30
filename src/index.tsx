@@ -23,7 +23,6 @@ import { theme, Fonts } from 'src/theme';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
 import 'aos/dist/aos.js';
 import 'slick-carousel/slick/slick.css';
@@ -57,7 +56,9 @@ const client = new ApolloClient({
 const queryClient = new QueryClient();
 
 // init animation on scroll
-AOS.init();
+AOS.init({
+  once: true,
+});
 
 const config: Config = {
   readOnlyChainId: ENV.CHAIN_ID,

@@ -33,16 +33,40 @@ export function Roadmap() {
     >
       <Container maxW="container.lg">
         <Flex direction="column" w="100%" margin="0 auto" textAlign="center">
-          <Text textStyle="h1">Roadmap</Text>
-          {isMobile && <Image src={RoadmapMobileSvg} mt="10" />}
-          {!isMobile && <Image src={RoadmapSvg} mt="10" />}
+          <Text textStyle="h1" data-aos="fade-down" data-aos-duration="500">
+            Roadmap
+          </Text>
+          {isMobile && (
+            <Image
+              src={RoadmapMobileSvg}
+              mt="10"
+              data-aos="fade-down"
+              data-aos-duration="700"
+            />
+          )}
+          {!isMobile && (
+            <Image
+              src={RoadmapSvg}
+              mt="10"
+              data-aos="fade-down"
+              data-aos-duration="700"
+            />
+          )}
         </Flex>
-        <Image src={LineBreakImg} my={8} />
+        <Image
+          src={LineBreakImg}
+          my={8}
+          data-aos="flip-up"
+          data-aos-delay="100"
+          data-aos-duration="900"
+        />
         <Box
           bgColor="blue.200"
           py={{ base: 6 }}
           px={{ base: 12 }}
           borderRadius="20px"
+          data-aos="fade-down"
+          data-aos-duration="1100"
         >
           <Grid
             templateColumns={{
@@ -92,6 +116,8 @@ export function Roadmap() {
           px={{ base: 12 }}
           borderRadius="20px"
           mt={8}
+          data-aos="fade-down"
+          data-aos-duration="1500"
         >
           <Grid
             templateColumns={{

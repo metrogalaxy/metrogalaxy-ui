@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, useMediaQuery } from '@chakra-ui/react';
+import { Box, Button, Center, useMediaQuery } from '@chakra-ui/react';
 import BannerImg from './assets/banner.webp';
 import { TELEGRAM_URL } from 'src/app/config/constants';
 
@@ -22,24 +22,30 @@ export function LandingPageBanner() {
       overflow="hidden"
       bgColor="blue.100"
     >
-      <Button
-        onClick={joinUs}
-        variant="solid"
-        size={isMobile ? 'sm' : 'md'}
+      <Center
         position="absolute"
-        bottom={{ base: 16, md: 28 }}
         right="50%"
+        bottom={{ base: 16, md: 28 }}
         transform="translateX(50%)"
-        borderColor="gray.200"
-        boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
-        _hover={{
-          color: 'green.200',
-          bgColor: 'gray.500',
-        }}
-        zIndex="2"
+        w="full"
+        zIndex={2}
       >
-        Become Our Citizen Now
-      </Button>
+        <Button
+          onClick={joinUs}
+          variant="solid"
+          size={isMobile ? 'sm' : 'md'}
+          borderColor="gray.200"
+          boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
+          _hover={{
+            color: 'green.200',
+            bgColor: 'gray.500',
+          }}
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
+          Become Our Citizen Now
+        </Button>
+      </Center>
     </Box>
   );
 }
