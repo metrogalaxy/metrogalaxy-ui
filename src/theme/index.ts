@@ -36,16 +36,25 @@ export const theme = extendTheme({
       500: '#050F1A',
     },
     grayBlur: {
-      100: 'rgba(20, 36, 51, 0.9)',
+      100: 'rgba(5, 15, 26, 0.4)',
+      200: 'rgba(5, 15, 26, 0.8)',
     },
     white: {
       100: '#F6FFF8BF',
       200: '#F6FFF8',
     },
+    whiteBlur: {
+      100: 'rgba(247, 255, 248, 0.5)',
+      200: 'rgba(247, 255, 248, 0.75)',
+    },
     green: {
       100: '#1BB486',
       200: '#62E47F',
       300: '#1E7054',
+    },
+    greenBlur: {
+      100: 'rgba(98, 228, 127, 0.5)',
+      200: 'rgba(98, 228, 127, 0.1)',
     },
     red: {
       100: '#F44336',
@@ -53,6 +62,8 @@ export const theme = extendTheme({
     blue: {
       100: '#2589C7',
       200: '#0D5180',
+      300: '#1BC4FF',
+      400: '#2D9DE3',
     },
   },
   breakpoints,
@@ -103,6 +114,22 @@ export const theme = extendTheme({
         base: 'md',
         lg: 'lg',
       },
+    },
+    appTitle: {
+      fontSize: {
+        base: 'md',
+        md: 'lg',
+      },
+      color: 'white',
+      fontFamily: 'Acrom-Bold',
+    },
+    appNormal: {
+      fontSize: {
+        base: 'sm',
+        md: 'md',
+      },
+      color: 'white',
+      fontFamily: 'Acrom',
     },
   },
   shadows: {

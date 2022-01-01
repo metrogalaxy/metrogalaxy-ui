@@ -6,8 +6,11 @@ const env: IEnv = {
   NODE_URL: 'https://api.avax.network/ext/bc/C/rpc',
   CHAIN_TOKEN: 'AVAX',
   CHAIN_EXPLORER_NAME: 'Snowtrace',
-  MINT_DATE: new Date(1639144800000), // December 10, 2021 21:00:00 UTC+7
+  PRIVATE_SALE_TIME: new Date(0),
+  PUBLIC_SALE_TIME: new Date(1),
+  END_SALE_TIME: new Date(1643587200 * 1000),
   METRONION_UNIT_PRICE: 1,
+  CURRENT_METRONION_VERSION_ID: 0,
 };
 
 export default env;

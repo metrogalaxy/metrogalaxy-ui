@@ -23,7 +23,7 @@ export function City() {
         transform="translateX(-50%) translateY(-50%)"
       >
         <Box
-          bgColor="grayBlur.100"
+          bgColor="grayBlur.200"
           color="white"
           border="2px solid"
           borderColor="green.200"

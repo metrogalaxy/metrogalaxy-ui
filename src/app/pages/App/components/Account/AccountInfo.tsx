@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { keyframes } from 'styled-components';
 import { ethers } from 'ethers';
-import { useConfig, useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
+import { useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
@@ -13,7 +13,6 @@ import ENV from 'src/app/config/env';
 export function AccountInfo() {
   const { logout } = useAccount();
   const { account } = useEthers();
-  const config = useConfig();
   const [isOpenDropwdown, setOpenDropdown] = React.useState(false);
   const wrapperRef = React.useRef(null);
 

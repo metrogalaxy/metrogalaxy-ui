@@ -40,6 +40,10 @@ export const Button = {
       _hover: {
         bgColor: 'transparent',
         color: 'green.200',
+        _disabled: {
+          bg: 'green.200',
+          color: 'gray.500',
+        },
       },
       _active: {
         bgColor: 'transparent',

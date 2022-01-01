@@ -1,13 +1,5 @@
 import { ethers } from 'ethers';
 import BaseWalletService from './BaseWalletService';
-import {
-  GetChainCurrency,
-  GetChainName,
-  GetChainRpcUrl,
-  GetExplorerUrl,
-  GetChainCurrencyName,
-} from 'src/app/config/constants';
-
 declare const window: any;
 
 const ErrorMetamaskNotInstalled = 'Metamask is not installed';
@@ -21,48 +13,56 @@ export default class MetamaskService extends BaseWalletService {
     }
   }
 
-  addNewChain = async (chainId: number): Promise<Error | undefined> => {
+  // addNewChain = async (chanId: ChainID) => {
+  //   await this.ethereum.request({
+  //     method: 'wallet_addEthereumChain',
+  //     params: [
+  //       {
+  //         chainId: Web3.utils.numberToHex(chanId),
+  //         rpcUrls: [NODE[chanId].url],
+  //         chainName: NODE[chanId].name,
+  //         blockExplorerUrls: [ETHERSCAN[chanId]],
+  //         nativeCurrency: {
+  //           name: NODE[chanId].name,
+  //           symbol: NODE[chanId].currencySymbol,
+  //           decimals: 18,
+  //         },
+  //       },
+  //     ],
+  //   });
+  // };
+
+  addNewChain = async (chainId: number): Promise<Error> => {
     if (this.ethereum) {
-      try {
-        return await this.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [
-            {
-              chainId: ethers.utils.hexValue(chainId),
-              rpcUrls: [GetChainRpcUrl(chainId)],
-              chainName: GetChainName(chainId),
-              blockExplorerUrls: [GetExplorerUrl(chainId)],
-              nativeCurrency: {
-                name: GetChainCurrencyName(chainId),
-                symbol: GetChainCurrency(chainId),
-                decimals: 18,
-              },
-            },
-          ],
-        });
-      } catch (error: any) {
-        return error;
-      }
+      await this.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: ethers.utils.hexValue(chainId),
+          },
+        ],
+      });
     }
     return new Error(ErrorMetamaskNotInstalled);
   };
 
-  switchChain = async (chainId: number): Promise<Error | undefined> => {
+  switchChain = async (chainId: number): Promise<Error> => {
     if (this.ethereum) {
       try {
-        return await this.ethereum.request({
+        await this.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: ethers.utils.hexValue(chainId) }],
         });
       } catch (error: any) {
         console.log(error);
-        if (error?.code === 4902 || error?.code === -32603) {
+        if (error?.code === 4902) {
           return await this.addNewChain(chainId);
         } else {
           return new Error(error!.message);
         }
       }
     }
+
     return new Error(ErrorMetamaskNotInstalled);
   };
 

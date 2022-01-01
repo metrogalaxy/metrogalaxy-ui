@@ -145,7 +145,7 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
               size={buttonSize}
               leftIcon={
                 <IconComponent
-                  width={{ base: 6, md: 8 }}
+                  width={{ base: 6, sm: 8 }}
                   height={{ base: 6, sm: 8 }}
                 />
               }
