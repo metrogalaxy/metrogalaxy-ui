@@ -1,171 +1,256 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import { ColorConstants } from 'src/styles/StyleConstants';
-import { Form } from 'react-bootstrap';
-import { PrimaryButton, DisabledButton } from 'src/app/components/Button';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useAccount } from 'src/app/hooks';
 import Decimal from 'decimal.js';
-import ENV from 'src/app/config/env';
+
+import {
+  Box,
+  Text,
+  Grid,
+  Flex,
+  Button,
+  FormControl,
+  Input,
+  Link,
+} from '@chakra-ui/react';
+import { Web3Provider } from '@ethersproject/providers';
+import { useEthers, useEtherBalance } from '@quangkeu1995/dappcore';
+import { ethers, BigNumber } from 'ethers';
+import { toast } from 'react-toastify';
+import { Round } from './';
+import { formatNumber } from 'src/utils/helpers';
+import { parseError } from 'src/utils/errors';
+import env from 'src/app/config';
+import { GetExplorerTransactionLink } from 'src/app/config/constants';
+import { useBuyMetronion, useButtonSize } from 'src/app/hooks';
+import { ITransactionReceipt } from 'src/app/service/types';
+
+const PRIVATE_CAP = env.metronionSale.privateCap;
+const PUBLIC_CAP = env.metronionSale.publicCap;
 
 interface IFormInput {
-  amount: string;
+  amount: number;
 }
 
-export function MintBox() {
+interface MintboxProps {
+  allocation: number;
+  purchased: number;
+  round: Round;
+  updateUserRecord: () => void;
+}
+
+export function MintBox(props: MintboxProps) {
+  const { account, library, chainId } = useEthers();
+  const provider = library as Web3Provider;
+
+  const isCorrectChain = chainId === env.chainId;
+
+  const ethBalance = useEtherBalance(account);
+  let formattedBalance = '0';
+  if (isCorrectChain && ethBalance) {
+    formattedBalance = ethers.utils.formatEther(ethBalance);
+    formattedBalance = formatNumber(formattedBalance, 4);
+  }
+
+  const buyMetronionMutation = useBuyMetronion(provider, account);
+
   let totalAmount = new Decimal(0);
-  const unitPrice = ENV.METRONION_UNIT_PRICE;
-  const { register, handleSubmit, watch, formState } = useForm<IFormInput>();
+  const unitPrice = env.metronionSale.metronionUnitPrice;
+  const { register, handleSubmit, watch, formState, setValue } =
+    useForm<IFormInput>();
   const { isActivated } = useAccount();
-  const watchedAmount = watch('amount', '');
-  const onSubmit: SubmitHandler<IFormInput> = _ => {
-    console.log('total amount: ' + totalAmount.toString());
+  const watchedAmount = watch('amount', 0);
+
+  const setMaxBuyAmount = () => {
+    const maxBuyAmount = props.allocation - props.purchased;
+    setValue('amount', maxBuyAmount);
+  };
+
+  const onSubmit = async (data: IFormInput) => {
+    const amount = BigNumber.from(data.amount);
+    const totalPaid = amount.mul(unitPrice);
+
+    const txHashPromise = buyMetronionMutation.mutateAsync({
+      amount,
+      totalPaid,
+    });
+
+    toast.dismiss();
+    toast.promise(
+      txHashPromise,
+      {
+        pending: {
+          render() {
+            return 'Minting...';
+          },
+        },
+        success: {
+          render({ data }) {
+            const txReceipt = data as ITransactionReceipt;
+            const txHashUrl = GetExplorerTransactionLink(
+              env.chainId,
+              txReceipt.txHash,
+            );
+            props.updateUserRecord();
+            return (
+              <Box>
+                Mint successfully, tx hash:{' '}
+                <Link href={txHashUrl} target="_blank" rel="noreferrer">
+                  {txReceipt.txHash}
+                </Link>
+              </Box>
+            );
+          },
+        },
+        error: {
+          render({ data }) {
+            const err = parseError(data);
+            const errMsg = err.data ? err.data.message : err.message;
+            return errMsg;
+          },
+        },
+      },
+      {
+        position: 'top-right',
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      },
+    );
   };
 
   const amountIsValid =
-    watchedAmount !== '' &&
-    Number(watchedAmount) >= 1 &&
-    Number(watchedAmount) <= 5;
+    watchedAmount !== 0 &&
+    Number(watchedAmount) >= PRIVATE_CAP &&
+    Number(watchedAmount) <= PUBLIC_CAP;
 
   if (amountIsValid) {
     totalAmount = new Decimal(watchedAmount).mul(unitPrice);
   }
 
   return (
-    <Wrapper>
-      <Box>
-        <Background />
-        <div>
-          <div className="title">Choose Quantity</div>
-          <Form.Control
-            className={`quantity-input ${
-              amountIsValid || !formState.isDirty ? '' : 'quantity-input-error'
-            }`}
+    <Box
+      bgColor="grayBlur.100"
+      border="2px solid"
+      borderColor="greenBlur.100"
+      borderRadius={14}
+      boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
+      p={{ base: 6, md: 8 }}
+      w={{
+        base: '100%',
+        xs: '375px',
+      }}
+      mb={10}
+    >
+      <Text
+        textStyle="appNormal"
+        textTransform="uppercase"
+        fontFamily="Acrom-Bold"
+      >
+        {props.round} Is Started
+      </Text>
+      <Grid templateRows="repeat(3, 1fr)" gap={2} mt={4}>
+        <Flex justifyContent="space-between">
+          <Text color="whiteBlur.200" textStyle="appNormal">
+            Your Allocation
+          </Text>
+          <Text color="green.200" textStyle="appNormal">
+            {props.allocation}{' '}
+            {props.allocation <= 1 ? 'Metronion' : 'Metronions'}
+          </Text>
+        </Flex>
+        <Flex justifyContent="space-between">
+          <Text color="whiteBlur.200" textStyle="appNormal">
+            Purchased
+          </Text>
+          <Text color="green.200" textStyle="appNormal">
+            {props.purchased}{' '}
+            {props.purchased <= 1 ? 'Metronion' : 'Metronions'}
+          </Text>
+        </Flex>
+        <Flex justifyContent="space-between">
+          <Text color="whiteBlur.200" textStyle="appNormal">
+            Unit Price
+          </Text>
+          <Text color="green.200" textStyle="appNormal">
+            {unitPrice} {env.chainToken}
+          </Text>
+        </Flex>
+      </Grid>
+      <Box mt={6}>
+        <Text color="white.200" textStyle="appNormal">
+          Balance: {formattedBalance} {env.chainToken}
+        </Text>
+        <FormControl
+          bgColor="grayBlur.200"
+          borderRadius="25%"
+          color="white"
+          position="relative"
+          mt={2}
+        >
+          <Input
             type="number"
-            placeholder="1"
-            min="1"
-            max="5"
             {...register('amount', {
               required: true,
-              min: 1,
-              max: 5,
+              min: PRIVATE_CAP,
+              max: PUBLIC_CAP,
             })}
+            _focus={
+              !amountIsValid && formState.isDirty
+                ? {
+                    borderColor: 'red',
+                  }
+                : { borderColor: 'greenBlur.100' }
+            }
           />
-          <div className="price">
-            <div>
-              Unit price: {unitPrice} {ENV.CHAIN_TOKEN}
-            </div>
-            {amountIsValid && (
-              <div>
-                You have to pay: {totalAmount.toString()} {ENV.CHAIN_TOKEN}
-              </div>
-            )}
-            {!amountIsValid && formState.isDirty && (
-              <div className="text-error">Amount should be in range 1 to 5</div>
-            )}
-          </div>
-          {!isActivated && (
-            <DisabledButton className="button">
-              Please Connect Wallet
-            </DisabledButton>
+          <Box
+            position="absolute"
+            right={3}
+            top="50%"
+            transform="translateY(-50%)"
+            fontFamily="Acrom-Bold"
+            textTransform="uppercase"
+            color="green.200"
+            fontSize={{ base: 'xs', md: 'sm' }}
+            onClick={setMaxBuyAmount}
+            cursor="pointer"
+          >
+            Max
+          </Box>
+        </FormControl>
+        <Box h={6} mt={2}>
+          {!amountIsValid && formState.isDirty && (
+            <Text textStyle="appNormal" color="red">
+              Amount should be in range {PRIVATE_CAP} to {PUBLIC_CAP}
+            </Text>
           )}
-          {isActivated && (
-            <PrimaryButton className="button" onClick={handleSubmit(onSubmit)}>
-              Mint
-            </PrimaryButton>
+          {amountIsValid && formState.isDirty && (
+            <Text textStyle="appNormal">
+              Total: {totalAmount.toString()} {env.chainToken}
+            </Text>
           )}
-        </div>
+          {formState.errors.amount && (
+            <Text textStyle="appNormal" color="red">
+              {formState.errors.amount?.message}
+            </Text>
+          )}
+        </Box>
+        <Button
+          variant="solid"
+          size={useButtonSize()}
+          mt={5}
+          w="full"
+          isLoading={buyMetronionMutation.isLoading}
+          loadingText="Minting"
+          disabled={!isActivated || buyMetronionMutation.isLoading}
+          onClick={handleSubmit(onSubmit)}
+        >
+          {isActivated ? 'Mint' : 'Please connect wallet'}
+        </Button>
       </Box>
-    </Wrapper>
+    </Box>
   );
 }
-
-const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-const Box = styled.div`
-  border: 2px solid rgba(98, 228, 127, 0.5);
-  box-sizing: border-box;
-  box-shadow: 0px 30px 50px rgba(32, 138, 55, 0.28);
-  border-radius: 2rem;
-  padding: 4rem;
-  max-width: 36rem;
-  width: 100%;
-  position: relative;
-
-  .title {
-    color: ${ColorConstants.WHITE};
-    font-family: 'Acrom-Bold';
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    margin-bottom: 2.2rem;
-  }
-
-  .quantity-input {
-    background: rgba(5, 15, 26, 0.8);
-    border-radius: 10px;
-    border: 2px solid transparent;
-    padding: 1.8rem;
-    font-family: 'Acrom-Light';
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    color: ${ColorConstants.WHITE};
-    box-shadow: none;
-    margin-bottom: 1.8rem;
-
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-    }
-  }
-
-  .quantity-input-error {
-    border: 2px solid ${ColorConstants.ERROR};
-  }
-
-  .text-error {
-    color: ${ColorConstants.ERROR};
-  }
-
-  .price {
-    font-family: 'Acrom-Light';
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    color: ${ColorConstants.WHITE};
-    margin-bottom: 3rem;
-    min-height: 5rem;
-
-    div {
-      margin-bottom: 1rem;
-    }
-  }
-
-  .button {
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    box-shadow: none;
-
-    &:hover {
-      transform: none;
-    }
-  }
-`;
-
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  background: #050f1a;
-  opacity: 0.6;
-  border-radius: 2rem;
-`;

@@ -1,85 +1,55 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import MintInfoIcon from './assets/mint_info_icon.png';
-import { Image } from 'react-bootstrap';
-import { ColorConstants } from 'src/styles/StyleConstants';
-import { mediaQuery, ScreenSize } from 'src/styles/media';
+import { Box, Text, Grid, Image, Flex } from '@chakra-ui/react';
+import { useEthers } from '@quangkeu1995/dappcore';
+import { Web3Provider } from '@ethersproject/providers';
+
+import MintInfoIcon from './assets/mint_info_icon.webp';
 import { MAX_METRONION_COUNT } from 'src/app/config/constants';
+import { useGetSaleRecord } from 'src/app/hooks';
+
+const REFETCH_INTERVAL = 5000; // milliseconds
 
 export function TotalMintInfo() {
+  const { library } = useEthers();
+  const provider = library as Web3Provider;
+  const { data: saleRecord } = useGetSaleRecord(provider, {
+    refetchInterval: REFETCH_INTERVAL,
+  });
+
+  const totalSold = saleRecord?.totalSold ? saleRecord.totalSold : 0;
+
   return (
-    <Wrapper>
-      <Box>
-        <Background />
-        <Image className="icon" src={MintInfoIcon} />
-        <div className="text-wrapper">
-          <div className="title">Total Metronions Minted</div>
-          <div className="text">
-            <span className="text--highlight">0</span>
-            <span>/{MAX_METRONION_COUNT}</span>
-          </div>
-        </div>
-      </Box>
-    </Wrapper>
+    <Box
+      bgColor="grayBlur.100"
+      border="2px solid"
+      borderColor="blue.300"
+      borderRadius={14}
+      boxShadow=" 0px 17.1491px 42.8728px rgba(7, 105, 140, 0.66);"
+      p={{ base: 6, md: 8 }}
+      w={{
+        base: '100%',
+        xs: '375px',
+      }}
+      h="fit-content"
+    >
+      <Grid templateColumns="80px 1fr" gap={3}>
+        <Image src={MintInfoIcon} />
+        <Flex flexDirection="column" justifyContent="center">
+          <Text
+            textStyle="appNormal"
+            textTransform="uppercase"
+            fontFamily="Acrom-Bold"
+          >
+            Total Minted
+          </Text>
+          <Box textStyle="appTitle" mt={2} fontSize={{ base: 'lg', md: 'xl' }}>
+            <Text as="span" color="blue.400">
+              {totalSold.toLocaleString()}
+            </Text>
+            <Text as="span">/{MAX_METRONION_COUNT.toLocaleString()}</Text>
+          </Box>
+        </Flex>
+      </Grid>
+    </Box>
   );
 }
-
-const Wrapper = styled.div`
-  ${mediaQuery.lessThan(ScreenSize.LG)`
-    display: flex;
-    justify-content: center;
-  `}
-`;
-
-const Box = styled.div`
-  border: 2px solid #1bc4ff;
-  box-sizing: border-box;
-  box-shadow: 0px 20px 50px rgba(7, 105, 140, 0.66);
-  border-radius: 2rem;
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  max-width: 36rem;
-
-  .icon {
-    width: 6.4rem;
-    height: 6.4rem;
-  }
-
-  .text-wrapper {
-    font-family: 'Acrom-Light';
-    margin-left: 2.4rem;
-  }
-
-  .title {
-    margin-bottom: 1.2rem;
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    color: ${ColorConstants.WHITE};
-  }
-
-  .text {
-    font-size: 2.4rem;
-    line-height: 2.9rem;
-    color: ${ColorConstants.WHITE};
-
-    &--highlight {
-      color: #2d9de3;
-    }
-  }
-`;
-
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  background: #050f1a;
-  opacity: 0.6;
-  border-radius: 2rem;
-`;

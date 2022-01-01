@@ -20,6 +20,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme, Fonts } from 'src/theme';
+import { ToastContainer } from 'react-toastify';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -27,7 +28,7 @@ import 'aos/dist/aos.css';
 import 'aos/dist/aos.js';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import 'focus-visible/dist/focus-visible';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import root app
 import { App } from 'src/app';
@@ -82,6 +83,7 @@ ReactDOM.render(
                   {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
                     <ReactQueryDevtools initialIsOpen={false} />
                   )}
+                  <ToastContainer />
                 </ChakraProvider>
               </QueryClientProvider>
             </DAppProvider>

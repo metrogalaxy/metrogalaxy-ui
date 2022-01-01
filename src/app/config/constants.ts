@@ -7,6 +7,8 @@ export const ADMIN_EMAIL = 'captain@metrogalaxy.io';
 
 export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
 export const MAX_METRONION_COUNT = 10000;
+export const METRONION_PRIVATE_CAP = 1;
+export const METRONION_PUBLIC_CAP = 5;
 
 export const ChainIdToName: Record<number, string> = {
   43113: 'Avalanche Fuji Testnet',
