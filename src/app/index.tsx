@@ -18,6 +18,7 @@ import { LandingPage } from './pages/LandingPage';
 import { ComingSoon } from './pages/App/ComingSoon';
 import { Tokenomics } from './pages/LandingPage/Tokenomics';
 import { AboutUs } from './pages/LandingPage/AboutUs';
+import { Pitchdeck } from './pages/LandingPage/Pitchdeck';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -46,6 +47,7 @@ export function App() {
         <Route exact path="/about" component={AboutUs} />
         {/* <Route exact path="/inventory" component={Inventory} />
         <Route path="/metronion/:id" component={MetronionInfo} /> */}
+        <Route exact path="/pitchdeck" component={Pitchdeck} />
         <Route component={NotFoundPage} />
       </Switch>
       {/* <GlobalStyle /> */}

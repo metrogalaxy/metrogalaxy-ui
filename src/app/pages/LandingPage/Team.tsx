@@ -36,14 +36,14 @@ const team = [
     position: 'Founder',
     name: 'Quang Nguyen',
     linkedIn: 'https://www.linkedin.com/in/le-quang-nguyen-a42120135/',
-    description: `Full-stack engineer with 3 years experience in blockchain field. 
+    description: `Full-stack engineer with 4 years experience in blockchain field. 
     Dapp builder, Kyber Network Alumni.`,
   },
   {
     avatar: TeamImage3,
     position: 'Head of Product',
     name: 'Hoang Le Minh',
-    linkedIn: 'https://www.linkedin.com/in/ho%C3%A0ng-tikchu-4275b4120/',
+    linkedIn: 'https://www.linkedin.com/in/ho%C3%A0ng-l%C3%AA-minh-4275b4120/',
     description:
       '10 years experience in game design and project management. Strong skills in product management and game publishing.',
   },

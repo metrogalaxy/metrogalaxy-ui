@@ -43,11 +43,11 @@ export function MetronionIntro() {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 800,
+    speed: 2000,
     slidesToShow: !isDesktop ? 2 : 4,
     slidesToScroll: !isDesktop ? 2 : 4,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 4000,
     cssEase: 'linear',
   };
 
