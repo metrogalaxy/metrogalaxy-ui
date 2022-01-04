@@ -8,6 +8,7 @@ import {
   MEDIUM_URL,
   DISCORD_URL,
 } from 'src/app/config/constants';
+import WhitepaperPdf from 'src/app/assets/whitepaper.pdf';
 
 export function Footer() {
   return (
@@ -40,6 +41,7 @@ export function Footer() {
                 About
               </Text>
               {/* <CustomLink href="/about">About Us</CustomLink> */}
+              <CustomLink href={WhitepaperPdf}>Whitepaper</CustomLink>
               <CustomLink href="/tokenomic" target="_self">
                 Token Metrics
               </CustomLink>
