@@ -2,44 +2,32 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'src/utils/@reduxjs/toolkit';
 import { useInjectReducer } from 'src/utils/redux-injectors';
 import { InventoryState } from './types';
-import { METRONION_PANEL_LIMITS_PER_PAGE } from 'src/app/config/constants';
-import { FetchInventoryQuery } from 'src/app/service/API/inventory';
-import { SortType } from 'src/app/pages/App/components/FilterBox';
-import { getEnumKey } from 'src/utils/helpers';
+import {
+  MetronionFilterParams,
+  DEFAULT_METRONION_FILTER_PARAMS,
+} from 'src/app/service/Metronion';
+import {
+  AccessoriesFilterParams,
+  DEFAULT_ACCESSORIES_FILTER_PARAMS,
+} from 'src/app/service/Accessories';
 
 export const initialState: InventoryState = {
-  address: '',
-  id: '',
-  sort: getEnumKey(SortType, SortType.LowestID),
-  page: 0,
-  limit: METRONION_PANEL_LIMITS_PER_PAGE,
+  metronionFilter: DEFAULT_METRONION_FILTER_PARAMS,
+  accessoriesFilter: DEFAULT_ACCESSORIES_FILTER_PARAMS,
 };
 
 const slice = createSlice({
   name: 'inventory',
   initialState,
   reducers: {
-    setQuery(state, action: PayloadAction<FetchInventoryQuery>) {
-      state.address = action.payload.address;
-      state.id = action.payload.id;
-      state.sort = action.payload.sort;
-      state.page = action.payload.page;
-      state.limit = action.payload.limit;
+    setMetronionFilter(state, action: PayloadAction<MetronionFilterParams>) {
+      state.metronionFilter = action.payload;
     },
-    setAddress(state, action: PayloadAction<string>) {
-      state.address = action.payload;
-    },
-    setId(state, action: PayloadAction<string>) {
-      state.id = action.payload;
-    },
-    setSort(state, action: PayloadAction<string>) {
-      state.sort = action.payload;
-    },
-    setPage(state, action: PayloadAction<number>) {
-      state.page = action.payload;
-    },
-    setLimit(state, action: PayloadAction<number>) {
-      state.limit = action.payload;
+    setAccessoriesFilter(
+      state,
+      action: PayloadAction<AccessoriesFilterParams>,
+    ) {
+      state.accessoriesFilter = action.payload;
     },
   },
 });

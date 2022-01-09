@@ -47,3 +47,10 @@ export function getEnumKey(enumInput: any, value: string): string {
   }
   return '';
 }
+
+export function safeMul(a: number, b: number): number {
+  const aBig = new BigNumber(a);
+  const bBig = new BigNumber(b);
+  const result = aBig.multipliedBy(bBig);
+  return result.toNumber();
+}

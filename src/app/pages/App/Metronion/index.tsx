@@ -14,7 +14,10 @@ import {
   METRONION_PUBLIC_CAP,
 } from 'src/app/config/constants';
 import env from 'src/app/config';
-import { useGetUserRecord, useIsWhitelistedAddress } from 'src/app/hooks';
+import {
+  useGetUserRecord,
+  useIsWhitelistedAddress,
+} from 'src/app/service/MetronionSale';
 import { PageLayout } from '../components/PageLayout';
 import AvatarGif from './assets/avatar.gif';
 import { useAccount } from 'src/app/hooks';

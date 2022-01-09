@@ -5,7 +5,7 @@ import { Web3Provider } from '@ethersproject/providers';
 
 import MintInfoIcon from './assets/mint_info_icon.webp';
 import { MAX_METRONION_COUNT } from 'src/app/config/constants';
-import { useGetSaleRecord } from 'src/app/hooks';
+import { useGetSaleRecord } from 'src/app/service/MetronionSale';
 
 const REFETCH_INTERVAL = 5000; // milliseconds
 

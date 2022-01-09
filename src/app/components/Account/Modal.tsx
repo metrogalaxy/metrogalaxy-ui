@@ -129,6 +129,7 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
       isCentered
       motionPreset="slideInBottom"
       variant="dark"
+      autoFocus={false}
     >
       <ModalOverlay />
       <ModalContent>
