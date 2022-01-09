@@ -16,7 +16,7 @@ const env: Config = {
     endSaleTime: new Date(1642212002 * 1000),
     metronionUnitPrice: 1,
   },
-  useMockData: false,
+  useMockData: true,
 };
 
 export default env;

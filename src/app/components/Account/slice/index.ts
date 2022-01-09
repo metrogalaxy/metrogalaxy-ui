@@ -1,8 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'src/utils/@reduxjs/toolkit';
-import { useInjectReducer, useInjectSaga } from 'src/utils/redux-injectors';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { accountSaga } from './saga';
 import { AccountState } from './types';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export const initialState: AccountState = {
   currentChainId: 0,
@@ -24,8 +26,16 @@ const slice = createSlice({
 
 export const { actions: accountActions } = slice;
 
+const reducer = persistReducer(
+  {
+    key: slice.name,
+    storage,
+  },
+  slice.reducer,
+);
+
 export const useAccountSlice = () => {
-  useInjectReducer({ key: slice.name, reducer: slice.reducer });
+  useInjectReducer({ key: slice.name, reducer: reducer });
   useInjectSaga({ key: slice.name, saga: accountSaga });
   return { actions: slice.actions };
 };

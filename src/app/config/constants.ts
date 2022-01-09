@@ -10,6 +10,66 @@ export const MAX_METRONION_COUNT = 10000;
 export const METRONION_PRIVATE_CAP = 1;
 export const METRONION_PUBLIC_CAP = 5;
 
+export enum CATEGORY {
+  METRONION = 'metronion',
+  ACCESSORIES = 'accessories',
+}
+
+export enum SORT_TYPE {
+  lowest_id = 'Lowest ID',
+  highest_id = 'Highest ID',
+  lowest_price = 'Lowest Price',
+  highest_price = 'Highest Price',
+  recently_listed = 'Recently Listed',
+  recently_sold = 'Recently Sold',
+  recently_offered = 'Recently Offered',
+}
+
+export enum ACCESSORY_TYPE {
+  ALL = 'all',
+  HAIR = 'hair',
+  FACE_ACCESSORIES = 'face',
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  SHOES = 'shoes',
+  COAT = 'coat',
+  NECKLACE = 'necklace',
+  LEFT_HAND_EQUIPMENT = 'left_hand_equipment',
+  RIGHT_HAND_EQUIPMENT = 'right_hand_equipment',
+  VEHICLES = 'vehicles',
+  WING = 'wing',
+  TAIL = 'tail',
+  PET = 'pet',
+  SET = 'set',
+}
+
+export enum RARITY {
+  COMMON = 'common',
+  UNCOMMON = 'uncommon',
+  RARE = 'rare',
+  EPIC = 'epic',
+  LEGENDARY = 'legendary',
+  MYTHICAL = 'mythical',
+}
+
+export enum GENDER {
+  MALE = 'male',
+  FEMALE = 'female',
+}
+
+export const STATS = [
+  'intra',
+  'bodily',
+  'inter',
+  'existential',
+  'musical',
+  'naturalistic',
+  'linguistic',
+  'logical',
+];
+
+export const DEFAULT_SORT = 'lowest_id';
+
 export const ChainIdToName: Record<number, string> = {
   43113: 'Avalanche Fuji Testnet',
   43114: 'Avalanche Mainnet',

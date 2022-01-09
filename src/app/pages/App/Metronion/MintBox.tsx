@@ -22,7 +22,8 @@ import { formatNumber } from 'src/utils/helpers';
 import { parseError } from 'src/utils/errors';
 import env from 'src/app/config';
 import { GetExplorerTransactionLink } from 'src/app/config/constants';
-import { useBuyMetronion, useButtonSize } from 'src/app/hooks';
+import { useBuyMetronion } from 'src/app/service/MetronionSale';
+import { useButtonSize } from 'src/app/hooks';
 import { ITransactionReceipt } from 'src/app/service/types';
 
 const PRIVATE_CAP = env.metronionSale.privateCap;

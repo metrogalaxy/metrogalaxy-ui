@@ -4,6 +4,8 @@ import { Button } from './components/button';
 import { Link } from './components/link';
 import { Modal } from './components/modal';
 import { Text } from './components/text';
+import { Checkbox } from './components/checkbox';
+import { layerStyles } from './layerStyles';
 
 const breakpoints = createBreakpoints({
   xs: '480px',
@@ -20,6 +22,7 @@ const components = {
   Link,
   Modal,
   Text,
+  Checkbox,
 };
 
 export const theme = extendTheme({
@@ -34,6 +37,7 @@ export const theme = extendTheme({
       300: '#203040',
       400: '#0B1926',
       500: '#050F1A',
+      600: '#3E4C59',
     },
     grayBlur: {
       100: 'rgba(5, 15, 26, 0.4)',
@@ -42,10 +46,12 @@ export const theme = extendTheme({
     white: {
       100: '#F6FFF8BF',
       200: '#F6FFF8',
+      300: '#6C7680',
     },
     whiteBlur: {
       100: 'rgba(247, 255, 248, 0.5)',
       200: 'rgba(247, 255, 248, 0.75)',
+      300: 'rgba(247, 255, 248, 0.2)',
     },
     green: {
       100: '#1BB486',
@@ -132,6 +138,7 @@ export const theme = extendTheme({
       fontFamily: 'Acrom',
     },
   },
+  layerStyles,
   shadows: {
     outline: 'none',
   },

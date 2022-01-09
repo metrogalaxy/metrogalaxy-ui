@@ -29,7 +29,7 @@ export function PageLayout(props: PageLayoutProps) {
       <NavBar isShowConnectWallet={true} />
       <Container
         height="100%"
-        maxW="1440px"
+        maxW="1680px"
         mt="98px"
         py={{ base: 4, md: 6 }}
         px={{ base: 6, md: 12 }}

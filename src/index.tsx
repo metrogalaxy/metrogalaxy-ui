@@ -21,6 +21,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme, Fonts } from 'src/theme';
 import { ToastContainer } from 'react-toastify';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -48,7 +49,9 @@ if (process.env.REACT_APP_ENABLE_MOCK_API === 'true') {
   worker.start();
 }
 
-const store = configureAppStore();
+const { store, persistor } = configureAppStore();
+export { persistor };
+
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 const client = new ApolloClient({
@@ -70,28 +73,30 @@ const config: Config = {
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HelmetProvider>
-      <ApolloProvider client={client}>
-        <ViewportProvider>
-          <React.StrictMode>
-            <DAppProvider config={config}>
-              <QueryClientProvider client={queryClient}>
-                <ChakraProvider theme={theme}>
-                  <Fonts />
-                  <App />
-                  {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
-                    <ReactQueryDevtools initialIsOpen={false} />
-                  )}
-                  <ToastContainer />
-                </ChakraProvider>
-              </QueryClientProvider>
-            </DAppProvider>
-          </React.StrictMode>
-        </ViewportProvider>
-      </ApolloProvider>
-    </HelmetProvider>
-  </Provider>,
+  <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <HelmetProvider>
+        <ApolloProvider client={client}>
+          <ViewportProvider>
+            <React.StrictMode>
+              <DAppProvider config={config}>
+                <QueryClientProvider client={queryClient}>
+                  <ChakraProvider theme={theme}>
+                    <Fonts />
+                    <App />
+                    {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
+                      <ReactQueryDevtools initialIsOpen={false} />
+                    )}
+                    <ToastContainer />
+                  </ChakraProvider>
+                </QueryClientProvider>
+              </DAppProvider>
+            </React.StrictMode>
+          </ViewportProvider>
+        </ApolloProvider>
+      </HelmetProvider>
+    </Provider>
+  </PersistGate>,
   MOUNT_NODE,
 );
 

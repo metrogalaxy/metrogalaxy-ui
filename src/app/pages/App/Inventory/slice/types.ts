@@ -1,8 +1,8 @@
+import { MetronionFilterParams } from 'src/app/service/Metronion';
+import { AccessoriesFilterParams } from 'src/app/service/Accessories';
+
 /* --- STATE --- */
 export interface InventoryState {
-  address: string;
-  id?: string;
-  sort?: string;
-  page?: number;
-  limit?: number;
+  metronionFilter: MetronionFilterParams;
+  accessoriesFilter: AccessoriesFilterParams;
 }
