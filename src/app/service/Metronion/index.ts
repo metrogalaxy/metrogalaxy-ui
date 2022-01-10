@@ -21,6 +21,21 @@ export interface Metronions {
   accessoryIds: number[];
 }
 
+export interface MetronionInfo {
+  id: number;
+  createAtTimestamp: number;
+  updatedAtTimestamp: number;
+  name: string;
+  versionId: number;
+  gender: string;
+  owner: string;
+  lastPrice: number;
+  currency: string;
+  uri: string;
+  image: string;
+  accessoryIds: number[];
+}
+
 export interface MetronionFilterParams {
   sort: string;
   id: number | undefined;
@@ -42,6 +57,7 @@ export interface MetronionsResponse {
 }
 
 export interface MetronionFetcher {
+  getMetronionInfo: (id: number) => Promise<MetronionInfo>;
   getMetronions: (account: string) => Promise<Metronions[]>;
   getMetronionsByPage: (
     account: string,
@@ -64,6 +80,16 @@ if (env.useMockData) {
 /**
  =========== Methods
  */
+
+export function useGetMetronionInfo(id: number, options?: any) {
+  return useQuery<MetronionInfo, Error>(
+    ['metronion-get-metronion-info', id],
+    async (): Promise<MetronionInfo> => {
+      return fetcher.getMetronionInfo(id);
+    },
+    options,
+  );
+}
 
 export function useGetMetronions(account: string, options?: any) {
   return useQuery<Metronions[], Error>(

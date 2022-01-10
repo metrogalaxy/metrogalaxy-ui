@@ -8,10 +8,10 @@
 
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 // import { Land, Marketplace, Metronion, Staking } from './pages/App/Loadable';
-import { Metronion, Inventory } from './pages/App/Loadable';
+import { Metronion, Inventory, MetronionInfo } from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import FavIcon from 'src/app/assets/favicon.png';
@@ -55,20 +55,19 @@ export function App() {
         />
         <link rel="icon" type="image/png" href={FavIcon} sizes="16x16" />
       </Helmet>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/metronion" element={<Metronion />} />
+        <Route path="/marketplace" element={<ComingSoon />} />
+        <Route path="/staking" element={<ComingSoon />} />
+        <Route path="/land" element={<ComingSoon />} />
+        <Route path="/tokenomic" element={<Tokenomics />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/metronion/:id" element={<MetronionInfo />} />
 
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/metronion" component={Metronion} />
-        <Route exact path="/marketplace" component={ComingSoon} />
-        <Route exact path="/staking" component={ComingSoon} />
-        <Route exact path="/land" component={ComingSoon} />
-        <Route exact path="/tokenomic" component={Tokenomics} />
-        <Route exact path="/about" component={AboutUs} />
-        <Route exact path="/inventory" component={Inventory} />
-        {/*<Route path="/metronion/:id" component={MetronionInfo} /> */}
-        <Route component={NotFoundPage} />
-      </Switch>
-      {/* <GlobalStyle /> */}
+        <Route element={<NotFoundPage />} />
+      </Routes>
     </BrowserRouter>
   );
 }

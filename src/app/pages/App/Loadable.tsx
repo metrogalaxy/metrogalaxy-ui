@@ -41,3 +41,11 @@ export const Inventory = lazyLoad(
     fallback: <LoadingBackground />,
   },
 );
+
+export const MetronionInfo = lazyLoad(
+  () => import('./MetronionInfo'),
+  module => module.MetronionInfo,
+  {
+    fallback: <LoadingBackground />,
+  },
+);

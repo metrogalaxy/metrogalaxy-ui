@@ -1,4 +1,9 @@
-import { MetronionFilterParams, Metronions, MetronionsResponse } from './index';
+import {
+  MetronionFilterParams,
+  MetronionInfo,
+  Metronions,
+  MetronionsResponse,
+} from './index';
 import * as MetronionImages from 'src/app/pages/LandingPage/assets/metronion';
 import env from 'src/app/config';
 
@@ -38,6 +43,31 @@ class MockFetcher {
   metronionsArray: Metronions[];
   constructor() {
     this.metronionsArray = MetronionsArray;
+  }
+
+  async getMetronionInfo(id: number): Promise<MetronionInfo> {
+    const results = this.metronionsArray.filter(item => item.id === id);
+    if (results.length === 0) {
+      throw new Error('no metronion found');
+    }
+
+    const item = results[0];
+
+    return {
+      id: item.id,
+      createAtTimestamp: item.createAtTimestamp,
+      updatedAtTimestamp: item.updatedAtTimestamp,
+      name: item.name,
+      versionId: item.versionId,
+      gender: item.gender,
+      owner: item.owner,
+      lastPrice: item.lastPrice,
+      currency: item.currency,
+      uri: item.uri,
+      image:
+        'https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/S_1.png',
+      accessoryIds: item.accessoryIds,
+    };
   }
 
   async getMetronions(account: string): Promise<Metronions[]> {

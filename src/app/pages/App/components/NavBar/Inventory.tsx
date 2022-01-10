@@ -4,7 +4,7 @@ import { Image } from 'react-bootstrap';
 import InventoryIcon from './assets/inventory_icon.png';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import { mediaQuery, ScreenSize } from 'src/styles/media';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFetchInventoryCount } from 'src/app/service/API/inventory';
 import { useEthers } from '@quangkeu1995/dappcore';
 import { useAccount } from 'src/app/hooks';
@@ -12,9 +12,9 @@ import { useAccount } from 'src/app/hooks';
 export function Inventory() {
   const { account } = useEthers();
   const { isActivated } = useAccount();
-  const history = useHistory();
+  const navigate = useNavigate();
   const openInventoryPage = () => {
-    history.push('/inventory');
+    navigate('/inventory');
   };
 
   const { data } = useFetchInventoryCount(account!, {
