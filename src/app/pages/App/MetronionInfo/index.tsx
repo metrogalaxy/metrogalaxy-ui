@@ -1,67 +1,110 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import { Helmet } from 'react-helmet-async';
+import {
+  Box,
+  Text,
+  Flex,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Image,
+  Grid,
+  GridItem,
+  Center,
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { NavBar, NAV_BAR_ITEMS_ID } from 'src/app/pages/App/components/NavBar';
-import { Layout, TitleLayout } from '../components/Layout';
-import { Background } from '../components/Background';
-import TitleIcon from 'src/app/pages/App/Inventory/assets/arrow.png';
-import { useHistory } from 'react-router-dom';
-import { lazyLoad } from 'src/utils/loadable';
-import { LoadingSpinnerWrapper } from 'src/app/components/Loading';
-import BigNumber from 'bignumber.js';
-import { MAX_METRONION_COUNT } from 'src/app/config/constants';
-import { NotFound } from './NotFound';
+import { BigNumber } from 'bignumber.js';
+import ArrowLeftIcon from 'src/app/assets/icon/arrow_left.svg';
+import { LoadingSpinner } from 'src/app/components/Loading';
 
-const Panel = lazyLoad(
-  () => import('./Panel'),
-  module => module.Panel,
-  {
-    fallback: <LoadingSpinnerWrapper />,
-  },
-);
+import { PageLayout } from '../components/PageLayout';
+import { useGetMetronionInfo } from 'src/app/service/Metronion';
+import { BasicInfo } from './BasicInfo';
+import { AccessoriesPanel } from './AccessoriesPanel';
+import { OffersPanel } from './OffersPanel';
 
-interface UrlParams {
-  id: string;
-}
+// const Panel = lazyLoad(
+//   () => import('./Panel'),
+//   module => module.Panel,
+//   {
+//     fallback: <LoadingSpinnerWrapper />,
+//   },
+// );
 
 export function MetronionInfo() {
-  const history = useHistory();
-  const { id } = useParams<UrlParams>();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const handleBackToInventoryPage = () => {
-    history.push('/inventory');
-  };
+  const idNumber = new BigNumber(id!);
 
-  const idNumber = new BigNumber(id);
-
-  const idValidIdParams =
-    !idNumber.isNaN() &&
-    idNumber.isGreaterThanOrEqualTo(1) &&
-    idNumber.isLessThanOrEqualTo(MAX_METRONION_COUNT);
+  const { data, isFetching } = useGetMetronionInfo(idNumber.toNumber(), {
+    enabled: !idNumber.isNaN(),
+  });
 
   return (
-    <Wrapper>
-      <Helmet>
-        <title>Metronion {id}</title>
-        <meta name="description" content={`The Metronion ${id}`} />
-      </Helmet>
-      <NavBar activeItemId={NAV_BAR_ITEMS_ID.Metronion} />
-      <Background />
-      {idValidIdParams && (
-        <Layout>
-          <TitleLayout iconSrc={TitleIcon} onClick={handleBackToInventoryPage}>
-            Metronion #{id}
-          </TitleLayout>
-          <Panel id={id} />
-        </Layout>
+    <PageLayout title="Metronion Info" content="Metronion Info">
+      <Flex
+        alignItems="center"
+        pt={{ base: 0, md: '8px' }}
+        mb={{ base: 6, sm: 8 }}
+        alignSelf={{ base: 'flex-start', md: 'center' }}
+      >
+        <Breadcrumb spacing={0}>
+          <BreadcrumbItem>
+            <BreadcrumbLink onClick={() => navigate(-1)}>
+              <Image src={ArrowLeftIcon} width="32px" height="32px" />
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`metronion/${idNumber.toString()}`}>
+              <Text
+                textStyle="appTitle"
+                textTransform="capitalize"
+                hover={{
+                  color: 'green.200',
+                }}
+              >
+                Metronion #{idNumber.toString()}
+              </Text>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </Flex>
+
+      <Center width="full" display={isFetching ? 'flex' : 'none'}>
+        <LoadingSpinner />
+      </Center>
+
+      {/* Main Panel */}
+      {data && (
+        <Grid
+          templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }}
+          templateRows="1fr"
+          gap={{ base: 4, lg: 10 }}
+          display={isFetching ? 'none' : 'grid'}
+          justifyItems="center"
+        >
+          {/* Accessories */}
+          <AccessoriesPanel accessoryIds={data.accessoryIds} />
+          {/* Avatar */}
+          <GridItem rowStart={1} rowEnd={{ base: 2 }}>
+            <Center>
+              <Image
+                src={data.image}
+                width="auto"
+                height="auto"
+                maxHeight={{ sm: '500px' }}
+              />
+            </Center>
+          </GridItem>
+          {/* Basic Info */}
+          <GridItem rowStart={{ base: 2, lg: 1 }} rowEnd={{ base: 3 }}>
+            <BasicInfo data={data} />
+            <OffersPanel />
+          </GridItem>
+          {/* Offers */}
+        </Grid>
       )}
-      {!idValidIdParams && <NotFound />}
-    </Wrapper>
+    </PageLayout>
   );
 }
-
-const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-`;

@@ -5,7 +5,7 @@ import { selectGlobal } from 'src/app/globalSlice/selectors';
 import { useSelector } from 'react-redux';
 import { safeMul, formatNumber } from 'src/utils/helpers';
 import { IconComponent } from 'src/app/components/CurrencyLogo';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface AccessoriesPanelProps {
   data: Accessories[];
@@ -40,7 +40,7 @@ interface ItemProps {
 }
 
 function Item(props: ItemProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const globalState = useSelector(selectGlobal);
 
   const lastPrice = props.item.lastPrice;
@@ -48,7 +48,7 @@ function Item(props: ItemProps) {
   const usdPrice = safeMul(lastPrice, globalState.avaxPrice);
 
   const onClickItem = () => {
-    history.push('/accessory/' + props.item.id);
+    navigate('/accessory/' + props.item.id);
   };
 
   return (

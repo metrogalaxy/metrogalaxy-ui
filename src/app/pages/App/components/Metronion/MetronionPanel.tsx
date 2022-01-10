@@ -7,7 +7,7 @@ import { safeMul, formatNumber } from 'src/utils/helpers';
 import MaleIcon from 'src/app/assets/icon/male.svg';
 import FemaleIcon from 'src/app/assets/icon/female.svg';
 import { IconComponent } from 'src/app/components/CurrencyLogo';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface MetronionPanelProps {
   data: Metronions[];
@@ -42,7 +42,7 @@ interface ItemProps {
 }
 
 function Item(props: ItemProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const globalState = useSelector(selectGlobal);
 
   const gender = props.item.gender;
@@ -51,7 +51,7 @@ function Item(props: ItemProps) {
   const usdPrice = safeMul(lastPrice, globalState.avaxPrice);
 
   const onClickItem = () => {
-    history.push('/metronion/' + props.item.id);
+    navigate('/metronion/' + props.item.id);
   };
 
   return (
