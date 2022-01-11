@@ -200,7 +200,7 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
             </Box>
           )}
           {error && (
-            <Text variant="error" mt={2} mb={4}>
+            <Text textStyle="error" mt={2} mb={4}>
               {error.message}
             </Text>
           )}

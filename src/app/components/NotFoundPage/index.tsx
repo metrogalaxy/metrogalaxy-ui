@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Box, Center, Grid, Text, Flex } from '@chakra-ui/react';
+import { Center, Grid, Text, Flex } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { Image } from 'react-bootstrap';
 
 export function NotFoundPage() {
   const navigate = useNavigate();
