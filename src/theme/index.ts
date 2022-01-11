@@ -5,6 +5,7 @@ import { Link } from './components/link';
 import { Modal } from './components/modal';
 import { Text } from './components/text';
 import { Checkbox } from './components/checkbox';
+import { Drawer } from './components/drawer';
 import { layerStyles } from './layerStyles';
 
 const breakpoints = createBreakpoints({
@@ -23,6 +24,7 @@ const components = {
   Modal,
   Text,
   Checkbox,
+  Drawer,
 };
 
 export const theme = extendTheme({
@@ -136,6 +138,9 @@ export const theme = extendTheme({
       },
       color: 'white',
       fontFamily: 'Acrom',
+    },
+    error: {
+      color: 'red',
     },
   },
   layerStyles,
