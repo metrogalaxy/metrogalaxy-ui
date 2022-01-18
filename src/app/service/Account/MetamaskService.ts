@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import BaseWalletService from './BaseWalletService';
+import env from 'src/app/config';
 declare const window: any;
 
 const ErrorMetamaskNotInstalled = 'Metamask is not installed';
@@ -39,6 +40,14 @@ export default class MetamaskService extends BaseWalletService {
         params: [
           {
             chainId: ethers.utils.hexValue(chainId),
+            rpcUrls: [env.nodeUrl],
+            chainName: env.chainName,
+            blockExplorerUrls: [env.chainExplorer],
+            nativeCurrency: {
+              name: env.chainToken,
+              symbol: env.chainToken,
+              decimals: 18,
+            },
           },
         ],
       });
@@ -55,7 +64,7 @@ export default class MetamaskService extends BaseWalletService {
         });
       } catch (error: any) {
         console.log(error);
-        if (error?.code === 4902) {
+        if (error?.code === 4902 || error?.code === -32603) {
           return await this.addNewChain(chainId);
         } else {
           return new Error(error!.message);

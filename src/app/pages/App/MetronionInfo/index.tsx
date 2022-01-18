@@ -21,6 +21,8 @@ import { useGetMetronionInfo } from 'src/app/service/Metronion';
 import { BasicInfo } from './BasicInfo';
 import { AccessoriesPanel } from './AccessoriesPanel';
 import { OffersPanel } from './OffersPanel';
+import { ActivitiesPanel } from './ActivitiesPanel';
+import { UNKNOWN_METRONION_IMG_URL } from 'src/app/config/constants';
 
 // const Panel = lazyLoad(
 //   () => import('./Panel'),
@@ -77,19 +79,27 @@ export function MetronionInfo() {
       {/* Main Panel */}
       {data && (
         <Grid
-          templateColumns={{ base: '1fr', lg: 'repeat(3, 1fr)' }}
-          templateRows="1fr"
-          gap={{ base: 4, lg: 10 }}
+          templateAreas={{
+            base: `"basicInfo" "avatar" "offers" "history" "accessories"`,
+            xl: `"accessories avatar basicInfo" "accessories avatar offers" "accessories avatar ." "history history history"`,
+          }}
+          gap={{ base: 2, lg: 10 }}
           display={isFetching ? 'none' : 'grid'}
           justifyItems="center"
         >
           {/* Accessories */}
-          <AccessoriesPanel accessoryIds={data.accessoryIds} />
+          <GridItem
+            gridArea="accessories"
+            justifySelf={{ base: 'center', xl: 'start' }}
+            width={{ base: '100%', xs: 'auto' }}
+          >
+            <AccessoriesPanel accessoryIds={data.accessoryIds} />
+          </GridItem>
           {/* Avatar */}
-          <GridItem rowStart={1} rowEnd={{ base: 2 }}>
+          <GridItem gridArea="avatar">
             <Center>
               <Image
-                src={data.image}
+                src={data.image || UNKNOWN_METRONION_IMG_URL}
                 width="auto"
                 height="auto"
                 maxHeight={{ sm: '500px' }}
@@ -97,11 +107,28 @@ export function MetronionInfo() {
             </Center>
           </GridItem>
           {/* Basic Info */}
-          <GridItem rowStart={{ base: 2, lg: 1 }} rowEnd={{ base: 3 }}>
+          <GridItem
+            gridArea="basicInfo"
+            justifySelf={{ base: 'center', xl: 'end' }}
+            width={{ base: '100%', xs: 'auto' }}
+          >
             <BasicInfo data={data} />
-            <OffersPanel />
           </GridItem>
           {/* Offers */}
+          <GridItem
+            gridArea="offers"
+            justifySelf={{ base: 'center', xl: 'end' }}
+            width={{ base: '100%', xs: 'auto' }}
+          >
+            <OffersPanel id={data.id} />
+          </GridItem>
+          {/* History */}
+          <GridItem
+            gridArea="history"
+            width={{ base: '100%', xs: 'auto', xl: '100%' }}
+          >
+            <ActivitiesPanel id={data.id} />
+          </GridItem>
         </Grid>
       )}
     </PageLayout>

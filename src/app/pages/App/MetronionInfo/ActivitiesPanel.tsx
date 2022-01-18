@@ -2,6 +2,8 @@ import * as React from 'react';
 import {
   Box,
   Text,
+  Flex,
+  Center,
   Table,
   Thead,
   Tbody,
@@ -9,20 +11,18 @@ import {
   Th,
   Td,
   Spinner,
-  Center,
-  Flex,
 } from '@chakra-ui/react';
-import { useGetMetronionOffers } from 'src/app/service/Metronion';
+import { useGetMetronionActivities } from 'src/app/service/Metronion';
 import { shortenAddress } from '@quangkeu1995/dappcore';
 import { IconComponent } from 'src/app/components/CurrencyLogo';
 import { formatNumber, getRelativeTime } from 'src/utils/helpers';
 
-interface OffersPanelProps {
+interface ActivitiesPanelProps {
   id: number;
 }
 
-export function OffersPanel(props: OffersPanelProps) {
-  const { data, isLoading } = useGetMetronionOffers(props.id);
+export function ActivitiesPanel(props: ActivitiesPanelProps) {
+  const { data, isLoading } = useGetMetronionActivities(props.id);
 
   return (
     <Box
@@ -35,6 +35,7 @@ export function OffersPanel(props: OffersPanelProps) {
       width={{
         base: '100%',
         xs: '375px',
+        xl: '100%',
       }}
       maxWidth={{ base: 'min(90vw, 431px)', xs: '100vw' }}
       overflowX="auto"
@@ -60,7 +61,7 @@ export function OffersPanel(props: OffersPanelProps) {
           textTransform="uppercase"
           fontFamily="Acrom-Bold"
         >
-          Offers
+          Activities
         </Text>
       </Box>
 
@@ -68,6 +69,15 @@ export function OffersPanel(props: OffersPanelProps) {
         <Thead>
           <Tr>
             <Th pl={{ base: 6, md: 8 }}>
+              <Text
+                textStyle="appNormal"
+                fontSize={{ base: '12px', md: '14px' }}
+                color="whiteBlur.200"
+              >
+                Event
+              </Text>
+            </Th>
+            <Th>
               <Text
                 textStyle="appNormal"
                 fontSize={{ base: '12px', md: '14px' }}
@@ -82,10 +92,19 @@ export function OffersPanel(props: OffersPanelProps) {
                 fontSize={{ base: '12px', md: '14px' }}
                 color="whiteBlur.200"
               >
+                To
+              </Text>
+            </Th>
+            <Th>
+              <Text
+                textStyle="appNormal"
+                fontSize={{ base: '12px', md: '14px' }}
+                color="whiteBlur.200"
+              >
                 Price
               </Text>
             </Th>
-            <Th pl={{ base: 6, md: 8 }}>
+            <Th>
               <Text
                 textStyle="appNormal"
                 fontSize={{ base: '12px', md: '14px' }}
@@ -107,7 +126,25 @@ export function OffersPanel(props: OffersPanelProps) {
                     fontSize={{ base: '12px', md: '14px' }}
                     color="whiteBlur.200"
                   >
+                    {formatActivityType(item.activityType)}
+                  </Text>
+                </Td>
+                <Td>
+                  <Text
+                    textStyle="appNormal"
+                    fontSize={{ base: '12px', md: '14px' }}
+                    color="whiteBlur.200"
+                  >
                     {shortenAddress(item.from)}
+                  </Text>
+                </Td>
+                <Td>
+                  <Text
+                    textStyle="appNormal"
+                    fontSize={{ base: '12px', md: '14px' }}
+                    color="whiteBlur.200"
+                  >
+                    {shortenAddress(item.to)}
                   </Text>
                 </Td>
                 <Td>
@@ -164,4 +201,8 @@ export function OffersPanel(props: OffersPanelProps) {
       )}
     </Box>
   );
+}
+
+function formatActivityType(input: string): string {
+  return input.split('_').join(' ').toUpperCase();
 }

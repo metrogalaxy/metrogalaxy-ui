@@ -43,6 +43,7 @@ interface MintboxProps {
 export function MintBox(props: MintboxProps) {
   const { account, library, chainId } = useEthers();
   const provider = library as Web3Provider;
+  const { isActivated } = useAccount();
 
   const isCorrectChain = chainId === env.chainId;
 
@@ -53,17 +54,19 @@ export function MintBox(props: MintboxProps) {
     formattedBalance = formatNumber(formattedBalance, 4);
   }
 
+  const allocation = isActivated ? props.allocation : 0;
+  const purchased = isActivated ? props.purchased : 0;
+
   const buyMetronionMutation = useBuyMetronion(provider, account);
 
   let totalAmount = new Decimal(0);
   const unitPrice = env.metronionSale.metronionUnitPrice;
   const { register, handleSubmit, watch, formState, setValue } =
     useForm<IFormInput>();
-  const { isActivated } = useAccount();
   const watchedAmount = watch('amount', 0);
 
   const setMaxBuyAmount = () => {
-    const maxBuyAmount = props.allocation - props.purchased;
+    const maxBuyAmount = allocation - purchased;
     setValue('amount', maxBuyAmount);
   };
 
@@ -134,7 +137,7 @@ export function MintBox(props: MintboxProps) {
 
   return (
     <Box
-      bgColor="grayBlur.100"
+      bgColor="grayBlur.200"
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
@@ -159,8 +162,7 @@ export function MintBox(props: MintboxProps) {
             Your Allocation
           </Text>
           <Text color="green.200" textStyle="appNormal">
-            {props.allocation}{' '}
-            {props.allocation <= 1 ? 'Metronion' : 'Metronions'}
+            {allocation} {allocation <= 1 ? 'Metronion' : 'Metronions'}
           </Text>
         </Flex>
         <Flex justifyContent="space-between">
@@ -168,8 +170,7 @@ export function MintBox(props: MintboxProps) {
             Purchased
           </Text>
           <Text color="green.200" textStyle="appNormal">
-            {props.purchased}{' '}
-            {props.purchased <= 1 ? 'Metronion' : 'Metronions'}
+            {purchased} {purchased <= 1 ? 'Metronion' : 'Metronions'}
           </Text>
         </Flex>
         <Flex justifyContent="space-between">
@@ -182,9 +183,12 @@ export function MintBox(props: MintboxProps) {
         </Flex>
       </Grid>
       <Box mt={6}>
-        <Text color="white.200" textStyle="appNormal">
-          Balance: {formattedBalance} {env.chainToken}
-        </Text>
+        {isActivated && (
+          <Text color="white.200" textStyle="appNormal">
+            Balance: {formattedBalance} {env.chainToken}
+          </Text>
+        )}
+
         <FormControl
           bgColor="grayBlur.200"
           borderRadius="25%"

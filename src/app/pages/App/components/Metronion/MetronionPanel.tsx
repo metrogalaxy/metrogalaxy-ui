@@ -8,6 +8,7 @@ import MaleIcon from 'src/app/assets/icon/male.svg';
 import FemaleIcon from 'src/app/assets/icon/female.svg';
 import { IconComponent } from 'src/app/components/CurrencyLogo';
 import { useNavigate } from 'react-router-dom';
+import { UNKNOWN_METRONION_IMG_URL } from 'src/app/config/constants';
 
 interface MetronionPanelProps {
   data: Metronions[];
@@ -46,7 +47,7 @@ function Item(props: ItemProps) {
   const globalState = useSelector(selectGlobal);
 
   const gender = props.item.gender;
-  const lastPrice = props.item.lastPrice;
+  const lastPrice = props.item.lastPrice ? props.item.lastPrice : 0;
 
   const usdPrice = safeMul(lastPrice, globalState.avaxPrice);
 
@@ -56,7 +57,7 @@ function Item(props: ItemProps) {
 
   return (
     <Box
-      bgColor="grayBlur.100"
+      bgColor="grayBlur.200"
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
@@ -87,7 +88,7 @@ function Item(props: ItemProps) {
         justifyContent="center"
       >
         <Image
-          src={props.item.image}
+          src={props.item.image || UNKNOWN_METRONION_IMG_URL}
           width={{ base: 'auto' }}
           height={{ base: '130px', xl: '160px' }}
         />
@@ -104,21 +105,31 @@ function Item(props: ItemProps) {
           <Text textStyle="appNormal">{`Metronion #${props.item.id}`}</Text>
         </Flex>
         {/* Last Price */}
-        <Flex alignItems="center">
-          <IconComponent
-            width={{ base: '14px', md: '16px' }}
-            height={{ base: '14px', md: '16px' }}
-            mr={2}
-          />
-          <Text textStyle="appNormal" fontFamily="Acrom-Bold" mr={2}>
-            {formatNumber(lastPrice, 2)}
-          </Text>
-        </Flex>
-        <Box>
-          <Text textStyle="appNormal" color="whiteBlur.100">
-            ~ ${formatNumber(usdPrice, 2)}
-          </Text>
-        </Box>
+        {lastPrice === 0 ? (
+          <Box>
+            <Text textStyle="appNormal" color="whiteBlur.100">
+              Unlisted
+            </Text>
+          </Box>
+        ) : (
+          <Flex justifyContent="space-between" flexWrap="wrap">
+            <Flex alignItems="center">
+              <IconComponent
+                width={{ base: '14px', md: '16px' }}
+                height={{ base: '14px', md: '16px' }}
+                mr={2}
+              />
+              <Text textStyle="appNormal" fontFamily="Acrom-Bold" mr={2}>
+                {formatNumber(lastPrice, 2)}
+              </Text>
+            </Flex>
+            <Box>
+              <Text textStyle="appNormal" color="whiteBlur.100">
+                ~ ${formatNumber(usdPrice, 2)}
+              </Text>
+            </Box>
+          </Flex>
+        )}
       </Box>
     </Box>
   );

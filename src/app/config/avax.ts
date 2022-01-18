@@ -5,6 +5,7 @@ const env: Config = {
   chainName: 'Avalanche Mainnet',
   nodeUrl: 'https://api.avax.network/ext/bc/C/rpc',
   chainToken: 'AVAX',
+  chainTokenName: 'Avalanche',
   chainExplorerName: 'Snowtrace',
   chainExplorer: 'https://snowtrace.io/',
   metronionSale: {

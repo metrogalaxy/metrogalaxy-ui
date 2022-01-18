@@ -21,7 +21,11 @@ import {
 } from '@chakra-ui/react';
 import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import { ethers } from 'ethers';
-import { useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
+import {
+  useEtherBalance,
+  useEthers,
+  shortenAddress,
+} from '@quangkeu1995/dappcore';
 import { useAccount, useButtonSize } from 'src/app/hooks';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { GetExplorerAddressLink } from 'src/app/config/constants';
@@ -36,7 +40,8 @@ export function AccountInfo() {
   const { hasCopied, onCopy } = useClipboard(account!);
 
   const ethBalance = useEtherBalance(account);
-  const formattedAddress = formatAddress(account!, 4, -3);
+  // const formattedAddress = formatAddress(account!, 4, -3);
+  const formattedAddress = shortenAddress(account!);
   let formattedBalance;
 
   if (ethBalance) {
@@ -133,7 +138,12 @@ export function AccountInfo() {
               </Tooltip>
             </Flex>
 
-            <Stack mt={6}>
+            <Stack
+              mt={6}
+              pb={3}
+              borderBottom="1px dashed"
+              borderBottomColor="whiteBlur.300"
+            >
               <Box>
                 <Link href="/inventory">
                   <Text

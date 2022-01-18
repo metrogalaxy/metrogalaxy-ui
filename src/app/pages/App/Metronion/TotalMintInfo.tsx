@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Text, Grid, Image, Flex } from '@chakra-ui/react';
+import { Box, Text, Grid, Image, Flex, Spinner } from '@chakra-ui/react';
 import { useEthers } from '@quangkeu1995/dappcore';
 import { Web3Provider } from '@ethersproject/providers';
 
@@ -12,7 +12,7 @@ const REFETCH_INTERVAL = 5000; // milliseconds
 export function TotalMintInfo() {
   const { library } = useEthers();
   const provider = library as Web3Provider;
-  const { data: saleRecord } = useGetSaleRecord(provider, {
+  const { data: saleRecord, isLoading } = useGetSaleRecord(provider, {
     refetchInterval: REFETCH_INTERVAL,
   });
 
@@ -20,7 +20,7 @@ export function TotalMintInfo() {
 
   return (
     <Box
-      bgColor="grayBlur.100"
+      bgColor="grayBlur.200"
       border="2px solid"
       borderColor="blue.300"
       borderRadius={14}
@@ -31,6 +31,7 @@ export function TotalMintInfo() {
         xs: '375px',
       }}
       h="fit-content"
+      position="relative"
     >
       <Grid templateColumns="80px 1fr" gap={3}>
         <Image src={MintInfoIcon} />
@@ -42,6 +43,7 @@ export function TotalMintInfo() {
           >
             Total Minted
           </Text>
+
           <Box textStyle="appTitle" mt={2} fontSize={{ base: 'lg', md: 'xl' }}>
             <Text as="span" color="blue.400">
               {totalSold.toLocaleString()}
@@ -50,6 +52,15 @@ export function TotalMintInfo() {
           </Box>
         </Flex>
       </Grid>
+      {isLoading && (
+        <Spinner
+          size="sm"
+          position="absolute"
+          top="20px"
+          right="20px"
+          color="white"
+        />
+      )}
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import env from 'src/app/config';
 import { GENDER, DEFAULT_SORT } from 'src/app/config/constants';
+import { BaseResponse } from 'src/app/service/types';
 
 /**
  ========= Interfaces
@@ -10,30 +11,53 @@ export interface Metronions {
   id: number;
   createAtTimestamp: number;
   updatedAtTimestamp: number;
+  createdAtBlock: number;
+  updatedAtBlock: number;
   name: string;
   versionId: number;
-  gender: string;
+  gender?: string;
   owner: string;
-  lastPrice: number;
+  lastPrice?: number;
   currency: string;
   uri: string;
-  image: string;
-  accessoryIds: number[];
+  image?: string;
+  accessoryIds?: number[];
 }
 
 export interface MetronionInfo {
   id: number;
   createAtTimestamp: number;
   updatedAtTimestamp: number;
+  createdAtBlock: number;
+  updatedAtBlock: number;
   name: string;
   versionId: number;
-  gender: string;
+  gender?: string;
   owner: string;
-  lastPrice: number;
+  lastPrice?: number;
   currency: string;
   uri: string;
-  image: string;
-  accessoryIds: number[];
+  image?: string;
+  accessoryIds?: number[];
+}
+
+export interface MetronionActivities {
+  id: number;
+  activityType: string;
+  price?: number;
+  from: string;
+  to: string;
+  timestamp: number;
+  blockNumber: number;
+}
+
+export interface MetronionOffers {
+  id: number;
+  price: number;
+  from: string;
+  to: string;
+  timestamp: number;
+  blockNumber: number;
 }
 
 export interface MetronionFilterParams {
@@ -50,10 +74,21 @@ export const DEFAULT_METRONION_FILTER_PARAMS = {
   stat: {},
 };
 
-export interface MetronionsResponse {
+export interface MetronionsResponse extends BaseResponse {
   count: number;
-  offset: number;
   data: Metronions[];
+}
+
+export interface MetronionInfoResponse extends BaseResponse {
+  data: MetronionInfo;
+}
+
+export interface MetronionActivitiesResponse extends BaseResponse {
+  data: MetronionActivities[];
+}
+
+export interface MetronionOffersResponse extends BaseResponse {
+  data: MetronionOffers[];
 }
 
 export interface MetronionFetcher {
@@ -65,6 +100,8 @@ export interface MetronionFetcher {
     limit: number,
     filter: MetronionFilterParams,
   ) => Promise<MetronionsResponse>;
+  getMetronionActivities: (id: number) => Promise<MetronionActivities[]>;
+  getMetronionOffers: (id: number) => Promise<MetronionOffers[]>;
 }
 
 let fetcher: MetronionFetcher;
@@ -112,6 +149,26 @@ export function useGetMetronionsByPage(
     ['metronion-get-metronions-by-page', account, offset, limit, filter],
     async (): Promise<MetronionsResponse> => {
       return fetcher.getMetronionsByPage(account, offset, limit, filter);
+    },
+    options,
+  );
+}
+
+export function useGetMetronionActivities(id: number, options?: any) {
+  return useQuery<MetronionActivities[], Error>(
+    ['metronion-get-metronion-activities', id],
+    async (): Promise<MetronionActivities[]> => {
+      return fetcher.getMetronionActivities(id);
+    },
+    options,
+  );
+}
+
+export function useGetMetronionOffers(id: number, options?: any) {
+  return useQuery<MetronionOffers[], Error>(
+    ['metronion-get-metronion-offers', id],
+    async (): Promise<MetronionOffers[]> => {
+      return fetcher.getMetronionOffers(id);
     },
     options,
   );

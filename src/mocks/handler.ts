@@ -1,9 +1,17 @@
 import { rest } from 'msw';
-import { inventoryHandler, inventoryCountHandler } from './inventory';
-import { metronionInfoHandler } from './metronion';
+import {
+  metronionByOwnerHandler,
+  metronionInfoHandler,
+  metronionActivitiesHandler,
+  metronionOffersHandler,
+} from './metronion';
 
 export const handlers = [
-  rest.get('/api/inventory', inventoryHandler),
-  rest.get('/api/inventory/count', inventoryCountHandler),
-  rest.get('/api/metronion/:id', metronionInfoHandler),
+  rest.post('/v1/metronion/metronionByOwner', metronionByOwnerHandler),
+  rest.get('/v1/metronion/metronionInfo', metronionInfoHandler),
+  rest.get('/v1/metronion/activities', metronionActivitiesHandler),
+  rest.get('/v1/metronion/offers', metronionOffersHandler),
+  // rest.get('/api/inventory', inventoryHandler),
+  // rest.get('/api/inventory/count', inventoryCountHandler),
+  // rest.get('/api/metronion/:id', metronionInfoHandler),
 ];

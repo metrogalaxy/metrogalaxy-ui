@@ -314,7 +314,7 @@ export function MetronionFilter(props: MetronionFilterProps) {
       ) : (
         <Flex justifyContent="center">
           <Box
-            bgColor="grayBlur.100"
+            bgColor="grayBlur.200"
             border="2px solid"
             borderColor="greenBlur.100"
             borderRadius={14}
@@ -350,6 +350,7 @@ const StatSlider = React.forwardRef<IStatSliderRef, IStatSlider>(
       return props.stats[props.label] ? props.stats[props.label] : [0, 100];
     }, [props]);
     const [stat, setStat] = React.useState<number[]>(propStat);
+    const [image, setImage] = React.useState<string>('');
 
     const onChange = (value: number[]) => {
       setStat(value);
@@ -370,17 +371,38 @@ const StatSlider = React.forwardRef<IStatSliderRef, IStatSlider>(
       },
     }));
 
+    React.useEffect(() => {
+      const loadImage = async () => {
+        try {
+          const importImage = await import(
+            `src/app/assets/icon/${props.label}.svg`
+          );
+          setImage(importImage.default);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      loadImage();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
       <Box mb={5}>
         <Flex justifyContent="space-between" mb={2}>
           <Flex>
-            <Box
-              bg="gray.600"
-              borderRadius="50%"
-              w="24px"
-              h="24px"
-              mr={3}
-            ></Box>
+            {image ? (
+              <Image borderRadius="50%" src={image} w="24px" h="24px" mr={3} />
+            ) : (
+              <Box
+                bg="gray.600"
+                borderRadius="50%"
+                w="24px"
+                h="24px"
+                mr={3}
+              ></Box>
+            )}
+
             <Text textStyle="appNormal" textTransform="capitalize" mr={3}>
               {props.label}
             </Text>
@@ -395,6 +417,7 @@ const StatSlider = React.forwardRef<IStatSliderRef, IStatSlider>(
             textTransform="uppercase"
             color="green.200"
             cursor="pointer"
+            fontSize={{ base: '12px', md: '14px' }}
             onClick={reset}
           >
             Reset

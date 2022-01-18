@@ -4,6 +4,11 @@ export const Button = {
     _focus: {
       boxShadow: 'none',
     },
+    _disabled: {
+      _hover: {
+        color: 'green.200',
+      },
+    },
   },
   sizes: {
     sm: {
