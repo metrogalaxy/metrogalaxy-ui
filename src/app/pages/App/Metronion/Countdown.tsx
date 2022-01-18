@@ -18,7 +18,7 @@ export function Countdown(props: CountdownProps) {
 
   return (
     <Box
-      bgColor="grayBlur.100"
+      bgColor="grayBlur.200"
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
@@ -37,7 +37,7 @@ export function Countdown(props: CountdownProps) {
         mb={4}
       >
         {props.round === Round.ENDED
-          ? 'Sale Ended'
+          ? 'Sale Ends In'
           : `${props.round} Starts In`}
       </Text>
       <Grid
@@ -49,7 +49,7 @@ export function Countdown(props: CountdownProps) {
         mb={4}
       >
         <Box
-          bgColor="grayBlur.200"
+          bgColor="grayBlur.300"
           borderRadius={8}
           p={3}
           textAlign="center"
@@ -58,7 +58,7 @@ export function Countdown(props: CountdownProps) {
           {days}D
         </Box>
         <Box
-          bgColor="grayBlur.200"
+          bgColor="grayBlur.300"
           borderRadius={8}
           p={3}
           textAlign="center"
@@ -67,7 +67,7 @@ export function Countdown(props: CountdownProps) {
           {hours}H
         </Box>
         <Box
-          bgColor="grayBlur.200"
+          bgColor="grayBlur.300"
           borderRadius={8}
           p={3}
           textAlign="center"
@@ -76,7 +76,7 @@ export function Countdown(props: CountdownProps) {
           {minutes}M
         </Box>
         <Box
-          bgColor="grayBlur.200"
+          bgColor="grayBlur.300"
           borderRadius={8}
           p={3}
           textAlign="center"

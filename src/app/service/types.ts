@@ -3,3 +3,7 @@ export interface ITransactionReceipt {
   isSuccess: boolean;
   error?: string;
 }
+
+export interface BaseResponse {
+  timestamp: number;
+}

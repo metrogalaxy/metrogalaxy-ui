@@ -13,7 +13,7 @@ import env from 'src/app/config';
 export function Guide() {
   return (
     <Box
-      bgColor="grayBlur.100"
+      bgColor="grayBlur.200"
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
@@ -23,7 +23,6 @@ export function Guide() {
         base: '100%',
         xs: '375px',
       }}
-      mt={10}
       position="relative"
       _after={{
         content: '""',

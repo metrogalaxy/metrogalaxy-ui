@@ -5,18 +5,19 @@ const env: Config = {
   chainName: 'Avalanche Fuji Testnet',
   nodeUrl: 'https://api.avax-test.network/ext/bc/C/rpc',
   chainToken: 'AVAX',
+  chainTokenName: 'Avalanche',
   chainExplorerName: 'Snowtrace',
   chainExplorer: 'https://testnet.snowtrace.io/',
   metronionSale: {
-    contractAddress: '0x48d7eEc677005512B0046e10f7b6F61dAAE5Ec1c',
+    contractAddress: '0x356a66256994C583Cd1a3Ed440880512521ea568',
     privateSaleTime: new Date(0 * 1000),
-    publicSaleTime: new Date(1642212001 * 1000),
+    publicSaleTime: new Date(1641924000 * 1000),
     privateCap: 1,
     publicCap: 5,
-    endSaleTime: new Date(1642212002 * 1000),
+    endSaleTime: new Date(1672010400 * 1000),
     metronionUnitPrice: 1,
   },
-  useMockData: true,
+  useMockData: false,
 };
 
 export default env;

@@ -9,7 +9,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import ArrowLeftIcon from 'src/app/assets/icon/arrow_left.svg';
-
+import { useNavigate } from 'react-router-dom';
 import { PageLayout } from '../components/PageLayout';
 import { CATEGORY } from 'src/app/config/constants';
 import { MetronionTab } from './MetronionTab';
@@ -17,6 +17,7 @@ import { AccessoriesTab } from './AccessoriesTab';
 
 export function Inventory() {
   const [category, setCategory] = React.useState<CATEGORY>(CATEGORY.METRONION);
+  const navigate = useNavigate();
 
   return (
     <PageLayout title="Inventory" content="User Inventory">
@@ -32,7 +33,7 @@ export function Inventory() {
         >
           <Breadcrumb spacing={0}>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/marketplace">
+              <BreadcrumbLink onClick={() => navigate(-1)}>
                 <Image src={ArrowLeftIcon} width="32px" height="32px" />
               </BreadcrumbLink>
             </BreadcrumbItem>

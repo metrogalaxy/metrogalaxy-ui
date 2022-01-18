@@ -61,7 +61,7 @@ export function Metronion() {
       enabled:
         provider &&
         isActivated &&
-        (duringPrivateSale || duringPublicSale) &&
+        (duringPrivateSale || duringPublicSale || saleEnded) &&
         account !== undefined &&
         account !== null,
     },
@@ -113,94 +113,48 @@ export function Metronion() {
       </Flex>
 
       <Grid
-        templateColumns={{
-          base: '1fr',
-          lg: 'repeat(2, 1fr)',
-          xl: 'repeat(3, 1fr)',
+        gap={8}
+        justifyItems="center"
+        mt={8}
+        templateAreas={{
+          base: `"totalMint" "guide" "avatar" "countdown" "mintBox"`,
+          xl: `"totalMint avatar countdown" "guide avatar mintBox"`,
         }}
-        rowGap={5}
       >
-        <GridItem
-          colSpan={{
-            base: 1,
-            xl: 2,
-          }}
-        >
-          <Grid
-            mt={5}
-            justifyItems={{
-              base: 'center',
-            }}
-            templateRows={{
-              base: '200px 1fr',
-              lg: '1fr',
-            }}
-            templateColumns={{
-              xl: 'repeat(2, 1fr)',
-            }}
-            columnGap={4}
-          >
-            {CountdownComponent}
-            <Center mt={10}>
-              <Image
-                src={AvatarGif}
-                ratio={3 / 4}
-                maxW={{ base: '200px', sm: '250px', lg: '300px' }}
-              />
-            </Center>
-          </Grid>
+        {/* Total Mint Info */}
+        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="totalMint">
+          <TotalMintInfo />
         </GridItem>
-        <GridItem
-          colStart={{
-            base: 1,
-            lg: 2,
-            xl: 3,
-          }}
-          colEnd={{
-            base: 2,
-            lg: 3,
-            xl: 4,
-          }}
-          colSpan={1}
-        >
-          <Grid
-            mt={5}
-            justifyItems={{
-              base: 'center',
-            }}
-          >
-            {isPrePrivateSale || saleEnded ? null : (
-              <MintBox
-                allocation={allocation}
-                purchased={purchased}
-                round={round}
-                updateUserRecord={refetchUserRecord}
-              />
-            )}
-            <TotalMintInfo />
-            <Guide />
-          </Grid>
+        {/* Guide */}
+        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="guide">
+          <Guide />
+        </GridItem>
+        {/* Avatar */}
+        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="avatar">
+          <Center>
+            <Image
+              src={AvatarGif}
+              ratio={3 / 4}
+              maxW={{ base: '200px', sm: '250px', lg: '300px' }}
+            />
+          </Center>
+        </GridItem>
+        {/* Countdown */}
+        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="countdown">
+          {CountdownComponent}
+        </GridItem>
+        {/* Mint Box */}
+        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="mintBox">
+          {isPrePrivateSale || saleEnded ? null : (
+            <MintBox
+              allocation={allocation}
+              purchased={purchased}
+              round={round}
+              updateUserRecord={refetchUserRecord}
+            />
+          )}
         </GridItem>
       </Grid>
-
-      {/* <NavBar activeItemId={NAV_BAR_ITEMS_ID.Metronion} />
-      <Background />
-      <Layout>
-        <TitleLayout iconSrc={TitleIcon}>Mint Metronion</TitleLayout>
-        <MainLayout>
-          <Row className="row-layout">
-            <Col sm={12} lg={4} className="col-layout">
-              <TotalMintInfo />
-              <Guide />
-            </Col>
-            <Col sm={12} lg={8} className="col-layout col-layout-flex">
-              <Avatar />
-              {!isRunning && <MintBox />}
-              {isRunning && <Countdown />}
-            </Col>
-          </Row>
-        </MainLayout>
-      </Layout> */}
     </PageLayout>
   );
 }

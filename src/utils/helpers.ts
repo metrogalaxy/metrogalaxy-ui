@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import RelativeTime from '@yaireo/relative-time';
 
 export function formatAddress(address: string, first = 10, last = -4) {
   if (!address) return '';
@@ -53,4 +54,9 @@ export function safeMul(a: number, b: number): number {
   const bBig = new BigNumber(b);
   const result = aBig.multipliedBy(bBig);
   return result.toNumber();
+}
+
+export function getRelativeTime(timestamp: number): string {
+  const relativeTime = new RelativeTime();
+  return relativeTime.from(new Date(timestamp * 1000));
 }

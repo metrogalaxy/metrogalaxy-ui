@@ -6,6 +6,7 @@ import { Modal } from './components/modal';
 import { Text } from './components/text';
 import { Checkbox } from './components/checkbox';
 import { Drawer } from './components/drawer';
+import { Table } from './components/table';
 import { layerStyles } from './layerStyles';
 
 const breakpoints = createBreakpoints({
@@ -25,6 +26,7 @@ const components = {
   Text,
   Checkbox,
   Drawer,
+  Table,
 };
 
 export const theme = extendTheme({
@@ -43,7 +45,8 @@ export const theme = extendTheme({
     },
     grayBlur: {
       100: 'rgba(5, 15, 26, 0.4)',
-      200: 'rgba(5, 15, 26, 0.8)',
+      200: 'rgba(5, 15, 26, 0.6)',
+      300: 'rgba(5, 15, 26, 0.8)',
     },
     white: {
       100: '#F6FFF8BF',
@@ -63,6 +66,7 @@ export const theme = extendTheme({
     greenBlur: {
       100: 'rgba(98, 228, 127, 0.5)',
       200: 'rgba(98, 228, 127, 0.1)',
+      300: 'rgba(98, 228, 127, 0.2)',
     },
     red: {
       100: '#F44336',

@@ -7,6 +7,7 @@ export interface Config {
   chainName: string;
   nodeUrl: string;
   chainToken: string;
+  chainTokenName: string;
   chainExplorerName: string;
   chainExplorer: string;
   metronionSale: {

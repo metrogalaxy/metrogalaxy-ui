@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, Stack, Grid } from '@chakra-ui/react';
+import { ACCESSORY_TYPE } from 'src/app/config/constants';
 
 interface AccessoriesPanelProps {
-  accessoryIds: number[];
+  accessoryIds: number[] | undefined;
 }
+
+const accessoryLabels = Object.values(ACCESSORY_TYPE)
+  .map(item => {
+    return item.split('_').join(' ').toUpperCase();
+  })
+  .slice(1);
 
 export function AccessoriesPanel(props: AccessoriesPanelProps) {
   console.log(props);
   return (
     <Box
-      bgColor="grayBlur.100"
+      bgColor="grayBlur.200"
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
@@ -28,6 +35,41 @@ export function AccessoriesPanel(props: AccessoriesPanelProps) {
       >
         Accessories
       </Text>
+      <Stack mt={8}>
+        {accessoryLabels.map(label => (
+          <Grid
+            key={label}
+            templateColumns="70px auto 50px"
+            borderTop="1px dashed #2E3D4D"
+            py={2}
+          >
+            <Box
+              bg="#F7FFF8"
+              borderRadius="6px"
+              width="42px"
+              height="42px"
+            ></Box>
+            <Box>
+              <Text
+                textStyle="appNormal"
+                textTransform="uppercase"
+                fontFamily="Acrom-Bold"
+                color="green.200"
+                fontSize={{ base: '12px', md: '14px' }}
+              >
+                {label}
+              </Text>
+              <Text
+                textStyle="appNormal"
+                color="whiteBlur.100"
+                fontSize={{ base: '12px', md: '14px' }}
+              >
+                None
+              </Text>
+            </Box>
+          </Grid>
+        ))}
+      </Stack>
     </Box>
   );
 }

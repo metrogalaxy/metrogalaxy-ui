@@ -9,6 +9,8 @@ export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
 export const MAX_METRONION_COUNT = 10000;
 export const METRONION_PRIVATE_CAP = 1;
 export const METRONION_PUBLIC_CAP = 5;
+export const UNKNOWN_METRONION_IMG_URL =
+  'https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png';
 
 export enum CATEGORY {
   METRONION = 'metronion',
@@ -58,15 +60,22 @@ export enum GENDER {
 }
 
 export const STATS = [
-  'intra',
-  'bodily',
-  'inter',
-  'existential',
-  'musical',
-  'naturalistic',
-  'linguistic',
-  'logical',
+  'creativity',
+  'charisma',
+  'resolve',
+  'fitness',
+  'intellect',
 ];
+
+export enum ACTIVITIY_TYPE {
+  MINT = 'mint',
+  TRANSFER = 'transfer',
+  LIST = 'list',
+  OFFER = 'offer',
+  OFFER_CANCELLED = 'offer_cancelled',
+  OFFER_TAKEN = 'offer_taken',
+  BUY = 'buy',
+}
 
 export const DEFAULT_SORT = 'lowest_id';
 
@@ -145,14 +154,4 @@ export function GetChainCurrencyName(chainId: number): string {
     return ChainIdToCurrencyName[chainId];
   }
   return '';
-}
-
-export enum AttributeType {
-  Body = 'body',
-  Hair = 'hair',
-  Face = 'face',
-  Top = 'top',
-  Bottom = 'bottom',
-  Accessories = 'accessories',
-  Equipment = 'equipment',
 }
