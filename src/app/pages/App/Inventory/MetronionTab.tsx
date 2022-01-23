@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, Flex, Center, Text, Image } from '@chakra-ui/react';
+import { Box, Grid, Flex, Center, Text } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
 import { useEthers } from '@quangkeu1995/dappcore';
 import { MetronionPanel, MetronionFilter } from '../components/Metronion';

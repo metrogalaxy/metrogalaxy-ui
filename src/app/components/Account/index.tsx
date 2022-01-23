@@ -7,10 +7,10 @@ import MetamaskService from 'src/app/service/Account/MetamaskService';
 import { ImportWalletModal } from './Modal';
 import { AccountInfo } from './AccountInfo';
 import { useButtonSize } from 'src/app/hooks/useSize';
-import { useEthers } from '@quangkeu1995/dappcore';
+// import { useEthers } from '@quangkeu1995/dappcore';
 
-import { useSelector } from 'react-redux';
-import { selectAccount } from 'src/app/components/Account/slice/selectors';
+// import { useSelector } from 'react-redux';
+// import { selectAccount } from 'src/app/components/Account/slice/selectors';
 
 const metamaskService = new MetamaskService();
 
@@ -19,9 +19,9 @@ export function Account() {
   const dispatch = useDispatch();
   const { actions } = useAccountSlice();
   const { isActivated } = useAccount();
-  const { account } = useEthers();
+  // const { account } = useEthers();
 
-  const accountState = useSelector(selectAccount);
+  // const accountState = useSelector(selectAccount);
 
   // React.useEffect(() => {
   //   alert(account);

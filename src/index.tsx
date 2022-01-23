@@ -22,6 +22,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { theme, Fonts } from 'src/theme';
 import { ToastContainer } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
+import axios from 'axios';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -39,14 +40,18 @@ import { HelmetProvider } from 'react-helmet-async';
 import { configureAppStore } from 'src/store/configureStore';
 
 import reportWebVitals from 'src/reportWebVitals';
-import ENV from 'src/app/config/env';
+import env from 'src/app/config';
 
 // Initialize languages
 import './locales/i18n';
 
+// enable mock service worker
 if (process.env.REACT_APP_ENABLE_MOCK_API === 'true') {
   const { worker } = require('./mocks/browser');
   worker.start();
+} else {
+  // apply API endpoint
+  axios.defaults.baseURL = env.api.endpoint;
 }
 
 const { store, persistor } = configureAppStore();
@@ -66,9 +71,9 @@ AOS.init({
 });
 
 const config: Config = {
-  readOnlyChainId: ENV.CHAIN_ID,
+  readOnlyChainId: env.chainId,
   readOnlyUrls: {
-    [ENV.CHAIN_ID]: ENV.NODE_URL,
+    [env.chainId]: env.nodeUrl,
   },
 };
 

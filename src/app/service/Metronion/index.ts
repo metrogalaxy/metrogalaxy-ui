@@ -93,7 +93,6 @@ export interface MetronionOffersResponse extends BaseResponse {
 
 export interface MetronionFetcher {
   getMetronionInfo: (id: number) => Promise<MetronionInfo>;
-  getMetronions: (account: string) => Promise<Metronions[]>;
   getMetronionsByPage: (
     account: string,
     offset: number,
@@ -128,15 +127,15 @@ export function useGetMetronionInfo(id: number, options?: any) {
   );
 }
 
-export function useGetMetronions(account: string, options?: any) {
-  return useQuery<Metronions[], Error>(
-    ['metronion-get-metronions', account],
-    async (): Promise<Metronions[]> => {
-      return fetcher.getMetronions(account);
-    },
-    options,
-  );
-}
+// export function useGetMetronions(account: string, options?: any) {
+//   return useQuery<Metronions[], Error>(
+//     ['metronion-get-metronions', account],
+//     async (): Promise<Metronions[]> => {
+//       return fetcher.getMetronions(account);
+//     },
+//     options,
+//   );
+// }
 
 export function useGetMetronionsByPage(
   account: string,

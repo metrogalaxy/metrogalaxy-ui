@@ -15,13 +15,18 @@ const ImgUrls = [
 
 const AccessoriesArray: Accessories[] = ImgUrls.map((item, index) => {
   const baseCreatedAtTimestamp = 1640970000;
+  const baseBlockNumber = 4746545;
 
   return {
     id: index,
     createAtTimestamp: baseCreatedAtTimestamp + index,
+    updatedAtTimestamp: baseCreatedAtTimestamp + index,
+    createdAtBlock: baseBlockNumber + index,
+    updatedAtBlock: baseBlockNumber + index,
     name: `Item ${index}`,
     totalSupply: 100,
     lastPrice: 0.5,
+    currency: 'AVAX',
     owner: '0x09B64e3d589AE90ACCE69C75C346722D8EbFB65D',
     uri: `https://api.metrogalaxy.io/v1.0/accessory_metadata/${index}`,
     image: item,

@@ -27,7 +27,7 @@ import {
   shortenAddress,
 } from '@quangkeu1995/dappcore';
 import { useAccount, useButtonSize } from 'src/app/hooks';
-import { formatAddress, formatNumber } from 'src/utils/helpers';
+import { formatNumber } from 'src/utils/helpers';
 import { GetExplorerAddressLink } from 'src/app/config/constants';
 import { IconComponent } from 'src/app/components/CurrencyLogo';
 import env from 'src/app/config';

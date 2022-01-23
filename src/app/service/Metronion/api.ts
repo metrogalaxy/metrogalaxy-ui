@@ -1,7 +1,6 @@
 import {
   MetronionFilterParams,
   MetronionInfo,
-  Metronions,
   MetronionsResponse,
   MetronionInfoResponse,
   MetronionActivities,
