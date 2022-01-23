@@ -9,15 +9,18 @@ const env: Config = {
   chainExplorerName: 'Snowtrace',
   chainExplorer: 'https://testnet.snowtrace.io/',
   metronionSale: {
-    contractAddress: '0x356a66256994C583Cd1a3Ed440880512521ea568',
-    privateSaleTime: new Date(0 * 1000),
-    publicSaleTime: new Date(1641924000 * 1000),
+    contractAddress: '0x936864d8a298bCd20Abc3A43438fDE038e909DfF',
+    privateSaleTime: new Date(1642953600 * 1000),
+    publicSaleTime: new Date(1643007600 * 1000),
     privateCap: 1,
     publicCap: 5,
-    endSaleTime: new Date(1672010400 * 1000),
+    endSaleTime: new Date(1643166000 * 1000),
     metronionUnitPrice: 1,
   },
   useMockData: false,
+  api: {
+    endpoint: 'https://dev-api.metrogalaxy.io',
+  },
 };
 
 export default env;

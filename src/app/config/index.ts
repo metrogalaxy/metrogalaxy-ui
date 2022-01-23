@@ -20,6 +20,9 @@ export interface Config {
     metronionUnitPrice: number;
   };
   useMockData: boolean;
+  api: {
+    endpoint: string;
+  };
 }
 
 const ENV: Config = require(`./${environment}.ts`).default;

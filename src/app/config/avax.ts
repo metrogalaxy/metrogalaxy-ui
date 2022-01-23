@@ -18,6 +18,9 @@ const env: Config = {
     metronionUnitPrice: 1,
   },
   useMockData: false,
+  api: {
+    endpoint: 'localhost:8080',
+  },
 };
 
 export default env;

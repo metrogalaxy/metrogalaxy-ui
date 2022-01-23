@@ -14,12 +14,16 @@ import {
 export interface Accessories {
   id: number;
   createAtTimestamp: number;
+  updatedAtTimestamp: number;
+  createdAtBlock: number;
+  updatedAtBlock: number;
   name: string;
   totalSupply: number;
   owner: string;
-  lastPrice: number;
+  lastPrice?: number;
+  currency: string;
   uri: string;
-  image: string;
+  image?: string;
 }
 
 export interface AccessoriesFilterParams {
@@ -47,7 +51,6 @@ export interface AccessoriesResponse {
 }
 
 export interface AccessoriesFetcher {
-  getAccessories: (account: string) => Promise<Accessories[]>;
   getAccessoriesByPage: (
     account: string,
     offset: number,
@@ -70,15 +73,15 @@ if (env.useMockData) {
  =========== Methods
  */
 
-export function useGetAccessories(account: string, options?: any) {
-  return useQuery<Accessories[], Error>(
-    ['accessories-get-acceesories', account],
-    async (): Promise<Accessories[]> => {
-      return fetcher.getAccessories(account);
-    },
-    options,
-  );
-}
+// export function useGetAccessories(account: string, options?: any) {
+//   return useQuery<Accessories[], Error>(
+//     ['accessories-get-acceesories', account],
+//     async (): Promise<Accessories[]> => {
+//       return fetcher.getAccessories(account);
+//     },
+//     options,
+//   );
+// }
 
 export function useGetAccessoriesByPage(
   account: string,
