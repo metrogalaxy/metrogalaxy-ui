@@ -4,19 +4,14 @@
 
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { InjectedReducersType } from 'src/utils/types/injector-typings';
+import accountReducer from 'src/app/components/Account/slice';
+import inventoryReducer from 'src/app/pages/App/Inventory/slice';
+import globalReducer from 'src/app/globalSlice';
 
-/**
- * Merges the main reducer with the router state and dynamically injected reducers
- */
-export function createReducer(injectedReducers: InjectedReducersType = {}) {
-  // Initially we don't have any injectedReducers, so returning identity function to avoid the error
-  if (Object.keys(injectedReducers).length === 0) {
-    return state => state;
-  } else {
-    const combinedReducers = combineReducers({
-      ...injectedReducers,
-    });
-    return combinedReducers;
-  }
+export function createReducer() {
+  return combineReducers({
+    account: accountReducer,
+    inventory: inventoryReducer,
+    global: globalReducer,
+  });
 }
