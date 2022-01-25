@@ -63,7 +63,13 @@ const client = new ApolloClient({
   uri: 'https://api.thegraph.com/subgraphs/name/paulrberg/create-eth-app',
 });
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 // init animation on scroll
 AOS.init({

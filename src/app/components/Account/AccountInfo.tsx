@@ -86,6 +86,9 @@ export function AccountInfo() {
             borderRadius="50px"
             _hover={{
               cursor: 'pointer',
+              bgColor: 'green.200',
+              color: 'gray.500',
+              borderColor: 'green.200',
             }}
             onClick={onOpen}
           >
