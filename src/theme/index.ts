@@ -88,6 +88,9 @@ export const theme = extendTheme({
       '*': {
         fontFamily: 'Acrom',
       },
+      '.react-player-wrapper > div > iframe': {
+        borderRadius: '14px',
+      },
     },
   },
   textStyles: {

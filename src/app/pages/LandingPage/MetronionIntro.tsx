@@ -74,7 +74,7 @@ export function MetronionIntro() {
       }}
     >
       <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
-        <Box textAlign="center" pl={{ base: 0, lg: 16 }}>
+        <Box textAlign="center">
           <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
             Become our citizen, become a Metronion
           </Text>

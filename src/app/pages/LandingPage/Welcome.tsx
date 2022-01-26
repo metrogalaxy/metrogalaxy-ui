@@ -1,66 +1,71 @@
 import * as React from 'react';
-import { Container, Flex, Image, Box, Text } from '@chakra-ui/react';
-import WelcomeImg from './assets/welcome.webp';
-import Cloud1Img from './assets/cloud_1.webp';
+import { Container, Center, Image, Box, Text } from '@chakra-ui/react';
 import Cloud2Img from './assets/cloud_2.webp';
-import Cloud3Img from './assets/cloud_3.webp';
 import Cloud4Img from './assets/cloud_4.webp';
+import ReactPlayer from 'react-player/lazy';
+import { TRAILER_VIDEO_URL } from 'src/app/config/constants';
 
 export function Welcome() {
   return (
     <Box bg="blue.100">
+      <Container maxW="container.lg" px={{ base: 8 }} position="relative">
+        <Box
+          border="6px solid rgba(15, 82, 123, 0.8)"
+          borderRadius="20px"
+          height={{ base: '320px', lg: '640px' }}
+        >
+          <ReactPlayer
+            url={TRAILER_VIDEO_URL}
+            width="100%"
+            height="100%"
+            className="react-player-wrapper"
+          />
+        </Box>
+      </Container>
+
       <Container
-        maxW="container.lg"
-        py={{ base: 16 }}
+        maxW="container.md"
+        mt={16}
+        pb={{ base: 16 }}
         px={{ base: 8 }}
         position="relative"
       >
-        <Flex
-          width="full"
-          direction={{ base: 'column', lg: 'row' }}
-          alignItems="center"
-        >
-          <Image
-            width={{ base: '240px', md: '320px', lg: '380px' }}
-            src={WelcomeImg}
-            alt="WelcomeImg"
-            mb="10"
-            className="cssanimation hu__hu__"
-          />
-          <Box
-            textAlign={{ base: 'center', lg: 'left' }}
-            pl={{ base: 0, lg: 16 }}
+        <Center flexDirection="column">
+          <Text
+            textStyle="h1"
+            textAlign="center"
+            data-aos="fade-left"
+            data-aos-duration="500"
           >
-            <Text textStyle="h1" data-aos="fade-left" data-aos-duration="500">
-              Welcome to MetroGalaxy
-            </Text>
+            Welcome to MetroGalaxy
+          </Text>
+          <Text
+            textStyle="h2"
+            mt={4}
+            data-aos="fade-left"
+            data-aos-duration="700"
+            textAlign="center"
+          >
+            Decentralized Metaverse <br />
+            and Gamified Online Virtual World
+          </Text>
+          <Box position="relative" zIndex="2">
             <Text
-              textStyle="h2"
-              mt="16"
+              textStyle="paragraph"
+              mt="10"
+              textAlign="justify"
               data-aos="fade-left"
-              data-aos-duration="700"
+              data-aos-duration="900"
             >
-              Decentralized Metaverse <br />
-              and Gamified Online Virtual World
+              MetroGalaxy is a metaverse project that uniquely blends a social
+              platform together with an online virtual game that lets you
+              role-play as anyone you want, do anything you like in an
+              ever-expanding decentralized world. Currently it is being
+              developed on Avalanche.
             </Text>
-            <Box position="relative" zIndex="2">
-              <Text
-                textStyle="paragraph"
-                mt="10"
-                textAlign="justify"
-                data-aos="fade-left"
-                data-aos-duration="900"
-              >
-                MetroGalaxy is a metaverse project that uniquely blends a social
-                platform together with an online virtual game that lets you
-                role-play as anyone you want, do anything you like in an
-                ever-expanding decentralized world. Currently it is being
-                developed on Avalanche.
-              </Text>
-            </Box>
           </Box>
-        </Flex>
-        <Image
+        </Center>
+        {/* <Image
           src={Cloud1Img}
           position="absolute"
           zIndex="1"
@@ -81,7 +86,7 @@ export function Welcome() {
             lg: '-250px',
             xl: '-350px',
           }}
-        />
+        /> */}
         <Image
           src={Cloud2Img}
           position="absolute"
@@ -104,7 +109,7 @@ export function Welcome() {
           }}
         />
 
-        <Image
+        {/* <Image
           src={Cloud3Img}
           position="absolute"
           zIndex="1"
@@ -125,7 +130,7 @@ export function Welcome() {
             md: '20px',
             xl: '-80px',
           }}
-        />
+        /> */}
         <Image
           src={Cloud4Img}
           position="absolute"
