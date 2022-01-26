@@ -1,4 +1,3 @@
-import { Web3Provider } from '@ethersproject/providers';
 import { Signer } from '@ethersproject/abstract-signer';
 import { SaleRecord, UserSaleRecord } from './index';
 import { BigNumber } from 'ethers';
@@ -50,14 +49,11 @@ class MockFetcher {
     }
   }
 
-  async isWhitelistedAddress(
-    _: Web3Provider | undefined,
-    __: string,
-  ): Promise<boolean> {
+  async isWhitelistedAddress(__: string): Promise<boolean> {
     return false;
   }
 
-  async getSaleRecord(_: Web3Provider | undefined): Promise<SaleRecord> {
+  async getSaleRecord(): Promise<SaleRecord> {
     return {
       totalSold: this.totalSold,
       privateSold: this.privateSold,
@@ -66,10 +62,7 @@ class MockFetcher {
     };
   }
 
-  async getUserRecord(
-    _: Web3Provider | undefined,
-    account: string,
-  ): Promise<UserSaleRecord> {
+  async getUserRecord(account: string): Promise<UserSaleRecord> {
     if (!this.userSaleRecords[account]) {
       this.userSaleRecords[account] = {
         privateBought: 0,

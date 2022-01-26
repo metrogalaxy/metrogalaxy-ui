@@ -8,7 +8,6 @@ import { Countdown } from './Countdown';
 import { SaleEnded } from './SaleEnded';
 
 import { useEthers } from '@quangkeu1995/dappcore';
-import { Web3Provider } from '@ethersproject/providers';
 import {
   METRONION_PRIVATE_CAP,
   METRONION_PUBLIC_CAP,
@@ -29,8 +28,7 @@ export enum Round {
 }
 
 export function Metronion() {
-  const { library, account } = useEthers();
-  const provider = library as Web3Provider;
+  const { account } = useEthers();
   const { isActivated } = useAccount();
   const now = Date.now();
 
@@ -44,9 +42,8 @@ export function Metronion() {
   const saleEnded = now >= env.metronionSale.endSaleTime.getTime();
 
   // check address is whitelisted if on the private sale phase
-  const { data: isWhitelisted } = useIsWhitelistedAddress(provider, account!, {
+  const { data: isWhitelisted } = useIsWhitelistedAddress(account!, {
     enabled:
-      provider &&
       isActivated &&
       duringPrivateSale &&
       account !== undefined &&
@@ -55,11 +52,9 @@ export function Metronion() {
 
   // get user record on private and public sale
   const { data: userRecord, refetch: refetchUserRecord } = useGetUserRecord(
-    provider,
     account!,
     {
       enabled:
-        provider &&
         isActivated &&
         (duringPrivateSale || duringPublicSale || saleEnded) &&
         account !== undefined &&
