@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import BackgroundImg from './assets/background.png';
+import BackgroundImg from 'src/app/assets/app/background.webp';
 import { LoadingSpinner } from 'src/app/components/Loading';
 
 export const Background = styled.div`

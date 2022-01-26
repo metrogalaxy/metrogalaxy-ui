@@ -1,147 +1,130 @@
 import * as React from 'react';
-import { ColorConstants } from 'src/styles/StyleConstants';
-import styled from 'styled-components/macro';
-import BookmarkIcon from './assets/bookmark.png';
-import { mediaQuery, ScreenSize } from 'src/styles/media';
-import ENV from 'src/app/config/env';
+import {
+  Box,
+  Text,
+  Grid,
+  Flex,
+  UnorderedList,
+  ListItem,
+} from '@chakra-ui/react';
+import BookmarkIcon from './assets/bookmark.webp';
+import env from 'src/app/config';
 
 export function Guide() {
   return (
-    <Wrapper>
-      <Box>
-        <Background />
-        <div className="text-wrapper">
-          <div className="title">Guide</div>
-          <div className="text-item">
-            <div className="index">1</div>
-            <div className="description">Connect Wallet</div>
-          </div>
-          <div className="text-item">
-            <div className="index">2</div>
-            <div className="description">Choose Quantity</div>
-          </div>
-          <div className="text-item">
-            <div className="index">3</div>
-            <div className="description">Click Mint</div>
-          </div>
-          <div className="line-dashed"></div>
-          <div className="notice">
-            <ul>
-              <li>Each wallet can mint up to 5 Metronions</li>
-              <li>
-                Each Metronion costs {ENV.METRONION_UNIT_PRICE}{' '}
-                {ENV.CHAIN_TOKEN}
-              </li>
-              {/* <li>All Metronions are going to be revealed on Oct 31 2021</li> */}
-            </ul>
-          </div>
-        </div>
+    <Box
+      bgColor="grayBlur.200"
+      border="2px solid"
+      borderColor="greenBlur.100"
+      borderRadius={14}
+      boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
+      p={{ base: 6, md: 8 }}
+      w={{
+        base: '100%',
+        xs: '375px',
+      }}
+      position="relative"
+      _after={{
+        content: '""',
+        display: 'block',
+        bgImage: `url(${BookmarkIcon})`,
+        bgSize: '38px 48px',
+        bgRepeat: 'no-repeat',
+        position: 'absolute',
+        top: '-12px',
+        left: '24px',
+        w: '100%',
+        h: '100%',
+      }}
+    >
+      <Text
+        textStyle="appNormal"
+        textTransform="uppercase"
+        fontFamily="Acrom-Bold"
+        pl={12}
+      >
+        Guide
+      </Text>
+      <Grid
+        templateRows="repeat(3, 1fr)"
+        gap={2}
+        mt={3}
+        borderBottom="1px dashed"
+        borderBottomColor="greenBlur.100"
+        pb={5}
+      >
+        <Flex>
+          <Box
+            color="#0b1926"
+            fontFamily="Acrom-Bold"
+            fontSize="12px"
+            textStyle="appNormal"
+            bgColor="#da3f76"
+            boxShadow="0px 2px 0px rgba(142, 14, 59, 0.68)"
+            borderRadius="50%"
+            w={5}
+            h={5}
+            textAlign="center"
+            mr={3}
+          >
+            1
+          </Box>
+          <Text textStyle="appNormal">Connect Wallet</Text>
+        </Flex>
+        <Flex>
+          <Box
+            color="#0b1926"
+            fontFamily="Acrom-Bold"
+            fontSize="12px"
+            textStyle="appNormal"
+            bgColor="#da3f76"
+            boxShadow="0px 2px 0px rgba(142, 14, 59, 0.68)"
+            borderRadius="50%"
+            w={5}
+            h={5}
+            textAlign="center"
+            mr={3}
+          >
+            2
+          </Box>
+          <Text textStyle="appNormal">Choose Quantity</Text>
+        </Flex>
+        <Flex>
+          <Box
+            color="#0b1926"
+            fontFamily="Acrom-Bold"
+            fontSize="12px"
+            textStyle="appNormal"
+            bgColor="#da3f76"
+            boxShadow="0px 2px 0px rgba(142, 14, 59, 0.68)"
+            borderRadius="50%"
+            w={5}
+            h={5}
+            textAlign="center"
+            mr={3}
+          >
+            3
+          </Box>
+          <Text textStyle="appNormal">Click Mint</Text>
+        </Flex>
+      </Grid>
+      <Box mt={5}>
+        <UnorderedList color="#FFCB4E" textStyle="appNormal" fontStyle="italic">
+          <ListItem>
+            Each Metronion costs {env.metronionSale.metronionUnitPrice}{' '}
+            {env.chainToken}
+          </ListItem>
+          <ListItem>
+            You can buy up to {env.metronionSale.privateCap} Metronion in
+            Private Sale
+          </ListItem>
+          <ListItem>
+            You can buy up to {env.metronionSale.publicCap} Metronions in Public
+            Sale
+          </ListItem>
+          {/* <ListItem>All Metronions are going to be revealed on Oct 31 2021</ListItem> */}
+        </UnorderedList>
       </Box>
-    </Wrapper>
+    </Box>
   );
 }
-
-const Wrapper = styled.div`
-  ${mediaQuery.lessThan(ScreenSize.LG)`
-    display: flex;
-    justify-content: center;
-  `}
-`;
-
-const Box = styled.div`
-  border: 2px solid rgba(98, 228, 127, 0.5);
-  box-sizing: border-box;
-  box-shadow: 0px 30px 50px rgba(32, 138, 55, 0.28);
-  border-radius: 2rem;
-  padding: 4rem;
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  position: relative;
-  width: 100%;
-  max-width: 36rem;
-
-  &::after {
-    content: '';
-    display: block;
-    background-image: url(${BookmarkIcon});
-    background-size: 4.6rem 6.5rem;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: -1.5rem;
-    left: 2.5rem;
-  }
-
-  .text-wrapper {
-    width: 100%;
-  }
-
-  .title {
-    color: ${ColorConstants.WHITE};
-    font-family: 'Acrom-Bold';
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    margin-left: 3.6rem;
-  }
-
-  .text-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .index {
-    color: #0b1926;
-    font-family: 'Acrom-Bold';
-    font-size: 1.2rem;
-    line-height: 1.4rem;
-    width: 2.4rem;
-    height: 2.4rem;
-    line-height: 2.4rem;
-    background: #da3f76;
-    box-shadow: 0px 2px 0px rgba(142, 14, 59, 0.68);
-    border-radius: 50%;
-    text-align: center;
-    margin-right: 1.2rem;
-  }
-
-  .description {
-    color: ${ColorConstants.WHITE};
-    font-family: 'Acrom-Light';
-    font-size: 1.6rem;
-    line-height: 3.5rem;
-  }
-
-  .line-dashed {
-    border: 1px dashed #62e47f;
-    opacity: 0.3;
-    margin-top: 2.6rem;
-  }
-
-  .notice {
-    color: #ffcb4e;
-    font-family: 'Acrom-Light';
-    font-size: 1.4rem;
-    font-style: italic;
-    line-height: 2.4rem;
-    margin-top: 2.6rem;
-  }
-`;
-
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  background: #050f1a;
-  opacity: 0.6;
-  border-radius: 2rem;
-`;

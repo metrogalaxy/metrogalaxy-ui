@@ -4,6 +4,7 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { slide as Menu } from 'react-burger-menu';
 import { Logo } from 'src/app/components/Logo';
 import { Link as RouterLink } from 'react-router-dom';
+import { Account } from 'src/app/components/Account';
 
 var styles = {
   bmBurgerButton: {
@@ -23,7 +24,7 @@ var styles = {
     top: '0',
   },
   bmMenu: {
-    background: '#010101',
+    background: '#142433',
     padding: '2.5em 1.5em 0',
     fontSize: '1.25em',
     borderLeft: '1px solid #333',
@@ -35,8 +36,7 @@ var styles = {
   bmItem: {
     display: 'flex',
     justifyContent: 'center',
-    height: 50,
-    borderBottom: '1px solid #333',
+    height: 'fit-content',
     alignItems: 'center',
   },
   bmOverlay: {
@@ -44,7 +44,11 @@ var styles = {
   },
 };
 
-export function NavBar() {
+interface INavBarProps {
+  isShowConnectWallet?: boolean;
+}
+
+export function NavBar(props: INavBarProps) {
   return (
     <Flex
       as="nav"
@@ -52,7 +56,7 @@ export function NavBar() {
       justify="space-between"
       wrap="wrap"
       width="full"
-      bg="grayBlur.100"
+      bg="grayBlur.200"
       color="white"
       position="absolute"
       zIndex="100"
@@ -83,16 +87,17 @@ export function NavBar() {
         </Stack>
       </Flex>
       <Flex>
-        <Box display={{ base: 'none', xl: 'block' }}>
-          <LinkComponent to="/about">About Us</LinkComponent>
-        </Box>
         <Flex alignItems="center">
+          <Box display={{ base: 'none', xl: 'block' }}>
+            {props.isShowConnectWallet && <Account />}
+          </Box>
           <Box display={{ base: 'block', xl: 'none' }}>
             <Menu
+              disableAutoFocus
               right
               styles={styles}
               customBurgerIcon={<HamburgerIcon />}
-              customCrossIcon={<CloseIcon />}
+              customCrossIcon={<CloseIcon opacity={0.7} />}
             >
               <LinkComponentMobile to="/metronion">
                 Metronions
@@ -102,7 +107,11 @@ export function NavBar() {
               </LinkComponentMobile>
               <LinkComponentMobile to="/staking">Staking</LinkComponentMobile>
               <LinkComponentMobile to="/land">Land</LinkComponentMobile>
-              <LinkComponentMobile to="/about">About Us</LinkComponentMobile>
+              {props.isShowConnectWallet && (
+                <Box mt={6} pt={6} h="100%" borderTop="1px solid #3E4C59">
+                  <Account />
+                </Box>
+              )}
             </Menu>
           </Box>
         </Flex>
@@ -134,6 +143,8 @@ function LinkComponentMobile(props: LinkComponentProps) {
   return (
     <RouterLink to={props.to}>
       <Text
+        color="white.200"
+        fontFamily="Acrom-Bold"
         textTransform="uppercase"
         _hover={{ color: 'green.200' }}
         fontSize={{

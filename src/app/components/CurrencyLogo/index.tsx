@@ -1,13 +1,10 @@
 import ENV from 'src/app/config/env';
-import { Image } from 'react-bootstrap';
+import { Image } from '@chakra-ui/react';
 
 let IconComp;
 switch (ENV.CHAIN_TOKEN) {
-  case 'ETH':
-    IconComp = require('./assets/ETH.png').default;
-    break;
-  case 'BNB':
-    IconComp = require('./assets/BNB.png').default;
+  case 'AVAX':
+    IconComp = require('src/app/assets/icon/avax.svg').default;
     break;
 }
 

@@ -7,17 +7,101 @@ export const ADMIN_EMAIL = 'captain@metrogalaxy.io';
 
 export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
 export const MAX_METRONION_COUNT = 10000;
+export const METRONION_PRIVATE_CAP = 1;
+export const METRONION_PUBLIC_CAP = 5;
+export const UNKNOWN_METRONION_IMG_URL =
+  'https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png';
+
+export enum CATEGORY {
+  METRONION = 'metronion',
+  ACCESSORIES = 'accessories',
+}
+
+export enum SORT_TYPE {
+  lowest_id = 'Lowest ID',
+  highest_id = 'Highest ID',
+  lowest_price = 'Lowest Price',
+  highest_price = 'Highest Price',
+  recently_listed = 'Recently Listed',
+  recently_sold = 'Recently Sold',
+  recently_offered = 'Recently Offered',
+}
+
+export enum ACCESSORY_TYPE {
+  ALL = 'all',
+  HAIR = 'hair',
+  FACE_ACCESSORIES = 'face',
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  SHOES = 'shoes',
+  COAT = 'coat',
+  NECKLACE = 'necklace',
+  LEFT_HAND_EQUIPMENT = 'left_hand_equipment',
+  RIGHT_HAND_EQUIPMENT = 'right_hand_equipment',
+  VEHICLES = 'vehicles',
+  WING = 'wing',
+  TAIL = 'tail',
+  PET = 'pet',
+  SET = 'set',
+}
+
+export enum RARITY {
+  COMMON = 'common',
+  UNCOMMON = 'uncommon',
+  RARE = 'rare',
+  EPIC = 'epic',
+  LEGENDARY = 'legendary',
+  MYTHICAL = 'mythical',
+}
+
+export enum GENDER {
+  MALE = 'male',
+  FEMALE = 'female',
+}
+
+export const STATS = [
+  'creativity',
+  'charisma',
+  'resolve',
+  'fitness',
+  'intellect',
+];
+
+export enum ACTIVITIY_TYPE {
+  MINT = 'mint',
+  TRANSFER = 'transfer',
+  LIST = 'list',
+  OFFER = 'offer',
+  OFFER_CANCELLED = 'offer_cancelled',
+  OFFER_TAKEN = 'offer_taken',
+  BUY = 'buy',
+}
+
+export const DEFAULT_SORT = 'lowest_id';
 
 export const ChainIdToName: Record<number, string> = {
-  1: 'ETH Mainnet',
-  3: 'ETH Ropsten',
-  56: 'BSC Mainnet',
+  43113: 'Avalanche Fuji Testnet',
+  43114: 'Avalanche Mainnet',
 };
 
 const ChainIdToEtherscanBaseUrl: Record<number, string> = {
-  1: 'https://etherscan.com/',
-  2: 'https://ropsten.etherscan.com/',
-  56: 'https://bscscan.com/',
+  43113: 'https://testnet.snowtrace.io/',
+  43114: 'https://snowtrace.io/',
+};
+
+const ChainIdToCurrency: Record<number, string> = {
+  43113: 'AVAX',
+  43114: 'AVAX',
+};
+
+const ChainIdToRpcUrl: Record<number, string> = {
+  43113: 'https://api.avax-test.network/ext/bc/C/rpc',
+  43114: 'https://api.avax.network/ext/bc/C/rpc',
+};
+
+const ChainIdToCurrencyName: Record<number, string> = {
+  43113: 'Avalanche',
+  43114: 'Avalanche',
 };
 
 export function GetChainName(chainId: number): string {
@@ -27,19 +111,47 @@ export function GetChainName(chainId: number): string {
   return '';
 }
 
-export function GetEtherscanUrl(chainId: number): string {
+export function GetChainRpcUrl(chainId: number): string {
+  if (ChainIdToRpcUrl[chainId]) {
+    return ChainIdToRpcUrl[chainId];
+  }
+  return '';
+}
+
+export function GetExplorerUrl(chainId: number): string {
   if (ChainIdToEtherscanBaseUrl[chainId]) {
     return ChainIdToEtherscanBaseUrl[chainId];
   }
-  return 'https://etherscan.com/';
+  return '';
 }
 
-export enum AttributeType {
-  Body = 'body',
-  Hair = 'hair',
-  Face = 'face',
-  Top = 'top',
-  Bottom = 'bottom',
-  Accessories = 'accessories',
-  Equipment = 'equipment',
+export function GetExplorerAddressLink(
+  chainId: number,
+  account: string,
+): string {
+  if (ChainIdToEtherscanBaseUrl[chainId]) {
+    return ChainIdToEtherscanBaseUrl[chainId] + `address/${account}`;
+  }
+  return '';
+}
+
+export function GetExplorerTransactionLink(chainId: number, txHash: string) {
+  if (ChainIdToEtherscanBaseUrl[chainId]) {
+    return ChainIdToEtherscanBaseUrl[chainId] + `tx/${txHash}`;
+  }
+  return '';
+}
+
+export function GetChainCurrency(chainId: number): string {
+  if (ChainIdToCurrency[chainId]) {
+    return ChainIdToCurrency[chainId];
+  }
+  return '';
+}
+
+export function GetChainCurrencyName(chainId: number): string {
+  if (ChainIdToCurrencyName[chainId]) {
+    return ChainIdToCurrencyName[chainId];
+  }
+  return '';
 }

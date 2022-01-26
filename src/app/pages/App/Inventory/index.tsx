@@ -1,93 +1,109 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
-import { Helmet } from 'react-helmet-async';
-import { NavBar, NAV_BAR_ITEMS_ID } from 'src/app/pages/App/components/NavBar';
-import { Row, Col } from 'react-bootstrap';
-import { Background } from '../components/Background';
-import { Layout, TitleLayout } from '../components/Layout';
-import { lazyLoad } from 'src/utils/loadable';
-import { LoadingSpinnerWrapper } from 'src/app/components/Loading';
-import { useHistory } from 'react-router-dom';
-import { mediaQuery, ScreenSize } from 'src/styles/media';
-import ArrorImg from './assets/arrow.png';
-import { Filter } from './Filter';
-import { useAccount } from 'src/app/hooks';
-import { ColorConstants } from 'src/styles/StyleConstants';
-
-const ItemPanel = lazyLoad(
-  () => import('./ItemPanel'),
-  module => module.ItemPanel,
-  {
-    fallback: <LoadingSpinnerWrapper />,
-  },
-);
+import {
+  Box,
+  Text,
+  Flex,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Image,
+} from '@chakra-ui/react';
+import ArrowLeftIcon from 'src/app/assets/icon/arrow_left.svg';
+import { useNavigate } from 'react-router-dom';
+import { PageLayout } from '../components/PageLayout';
+import { CATEGORY } from 'src/app/config/constants';
+import { MetronionTab } from './MetronionTab';
+import { AccessoriesTab } from './AccessoriesTab';
 
 export function Inventory() {
-  const { isActivated } = useAccount();
-
-  const history = useHistory();
-  const handleBackToMintPage = () => {
-    history.push('/metronion');
-  };
+  const [category, setCategory] = React.useState<CATEGORY>(CATEGORY.METRONION);
+  const navigate = useNavigate();
 
   return (
-    <Wrapper>
-      <Helmet>
-        <title>Inventory</title>
-        <meta name="description" content="The Metronion" />
-      </Helmet>
-      <NavBar activeItemId={NAV_BAR_ITEMS_ID.Metronion} />
-      <Background />
-      <Layout>
-        <TitleLayout iconSrc={ArrorImg} onClick={handleBackToMintPage}>
-          Inventory
-        </TitleLayout>
-        <MainLayout>
-          <Row className="row-layout">
-            <Col sm={12} lg={4} className="col-layout">
-              <Filter />
-            </Col>
-            <Col sm={12} lg={8} className="col-layout">
-              {!isActivated && (
-                <Warning>Please Connect Your Wallet First</Warning>
-              )}
-              {isActivated && <ItemPanel />}
-            </Col>
-          </Row>
-        </MainLayout>
-      </Layout>
-    </Wrapper>
+    <PageLayout title="Inventory" content="User Inventory">
+      <Flex
+        flexDirection={{ base: 'column', md: 'row' }}
+        justifyContent="flex-start"
+        alignItems="center"
+      >
+        <Flex
+          alignItems="center"
+          mb={{ base: 6, sm: 8 }}
+          alignSelf={{ base: 'flex-start', md: 'center' }}
+        >
+          <Breadcrumb spacing={0}>
+            <BreadcrumbItem>
+              <BreadcrumbLink onClick={() => navigate(-1)}>
+                <Image src={ArrowLeftIcon} width="32px" height="32px" />
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/inventory">
+                <Text
+                  textStyle="appTitle"
+                  textTransform="capitalize"
+                  hover={{
+                    color: 'green.200',
+                  }}
+                >
+                  Inventory
+                </Text>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Flex>
+        <Box mb={{ base: 2, sm: 8 }} ml={{ base: 0, sm: 8 }}>
+          <Flex>
+            <Category
+              isSelected={category === CATEGORY.METRONION}
+              onClick={() => setCategory(CATEGORY.METRONION)}
+            >
+              {CATEGORY.METRONION}
+            </Category>
+            <Category
+              isSelected={category === CATEGORY.ACCESSORIES}
+              onClick={() => setCategory(CATEGORY.ACCESSORIES)}
+            >
+              {CATEGORY.ACCESSORIES}
+            </Category>
+          </Flex>
+        </Box>
+      </Flex>
+
+      {/* Main Panel */}
+      {category === CATEGORY.METRONION ? <MetronionTab /> : <AccessoriesTab />}
+    </PageLayout>
   );
 }
 
-const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-`;
+interface ICategoryProps {
+  children: React.ReactNode;
+  isSelected?: boolean;
+  onClick: () => void;
+}
 
-const MainLayout = styled.div`
-  .row-layout {
-    margin: 0;
-  }
-
-  .col-layout {
-    padding: 0;
-    ${mediaQuery.lessThan(ScreenSize.LG)`
-      margin-bottom: 4rem;
-    `}
-  }
-
-  .col-layout-flex {
-    ${mediaQuery.greaterThan(ScreenSize.LG)`
-      display: flex;
-    `}
-  }
-`;
-
-const Warning = styled.div`
-  font-family: 'Acrom';
-  font-size: 1.8rem;
-  line-height: 2.2rem;
-  color: ${ColorConstants.WHITE};
-  text-align: center;
-`;
+function Category(props: ICategoryProps) {
+  return (
+    <Box
+      bg={props.isSelected ? 'gray.500' : 'transparent'}
+      borderRadius="20px"
+      px={{ base: 6, md: 8 }}
+      py={{ base: 3 }}
+      cursor="pointer"
+      onClick={props.onClick}
+    >
+      <Flex alignItems="center">
+        <Box
+          bg={props.isSelected ? 'green.200' : 'white.100'}
+          borderRadius="50%"
+          w="8px"
+          h="8px"
+          mr={2}
+        ></Box>
+        <Text textStyle="appNormal" textTransform="uppercase">
+          {props.children}
+        </Text>
+      </Flex>
+    </Box>
+  );
+}

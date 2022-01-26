@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { selectAccount } from 'src/app/pages/App/components/Account/slice/selectors';
+import { selectAccount } from 'src/app/components/Account/slice/selectors';
 import { useConfig, useEthers } from '@quangkeu1995/dappcore';
 import { useDispatch } from 'react-redux';
-import { useAccountSlice } from 'src/app/pages/App/components/Account/slice';
+import { useAccountSlice } from 'src/app/components/Account/slice';
 
 interface useAccountReturn {
   currentChainId: number;

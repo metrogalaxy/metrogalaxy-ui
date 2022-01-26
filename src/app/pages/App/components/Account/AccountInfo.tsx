@@ -2,18 +2,17 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { keyframes } from 'styled-components';
 import { ethers } from 'ethers';
-import { useConfig, useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
+import { useEtherBalance, useEthers } from '@quangkeu1995/dappcore';
 import { formatAddress, formatNumber } from 'src/utils/helpers';
 import { ColorConstants } from 'src/styles/StyleConstants';
 import useOnClickOutside from 'use-onclickoutside';
-import { GetEtherscanUrl } from 'src/app/config/constants';
+import { GetExplorerAddressLink } from 'src/app/config/constants';
 import { useAccount } from 'src/app/hooks';
 import ENV from 'src/app/config/env';
 
 export function AccountInfo() {
   const { logout } = useAccount();
   const { account } = useEthers();
-  const config = useConfig();
   const [isOpenDropwdown, setOpenDropdown] = React.useState(false);
   const wrapperRef = React.useRef(null);
 
@@ -35,8 +34,7 @@ export function AccountInfo() {
     await logout();
   };
 
-  const etherscanBaseUrl = GetEtherscanUrl(config.readOnlyChainId!);
-  const etherscanUrl = `${etherscanBaseUrl}/address/${account}`;
+  const etherscanUrl = GetExplorerAddressLink(ENV.CHAIN_ID, account || '');
 
   return (
     <Wrapper ref={wrapperRef}>

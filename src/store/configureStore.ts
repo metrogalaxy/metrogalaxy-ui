@@ -2,39 +2,49 @@
  * Create the store with dynamic reducers
  */
 
-import {
-  configureStore,
-  getDefaultMiddleware,
-  StoreEnhancer,
-} from '@reduxjs/toolkit';
-import { createInjectorsEnhancer } from 'redux-injectors';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import persistState from 'redux-localstorage';
+
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
 import { createReducer } from './reducers';
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+};
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
-  const { run: runSaga } = sagaMiddleware;
+  // const { run: runSaga } = sagaMiddleware;
 
   // Create the store with saga middleware
   const middlewares = [sagaMiddleware];
 
-  const enhancers = [
-    createInjectorsEnhancer({
-      createReducer,
-      runSaga,
-    }),
-    persistState('account'),
-  ] as StoreEnhancer[];
-
   const store = configureStore({
-    reducer: createReducer(),
-    middleware: [...getDefaultMiddleware(), ...middlewares],
-    devTools: process.env.NODE_ENV !== 'production',
-    enhancers,
+    reducer: persistReducer(persistConfig, createReducer()),
+    middleware: [
+      ...getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+      ...middlewares,
+    ],
   });
 
-  return store;
+  let persistor = persistStore(store);
+  return { store, persistor };
 }

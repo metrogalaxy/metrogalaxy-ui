@@ -1,15 +1,14 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
+import { Center, Grid, Text, Flex } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Helmet } from 'react-helmet-async';
-import { useHistory } from 'react-router-dom';
-import { Image } from 'react-bootstrap';
-import HomepageImg from './assets/homepage.png';
+import { useNavigate } from 'react-router-dom';
 
 export function NotFoundPage() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onBackToHome = () => {
-    history.push('/');
+    navigate('/');
   };
 
   return (
@@ -18,55 +17,20 @@ export function NotFoundPage() {
         <title>404 Page Not Found</title>
         <meta name="description" content="Page not found" />
       </Helmet>
-      <Wrapper>
-        <div className="title">
-          4
-          <span role="img" aria-label="Crying Face">
-            😢
-          </span>
-          4
-        </div>
-        <div className="sub-title">Page not found</div>
-        <div className="back-to-home" onClick={onBackToHome}>
-          <Image src={HomepageImg} className="back-to-home--img" />
-          <div className="text">Back to home</div>
-        </div>
-      </Wrapper>
+      <Center height="100vh" width="100%" flexDirection="column">
+        <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+          <Text textStyle="appTitle">4</Text>
+          <Text>😢</Text>
+          <Text textStyle="appTitle">4</Text>
+        </Grid>
+        <Text textStyle="appTitle" fontSize="2xl">
+          Page Not Found
+        </Text>
+        <Flex onClick={onBackToHome} alignItems="center" cursor="pointer">
+          <ArrowBackIcon width="24px" height="24px" color="white" mr={2} />
+          <Text textStyle="appTitle">Back To Home</Text>
+        </Flex>
+      </Center>
     </div>
   );
 }
-
-const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 320px;
-
-  .title {
-    font-size: 6rem;
-    margin-bottom: 1rem;
-  }
-
-  .sub-title {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .text {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
-
-  .back-to-home {
-    display: flex;
-    flex-direction: row;
-
-    &--img {
-      width: 2rem;
-      height: 2rem;
-      margin-right: 0.6rem;
-    }
-  }
-`;

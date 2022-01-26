@@ -8,7 +8,7 @@ import {
   Button,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import B1Image from './assets/metronion/B1.webp';
 import B2Image from './assets/metronion/B2.webp';
@@ -38,7 +38,7 @@ const MetronionImages = [
 export function MetronionIntro() {
   const [isMobile] = useMediaQuery('(max-width: 576px)');
   const [isDesktop] = useMediaQuery('(min-width: 768px)');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const settings = {
     dots: false,
@@ -52,7 +52,7 @@ export function MetronionIntro() {
   };
 
   const openPageMetronion = () => {
-    history.push('/metronion');
+    navigate('/metronion');
   };
 
   return (

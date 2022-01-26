@@ -20,6 +20,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme, Fonts } from 'src/theme';
+import { ToastContainer } from 'react-toastify';
+import { PersistGate } from 'redux-persist/integration/react';
+import axios from 'axios';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
@@ -27,6 +30,7 @@ import 'aos/dist/aos.css';
 import 'aos/dist/aos.js';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import root app
 import { App } from 'src/app';
@@ -36,24 +40,36 @@ import { HelmetProvider } from 'react-helmet-async';
 import { configureAppStore } from 'src/store/configureStore';
 
 import reportWebVitals from 'src/reportWebVitals';
-import ENV from 'src/app/config/env';
+import env from 'src/app/config';
 
 // Initialize languages
 import './locales/i18n';
 
+// enable mock service worker
 if (process.env.REACT_APP_ENABLE_MOCK_API === 'true') {
   const { worker } = require('./mocks/browser');
   worker.start();
+} else {
+  // apply API endpoint
+  axios.defaults.baseURL = env.api.endpoint;
 }
 
-const store = configureAppStore();
+const { store, persistor } = configureAppStore();
+export { persistor };
+
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 const client = new ApolloClient({
   uri: 'https://api.thegraph.com/subgraphs/name/paulrberg/create-eth-app',
 });
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 // init animation on scroll
 AOS.init({
@@ -61,35 +77,37 @@ AOS.init({
 });
 
 const config: Config = {
-  readOnlyChainId: ENV.CHAIN_ID,
+  readOnlyChainId: env.chainId,
   readOnlyUrls: {
-    [ENV.CHAIN_ID]: ENV.NODE_URL,
+    [env.chainId]: env.nodeUrl,
   },
-  supportedChains: [ENV.CHAIN_ID],
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HelmetProvider>
-      <ApolloProvider client={client}>
-        <ViewportProvider>
-          <React.StrictMode>
-            <DAppProvider config={config}>
-              <QueryClientProvider client={queryClient}>
-                <ChakraProvider theme={theme}>
-                  <Fonts />
-                  <App />
-                  {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
-                    <ReactQueryDevtools initialIsOpen={false} />
-                  )}
-                </ChakraProvider>
-              </QueryClientProvider>
-            </DAppProvider>
-          </React.StrictMode>
-        </ViewportProvider>
-      </ApolloProvider>
-    </HelmetProvider>
-  </Provider>,
+  <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <HelmetProvider>
+        <ApolloProvider client={client}>
+          <ViewportProvider>
+            <React.StrictMode>
+              <DAppProvider config={config}>
+                <QueryClientProvider client={queryClient}>
+                  <ChakraProvider theme={theme}>
+                    <Fonts />
+                    <App />
+                    {process.env.REACT_APP_ENABLE_QUERY_DEBUG === 'true' && (
+                      <ReactQueryDevtools initialIsOpen={false} />
+                    )}
+                    <ToastContainer />
+                  </ChakraProvider>
+                </QueryClientProvider>
+              </DAppProvider>
+            </React.StrictMode>
+          </ViewportProvider>
+        </ApolloProvider>
+      </HelmetProvider>
+    </Provider>
+  </PersistGate>,
   MOUNT_NODE,
 );
 

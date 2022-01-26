@@ -1,5 +1,13 @@
 import { extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { Button } from './components/button';
+import { Link } from './components/link';
+import { Modal } from './components/modal';
+import { Text } from './components/text';
+import { Checkbox } from './components/checkbox';
+import { Drawer } from './components/drawer';
+import { Table } from './components/table';
+import { layerStyles } from './layerStyles';
 
 const breakpoints = createBreakpoints({
   xs: '480px',
@@ -12,56 +20,13 @@ const breakpoints = createBreakpoints({
 });
 
 const components = {
-  Button: {
-    baseStyle: {
-      borderRadius: '6rem',
-      _focus: {
-        boxShadow: 'none',
-      },
-    },
-    sizes: {
-      sm: {
-        padding: '1rem 2rem',
-        height: '2.5rem',
-      },
-      md: {
-        padding: '1.25rem 2.25rem',
-        height: '3.5rem',
-      },
-    },
-    variants: {
-      outline: {
-        border: '2px solid',
-        borderColor: 'green.200',
-        color: 'green.200',
-        _hover: {
-          bgColor: 'green.200',
-          color: 'gray.500',
-        },
-      },
-      solid: {
-        border: '2px solid',
-        borderColor: 'green.200',
-        bgColor: 'green.200',
-        color: 'gray.500',
-        _hover: {
-          bgColor: 'transparent',
-          color: 'green.200',
-        },
-      },
-    },
-  },
-  Link: {
-    baseStyle: {
-      _hover: {
-        textDecoration: 'none',
-        color: 'transparent',
-      },
-      _focus: {
-        boxShadow: 'none',
-      },
-    },
-  },
+  Button,
+  Link,
+  Modal,
+  Text,
+  Checkbox,
+  Drawer,
+  Table,
 };
 
 export const theme = extendTheme({
@@ -76,21 +41,41 @@ export const theme = extendTheme({
       300: '#203040',
       400: '#0B1926',
       500: '#050F1A',
+      600: '#3E4C59',
     },
     grayBlur: {
-      100: 'rgba(20, 36, 51, 0.9)',
+      100: 'rgba(5, 15, 26, 0.4)',
+      200: 'rgba(5, 15, 26, 0.6)',
+      300: 'rgba(5, 15, 26, 0.8)',
     },
     white: {
       100: '#F6FFF8BF',
       200: '#F6FFF8',
+      300: '#6C7680',
+    },
+    whiteBlur: {
+      100: 'rgba(247, 255, 248, 0.5)',
+      200: 'rgba(247, 255, 248, 0.75)',
+      300: 'rgba(247, 255, 248, 0.2)',
     },
     green: {
       100: '#1BB486',
       200: '#62E47F',
+      300: '#1E7054',
+    },
+    greenBlur: {
+      100: 'rgba(98, 228, 127, 0.5)',
+      200: 'rgba(98, 228, 127, 0.1)',
+      300: 'rgba(98, 228, 127, 0.2)',
+    },
+    red: {
+      100: '#F44336',
     },
     blue: {
       100: '#2589C7',
       200: '#0D5180',
+      300: '#1BC4FF',
+      400: '#2D9DE3',
     },
   },
   breakpoints,
@@ -142,6 +127,29 @@ export const theme = extendTheme({
         lg: 'lg',
       },
     },
+    appTitle: {
+      fontSize: {
+        base: 'md',
+        md: 'lg',
+      },
+      color: 'white',
+      fontFamily: 'Acrom-Bold',
+    },
+    appNormal: {
+      fontSize: {
+        base: 'sm',
+        md: 'md',
+      },
+      color: 'white',
+      fontFamily: 'Acrom',
+    },
+    error: {
+      color: 'red',
+    },
+  },
+  layerStyles,
+  shadows: {
+    outline: 'none',
   },
 });
 
