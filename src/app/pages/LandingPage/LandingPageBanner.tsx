@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Center } from '@chakra-ui/react';
+import { Box, Button, Center, Text } from '@chakra-ui/react';
 import BannerImg from './assets/banner.webp';
 import { TELEGRAM_URL } from 'src/app/config/constants';
 import { useButtonSize } from 'src/app/hooks/useSize';
@@ -23,12 +23,24 @@ export function LandingPageBanner() {
     >
       <Center
         position="absolute"
+        flexDirection="column"
         right="50%"
-        bottom={{ base: 16, md: 28 }}
+        bottom={{ base: 14, lg: 24 }}
         transform="translateX(50%)"
         w="full"
         zIndex={2}
       >
+        <Text
+          textStyle="h1"
+          fontFamily="Acrom-Bold"
+          fontSize={{ base: 30, lg: 42 }}
+          textAlign="center"
+          data-aos="fade-up"
+          data-aos-duration="500"
+          mb={{ base: 4, md: 8 }}
+        >
+          Welcome to MetroGalaxy
+        </Text>
         <Button
           onClick={joinUs}
           variant="solid"

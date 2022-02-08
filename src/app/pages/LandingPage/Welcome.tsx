@@ -31,17 +31,16 @@ export function Welcome() {
         position="relative"
       >
         <Center flexDirection="column">
-          <Text
+          {/* <Text
             textStyle="h1"
             textAlign="center"
             data-aos="fade-left"
             data-aos-duration="500"
           >
             Welcome to MetroGalaxy
-          </Text>
+          </Text> */}
           <Text
             textStyle="h2"
-            mt={4}
             data-aos="fade-left"
             data-aos-duration="700"
             textAlign="center"
