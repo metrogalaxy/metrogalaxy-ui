@@ -9,6 +9,7 @@ import {
   DISCORD_URL,
 } from 'src/app/config/constants';
 import WhitepaperPdf from 'src/app/assets/whitepaper.pdf';
+import TermsPdf from 'src/app/assets/terms_and_conditions.pdf';
 
 export function Footer() {
   return (
@@ -69,7 +70,7 @@ export function Footer() {
               </Text>
               <CustomLink href={`mailto:${ADMIN_EMAIL}`}>Contact Us</CustomLink>
               <CustomLink>Disclaimer</CustomLink>
-              <CustomLink>Term of Service</CustomLink>
+              <CustomLink href={TermsPdf}>Terms & Conditions</CustomLink>
               <CustomLink>Offical Token</CustomLink>
             </Flex>
           </Grid>
