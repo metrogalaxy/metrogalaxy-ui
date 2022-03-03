@@ -45,7 +45,7 @@ class ApiFetcher {
     }
 
     const response = await axios.post<AccessoriesResponse>(
-      '/v1/accessories/accessoriesByOwner',
+      '/v1/accessories/list',
       params,
     );
     return response.data;

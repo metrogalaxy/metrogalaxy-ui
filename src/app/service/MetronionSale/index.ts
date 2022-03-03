@@ -92,6 +92,7 @@ export function useGetSaleRecord(options?: any) {
 export function useBuyMetronion(
   provider: Web3Provider | undefined,
   account: string | null | undefined,
+  options?: any,
 ) {
   return useMutation((params: BuyMetronionParams) => {
     if (provider && account) {
@@ -99,5 +100,5 @@ export function useBuyMetronion(
       return fetcher.buyMetronion(signer, params.amount, params.totalPaid);
     }
     return Promise.reject('web3 not connected');
-  });
+  }, options);
 }

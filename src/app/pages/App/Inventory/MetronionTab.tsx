@@ -41,7 +41,6 @@ export function MetronionTab() {
     if (!isActivated) {
       return;
     }
-    console.log('call api get metronion');
     setFilter(params);
   };
 

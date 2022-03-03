@@ -41,6 +41,7 @@ import {
   AccessoriesFilterParams,
   DEFAULT_ACCESSORIES_FILTER_PARAMS,
 } from 'src/app/service/Accessories';
+import { useDebounce } from 'src/app/hooks';
 
 const MIN_STAT = 0;
 const MAX_STAT = 100;
@@ -55,6 +56,8 @@ export function AccessoriesFilter(props: AccessoriesFilterProps) {
   const [filter, setFilter] = React.useState<AccessoriesFilterParams>(
     DEFAULT_ACCESSORIES_FILTER_PARAMS,
   );
+  const [filterId, setFilterId] = React.useState<number | undefined>(undefined);
+  const debounceFilterId = useDebounce(filterId, 500);
 
   const statRef: React.RefObject<IStatSliderRef>[] = [];
   const { register, control, setValue, getValues, reset } =
@@ -87,19 +90,23 @@ export function AccessoriesFilter(props: AccessoriesFilterProps) {
 
     setFilter({
       sort: watchAllFields.sort ? watchAllFields.sort : DEFAULT_SORT,
-      id: watchAllFields.id,
+      id: debounceFilterId,
       accessoryType: watchAllFields.accessoryType,
       rarity: watchAllFields.rarity,
       gender: gender,
       stat: stat,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [watchAllFields]);
+  }, [watchAllFields, debounceFilterId]);
 
   React.useEffect(() => {
     props.onFilterChange(filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
+
+  React.useEffect(() => {
+    setFilterId(watchAllFields.id);
+  }, [watchAllFields.id]);
 
   React.useEffect(() => {
     register('sort');
@@ -115,7 +122,8 @@ export function AccessoriesFilter(props: AccessoriesFilterProps) {
   };
 
   const onIdChange = (event: any) => {
-    const id = event.target.value === '' ? undefined : +event.target.value;
+    const id = event.target.value === '' ? undefined : event.target.value;
+    setFilterId(id);
     setValue('id', id);
   };
 
@@ -218,7 +226,9 @@ export function AccessoriesFilter(props: AccessoriesFilterProps) {
                   md: 'md',
                 },
               }}
-              value={getValues('id') ? getValues('id') : ''}
+              value={
+                filterId !== undefined && filterId !== null ? filterId : ''
+              }
               onChange={onIdChange}
             />
             <InputRightElement
@@ -428,7 +438,6 @@ export function AccessoriesFilter(props: AccessoriesFilterProps) {
             border="2px solid"
             borderColor="greenBlur.100"
             borderRadius={14}
-            boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
             p={{ base: 6, md: 8 }}
             w={{
               base: '100%',

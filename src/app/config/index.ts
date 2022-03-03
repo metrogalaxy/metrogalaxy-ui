@@ -10,6 +10,9 @@ export interface Config {
   chainTokenName: string;
   chainExplorerName: string;
   chainExplorer: string;
+  metronionNFT: {
+    contractAddress: string;
+  };
   metronionSale: {
     contractAddress: string;
     privateSaleTime: Date;
@@ -18,6 +21,12 @@ export interface Config {
     publicCap: number;
     endSaleTime: Date;
     metronionUnitPrice: number;
+  };
+  marketplace: {
+    contractAddress: string;
+  };
+  metroToken: {
+    contractAddress: string;
   };
   useMockData: boolean;
   api: {

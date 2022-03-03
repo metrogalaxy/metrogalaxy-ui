@@ -1,17 +1,15 @@
 import * as React from 'react';
-import { Box, Grid, Image, Text, Flex } from '@chakra-ui/react';
-import { Metronions } from 'src/app/service/Metronion';
-import { selectGlobal } from 'src/app/globalSlice/selectors';
-import { useSelector } from 'react-redux';
-import { safeMul, formatNumber } from 'src/utils/helpers';
+import { Box, Grid, Image, Text, Flex, GridItem } from '@chakra-ui/react';
+import { MetronionInfo } from 'src/app/service/Metronion';
+import { formatNumber } from 'src/utils/helpers';
 import MaleIcon from 'src/app/assets/icon/male.svg';
 import FemaleIcon from 'src/app/assets/icon/female.svg';
-import { IconComponent } from 'src/app/components/CurrencyLogo';
+import { MetroTokenComponent } from 'src/app/components/CurrencyLogo';
 import { useNavigate } from 'react-router-dom';
 import { UNKNOWN_METRONION_IMG_URL } from 'src/app/config/constants';
 
 interface MetronionPanelProps {
-  data: Metronions[];
+  data: MetronionInfo[];
 }
 
 export function MetronionPanel(props: MetronionPanelProps) {
@@ -39,17 +37,16 @@ export function MetronionPanel(props: MetronionPanelProps) {
 }
 
 interface ItemProps {
-  item: Metronions;
+  item: MetronionInfo;
 }
 
 function Item(props: ItemProps) {
   const navigate = useNavigate();
-  const globalState = useSelector(selectGlobal);
 
   const gender = props.item.gender;
   const lastPrice = props.item.lastPrice ? props.item.lastPrice : 0;
-
-  const usdPrice = safeMul(lastPrice, globalState.avaxPrice);
+  const currentPrice = props.item.currentPrice ? props.item.currentPrice : 0;
+  const topBid = props.item.topBid ? props.item.topBid : 0;
 
   const onClickItem = () => {
     navigate('/metronion/' + props.item.id);
@@ -61,7 +58,6 @@ function Item(props: ItemProps) {
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
-      boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
       minWidth={{ base: '160px', md: '180px' }}
       width={{ base: '160px', md: 'fit-content' }}
       height="fit-content"
@@ -72,6 +68,7 @@ function Item(props: ItemProps) {
       position="relative"
       onClick={onClickItem}
     >
+      {/* Gender */}
       {gender && (
         <Box position="absolute" top="10px" right="10px">
           <Image
@@ -81,6 +78,7 @@ function Item(props: ItemProps) {
           />
         </Box>
       )}
+      {/* Avatar */}
       <Flex
         minWidth={{ base: 'auto', xl: '220px' }}
         pt={{ base: 4, md: 6 }}
@@ -90,12 +88,14 @@ function Item(props: ItemProps) {
         <Image
           src={props.item.image || UNKNOWN_METRONION_IMG_URL}
           width={{ base: 'auto' }}
-          height={{ base: '130px', xl: '160px' }}
+          height={{ base: '130px', lg: '180px' }}
         />
       </Flex>
+      {/* Title */}
       <Box
         bg="gray.500"
-        px={{ base: 4, md: 5, lg: 6 }}
+        minWidth={{ lg: '230px' }}
+        px={{ base: 4, md: 5, lg: 5 }}
         py={{ base: 2, md: 4 }}
         borderBottomLeftRadius={14}
         borderBottomRightRadius={14}
@@ -104,31 +104,95 @@ function Item(props: ItemProps) {
         <Flex justifyContent="space-between" mb={2}>
           <Text textStyle="appNormal">{`Metronion #${props.item.id}`}</Text>
         </Flex>
-        {/* Last Price */}
-        {lastPrice === 0 ? (
-          <Box>
+        {/* Unlisted */}
+        {lastPrice === 0 && currentPrice === 0 && topBid === 0 && (
+          <Grid
+            templateRows={{ base: 'repeat(2, 1fr)', lg: '1fr' }}
+            templateColumns={{ lg: 'repeat(2, 1fr)' }}
+            rowGap={0}
+          >
             <Text textStyle="appNormal" color="whiteBlur.100">
               Unlisted
             </Text>
-          </Box>
-        ) : (
-          <Flex justifyContent="space-between" flexWrap="wrap">
-            <Flex alignItems="center">
-              <IconComponent
-                width={{ base: '14px', md: '16px' }}
-                height={{ base: '14px', md: '16px' }}
-                mr={2}
-              />
-              <Text textStyle="appNormal" fontFamily="Acrom-Bold" mr={2}>
-                {formatNumber(lastPrice, 2)}
-              </Text>
-            </Flex>
-            <Box>
+          </Grid>
+        )}
+        {/* Listed current price */}
+        {currentPrice !== 0 && (
+          <Grid
+            templateRows={{ base: 'repeat(2, 1fr)', lg: '1fr' }}
+            templateColumns={{ lg: 'repeat(2, 1fr)' }}
+            rowGap={0}
+          >
+            <GridItem>
               <Text textStyle="appNormal" color="whiteBlur.100">
-                ~ ${formatNumber(usdPrice, 2)}
+                For Sale
               </Text>
-            </Box>
-          </Flex>
+            </GridItem>
+            <GridItem justifySelf={{ lg: 'flex-end' }}>
+              <Flex alignItems="center">
+                <MetroTokenComponent
+                  width={{ base: '14px', md: '16px' }}
+                  height={{ base: '14px', md: '16px' }}
+                  mr={2}
+                />
+                <Text textStyle="appNormal" fontFamily="Acrom-Bold">
+                  {formatNumber(currentPrice, 2)}
+                </Text>
+              </Flex>
+            </GridItem>
+          </Grid>
+        )}
+        {/* Top Bid */}
+        {currentPrice === 0 && topBid !== 0 && (
+          <Grid
+            templateRows={{ base: 'repeat(2, 1fr)', lg: '1fr' }}
+            templateColumns={{ lg: 'repeat(2, 1fr)' }}
+            rowGap={0}
+          >
+            <GridItem>
+              <Text textStyle="appNormal" color="whiteBlur.100">
+                Top Bid
+              </Text>
+            </GridItem>
+            <GridItem justifySelf={{ lg: 'flex-end' }}>
+              <Flex alignItems="center">
+                <MetroTokenComponent
+                  width={{ base: '14px', md: '16px' }}
+                  height={{ base: '14px', md: '16px' }}
+                  mr={2}
+                />
+                <Text textStyle="appNormal" fontFamily="Acrom-Bold">
+                  {formatNumber(topBid, 2)}
+                </Text>
+              </Flex>
+            </GridItem>
+          </Grid>
+        )}
+        {/* Last Price */}
+        {currentPrice === 0 && topBid === 0 && lastPrice !== 0 && (
+          <Grid
+            templateRows={{ base: 'repeat(2, 1fr)', lg: '1fr' }}
+            templateColumns={{ lg: 'repeat(2, 1fr)' }}
+            rowGap={0}
+          >
+            <GridItem>
+              <Text textStyle="appNormal" color="whiteBlur.100">
+                Last Price
+              </Text>
+            </GridItem>
+            <GridItem justifySelf={{ lg: 'flex-end' }}>
+              <Flex alignItems="center">
+                <MetroTokenComponent
+                  width={{ base: '14px', md: '16px' }}
+                  height={{ base: '14px', md: '16px' }}
+                  mr={2}
+                />
+                <Text textStyle="appNormal" fontFamily="Acrom-Bold">
+                  {formatNumber(lastPrice, 2)}
+                </Text>
+              </Flex>
+            </GridItem>
+          </Grid>
         )}
       </Box>
     </Box>

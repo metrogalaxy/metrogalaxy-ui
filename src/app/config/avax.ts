@@ -8,6 +8,9 @@ const env: Config = {
   chainTokenName: 'Avalanche',
   chainExplorerName: 'Snowtrace',
   chainExplorer: 'https://snowtrace.io/',
+  metronionNFT: {
+    contractAddress: '',
+  },
   metronionSale: {
     contractAddress: '0x48d7eEc677005512B0046e10f7b6F61dAAE5Ec1c',
     privateSaleTime: new Date(0),
@@ -16,6 +19,12 @@ const env: Config = {
     publicCap: 5,
     endSaleTime: new Date(1643587200 * 1000),
     metronionUnitPrice: 1,
+  },
+  marketplace: {
+    contractAddress: '',
+  },
+  metroToken: {
+    contractAddress: '',
   },
   useMockData: false,
   api: {

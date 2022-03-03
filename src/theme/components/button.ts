@@ -12,12 +12,12 @@ export const Button = {
   },
   sizes: {
     sm: {
-      padding: '1rem 2rem',
+      padding: '1rem 1.5rem',
       height: '2.5rem',
     },
     md: {
       padding: '1.25rem 2.25rem',
-      height: '3.5rem',
+      height: '3rem',
     },
   },
   variants: {

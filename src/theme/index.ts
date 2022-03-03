@@ -1,20 +1,25 @@
 import { extendTheme } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
-import { Button } from './components/button';
-import { Link } from './components/link';
-import { Modal } from './components/modal';
-import { Text } from './components/text';
-import { Checkbox } from './components/checkbox';
-import { Drawer } from './components/drawer';
-import { Table } from './components/table';
+import {
+  Button,
+  Link,
+  Modal,
+  Text,
+  Checkbox,
+  Drawer,
+  Table,
+  Progress,
+} from './components/';
 import { layerStyles } from './layerStyles';
 
 const breakpoints = createBreakpoints({
+  xxs: '380px',
   xs: '480px',
   sm: '576px',
   md: '768px',
   lg: '960px',
   xl: '1200px',
+  '1400px': '1400px',
   '2xl': '1600px',
   '3xl': '2400px',
 });
@@ -27,6 +32,7 @@ const components = {
   Checkbox,
   Drawer,
   Table,
+  Progress,
 };
 
 export const theme = extendTheme({

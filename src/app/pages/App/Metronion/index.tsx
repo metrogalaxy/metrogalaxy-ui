@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Flex, Text, Image, Grid, GridItem, Center } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Grid,
+  GridItem,
+  Center,
+} from '@chakra-ui/react';
 import TitleIcon from './assets/title_icon.svg';
 import { TotalMintInfo } from './TotalMintInfo';
 import { Guide } from './Guide';
@@ -113,16 +121,15 @@ export function Metronion() {
         mt={8}
         templateAreas={{
           base: `"totalMint" "guide" "avatar" "countdown" "mintBox"`,
-          xl: `"totalMint avatar countdown" "guide avatar mintBox"`,
+          xl: `"totalMint avatar countdown" "totalMint avatar mintBox"`,
         }}
       >
         {/* Total Mint Info */}
         <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="totalMint">
           <TotalMintInfo />
-        </GridItem>
-        {/* Guide */}
-        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="guide">
-          <Guide />
+          <Box mt={8}>
+            <Guide />
+          </Box>
         </GridItem>
         {/* Avatar */}
         <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="avatar">

@@ -42,7 +42,7 @@ export function Inventory() {
                 <Text
                   textStyle="appTitle"
                   textTransform="capitalize"
-                  hover={{
+                  _hover={{
                     color: 'green.200',
                   }}
                 >

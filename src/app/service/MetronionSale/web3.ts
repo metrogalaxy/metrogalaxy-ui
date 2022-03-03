@@ -11,6 +11,7 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { SaleRecord, UserSaleRecord } from './index';
 import { BigNumber } from 'ethers';
 import { ITransactionReceipt } from '../types';
+import { DEFAULT_TX_CONFIRMATION_BLOCK } from 'src/app/config/constants';
 
 class Web3Fetcher {
   metronionSaleContract: string;
@@ -79,7 +80,7 @@ class Web3Fetcher {
       value: ethers.utils.parseEther(totalPaid.toString()),
     });
 
-    const txReceipt = await tx.wait(1);
+    const txReceipt = await tx.wait(DEFAULT_TX_CONFIRMATION_BLOCK);
     return {
       txHash: txReceipt.transactionHash,
       isSuccess: true,

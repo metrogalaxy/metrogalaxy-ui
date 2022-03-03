@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Box, Grid, Flex, Center, Text } from '@chakra-ui/react';
+import { SmallCloseIcon } from '@chakra-ui/icons';
 import { useEthers } from '@quangkeu1995/dappcore';
 import { Pagination } from 'src/app/components/Pagination';
 import { LoadingSpinner } from 'src/app/components/Loading';
@@ -73,14 +74,17 @@ export function AccessoriesTab() {
           <LoadingSpinner />
         </Center>
         <Box width="fit-content" display={isFetching ? 'none' : 'block'}>
-          <Center
+          <Flex
+            flexDirection="row"
+            alignItems="center"
             width="100%"
             display={
-              !data || (data && data.data.length === 0) ? 'block' : 'none'
+              !data || (data && data.data.length === 0) ? 'flex' : 'none'
             }
           >
-            <Text textStyle="appNormal">No Data</Text>
-          </Center>
+            <SmallCloseIcon width="38px" height="38px" color="white" mr={1} />
+            <Text textStyle="appTitle">No Data</Text>
+          </Flex>
           <Box display={data && data.data.length > 0 ? 'block' : 'none'}>
             <AccessoriesPanel data={data ? data.data : []} />
             <Center>

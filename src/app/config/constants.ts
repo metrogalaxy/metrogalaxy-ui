@@ -12,6 +12,9 @@ export const METRONION_PRIVATE_CAP = 1;
 export const METRONION_PUBLIC_CAP = 5;
 export const UNKNOWN_METRONION_IMG_URL =
   'https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png';
+export const MAX_METRONION_PRICE_PER_UNIT = 100000000; // 100M
+export const DEFAULT_TX_CONFIRMATION_BLOCK = 3;
+export const MAX_STATS_VALUE = 100;
 
 export enum CATEGORY {
   METRONION = 'metronion',
@@ -23,15 +26,35 @@ export enum SORT_TYPE {
   highest_id = 'Highest ID',
   lowest_price = 'Lowest Price',
   highest_price = 'Highest Price',
-  recently_listed = 'Recently Listed',
-  recently_sold = 'Recently Sold',
-  recently_offered = 'Recently Offered',
+  // recently_listed = 'Recently Listed',
+  // recently_sold = 'Recently Sold',
+  // recently_offered = 'Recently Offered',
+}
+
+export enum METRONION_PARTS {
+  ALL = 'all',
+  HAIR = 'hair',
+  SKIN = 'skin',
+  FACE = 'face',
+  FACE_ACCESSORIES = 'face_accessories',
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  SHOES = 'shoes',
+  COAT = 'coat',
+  NECKLACE = 'necklace',
+  LEFT_HAND_EQUIPMENT = 'left_hand_equipment',
+  RIGHT_HAND_EQUIPMENT = 'right_hand_equipment',
+  VEHICLES = 'vehicles',
+  WING = 'wing',
+  TAIL = 'tail',
+  PET = 'pet',
+  SET = 'set',
 }
 
 export enum ACCESSORY_TYPE {
   ALL = 'all',
   HAIR = 'hair',
-  FACE_ACCESSORIES = 'face',
+  FACE_ACCESSORIES = 'face_accessories',
   TOP = 'top',
   BOTTOM = 'bottom',
   SHOES = 'shoes',
@@ -53,6 +76,11 @@ export enum RARITY {
   EPIC = 'epic',
   LEGENDARY = 'legendary',
   MYTHICAL = 'mythical',
+}
+
+export enum STATUS {
+  FOR_SALE = 'for_sale',
+  HAS_OFFERS = 'has_offers',
 }
 
 export enum GENDER {
