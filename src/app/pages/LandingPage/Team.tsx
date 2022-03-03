@@ -10,30 +10,30 @@ import {
   Image,
   useMediaQuery,
 } from '@chakra-ui/react';
-// import TeamImage1 from './assets/team/1.webp';
-import TeamImage2 from './assets/team/2.webp';
-import TeamImage3 from './assets/team/3.webp';
+import TeamImage1 from './assets/team/dinh_anh_tuyen.webp';
+import TeamImage2 from './assets/team/nguyen_le_quang.webp';
+import TeamImage3 from './assets/team/le_minh_hoang.webp';
 // import TeamImage4 from './assets/team/4.webp';
-import TeamImage5 from './assets/team/5.webp';
-// import TeamImage6 from './assets/team/6.webp';
+import TeamImage5 from './assets/team/nguyen_hoang_giang.webp';
+import TeamImage6 from './assets/team/dang_hoang_long.webp';
 // import TeamImage7 from './assets/team/7.webp';
-import TeamImage8 from './assets/team/8.webp';
-import TeamImage9 from './assets/team/9.webp';
-import TeamImage10 from './assets/team/10.webp';
-import TeamImage11 from './assets/team/11.webp';
+import TeamImage8 from './assets/team/nguyen_duy_vu.webp';
+import TeamImage9 from './assets/team/nguyen_thu_linh.webp';
+import TeamImage10 from './assets/team/mac_van_anh.webp';
+// import TeamImage11 from './assets/team/11.webp';
 import LinkedinImage from './assets/team/linkedin.svg';
 
 const team = [
-  // {
-  //   avatar: TeamImage1,
-  //   position: 'CEO, Co-founder',
-  //   name: 'Tuyen Dinh',
-  //   description: `Full-stack engineer with 3 years experience in blockchain field.
-  //   Dapp builder, Kyber Network Alumni.`,
-  // },
+  {
+    avatar: TeamImage1,
+    position: 'CEO, Co-Founder',
+    name: 'Tuyen Dinh Anh',
+    linkedIn: 'https://www.linkedin.com/in/tuyen-dinh-anh-3a033611b/',
+    description: `Growth marketer with experience in business development. Kyber Network Alumni.`,
+  },
   {
     avatar: TeamImage2,
-    position: 'Founder',
+    position: 'CTO, Co-Founder',
     name: 'Quang Nguyen',
     linkedIn: 'https://www.linkedin.com/in/le-quang-nguyen-a42120135/',
     description: `Full-stack engineer with 4 years experience in blockchain field. 
@@ -58,6 +58,13 @@ const team = [
     name: 'Giang Nguyen',
     description:
       'Senior game developer with 6 years experience working with Unity. Have built projects which achieve 10+ millions downloads on AppStore and Google Play Store.',
+  },
+  {
+    avatar: TeamImage6,
+    position: 'Game Server Developer',
+    name: 'Long Dang Hoang',
+    description:
+      'Senior game server developer with 7 years experience. Strong skills in backend development and database management.',
   },
   // {
   //   avatar: TeamImage6,
@@ -91,13 +98,13 @@ const team = [
     description:
       'She started drawing when she was 2 years old. At that time, she drawn on everything, even the furniture in her parents house. Until now, being a mom of 3 kids she still continues to draw. She never ran out of love for drawing.',
   },
-  {
-    avatar: TeamImage11,
-    position: 'Game Artist',
-    name: 'Ngan Pham',
-    description:
-      '8 years experience in Artwork digital and game artist. She has a keen interest in video games and cares about their artistry that ensures the release of beautiful, innovative games.',
-  },
+  // {
+  //   avatar: TeamImage11,
+  //   position: 'Game Artist',
+  //   name: 'Ngan Pham',
+  //   description:
+  //     '8 years experience in Artwork digital and game artist. She has a keen interest in video games and cares about their artistry that ensures the release of beautiful, innovative games.',
+  // },
 ];
 
 export function Team() {
