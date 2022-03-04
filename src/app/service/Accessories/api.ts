@@ -3,7 +3,7 @@ import { ACCESSORY_TYPE, RARITY, GENDER } from 'src/app/config/constants';
 import axios from 'axios';
 
 export interface IGetAccessoriesByPageParams {
-  account: string;
+  account?: string;
   offset: number;
   limit: number;
   sort: string;
@@ -16,20 +16,25 @@ export interface IGetAccessoriesByPageParams {
 
 class ApiFetcher {
   async getAccessoriesByPage(
-    account: string,
     offset: number,
     limit: number,
     filter: AccessoriesFilterParams,
   ): Promise<AccessoriesResponse> {
     const params: IGetAccessoriesByPageParams = {
-      account,
       offset,
       limit,
       sort: filter.sort,
     };
 
-    if (filter.id) {
-      params.id = filter.id;
+    if (filter.account) {
+      params.account = filter.account;
+    }
+    if (filter.id !== undefined && filter.id !== null) {
+      if (typeof filter.id === 'string') {
+        params.id = parseInt(filter.id);
+      } else {
+        params.id = filter.id;
+      }
     }
     if (filter.gender && filter.gender.length > 0) {
       params.gender = filter.gender;

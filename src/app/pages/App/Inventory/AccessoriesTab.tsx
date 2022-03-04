@@ -11,8 +11,7 @@ import {
   DEFAULT_ACCESSORIES_FILTER_PARAMS,
 } from 'src/app/service/Accessories';
 import { AccessoriesFilter, AccessoriesPanel } from '../components/Accessories';
-
-const ITEMS_PER_PAGE: number = 6;
+import { ITEMS_PER_PAGE } from 'src/app/config/constants';
 
 export function AccessoriesTab() {
   const [offset, setOffset] = React.useState<number>(0);
@@ -24,10 +23,12 @@ export function AccessoriesTab() {
 
   // fetch accessories
   const { data, isFetching } = useGetAccessoriesByPage(
-    account!,
     offset,
     ITEMS_PER_PAGE,
-    filter,
+    {
+      ...filter,
+      account: account!,
+    },
     {
       enabled:
         isActivated &&
@@ -41,7 +42,6 @@ export function AccessoriesTab() {
     if (!isActivated) {
       return;
     }
-    console.log('call api get accessories');
     setFilter(params);
   };
 

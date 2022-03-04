@@ -29,7 +29,7 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { ITransactionReceipt } from '../types';
 
 export interface IGetMetronionByPageParams {
-  account: string;
+  account?: string;
   offset: number;
   limit: number;
   sort: string;
@@ -91,20 +91,25 @@ class ApiFetcher {
   }
 
   async getMetronionsByPage(
-    account: string,
     offset: number,
     limit: number,
     filter: MetronionFilterParams,
   ): Promise<MetronionsResponse> {
     const params: IGetMetronionByPageParams = {
-      account,
       offset,
       limit,
       sort: filter.sort,
     };
 
+    if (filter.account) {
+      params.account = filter.account;
+    }
     if (filter.id !== undefined && filter.id !== null) {
-      params.id = filter.id;
+      if (typeof filter.id === 'string') {
+        params.id = parseInt(filter.id);
+      } else {
+        params.id = filter.id;
+      }
     }
     if (filter.gender && filter.gender.length > 0) {
       params.gender = filter.gender;

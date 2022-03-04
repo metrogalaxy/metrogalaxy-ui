@@ -15,6 +15,7 @@ export const UNKNOWN_METRONION_IMG_URL =
 export const MAX_METRONION_PRICE_PER_UNIT = 100000000; // 100M
 export const DEFAULT_TX_CONFIRMATION_BLOCK = 3;
 export const MAX_STATS_VALUE = 100;
+export const ITEMS_PER_PAGE: number = 6;
 
 export enum CATEGORY {
   METRONION = 'metronion',

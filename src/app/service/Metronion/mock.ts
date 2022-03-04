@@ -29,23 +29,25 @@ class MockFetcher {
   }
 
   async getMetronionsByPage(
-    account: string,
     _: number,
     __: number,
-    ___: MetronionFilterParams,
+    filter: MetronionFilterParams,
   ): Promise<MetronionsResponse> {
     await new Promise(resolve => {
       setTimeout(resolve, 500);
     });
 
-    return {
-      timestamp: MockListMetronion.timestamp,
-      count: MockListMetronion.count,
-      data: MockListMetronion.data.map(item => ({
-        ...item,
-        owner: account,
-      })),
-    };
+    if (filter.account) {
+      return {
+        timestamp: MockListMetronion.timestamp,
+        count: MockListMetronion.count,
+        data: MockListMetronion.data.map(item => ({
+          ...item,
+          owner: filter.account!,
+        })),
+      };
+    }
+    return MockListMetronion;
   }
 
   async getMetronionActivities(id: number): Promise<MetronionActivities[]> {

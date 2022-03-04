@@ -61,6 +61,7 @@ export interface MetronionOffers {
 }
 
 export interface MetronionFilterParams {
+  account?: string;
   sort: string;
   id: number | undefined;
   gender: GENDER[];
@@ -96,7 +97,6 @@ export interface MetronionOffersResponse extends BaseResponse {
 export interface MetronionFetcher {
   getMetronionInfo: (id: number) => Promise<MetronionInfo>;
   getMetronionsByPage: (
-    account: string,
     offset: number,
     limit: number,
     filter: MetronionFilterParams,
@@ -160,16 +160,15 @@ export function useGetMetronionInfo(id: number, options?: any) {
 }
 
 export function useGetMetronionsByPage(
-  account: string,
   offset: number,
   limit: number,
   filter: MetronionFilterParams,
   options?: any,
 ) {
   return useQuery<MetronionsResponse, Error>(
-    ['metronion-get-metronions-by-page', account, offset, limit, filter],
+    ['metronion-get-metronions-by-page', offset, limit, filter],
     async (): Promise<MetronionsResponse> => {
-      return fetcher.getMetronionsByPage(account, offset, limit, filter);
+      return fetcher.getMetronionsByPage(offset, limit, filter);
     },
     options,
   );

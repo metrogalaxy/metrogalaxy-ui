@@ -1,26 +1,24 @@
 import * as React from 'react';
+import { PageLayout } from '../components/PageLayout';
 import {
-  Box,
-  Text,
+  Icon,
   Flex,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Image,
+  Text,
+  Box,
 } from '@chakra-ui/react';
-import ArrowLeftIcon from 'src/app/assets/icon/arrow_left.svg';
-import { useNavigate } from 'react-router-dom';
-import { PageLayout } from '../components/PageLayout';
+import { AiOutlineShop } from 'react-icons/ai';
 import { CATEGORY } from 'src/app/config/constants';
 import { MetronionTab } from './MetronionTab';
 import { AccessoriesTab } from './AccessoriesTab';
 
-export function Inventory() {
+export function Marketplace() {
   const [category, setCategory] = React.useState<CATEGORY>(CATEGORY.METRONION);
-  const navigate = useNavigate();
 
   return (
-    <PageLayout title="Inventory" content="User Inventory">
+    <PageLayout title="Marketplace" content="Marketplace">
       <Flex
         flexDirection={{ base: 'column', md: 'row' }}
         justifyContent="flex-start"
@@ -33,11 +31,16 @@ export function Inventory() {
         >
           <Breadcrumb spacing={0}>
             <BreadcrumbItem>
-              <BreadcrumbLink onClick={() => navigate(-1)}>
-                <Image src={ArrowLeftIcon} width="32px" height="32px" />
+              <BreadcrumbLink href="/marketplace">
+                <Icon
+                  as={AiOutlineShop}
+                  width="32px"
+                  height="32px"
+                  color="green.200"
+                />
               </BreadcrumbLink>
               <Text textStyle="appTitle" textTransform="capitalize" ml={2}>
-                Inventory
+                Marketplace
               </Text>
             </BreadcrumbItem>
           </Breadcrumb>

@@ -27,6 +27,7 @@ export interface Accessories {
 }
 
 export interface AccessoriesFilterParams {
+  account?: string;
   sort: string;
   id: number | undefined;
   accessoryType: ACCESSORY_TYPE | undefined;
@@ -52,7 +53,6 @@ export interface AccessoriesResponse {
 
 export interface AccessoriesFetcher {
   getAccessoriesByPage: (
-    account: string,
     offset: number,
     limit: number,
     filter: AccessoriesFilterParams,
@@ -84,18 +84,15 @@ if (env.useMockData) {
 // }
 
 export function useGetAccessoriesByPage(
-  account: string,
   offset: number,
   limit: number,
   filter: AccessoriesFilterParams,
   options?: any,
 ) {
   return useQuery<AccessoriesResponse, Error>(
-    ['accessories-get-accessories-by-page', account, offset, limit, filter],
+    ['accessories-get-accessories-by-page', offset, limit, filter],
     async (): Promise<AccessoriesResponse> => {
-      console.log('receive request');
-      console.log(filter);
-      return fetcher.getAccessoriesByPage(account, offset, limit, filter);
+      return fetcher.getAccessoriesByPage(offset, limit, filter);
     },
     options,
   );

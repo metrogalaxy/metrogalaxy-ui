@@ -10,7 +10,12 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-// import { Metronion, Inventory, MetronionInfo } from './pages/App/Loadable';
+import {
+  Metronion,
+  Inventory,
+  MetronionInfo,
+  Marketplace,
+} from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import FavIcon from 'src/app/assets/favicon.png';
@@ -56,9 +61,8 @@ export function App() {
       </Helmet>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/metronion" element={<Metronion />} /> */}
-        <Route path="/metronion" element={<ComingSoon />} />
-        <Route path="/marketplace" element={<ComingSoon />} />
+        <Route path="/metronion" element={<Metronion />} />
+        <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/staking" element={<ComingSoon />} />
         <Route path="/land" element={<ComingSoon />} />
         <Route path="/tokenomic" element={<Tokenomics />} />

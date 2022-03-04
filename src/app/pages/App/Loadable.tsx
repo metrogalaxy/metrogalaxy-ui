@@ -10,13 +10,13 @@ export const Metronion = lazyLoad(
   },
 );
 
-// export const Marketplace = lazyLoad(
-//   () => import('./Marketplace'),
-//   module => module.Marketplace,
-//   {
-//     fallback: <LoadingBackground />,
-//   },
-// );
+export const Marketplace = lazyLoad(
+  () => import('./Marketplace'),
+  module => module.Marketplace,
+  {
+    fallback: <LoadingBackground />,
+  },
+);
 
 // export const Staking = lazyLoad(
 //   () => import('./Staking'),

@@ -1,61 +1,36 @@
 import * as React from 'react';
 import { Box, Grid, Flex, Center, Text } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
-import { useEthers } from '@quangkeu1995/dappcore';
-import { MetronionPanel, MetronionFilter } from '../components/Metronion';
 import { Pagination } from 'src/app/components/Pagination';
 import { LoadingSpinner } from 'src/app/components/Loading';
-import { useAccount } from 'src/app/hooks';
 import {
-  useGetMetronionsByPage,
-  MetronionFilterParams,
-  DEFAULT_METRONION_FILTER_PARAMS,
-} from 'src/app/service/Metronion';
+  useGetAccessoriesByPage,
+  AccessoriesFilterParams,
+  DEFAULT_ACCESSORIES_FILTER_PARAMS,
+} from 'src/app/service/Accessories';
+import { AccessoriesFilter, AccessoriesPanel } from '../components/Accessories';
 import { ITEMS_PER_PAGE } from 'src/app/config/constants';
 
-export function MetronionTab() {
+export function AccessoriesTab() {
   const [offset, setOffset] = React.useState<number>(0);
-  const [filter, setFilter] = React.useState<MetronionFilterParams>(
-    DEFAULT_METRONION_FILTER_PARAMS,
+  const [filter, setFilter] = React.useState<AccessoriesFilterParams>(
+    DEFAULT_ACCESSORIES_FILTER_PARAMS,
   );
-  const { isActivated } = useAccount();
-  const { account } = useEthers();
 
-  // fetch metronions
-  const { data, isFetching } = useGetMetronionsByPage(
+  // fetch accessories
+  const { data, isFetching } = useGetAccessoriesByPage(
     offset,
     ITEMS_PER_PAGE,
-    {
-      ...filter,
-      account: account!,
-    },
-    {
-      enabled:
-        isActivated &&
-        account !== null &&
-        account !== undefined &&
-        account !== '',
-    },
+    filter,
   );
 
   const onFilterChange = params => {
-    if (!isActivated) {
-      return;
-    }
     setFilter(params);
   };
 
   const onPageChange = (page: number) => {
     setOffset(page - 1);
   };
-
-  if (!isActivated) {
-    return (
-      <Box textAlign="center" mt={{ base: 8 }}>
-        <Text textStyle="appTitle">Please Connect Your Wallet</Text>
-      </Box>
-    );
-  }
 
   return (
     <Grid
@@ -68,7 +43,7 @@ export function MetronionTab() {
       gap={{ base: 6, lg: 12 }}
       mb={10}
     >
-      <MetronionFilter onFilterChange={onFilterChange} />
+      <AccessoriesFilter onFilterChange={onFilterChange} />
       <Flex width="100%" justifyContent={{ base: 'center', lg: 'flex-start' }}>
         <Center width="full" display={isFetching ? 'flex' : 'none'}>
           <LoadingSpinner />
@@ -86,7 +61,7 @@ export function MetronionTab() {
             <Text textStyle="appTitle">No Data</Text>
           </Flex>
           <Box display={data && data.data.length > 0 ? 'block' : 'none'}>
-            <MetronionPanel data={data ? data.data : []} />
+            <AccessoriesPanel data={data ? data.data : []} />
             <Center>
               <Pagination
                 count={data ? data.count : 0}

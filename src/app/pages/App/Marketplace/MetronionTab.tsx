@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Box, Grid, Flex, Center, Text } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
-import { useEthers } from '@quangkeu1995/dappcore';
 import { MetronionPanel, MetronionFilter } from '../components/Metronion';
 import { Pagination } from 'src/app/components/Pagination';
 import { LoadingSpinner } from 'src/app/components/Loading';
-import { useAccount } from 'src/app/hooks';
 import {
   useGetMetronionsByPage,
   MetronionFilterParams,
@@ -18,44 +16,21 @@ export function MetronionTab() {
   const [filter, setFilter] = React.useState<MetronionFilterParams>(
     DEFAULT_METRONION_FILTER_PARAMS,
   );
-  const { isActivated } = useAccount();
-  const { account } = useEthers();
 
   // fetch metronions
   const { data, isFetching } = useGetMetronionsByPage(
     offset,
     ITEMS_PER_PAGE,
-    {
-      ...filter,
-      account: account!,
-    },
-    {
-      enabled:
-        isActivated &&
-        account !== null &&
-        account !== undefined &&
-        account !== '',
-    },
+    filter,
   );
 
   const onFilterChange = params => {
-    if (!isActivated) {
-      return;
-    }
     setFilter(params);
   };
 
   const onPageChange = (page: number) => {
     setOffset(page - 1);
   };
-
-  if (!isActivated) {
-    return (
-      <Box textAlign="center" mt={{ base: 8 }}>
-        <Text textStyle="appTitle">Please Connect Your Wallet</Text>
-      </Box>
-    );
-  }
 
   return (
     <Grid

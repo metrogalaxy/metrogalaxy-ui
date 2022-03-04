@@ -62,7 +62,7 @@ export function MetronionFilter(props: MetronionFilterProps) {
       defaultValues: DEFAULT_METRONION_FILTER_PARAMS,
     });
   const [filterId, setFilterId] = React.useState<number | undefined>(undefined);
-  const debounceFilterId = useDebounce(filterId, 500);
+  const debounceFilterId = useDebounce<number | undefined>(filterId, 500);
 
   const watchAllFields = useWatch({
     control: control,
@@ -101,7 +101,7 @@ export function MetronionFilter(props: MetronionFilterProps) {
       stat: stat,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [watchAllFields]);
+  }, [watchAllFields, debounceFilterId]);
 
   React.useEffect(() => {
     props.onFilterChange(filter);
