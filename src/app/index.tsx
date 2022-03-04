@@ -67,9 +67,9 @@ export function App() {
         <Route path="/land" element={<ComingSoon />} />
         <Route path="/tokenomic" element={<Tokenomics />} />
         <Route path="/about" element={<AboutUs />} />
-        {/* <Route path="/inventory" element={<Inventory />} /> */}
+        <Route path="/inventory" element={<Inventory />} />
         <Route path="/inventory" element={<ComingSoon />} />
-        {/* <Route path="/metronion/:id" element={<MetronionInfo />} /> */}
+        <Route path="/metronion/:id" element={<MetronionInfo />} />
 
         <Route element={<NotFoundPage />} />
       </Routes>
