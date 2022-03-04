@@ -32,12 +32,15 @@ import {
   GENDER,
   STATS,
   DEFAULT_SORT,
+  STATUS,
 } from 'src/app/config/constants';
 import FilterIcon from 'src/app/assets/icon/filter.svg';
 import {
   MetronionFilterParams,
   DEFAULT_METRONION_FILTER_PARAMS,
 } from 'src/app/service/Metronion';
+import { useDebounce } from 'src/app/hooks';
+import { StatIcon } from '../StatIcon';
 
 const MIN_STAT = 0;
 const MAX_STAT = 100;
@@ -58,6 +61,8 @@ export function MetronionFilter(props: MetronionFilterProps) {
     useForm<MetronionFilterParams>({
       defaultValues: DEFAULT_METRONION_FILTER_PARAMS,
     });
+  const [filterId, setFilterId] = React.useState<number | undefined>(undefined);
+  const debounceFilterId = useDebounce<number | undefined>(filterId, 500);
 
   const watchAllFields = useWatch({
     control: control,
@@ -65,8 +70,14 @@ export function MetronionFilter(props: MetronionFilterProps) {
 
   React.useMemo(() => {
     let gender: GENDER[] = [];
+    let status: STATUS[] = [];
     if (watchAllFields.gender) {
       gender = watchAllFields.gender.map(item => {
+        return item!;
+      });
+    }
+    if (watchAllFields.status) {
+      status = watchAllFields.status.map(item => {
         return item!;
       });
     }
@@ -84,23 +95,29 @@ export function MetronionFilter(props: MetronionFilterProps) {
 
     setFilter({
       sort: watchAllFields.sort ? watchAllFields.sort : DEFAULT_SORT,
-      id: watchAllFields.id,
+      id: debounceFilterId,
       gender: gender,
+      status: status,
       stat: stat,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [watchAllFields]);
+  }, [watchAllFields, debounceFilterId]);
 
   React.useEffect(() => {
     props.onFilterChange(filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, [filter, debounceFilterId]);
+
+  React.useEffect(() => {
+    setFilterId(watchAllFields.id);
+  }, [watchAllFields.id]);
 
   React.useEffect(() => {
     register('sort');
     register('id');
     register('gender');
     register('stat');
+    register('status');
   }, [register]);
 
   const onSortchange = (value: string) => {
@@ -108,7 +125,8 @@ export function MetronionFilter(props: MetronionFilterProps) {
   };
 
   const onIdChange = (event: any) => {
-    const id = event.target.value === '' ? undefined : +event.target.value;
+    const id = event.target.value === '' ? undefined : event.target.value;
+    setFilterId(id);
     setValue('id', id);
   };
 
@@ -120,6 +138,10 @@ export function MetronionFilter(props: MetronionFilterProps) {
     const stat = getValues('stat');
     stat[name] = value;
     setValue('stat', stat);
+  };
+
+  const onStatusChange = (values: STATUS[]) => {
+    setValue('status', values);
   };
 
   const clearFilter = () => {
@@ -200,7 +222,9 @@ export function MetronionFilter(props: MetronionFilterProps) {
                   md: 'md',
                 },
               }}
-              value={getValues('id') ? getValues('id') : ''}
+              value={
+                filterId !== undefined && filterId !== null ? filterId : ''
+              }
               onChange={onIdChange}
             />
             <InputRightElement
@@ -208,6 +232,43 @@ export function MetronionFilter(props: MetronionFilterProps) {
               children={<SearchIcon color="whiteBlur.100" />}
             />
           </InputGroup>
+        </Box>
+
+        {/* Status */}
+        <Box
+          mb={5}
+          pb={5}
+          borderBottom="1px dashed"
+          borderBottomColor="whiteBlur.300"
+        >
+          <Text
+            textStyle="appNormal"
+            textTransform="uppercase"
+            fontFamily="Acrom-Bold"
+            color="white"
+            mb={5}
+          >
+            Status
+          </Text>
+
+          <CheckboxGroup onChange={onStatusChange} value={getValues('status')}>
+            <HStack spacing={5}>
+              <Checkbox
+                value={STATUS.FOR_SALE}
+                textTransform="capitalize"
+                textStyle="appNormal"
+              >
+                For Sale
+              </Checkbox>
+              <Checkbox
+                value={STATUS.HAS_OFFERS}
+                textTransform="capitalize"
+                textStyle="appNormal"
+              >
+                Has Offers
+              </Checkbox>
+            </HStack>
+          </CheckboxGroup>
         </Box>
 
         {/* Gender */}
@@ -318,7 +379,6 @@ export function MetronionFilter(props: MetronionFilterProps) {
             border="2px solid"
             borderColor="greenBlur.100"
             borderRadius={14}
-            boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
             p={{ base: 6, md: 8 }}
             w={{
               base: '100%',
@@ -392,36 +452,36 @@ const StatSlider = React.forwardRef<IStatSliderRef, IStatSlider>(
         <Flex justifyContent="space-between" mb={2}>
           <Flex>
             {image ? (
-              <Image borderRadius="50%" src={image} w="24px" h="24px" mr={3} />
+              <StatIcon image={image} />
             ) : (
-              <Box
-                bg="gray.600"
-                borderRadius="50%"
-                w="24px"
-                h="24px"
-                mr={3}
-              ></Box>
+              <Box bg="gray.600" borderRadius="50%" w="24px" h="24px"></Box>
             )}
-
-            <Text textStyle="appNormal" textTransform="capitalize" mr={3}>
-              {props.label}
-            </Text>
-            {(stat[0] !== 0 || stat[1] !== 100) && (
-              <Text textStyle="appNormal" color="blue.300">
-                {stat[0]} - {stat[1]}
+            <Flex alignItems="center" ml={3}>
+              <Text textStyle="appNormal" textTransform="capitalize" mr={3}>
+                {props.label}
               </Text>
+            </Flex>
+
+            {(stat[0] !== 0 || stat[1] !== 100) && (
+              <Flex alignItems="center">
+                <Text textStyle="appNormal" color="blue.300">
+                  {stat[0]} - {stat[1]}
+                </Text>
+              </Flex>
             )}
           </Flex>
-          <Text
-            textStyle="appNormal"
-            textTransform="uppercase"
-            color="green.200"
-            cursor="pointer"
-            fontSize={{ base: '12px', md: '14px' }}
-            onClick={reset}
-          >
-            Reset
-          </Text>
+          <Flex alignItems="center">
+            <Text
+              textStyle="appNormal"
+              textTransform="uppercase"
+              color="green.200"
+              cursor="pointer"
+              fontSize={{ base: '12px', md: '14px' }}
+              onClick={reset}
+            >
+              Reset
+            </Text>
+          </Flex>
         </Flex>
         <Box ml={3}>
           <RangeSlider

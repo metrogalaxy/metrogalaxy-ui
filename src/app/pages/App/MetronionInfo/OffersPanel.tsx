@@ -12,17 +12,32 @@ import {
   Center,
   Flex,
 } from '@chakra-ui/react';
-import { useGetMetronionOffers } from 'src/app/service/Metronion';
-import { shortenAddress } from '@quangkeu1995/dappcore';
-import { IconComponent } from 'src/app/components/CurrencyLogo';
-import { formatNumber, getRelativeTime } from 'src/utils/helpers';
+import { MetronionOffers } from 'src/app/service/Metronion';
+import { MetroTokenComponent } from 'src/app/components/CurrencyLogo';
+import { useEthers, addressEqual } from '@quangkeu1995/dappcore';
+import {
+  formatNumber,
+  getRelativeTime,
+  shortenAddress,
+} from 'src/utils/helpers';
+import { TakeOfferModal } from './TakeOfferModal';
+import { CancelOfferModal } from './CancelOfferModal';
+import { useAccount } from 'src/app/hooks';
 
 interface OffersPanelProps {
-  id: number;
+  owner: string;
+  data: MetronionOffers[] | undefined;
+  isLoading: boolean;
+  refetchMetronion: () => void;
 }
 
 export function OffersPanel(props: OffersPanelProps) {
-  const { data, isLoading } = useGetMetronionOffers(props.id);
+  const { account } = useEthers();
+  const { isActivated } = useAccount();
+  let isOwner = false;
+  if (account && props.owner) {
+    isOwner = addressEqual(account, props.owner);
+  }
 
   return (
     <Box
@@ -30,16 +45,10 @@ export function OffersPanel(props: OffersPanelProps) {
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
-      boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
       py={{ base: 6, md: 8 }}
       width={{
         base: '100%',
-        xs: '375px',
       }}
-      maxWidth={{ base: 'min(90vw, 431px)', xs: '100vw' }}
-      overflowX="auto"
-      whiteSpace="nowrap"
-      mb={10}
       position="relative"
       css={{
         '&::-webkit-scrollbar': {
@@ -64,100 +73,142 @@ export function OffersPanel(props: OffersPanelProps) {
         </Text>
       </Box>
 
-      <Table>
-        <Thead>
-          <Tr>
-            <Th pl={{ base: 6, md: 8 }}>
-              <Text
-                textStyle="appNormal"
-                fontSize={{ base: '12px', md: '14px' }}
-                color="whiteBlur.200"
-              >
-                From
-              </Text>
-            </Th>
-            <Th>
-              <Text
-                textStyle="appNormal"
-                fontSize={{ base: '12px', md: '14px' }}
-                color="whiteBlur.200"
-              >
-                Price
-              </Text>
-            </Th>
-            <Th pl={{ base: 6, md: 8 }}>
-              <Text
-                textStyle="appNormal"
-                fontSize={{ base: '12px', md: '14px' }}
-                color="whiteBlur.200"
-              >
-                Time
-              </Text>
-            </Th>
-          </Tr>
-        </Thead>
-        {/* Table Data */}
-        <Tbody>
-          {data &&
-            data.map((item, index) => (
-              <Tr key={index}>
-                <Td pl={{ base: 6, md: 8 }}>
-                  <Text
-                    textStyle="appNormal"
-                    fontSize={{ base: '12px', md: '14px' }}
-                    color="whiteBlur.200"
-                  >
-                    {shortenAddress(item.from)}
-                  </Text>
-                </Td>
-                <Td>
-                  {item.price ? (
-                    <Flex alignItems="center">
-                      <IconComponent
-                        width={{ base: '12px', md: '14px' }}
-                        height={{ base: '12px', md: '14px' }}
-                        mr={2}
+      <Box
+        overflow="auto"
+        maxHeight="300px"
+        width="100%"
+        maxWidth={{ base: 'calc(100vw - 48px)', md: 'calc(100vw - 96px)' }}
+      >
+        <Table>
+          <Thead position="sticky" top={0} zIndex={2}>
+            <Tr>
+              <Th pl={{ base: 6, md: 8 }} minWidth="150px">
+                <Text
+                  textStyle="appNormal"
+                  fontSize={{ base: '12px', md: '14px' }}
+                  color="whiteBlur.200"
+                >
+                  From
+                </Text>
+              </Th>
+              <Th minWidth="150px">
+                <Text
+                  textStyle="appNormal"
+                  fontSize={{ base: '12px', md: '14px' }}
+                  color="whiteBlur.200"
+                >
+                  Price
+                </Text>
+              </Th>
+              <Th minWidth="150px">
+                <Text
+                  textStyle="appNormal"
+                  fontSize={{ base: '12px', md: '14px' }}
+                  color="whiteBlur.200"
+                >
+                  Time
+                </Text>
+              </Th>
+              <Th minWidth="150px">
+                <Text
+                  textStyle="appNormal"
+                  fontSize={{ base: '12px', md: '14px' }}
+                  color="whiteBlur.200"
+                >
+                  Action
+                </Text>
+              </Th>
+            </Tr>
+          </Thead>
+          {/* Table Data */}
+          <Tbody>
+            {props.data &&
+              props.data.map((item, index) => (
+                <Tr key={index}>
+                  {/* From */}
+                  <Td pl={{ base: 6, md: 8 }}>
+                    <Text
+                      textStyle="appNormal"
+                      fontSize={{ base: '12px', md: '14px' }}
+                      color="whiteBlur.200"
+                    >
+                      {shortenAddress(item.from)}
+                    </Text>
+                  </Td>
+                  {/* Price */}
+                  <Td>
+                    {item.price ? (
+                      <Flex alignItems="center">
+                        <MetroTokenComponent
+                          width={{ base: '12px', md: '14px' }}
+                          height={{ base: '12px', md: '14px' }}
+                          mr={2}
+                        />
+                        <Text
+                          textStyle="appNormal"
+                          fontSize={{ base: '12px', md: '14px' }}
+                          color="whiteBlur.200"
+                        >
+                          {formatNumber(item.price, 2)}
+                        </Text>
+                      </Flex>
+                    ) : (
+                      <Text></Text>
+                    )}
+                  </Td>
+                  {/* Timestamp */}
+                  <Td>
+                    <Text
+                      textStyle="appNormal"
+                      fontSize={{ base: '12px', md: '14px' }}
+                      color="whiteBlur.200"
+                    >
+                      {getRelativeTime(item.timestamp)}
+                    </Text>
+                  </Td>
+                  {/* Action */}
+                  {isOwner &&
+                    account &&
+                    isActivated &&
+                    !addressEqual(item.from, account) && (
+                      <Td>
+                        <TakeOfferModal
+                          metronionId={item.id}
+                          offerPrice={item.price}
+                          buyer={item.from}
+                          refetchMetronion={props.refetchMetronion}
+                        />
+                      </Td>
+                    )}
+                  {account && isActivated && addressEqual(item.from, account) && (
+                    <Td>
+                      <CancelOfferModal
+                        metronionId={item.id}
+                        refetchMetronion={props.refetchMetronion}
                       />
-                      <Text
-                        textStyle="appNormal"
-                        fontSize={{ base: '12px', md: '14px' }}
-                        color="whiteBlur.200"
-                      >
-                        {formatNumber(item.price, 2)}
-                      </Text>
-                    </Flex>
-                  ) : (
-                    <Text></Text>
+                    </Td>
                   )}
-                </Td>
-                <Td>
-                  <Text
-                    textStyle="appNormal"
-                    fontSize={{ base: '12px', md: '14px' }}
-                    color="whiteBlur.200"
-                  >
-                    {getRelativeTime(item.timestamp)}
-                  </Text>
-                </Td>
-              </Tr>
-            ))}
-        </Tbody>
-      </Table>
+                </Tr>
+              ))}
+          </Tbody>
+        </Table>
+      </Box>
       {/* No Data */}
-      {(!data || (data && data.length === 0)) && !isLoading && (
-        <Center mt={4} width="100%">
-          <Text
-            textStyle="appNormal"
-            fontSize={{ base: '12px', md: '14px' }}
-            textTransform="uppercase"
-            color="whiteBlur.200"
-          >
-            No Data
-          </Text>
-        </Center>
-      )}
+      {(!props.data || (props.data && props.data.length === 0)) &&
+        !props.isLoading && (
+          <Center mt={4} width="100%">
+            <Text
+              textStyle="appNormal"
+              fontSize={{ base: '12px', md: '14px' }}
+              textTransform="uppercase"
+              color="whiteBlur.200"
+            >
+              No Data
+            </Text>
+          </Center>
+        )}
       {/* Loading */}
-      {isLoading && (
+      {props.isLoading && (
         <Center mt={4} width="100%">
           <Spinner size="sm" color="white" />
         </Center>

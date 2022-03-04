@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Box, Text, Grid, Image, Flex, Spinner } from '@chakra-ui/react';
-import { useEthers } from '@quangkeu1995/dappcore';
-import { Web3Provider } from '@ethersproject/providers';
 
 import MintInfoIcon from './assets/mint_info_icon.webp';
 import { MAX_METRONION_COUNT } from 'src/app/config/constants';
@@ -10,9 +8,7 @@ import { useGetSaleRecord } from 'src/app/service/MetronionSale';
 const REFETCH_INTERVAL = 5000; // milliseconds
 
 export function TotalMintInfo() {
-  const { library } = useEthers();
-  const provider = library as Web3Provider;
-  const { data: saleRecord, isLoading } = useGetSaleRecord(provider, {
+  const { data: saleRecord, isLoading } = useGetSaleRecord({
     refetchInterval: REFETCH_INTERVAL,
   });
 

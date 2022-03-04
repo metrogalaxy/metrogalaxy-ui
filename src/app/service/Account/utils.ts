@@ -1,11 +1,11 @@
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { InjectedConnector } from '@web3-react/injected-connector';
-import ENV from 'src/app/config/env';
+import env from 'src/app/config';
 
 export function NewWalletConnector() {
   return new WalletConnectConnector({
     rpc: {
-      [ENV.CHAIN_ID]: ENV.NODE_URL,
+      [env.chainId]: env.nodeUrl,
     },
     qrcode: true,
   });
@@ -13,6 +13,6 @@ export function NewWalletConnector() {
 
 export function NewInjectedConnector() {
   return new InjectedConnector({
-    supportedChainIds: [ENV.CHAIN_ID],
+    supportedChainIds: [env.chainId],
   });
 }

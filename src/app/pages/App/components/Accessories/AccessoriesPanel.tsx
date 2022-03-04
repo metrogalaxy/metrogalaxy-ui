@@ -58,7 +58,6 @@ function Item(props: ItemProps) {
       border="2px solid"
       borderColor="greenBlur.100"
       borderRadius={14}
-      boxShadow="0px 25.6667px 42.7778px rgba(32, 138, 55, 0.28)"
       minWidth={{ base: '160px', md: '180px' }}
       width={{ base: '160px', md: 'fit-content' }}
       height="fit-content"

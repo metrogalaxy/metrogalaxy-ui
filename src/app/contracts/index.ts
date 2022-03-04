@@ -2,11 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { MetroGalaxyMarketplace } from "./MetroGalaxyMarketplace";
+export type { MetroToken } from "./MetroToken";
 export type { MetronionAccessories } from "./MetronionAccessories";
 export type { MetronionNFT } from "./MetronionNFT";
 export type { MetronionSale } from "./MetronionSale";
 
 export { MetroGalaxyMarketplace__factory } from "./factories/MetroGalaxyMarketplace__factory";
+export { MetroToken__factory } from "./factories/MetroToken__factory";
 export { MetronionAccessories__factory } from "./factories/MetronionAccessories__factory";
 export { MetronionNFT__factory } from "./factories/MetronionNFT__factory";
 export { MetronionSale__factory } from "./factories/MetronionSale__factory";

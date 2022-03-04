@@ -9,20 +9,28 @@ import {
   Grid,
   GridItem,
   Center,
+  Box,
+  Stack,
+  Link,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { BigNumber } from 'bignumber.js';
 import ArrowLeftIcon from 'src/app/assets/icon/arrow_left.svg';
 import { LoadingSpinner } from 'src/app/components/Loading';
-
+import {
+  useGetMetronionInfo,
+  useGetMetronionActivities,
+  useGetMetronionOffers,
+} from 'src/app/service/Metronion';
 import { PageLayout } from '../components/PageLayout';
-import { useGetMetronionInfo } from 'src/app/service/Metronion';
 import { BasicInfo } from './BasicInfo';
 import { AccessoriesPanel } from './AccessoriesPanel';
 import { OffersPanel } from './OffersPanel';
 import { ActivitiesPanel } from './ActivitiesPanel';
 import { UNKNOWN_METRONION_IMG_URL } from 'src/app/config/constants';
+import { StatsComponent } from './Stats';
+import { Avatar } from './Avatar';
 
 // const Panel = lazyLoad(
 //   () => import('./Panel'),
@@ -38,9 +46,60 @@ export function MetronionInfo() {
 
   const idNumber = new BigNumber(id!);
 
-  const { data, isFetching } = useGetMetronionInfo(idNumber.toNumber(), {
+  const {
+    data: metronionInfo,
+    isLoading: metronionInfoIsLoading,
+    refetch: refetchMetronionInfo,
+  } = useGetMetronionInfo(idNumber.toNumber(), {
     enabled: !idNumber.isNaN(),
   });
+
+  const {
+    data: metronionActivities,
+    isLoading: metronionActivitiesIsLoading,
+    refetch: refetchMetronionActivities,
+  } = useGetMetronionActivities(idNumber.toNumber(), {
+    enabled: !idNumber.isNaN(),
+  });
+
+  const {
+    data: metronionOffers,
+    isLoading: metronionOffersIsLoading,
+    refetch: refetchMetronionOffers,
+  } = useGetMetronionOffers(idNumber.toNumber(), {
+    enabled: !idNumber.isNaN(),
+  });
+
+  const isLoading = metronionInfoIsLoading && metronionActivitiesIsLoading;
+
+  let metronionOwner = '';
+  if (metronionInfo) {
+    if (metronionInfo.listedBy) {
+      metronionOwner = metronionInfo.listedBy;
+    } else {
+      metronionOwner = metronionInfo.owner;
+    }
+  } else if (!metronionInfo && !isLoading) {
+    return (
+      <PageLayout title="Metronion Info" content="Metronion Info">
+        <Center>
+          <Link onClick={() => navigate(-1)}>
+            <Image src={ArrowLeftIcon} width="32px" height="32px" />
+          </Link>
+          <Text textStyle="appTitle" ml={2}>
+            Metronion Not Found
+          </Text>
+        </Center>
+      </PageLayout>
+    );
+  }
+
+  const refetchMetronion = async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    await refetchMetronionInfo();
+    await refetchMetronionActivities();
+    await refetchMetronionOffers();
+  };
 
   return (
     <PageLayout title="Metronion Info" content="Metronion Info">
@@ -55,81 +114,62 @@ export function MetronionInfo() {
             <BreadcrumbLink onClick={() => navigate(-1)}>
               <Image src={ArrowLeftIcon} width="32px" height="32px" />
             </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`metronion/${idNumber.toString()}`}>
-              <Text
-                textStyle="appTitle"
-                textTransform="capitalize"
-                hover={{
-                  color: 'green.200',
-                }}
-              >
-                Metronion #{idNumber.toString()}
-              </Text>
-            </BreadcrumbLink>
+            <Text textStyle="appTitle" textTransform="capitalize" ml={2}>
+              Metronion #{idNumber.toString()}
+            </Text>
           </BreadcrumbItem>
         </Breadcrumb>
       </Flex>
 
-      <Center width="full" display={isFetching ? 'flex' : 'none'}>
+      <Center width="full" display={isLoading ? 'flex' : 'none'}>
         <LoadingSpinner />
       </Center>
 
       {/* Main Panel */}
-      {data && (
-        <Grid
-          templateAreas={{
-            base: `"basicInfo" "avatar" "offers" "history" "accessories"`,
-            xl: `"accessories avatar basicInfo" "accessories avatar offers" "accessories avatar ." "history history history"`,
-          }}
-          gap={{ base: 2, lg: 10 }}
-          display={isFetching ? 'none' : 'grid'}
-          justifyItems="center"
-        >
-          {/* Accessories */}
-          <GridItem
-            gridArea="accessories"
-            justifySelf={{ base: 'center', xl: 'start' }}
-            width={{ base: '100%', xs: 'auto' }}
+      {metronionInfo && (
+        <Box>
+          <Grid
+            templateColumns={{ base: '1fr', xl: '2fr 3fr' }}
+            gap={{ base: 2, xl: 14 }}
+            rowGap={{ base: 10 }}
+            display={isLoading ? 'none' : 'grid'}
+            justifyItems="center"
           >
-            <AccessoriesPanel accessoryIds={data.accessoryIds} />
-          </GridItem>
-          {/* Avatar */}
-          <GridItem gridArea="avatar">
-            <Center>
-              <Image
-                src={data.image || UNKNOWN_METRONION_IMG_URL}
-                width="auto"
-                height="auto"
-                maxHeight={{ sm: '500px' }}
-              />
-            </Center>
-          </GridItem>
-          {/* Basic Info */}
-          <GridItem
-            gridArea="basicInfo"
-            justifySelf={{ base: 'center', xl: 'end' }}
-            width={{ base: '100%', xs: 'auto' }}
-          >
-            <BasicInfo data={data} />
-          </GridItem>
-          {/* Offers */}
-          <GridItem
-            gridArea="offers"
-            justifySelf={{ base: 'center', xl: 'end' }}
-            width={{ base: '100%', xs: 'auto' }}
-          >
-            <OffersPanel id={data.id} />
-          </GridItem>
-          {/* History */}
-          <GridItem
-            gridArea="history"
-            width={{ base: '100%', xs: 'auto', xl: '100%' }}
-          >
-            <ActivitiesPanel id={data.id} />
-          </GridItem>
-        </Grid>
+            <GridItem width="100%">
+              <Stack gap={8}>
+                {/* Avatar */}
+                <Avatar
+                  image={metronionInfo.image || UNKNOWN_METRONION_IMG_URL}
+                />
+                {/* Stats */}
+                <StatsComponent stats={metronionInfo.baseStats} />
+                {/* Accessories */}
+                <AccessoriesPanel parts={metronionInfo.parts} />
+              </Stack>
+            </GridItem>
+            <GridItem width="100%">
+              <Stack gap={8}>
+                {/* Basic Info */}
+                <BasicInfo
+                  data={metronionInfo}
+                  refetchMetronion={refetchMetronion}
+                />
+                {/* Offers */}
+                <OffersPanel
+                  owner={metronionOwner}
+                  data={metronionOffers}
+                  isLoading={metronionOffersIsLoading}
+                  refetchMetronion={refetchMetronion}
+                />
+                {/* Activities */}
+                <ActivitiesPanel
+                  data={metronionActivities}
+                  isLoading={metronionActivitiesIsLoading}
+                />
+              </Stack>
+            </GridItem>
+          </Grid>
+        </Box>
       )}
     </PageLayout>
   );

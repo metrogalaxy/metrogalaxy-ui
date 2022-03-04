@@ -36,19 +36,9 @@ export function Inventory() {
               <BreadcrumbLink onClick={() => navigate(-1)}>
                 <Image src={ArrowLeftIcon} width="32px" height="32px" />
               </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/inventory">
-                <Text
-                  textStyle="appTitle"
-                  textTransform="capitalize"
-                  hover={{
-                    color: 'green.200',
-                  }}
-                >
-                  Inventory
-                </Text>
-              </BreadcrumbLink>
+              <Text textStyle="appTitle" textTransform="capitalize" ml={2}>
+                Inventory
+              </Text>
             </BreadcrumbItem>
           </Breadcrumb>
         </Flex>

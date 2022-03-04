@@ -1,0 +1,185 @@
+{
+  "timestamp": 1645682539,
+  "count": 6,
+  "data": [
+    {
+      "id": 5,
+      "createdAtTimestamp": 1645032328,
+      "updatedAtTimestamp": 1645092630,
+      "createdAtBlock": 6180332,
+      "updatedAtBlock": 6209355,
+      "name": "My Metronion",
+      "versionId": 0,
+      "owner": "0x2cdbb4ae2bc4cba896fd8abc526d4ac0f459c33b",
+      "lastPrice": 200000,
+      "topBid": 12345678.1212412,
+      "gender": "female",
+      "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/metronions/0.png",
+      "baseStats": {
+        "creativity": 12,
+        "charisma": 20,
+        "resolve": 36,
+        "fitness": 7,
+        "intellect": 25
+      },
+      "parts": [
+        {
+          "type": "hair",
+          "name": "Yellow Long Hair",
+          "changable": true,
+          "isOrigin": true,
+          "rarity": 10,
+          "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/metronions/0.png"
+        },
+        {
+          "type": "skin",
+          "name": "Black Skin",
+          "changable": false,
+          "isOrigin": true,
+          "rarity": 50,
+          "image": ""
+        },
+        {
+          "type": "face",
+          "name": "Face 20",
+          "changable": false,
+          "isOrigin": true,
+          "rarity": 32,
+          "image": ""
+        },
+        {
+          "type": "top",
+          "name": "Red Crop Top",
+          "changable": true,
+          "isOrigin": true,
+          "rarity": 15,
+          "image": ""
+        },
+        {
+          "type": "bottom",
+          "name": "Green Short",
+          "changable": true,
+          "isOrigin": true,
+          "rarity": 45,
+          "image": ""
+        },
+        {
+          "type": "shoes",
+          "name": "Blue Boots",
+          "changable": true,
+          "isOrigin": true,
+          "rarity": 2,
+          "image": ""
+        },
+        {
+          "type": "face_accessories",
+          "name": "Face Accessories 5 Very Long Description",
+          "changable": true,
+          "isOrigin": true,
+          "rarity": 1.5,
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "createdAtTimestamp": 1645032328,
+      "updatedAtTimestamp": 1645032328,
+      "createdAtBlock": 6180332,
+      "updatedAtBlock": 6180332,
+      "name": "Mark",
+      "versionId": 0,
+      "owner": "0x2cdbb4ae2bc4cba896fd8abc526d4ac0f459c33b",
+      "gender": "male",
+      "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png",
+      "baseStats": {
+        "creativity": 0,
+        "charisma": 0,
+        "resolve": 0,
+        "fitness": 0,
+        "intellect": 0
+      }
+    },
+    {
+      "id": 7,
+      "createdAtTimestamp": 1645032328,
+      "updatedAtTimestamp": 1645032328,
+      "createdAtBlock": 6180332,
+      "updatedAtBlock": 6180332,
+      "name": "",
+      "versionId": 0,
+      "owner": "0x2cdbb4ae2bc4cba896fd8abc526d4ac0f459c33b",
+      "lastPrice": 200000,
+      "topBid": 12345,
+      "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png",
+      "baseStats": {
+        "creativity": 0,
+        "charisma": 0,
+        "resolve": 0,
+        "fitness": 0,
+        "intellect": 0
+      }
+    },
+    {
+      "id": 8,
+      "createdAtTimestamp": 1645032328,
+      "updatedAtTimestamp": 1645032328,
+      "createdAtBlock": 6180332,
+      "updatedAtBlock": 6180332,
+      "name": "",
+      "versionId": 0,
+      "owner": "0x2cdbb4ae2bc4cba896fd8abc526d4ac0f459c33b",
+      "lastPrice": 999999,
+      "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png",
+      "baseStats": {
+        "creativity": 0,
+        "charisma": 0,
+        "resolve": 0,
+        "fitness": 0,
+        "intellect": 0
+      }
+    },
+    {
+      "id": 9,
+      "createdAtTimestamp": 1645032328,
+      "updatedAtTimestamp": 1645032328,
+      "createdAtBlock": 6180332,
+      "updatedAtBlock": 6180332,
+      "name": "",
+      "versionId": 0,
+      "owner": "0x02dcf557423b682933d5ca774af75c2cd8876189",
+      "lastPrice": 50000,
+      "currentPrice": 202345,
+      "listedBy": "0x2cdbb4ae2bc4cba896fd8abc526d4ac0f459c33b",
+      "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png",
+      "baseStats": {
+        "creativity": 0,
+        "charisma": 0,
+        "resolve": 0,
+        "fitness": 0,
+        "intellect": 0
+      }
+    },
+    {
+      "id": 16,
+      "createdAtTimestamp": 1645032434,
+      "updatedAtTimestamp": 1645092441,
+      "createdAtBlock": 6180384,
+      "updatedAtBlock": 6209261,
+      "name": "",
+      "versionId": 0,
+      "owner": "0x02dcf557423b682933d5ca774af75c2cd8876189",
+      "lastPrice": 30000,
+      "currentPrice": 199998,
+      "listedBy": "0x2cdbb4ae2bc4cba896fd8abc526d4ac0f459c33b",
+      "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/unknown_metronion.png",
+      "baseStats": {
+        "creativity": 0,
+        "charisma": 0,
+        "resolve": 0,
+        "fitness": 0,
+        "intellect": 0
+      }
+    }
+  ]
+}

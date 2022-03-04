@@ -4,6 +4,7 @@ import { GlobalState } from './types';
 
 export const initialState: GlobalState = {
   avaxPrice: 0,
+  metroPrice: 0.01,
 };
 
 const slice = createSlice({
@@ -12,6 +13,9 @@ const slice = createSlice({
   reducers: {
     setAvaxPrice(state, action: PayloadAction<number>) {
       state.avaxPrice = action.payload;
+    },
+    setMetroPrice(state, action: PayloadAction<number>) {
+      state.metroPrice = action.payload;
     },
   },
 });

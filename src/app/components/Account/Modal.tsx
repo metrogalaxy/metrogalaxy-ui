@@ -29,7 +29,7 @@ import { IconComponent } from 'src/app/components/CurrencyLogo';
 import MetamaskImg from 'src/app/assets/icon/metamask.svg';
 import WalletConnectImg from 'src/app/assets/icon/walletconnect.svg';
 import { useButtonSize } from 'src/app/hooks/useSize';
-import ENV from 'src/app/config/env';
+import env from 'src/app/config';
 
 interface IImportWalletModalProps {
   isShow: boolean;
@@ -64,17 +64,17 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
    * Handle switching chain to configured chainID
    */
   const switchChain = async () => {
-    if (currentChainId === Number(ENV.CHAIN_ID)) {
+    if (currentChainId === Number(env.chainId)) {
       return;
     }
     setIsSwitchChain(true);
-    const err = await metamaskService.switchChain(ENV.CHAIN_ID);
+    const err = await metamaskService.switchChain(env.chainId);
     if (err) {
       console.log(err);
       setError(err);
     } else {
-      if (ENV.CHAIN_ID) {
-        dispatch(actions.setCurrentChainId(Number(ENV.CHAIN_ID)));
+      if (env.chainId) {
+        dispatch(actions.setCurrentChainId(Number(env.chainId)));
       }
     }
     setIsSwitchChain(false);
@@ -117,8 +117,8 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
     setIsConnectWallet(false);
   };
 
-  const isCorrectChain = currentChainId === ENV.CHAIN_ID;
-  const chainName = GetChainName(ENV.CHAIN_ID);
+  const isCorrectChain = currentChainId === env.chainId;
+  const chainName = GetChainName(env.chainId);
 
   const buttonSize = useButtonSize();
 

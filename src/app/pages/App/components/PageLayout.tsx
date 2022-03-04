@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Box, Container } from '@chakra-ui/react';
 import { NavBar } from 'src/app/components/Layout/NavBar';
-import BgImg from 'src/app/assets/app/background.webp';
 
 interface PageLayoutProps {
   title: string;
@@ -16,8 +15,7 @@ export function PageLayout(props: PageLayoutProps) {
       w="full"
       minHeight="100vh"
       height="100%"
-      bgImage={BgImg}
-      bgSize="cover"
+      bgColor="#0B1926"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       overflow="hidden"

@@ -11,8 +11,7 @@ import {
   MetronionFilterParams,
   DEFAULT_METRONION_FILTER_PARAMS,
 } from 'src/app/service/Metronion';
-
-const ITEMS_PER_PAGE: number = 6;
+import { ITEMS_PER_PAGE } from 'src/app/config/constants';
 
 export function MetronionTab() {
   const [offset, setOffset] = React.useState<number>(0);
@@ -24,10 +23,12 @@ export function MetronionTab() {
 
   // fetch metronions
   const { data, isFetching } = useGetMetronionsByPage(
-    account!,
     offset,
     ITEMS_PER_PAGE,
-    filter,
+    {
+      ...filter,
+      account: account!,
+    },
     {
       enabled:
         isActivated &&
@@ -41,7 +42,6 @@ export function MetronionTab() {
     if (!isActivated) {
       return;
     }
-    console.log('call api get metronion');
     setFilter(params);
   };
 

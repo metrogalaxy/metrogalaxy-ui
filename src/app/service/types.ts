@@ -7,3 +7,11 @@ export interface ITransactionReceipt {
 export interface BaseResponse {
   timestamp: number;
 }
+
+export interface Stats {
+  creativity: number;
+  charisma: number;
+  resolve: number;
+  fitness: number;
+  intellect: number;
+}

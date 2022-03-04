@@ -1,6 +1,6 @@
 import env from 'src/app/config';
 import { ethers } from 'ethers';
-import { Web3Provider } from '@ethersproject/providers';
+import { Web3Provider, JsonRpcProvider } from '@ethersproject/providers';
 import { MetronionSale__factory } from 'src/app/contracts/';
 import {
   MetronionSale,
@@ -11,37 +11,39 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { SaleRecord, UserSaleRecord } from './index';
 import { BigNumber } from 'ethers';
 import { ITransactionReceipt } from '../types';
+import { DEFAULT_TX_CONFIRMATION_BLOCK } from 'src/app/config/constants';
 
 class Web3Fetcher {
   metronionSaleContract: string;
   metronionSaleABI: ethers.utils.Interface;
+  provider: ethers.providers.Provider;
 
   constructor() {
     this.metronionSaleContract = env.metronionSale.contractAddress;
     this.metronionSaleABI = new ethers.utils.Interface(
       MetronionSale__factory.abi,
     );
+    this.provider = new JsonRpcProvider(env.nodeUrl);
   }
 
-  getMetronionSaleContract(provider: Web3Provider | undefined): MetronionSale {
+  getMetronionSaleContract(
+    provider?: ethers.providers.Provider,
+  ): MetronionSale {
     return new ethers.Contract(
       this.metronionSaleContract,
       this.metronionSaleABI,
-      provider,
+      provider ? provider : this.provider,
     ) as MetronionSale;
   }
 
-  async isWhitelistedAddress(
-    provider: Web3Provider | undefined,
-    account: string,
-  ): Promise<boolean> {
-    const contract = this.getMetronionSaleContract(provider);
+  async isWhitelistedAddress(account: string): Promise<boolean> {
+    const contract = this.getMetronionSaleContract();
     const response: boolean = await contract.isWhitelistedAddress(account);
     return response;
   }
 
-  async getSaleRecord(provider: Web3Provider | undefined): Promise<SaleRecord> {
-    const contract = this.getMetronionSaleContract(provider);
+  async getSaleRecord(): Promise<SaleRecord> {
+    const contract = this.getMetronionSaleContract();
     const response: SaleRecordStructOutput = await contract.getSaleRecord();
 
     return {
@@ -52,11 +54,8 @@ class Web3Fetcher {
     };
   }
 
-  async getUserRecord(
-    provider: Web3Provider | undefined,
-    account: string,
-  ): Promise<UserSaleRecord> {
-    const contract = this.getMetronionSaleContract(provider);
+  async getUserRecord(account: string): Promise<UserSaleRecord> {
+    const contract = this.getMetronionSaleContract();
     const response: UserRecordStructOutput = await contract.getUserRecord(
       account,
     );
@@ -81,7 +80,7 @@ class Web3Fetcher {
       value: ethers.utils.parseEther(totalPaid.toString()),
     });
 
-    const txReceipt = await tx.wait(1);
+    const txReceipt = await tx.wait(DEFAULT_TX_CONFIRMATION_BLOCK);
     return {
       txHash: txReceipt.transactionHash,
       isSuccess: true,

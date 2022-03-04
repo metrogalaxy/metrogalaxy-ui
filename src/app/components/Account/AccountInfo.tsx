@@ -16,20 +16,26 @@ import {
   Button,
   Center,
   Stack,
+  Icon,
   useDisclosure,
   useClipboard,
 } from '@chakra-ui/react';
 import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
+import { AiOutlineWallet } from 'react-icons/ai';
 import { ethers } from 'ethers';
 import {
   useEtherBalance,
   useEthers,
   shortenAddress,
+  useTokenBalance,
 } from '@quangkeu1995/dappcore';
 import { useAccount, useButtonSize } from 'src/app/hooks';
 import { formatNumber } from 'src/utils/helpers';
 import { GetExplorerAddressLink } from 'src/app/config/constants';
-import { IconComponent } from 'src/app/components/CurrencyLogo';
+import {
+  IconComponent,
+  MetroTokenComponent,
+} from 'src/app/components/CurrencyLogo';
 import env from 'src/app/config';
 
 export function AccountInfo() {
@@ -40,13 +46,19 @@ export function AccountInfo() {
   const { hasCopied, onCopy } = useClipboard(account!);
 
   const ethBalance = useEtherBalance(account);
-  // const formattedAddress = formatAddress(account!, 4, -3);
+  const metroBalance = useTokenBalance(env.metroToken.contractAddress, account);
   const formattedAddress = shortenAddress(account!);
-  let formattedBalance;
+  let formattedETHBalance;
 
   if (ethBalance) {
-    formattedBalance = ethers.utils.formatEther(ethBalance);
-    formattedBalance = formatNumber(formattedBalance, 4);
+    formattedETHBalance = ethers.utils.formatEther(ethBalance);
+    formattedETHBalance = formatNumber(formattedETHBalance, 4);
+  }
+
+  let formattedMetroBalance;
+  if (metroBalance) {
+    formattedMetroBalance = ethers.utils.formatEther(metroBalance);
+    formattedMetroBalance = formatNumber(formattedMetroBalance, 4);
   }
 
   let accountExplorerLink;
@@ -57,13 +69,28 @@ export function AccountInfo() {
   return (
     <Box color="white" fontSize={{ base: 'sm', sm: 'md' }}>
       <Grid
-        templateColumns={{ base: '1fr', xl: 'auto auto' }}
+        templateColumns={{ base: '1fr', xl: 'auto auto auto' }}
         templateRows={{ base: 'repeat(2, 1fr)', xl: '1fr' }}
         gap={2}
         justifyItems={{ base: 'start', xl: 'end' }}
         alignItems="center"
       >
-        <GridItem>
+        {/* METRO Balance */}
+        <GridItem display={{ base: 'none', '1400px': 'block' }}>
+          <Flex alignItems="center" mr={2}>
+            <MetroTokenComponent
+              mr={2}
+              w={{ base: 4, sm: 6 }}
+              h={{ base: 4, sm: 6 }}
+            />
+
+            <Text>
+              {formattedMetroBalance ? formattedMetroBalance : 0} METRO
+            </Text>
+          </Flex>
+        </GridItem>
+        {/* Avax Balance */}
+        <GridItem display={{ base: 'none', '1400px': 'block' }}>
           <Flex alignItems="center" mr={2}>
             <IconComponent
               mr={2}
@@ -72,11 +99,12 @@ export function AccountInfo() {
             />
 
             <Text>
-              {formattedBalance ? formattedBalance : 0} {env.chainToken}
+              {formattedETHBalance ? formattedETHBalance : 0} {env.chainToken}
             </Text>
           </Flex>
         </GridItem>
-        <GridItem rowStart={{ base: 1 }} colStart={{ xl: 2 }}>
+        {/* Address */}
+        <GridItem rowStart={{ base: 1 }} colStart={{ xl: 3 }}>
           <Box
             bgColor="greenBlur.200"
             py={{ base: 2, sm: 3 }}
@@ -92,7 +120,10 @@ export function AccountInfo() {
             }}
             onClick={onOpen}
           >
-            <Text>{formattedAddress}</Text>
+            <Flex alignItems="center">
+              <Text>{formattedAddress}</Text>
+              <Icon as={AiOutlineWallet} ml={2} />
+            </Flex>
           </Box>
         </GridItem>
       </Grid>
@@ -162,9 +193,21 @@ export function AccountInfo() {
             </Stack>
 
             <Stack mt={4}>
-              <Text textStyle="appNormal" color="white">
+              <Text textStyle="appNormal" color="white" mb={2}>
                 Balances
               </Text>
+              <Flex justifyContent="space-between">
+                <Flex>
+                  <MetroTokenComponent
+                    mr={2}
+                    w={{ base: 4, sm: 6 }}
+                    h={{ base: 4, sm: 6 }}
+                  />
+                  <Text>METRO</Text>
+                </Flex>
+
+                <Text>{formattedMetroBalance ? formattedMetroBalance : 0}</Text>
+              </Flex>
               <Flex justifyContent="space-between">
                 <Flex>
                   <IconComponent
@@ -175,7 +218,7 @@ export function AccountInfo() {
                   <Text>{env.chainToken}</Text>
                 </Flex>
 
-                <Text>{formattedBalance ? formattedBalance : 0}</Text>
+                <Text>{formattedETHBalance ? formattedETHBalance : 0}</Text>
               </Flex>
             </Stack>
 

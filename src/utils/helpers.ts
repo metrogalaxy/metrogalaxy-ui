@@ -1,5 +1,8 @@
 import BigNumber from 'bignumber.js';
 import RelativeTime from '@yaireo/relative-time';
+import { shortenAddress as shortenAddressLib } from '@quangkeu1995/dappcore';
+
+const UPPER_LIMIT_FORMAT = 1000000;
 
 export function formatAddress(address: string, first = 10, last = -4) {
   if (!address) return '';
@@ -17,8 +20,8 @@ export function formatNumber(number: string | number, precision = 0): string {
   if (number > 0 && number < 1) return toMeaningfulNumber(+number, precision);
 
   let bigNumber = new BigNumber(number);
-  if (bigNumber.comparedTo(1000000) >= 0) {
-    return bigNumber.toExponential(2);
+  if (bigNumber.comparedTo(UPPER_LIMIT_FORMAT) >= 0) {
+    return abbreviateNumber(bigNumber.toNumber());
   }
   let formattedNumber = bigNumber.toFormat(precision);
   const numberParts = formattedNumber.split('.');
@@ -59,4 +62,26 @@ export function safeMul(a: number, b: number): number {
 export function getRelativeTime(timestamp: number): string {
   const relativeTime = new RelativeTime();
   return relativeTime.from(new Date(timestamp * 1000));
+}
+
+export function shortenAddress(address: string): string {
+  if (address === '' || address === '0x') {
+    return '';
+  }
+  return shortenAddressLib(address);
+}
+
+function abbreviateNumber(value: number): string {
+  let newValue = value;
+  const suffixes = ['', 'K', 'M', 'B', 'T'];
+  let suffixNum = 0;
+  while (newValue >= 1000) {
+    newValue /= 1000;
+    suffixNum++;
+  }
+
+  let result = newValue.toPrecision(3);
+
+  result += suffixes[suffixNum];
+  return result;
 }

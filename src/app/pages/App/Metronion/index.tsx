@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Flex, Text, Image, Grid, GridItem, Center } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Grid,
+  GridItem,
+  Center,
+} from '@chakra-ui/react';
 import TitleIcon from './assets/title_icon.svg';
 import { TotalMintInfo } from './TotalMintInfo';
 import { Guide } from './Guide';
@@ -8,7 +16,6 @@ import { Countdown } from './Countdown';
 import { SaleEnded } from './SaleEnded';
 
 import { useEthers } from '@quangkeu1995/dappcore';
-import { Web3Provider } from '@ethersproject/providers';
 import {
   METRONION_PRIVATE_CAP,
   METRONION_PUBLIC_CAP,
@@ -29,8 +36,7 @@ export enum Round {
 }
 
 export function Metronion() {
-  const { library, account } = useEthers();
-  const provider = library as Web3Provider;
+  const { account } = useEthers();
   const { isActivated } = useAccount();
   const now = Date.now();
 
@@ -44,9 +50,8 @@ export function Metronion() {
   const saleEnded = now >= env.metronionSale.endSaleTime.getTime();
 
   // check address is whitelisted if on the private sale phase
-  const { data: isWhitelisted } = useIsWhitelistedAddress(provider, account!, {
+  const { data: isWhitelisted } = useIsWhitelistedAddress(account!, {
     enabled:
-      provider &&
       isActivated &&
       duringPrivateSale &&
       account !== undefined &&
@@ -55,11 +60,9 @@ export function Metronion() {
 
   // get user record on private and public sale
   const { data: userRecord, refetch: refetchUserRecord } = useGetUserRecord(
-    provider,
     account!,
     {
       enabled:
-        provider &&
         isActivated &&
         (duringPrivateSale || duringPublicSale || saleEnded) &&
         account !== undefined &&
@@ -118,16 +121,15 @@ export function Metronion() {
         mt={8}
         templateAreas={{
           base: `"totalMint" "guide" "avatar" "countdown" "mintBox"`,
-          xl: `"totalMint avatar countdown" "guide avatar mintBox"`,
+          xl: `"totalMint avatar countdown" "totalMint avatar mintBox"`,
         }}
       >
         {/* Total Mint Info */}
         <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="totalMint">
           <TotalMintInfo />
-        </GridItem>
-        {/* Guide */}
-        <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="guide">
-          <Guide />
+          <Box mt={8}>
+            <Guide />
+          </Box>
         </GridItem>
         {/* Avatar */}
         <GridItem width={{ base: '100%', xs: 'auto' }} gridArea="avatar">

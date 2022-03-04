@@ -28,15 +28,9 @@ export interface SaleRecord {
 }
 
 export interface MetronionSaleFetcher {
-  isWhitelistedAddress: (
-    provider: Web3Provider | undefined,
-    account: string,
-  ) => Promise<boolean>;
-  getSaleRecord: (provider: Web3Provider | undefined) => Promise<SaleRecord>;
-  getUserRecord: (
-    provider: Web3Provider | undefined,
-    account: string,
-  ) => Promise<UserSaleRecord>;
+  isWhitelistedAddress: (account: string) => Promise<boolean>;
+  getSaleRecord: () => Promise<SaleRecord>;
+  getUserRecord: (account: string) => Promise<UserSaleRecord>;
   buyMetronion: (
     signer: Signer,
     amount: BigNumber,
@@ -65,42 +59,31 @@ export interface BuyMetronionParams {
   totalPaid: BigNumber;
 }
 
-export function useIsWhitelistedAddress(
-  provider: Web3Provider | undefined,
-  account: string,
-  options?: any,
-) {
+export function useIsWhitelistedAddress(account: string, options?: any) {
   return useQuery<boolean, Error>(
     ['metronion-sale-is-whitelisted', account],
     async (): Promise<boolean> => {
-      return fetcher.isWhitelistedAddress(provider, account);
+      return fetcher.isWhitelistedAddress(account);
     },
     options,
   );
 }
 
-export function useGetUserRecord(
-  provider: Web3Provider | undefined,
-  account: string,
-  options?: any,
-) {
+export function useGetUserRecord(account: string, options?: any) {
   return useQuery<UserSaleRecord, Error>(
     ['metronion-sale-user-sale-record', account],
     async (): Promise<UserSaleRecord> => {
-      return fetcher.getUserRecord(provider, account);
+      return fetcher.getUserRecord(account);
     },
     options,
   );
 }
 
-export function useGetSaleRecord(
-  provider: Web3Provider | undefined,
-  options?: any,
-) {
+export function useGetSaleRecord(options?: any) {
   return useQuery<SaleRecord, Error>(
     ['metronion-sale-sale-record'],
     async (): Promise<SaleRecord> => {
-      return fetcher.getSaleRecord(provider);
+      return fetcher.getSaleRecord();
     },
     options,
   );
@@ -109,6 +92,7 @@ export function useGetSaleRecord(
 export function useBuyMetronion(
   provider: Web3Provider | undefined,
   account: string | null | undefined,
+  options?: any,
 ) {
   return useMutation((params: BuyMetronionParams) => {
     if (provider && account) {
@@ -116,5 +100,5 @@ export function useBuyMetronion(
       return fetcher.buyMetronion(signer, params.amount, params.totalPaid);
     }
     return Promise.reject('web3 not connected');
-  });
+  }, options);
 }
