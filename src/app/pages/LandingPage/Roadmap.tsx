@@ -99,12 +99,7 @@ export function Roadmap() {
               }}
               alignItems="center"
             >
-              <Image
-                src={MoonKnightImg}
-                w="100%"
-                maxW={{ base: '120px' }}
-                ratio={16 / 9}
-              />
+              <Image src={MoonKnightImg} w="100%" maxW={{ base: '120px' }} />
               <Image src={FaralandImg} w="100%" maxW={{ base: '120px' }} />
               <Image src={V2BLabImg} w="100%" maxW={{ base: '120px' }} />
             </Grid>

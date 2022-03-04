@@ -136,7 +136,6 @@ export function Metronion() {
           <Center>
             <Image
               src={AvatarGif}
-              ratio={3 / 4}
               maxW={{ base: '200px', sm: '250px', lg: '300px' }}
             />
           </Center>
