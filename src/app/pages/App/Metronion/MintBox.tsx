@@ -20,7 +20,7 @@ import { toast } from 'react-toastify';
 import { Round } from './';
 import { formatNumber } from 'src/utils/helpers';
 import { parseError } from 'src/utils/errors';
-import env from 'src/app/config';
+import env, { ToastConfig } from 'src/app/config';
 import { GetExplorerTransactionLink } from 'src/app/config/constants';
 import { useBuyMetronion } from 'src/app/service/MetronionSale';
 import { useButtonSize } from 'src/app/hooks';
@@ -114,15 +114,7 @@ export function MintBox(props: MintboxProps) {
           },
         },
       },
-      {
-        position: 'top-right',
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      },
+      ToastConfig,
     );
   };
 

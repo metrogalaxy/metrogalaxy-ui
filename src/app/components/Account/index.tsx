@@ -1,31 +1,23 @@
 import * as React from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { useAccountSlice } from './slice';
-import { useDispatch } from 'react-redux';
 import { useAccount } from 'src/app/hooks';
 import MetamaskService from 'src/app/service/Account/MetamaskService';
 import { ImportWalletModal } from './Modal';
 import { AccountInfo } from './AccountInfo';
 import { useButtonSize } from 'src/app/hooks/useSize';
-// import { useEthers } from '@quangkeu1995/dappcore';
-
-// import { useSelector } from 'react-redux';
-// import { selectAccount } from 'src/app/components/Account/slice/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAccount } from './slice/selectors';
 
 const metamaskService = new MetamaskService();
 
 export function Account() {
-  const [isShowModal, setIsShowModal] = React.useState(false);
   const dispatch = useDispatch();
   const { actions } = useAccountSlice();
   const { isActivated } = useAccount();
   // const { account } = useEthers();
 
-  // const accountState = useSelector(selectAccount);
-
-  // React.useEffect(() => {
-  //   alert(account);
-  // }, []);
+  const accountState = useSelector(selectAccount);
 
   // get initial chain id
   React.useEffect(() => {
@@ -58,7 +50,7 @@ export function Account() {
   // }, []);
 
   const loadWeb3Modal = () => {
-    setIsShowModal(true);
+    dispatch(actions.setIsShowModal(true));
   };
   let modalButtons = (
     <Button variant="outline" onClick={loadWeb3Modal} size={useButtonSize()}>
@@ -73,8 +65,8 @@ export function Account() {
     <Box>
       {modalButtons}
       <ImportWalletModal
-        isShow={isShowModal}
-        handleClose={() => setIsShowModal(false)}
+        isShow={accountState.isShowModal}
+        handleClose={() => dispatch(actions.setIsShowModal(false))}
       />
     </Box>
   );

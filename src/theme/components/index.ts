@@ -6,3 +6,4 @@ export * from './modal';
 export * from './progress';
 export * from './table';
 export * from './text';
+export * from './input';

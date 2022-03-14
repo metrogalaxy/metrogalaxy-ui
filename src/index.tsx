@@ -45,6 +45,9 @@ import env from 'src/app/config';
 // Initialize languages
 import './locales/i18n';
 
+// init firebase
+import './firebase';
+
 // enable mock service worker
 if (process.env.REACT_APP_ENABLE_MOCK_API === 'true') {
   const { worker } = require('./mocks/browser');

@@ -178,18 +178,12 @@ export function AccountInfo() {
               borderBottom="1px dashed"
               borderBottomColor="whiteBlur.300"
             >
-              <Box>
-                <Link href="/inventory">
-                  <Text
-                    textStyle="appNormal"
-                    _hover={{
-                      color: 'green.200',
-                    }}
-                  >
-                    Inventory
-                  </Text>
-                </Link>
-              </Box>
+              <Link href="/inventory" color="white">
+                Inventory
+              </Link>
+              <Link href="/profile" color="white">
+                Account Profile
+              </Link>
             </Stack>
 
             <Stack mt={4}>

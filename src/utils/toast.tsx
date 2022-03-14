@@ -1,11 +1,9 @@
 import { toast } from 'react-toastify';
 import { ITransactionReceipt } from 'src/app/service/types';
 import { GetExplorerTransactionLink } from 'src/app/config/constants';
-import env from 'src/app/config';
+import env, { ToastConfig } from 'src/app/config';
 import { Box, Link } from '@chakra-ui/react';
 import { parseError } from 'src/utils/errors';
-
-const TOAST_AUTO_CLOSE_INTERVAL = 5000;
 
 export async function toastHandler(
   txHashPromise: Promise<ITransactionReceipt>,
@@ -50,14 +48,6 @@ export async function toastHandler(
         },
       },
     },
-    {
-      position: 'top-right',
-      autoClose: TOAST_AUTO_CLOSE_INTERVAL,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    },
+    ToastConfig,
   );
 }

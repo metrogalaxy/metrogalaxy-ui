@@ -16,7 +16,7 @@ export const Button = {
       height: '2.5rem',
     },
     md: {
-      padding: '1.25rem 2.25rem',
+      padding: '1rem 2.25rem',
       height: '3rem',
     },
   },

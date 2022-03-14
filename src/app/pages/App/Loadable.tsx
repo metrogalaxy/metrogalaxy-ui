@@ -49,3 +49,35 @@ export const MetronionInfo = lazyLoad(
     fallback: <LoadingBackground />,
   },
 );
+
+export const Login = lazyLoad(
+  () => import('./Login'),
+  module => module.Login,
+  {
+    fallback: <LoadingBackground />,
+  },
+);
+
+export const SignUp = lazyLoad(
+  () => import('./SignUp'),
+  module => module.SignUp,
+  {
+    fallback: <LoadingBackground />,
+  },
+);
+
+export const ResetPassword = lazyLoad(
+  () => import('./ResetPassword'),
+  module => module.ResetPassword,
+  {
+    fallback: <LoadingBackground />,
+  },
+);
+
+export const Profile = lazyLoad(
+  () => import('./Profile'),
+  module => module.Profile,
+  {
+    fallback: <LoadingBackground />,
+  },
+);

@@ -31,6 +31,10 @@ const env: Config = {
   api: {
     endpoint: 'http://localhost:8080',
   },
+  googleOAuth: {
+    clientId:
+      '421185552601-cciedsseri0im5pru0cc1h0sdai1ob0u.apps.googleusercontent.com',
+  },
 };
 
 export default env;
