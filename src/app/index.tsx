@@ -15,6 +15,10 @@ import {
   Inventory,
   MetronionInfo,
   Marketplace,
+  Login,
+  SignUp,
+  ResetPassword,
+  Profile,
 } from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
@@ -23,11 +27,15 @@ import { LandingPage } from './pages/LandingPage';
 import { ComingSoon } from './pages/App/ComingSoon';
 import { Tokenomics } from './pages/LandingPage/Tokenomics';
 import { AboutUs } from './pages/LandingPage/AboutUs';
+import { UserAuthContextProvider } from './context/UserAuthContext';
 
 import env from 'src/app/config';
 import { useGlobalSlice } from 'src/app/globalSlice';
 import { useDispatch } from 'react-redux';
 import { useGetTokenUSDPrice } from 'src/app/service/Coingecko';
+import ProtectedRoute, {
+  LoginProtectedRoute,
+} from './components/ProtectedRoute';
 
 const FETCH_TOKEN_PRICE_INTERVAL = 30 * 1000;
 
@@ -59,20 +67,41 @@ export function App() {
         />
         <link rel="icon" type="image/png" href={FavIcon} sizes="16x16" />
       </Helmet>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/metronion" element={<Metronion />} />
-        <Route path="/marketplace" element={<Marketplace />} />
-        <Route path="/staking" element={<ComingSoon />} />
-        <Route path="/land" element={<ComingSoon />} />
-        <Route path="/tokenomic" element={<Tokenomics />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/inventory" element={<Inventory />} />
-        <Route path="/inventory" element={<ComingSoon />} />
-        <Route path="/metronion/:id" element={<MetronionInfo />} />
 
-        <Route element={<NotFoundPage />} />
-      </Routes>
+      <UserAuthContextProvider>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/metronion" element={<Metronion />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/staking" element={<ComingSoon />} />
+          <Route path="/land" element={<ComingSoon />} />
+          <Route path="/tokenomic" element={<Tokenomics />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/inventory" element={<ComingSoon />} />
+          <Route path="/metronion/:id" element={<MetronionInfo />} />
+          <Route
+            path="/login"
+            element={
+              <LoginProtectedRoute>
+                <Login />
+              </LoginProtectedRoute>
+            }
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route element={<NotFoundPage />} />
+        </Routes>
+      </UserAuthContextProvider>
     </BrowserRouter>
   );
 }

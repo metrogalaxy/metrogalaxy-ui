@@ -32,8 +32,13 @@ export interface Config {
   api: {
     endpoint: string;
   };
+  googleOAuth: {
+    clientId: string;
+  };
 }
 
 const ENV: Config = require(`./${environment}.ts`).default;
 
 export default ENV;
+
+export * from './config';

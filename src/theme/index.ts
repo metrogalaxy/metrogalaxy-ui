@@ -9,6 +9,7 @@ import {
   Drawer,
   Table,
   Progress,
+  Input,
 } from './components/';
 import { layerStyles } from './layerStyles';
 
@@ -33,6 +34,7 @@ const components = {
   Drawer,
   Table,
   Progress,
+  Input,
 };
 
 export const theme = extendTheme({

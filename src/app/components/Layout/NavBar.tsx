@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { Box, Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, Stack, Text, Button, Icon } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { slide as Menu } from 'react-burger-menu';
 import { Logo } from 'src/app/components/Logo';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Account } from 'src/app/components/Account';
+import { useButtonSize } from 'src/app/hooks';
+import { useGlobalState } from 'src/app/globalSlice';
+import { AiOutlineUser } from 'react-icons/ai';
 
 var styles = {
   bmBurgerButton: {
@@ -49,6 +52,30 @@ interface INavBarProps {
 }
 
 export function NavBar(props: INavBarProps) {
+  const buttonSize = useButtonSize();
+  const navigate = useNavigate();
+  const { user } = useGlobalState();
+
+  const LoginButton = props.isShowConnectWallet ? null : (
+    <Button
+      variant="solid"
+      size={buttonSize}
+      display={{ base: 'none', xl: 'inline-flex' }}
+      width="100%"
+      mt={{ base: 4, xl: 0 }}
+      onClick={() => {
+        if (user) {
+          navigate('profile');
+        } else {
+          navigate('/login');
+        }
+      }}
+      rightIcon={<Icon as={AiOutlineUser} />}
+    >
+      {user ? 'Account' : 'Log in'}
+    </Button>
+  );
+
   return (
     <Flex
       as="nav"
@@ -86,7 +113,9 @@ export function NavBar(props: INavBarProps) {
           <LinkComponent to="/land">Land</LinkComponent>
         </Stack>
       </Flex>
+
       <Flex>
+        {LoginButton}
         <Flex alignItems="center">
           <Box display={{ base: 'none', xl: 'block' }}>
             {props.isShowConnectWallet && <Account />}
@@ -107,6 +136,7 @@ export function NavBar(props: INavBarProps) {
               </LinkComponentMobile>
               <LinkComponentMobile to="/staking">Staking</LinkComponentMobile>
               <LinkComponentMobile to="/land">Land</LinkComponentMobile>
+              {LoginButton}
               {props.isShowConnectWallet && (
                 <Box mt={6} pt={6} h="100%" borderTop="1px solid #3E4C59">
                   <Account />

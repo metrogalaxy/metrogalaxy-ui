@@ -5,6 +5,7 @@ import { AccountState } from './types';
 export const initialState: AccountState = {
   currentChainId: 0,
   isConnected: false,
+  isShowModal: false,
 };
 
 const slice = createSlice({
@@ -16,6 +17,9 @@ const slice = createSlice({
     },
     setIsConnected(state, action: PayloadAction<boolean>) {
       state.isConnected = action.payload;
+    },
+    setIsShowModal(state, action: PayloadAction<boolean>) {
+      state.isShowModal = action.payload;
     },
   },
 });
