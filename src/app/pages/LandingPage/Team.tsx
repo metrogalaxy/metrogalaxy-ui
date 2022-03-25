@@ -35,7 +35,7 @@ const team = [
     position: 'CTO, Co-Founder',
     name: 'Quang Nguyen',
     linkedIn: 'https://www.linkedin.com/in/le-quang-nguyen-a42120135/',
-    description: `Full-stack engineer with 6 years experience in software development and blockchain. 
+    description: `Full-stack engineer with 5 years experience in software development and blockchain. 
     Dapp builder, Kyber Network Alumni.`,
   },
   {

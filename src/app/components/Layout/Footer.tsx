@@ -8,7 +8,7 @@ import {
   MEDIUM_URL,
   DISCORD_URL,
 } from 'src/app/config/constants';
-import WhitepaperPdf from 'src/app/assets/whitepaper.pdf';
+import Pitchdeck from 'src/app/assets/pitchdeck.pdf';
 import TermsPdf from 'src/app/assets/terms_and_conditions.pdf';
 
 export function Footer() {
@@ -42,7 +42,7 @@ export function Footer() {
                 About
               </Text>
               <CustomLink href="/about">About Us</CustomLink>
-              <CustomLink href={WhitepaperPdf}>Whitepaper</CustomLink>
+              <CustomLink href={Pitchdeck}>Pitchdeck</CustomLink>
               <CustomLink href="/tokenomic" target="_self">
                 Token Metrics
               </CustomLink>
