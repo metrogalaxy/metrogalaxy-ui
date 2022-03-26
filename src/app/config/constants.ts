@@ -5,6 +5,8 @@ export const MEDIUM_URL = 'https://medium.com/@metrogalaxy';
 export const DISCORD_URL = 'https://discord.gg/HyEEZAgJ';
 export const ADMIN_EMAIL = 'captain@metrogalaxy.io';
 export const TRAILER_VIDEO_URL = 'https://www.youtube.com/watch?v=1nVdAdgVmy0';
+export const CAREER_URL =
+  'https://metrogalaxy.notion.site/Recruiting-and-Careers-f52df90fb5de48999885401eadf6a59e';
 
 export const METRONION_PANEL_LIMITS_PER_PAGE = 6;
 export const MAX_METRONION_COUNT = 10000;

@@ -7,6 +7,7 @@ import {
   ADMIN_EMAIL,
   MEDIUM_URL,
   DISCORD_URL,
+  CAREER_URL,
 } from 'src/app/config/constants';
 import Pitchdeck from 'src/app/assets/pitchdeck.pdf';
 import TermsPdf from 'src/app/assets/terms_and_conditions.pdf';
@@ -46,6 +47,7 @@ export function Footer() {
               <CustomLink href="/tokenomic" target="_self">
                 Token Metrics
               </CustomLink>
+              <CustomLink href={CAREER_URL}>Careers</CustomLink>
             </Flex>
             <Flex
               direction="column"
