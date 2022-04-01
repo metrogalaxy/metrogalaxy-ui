@@ -1,4 +1,4 @@
-// const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   test: /\.(png|svg|jpg|gif|pdf)$/,
@@ -10,4 +10,5 @@ module.exports = {
       },
     },
   ],
+  plugins: [new Dotenv()],
 };

@@ -204,3 +204,5 @@ async function fetchUserInfo(email: string): Promise<UserInfo> {
     throw new Error('user did not exist');
   }
 }
+
+export * from './hashing';

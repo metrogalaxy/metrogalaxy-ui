@@ -2,7 +2,7 @@ export const INFURA_ID = '5e95a0d24c4548f5bc89ee9dc2930380';
 export const TELEGRAM_URL = 'https://t.me/metrogalaxy';
 export const TWITTER_URL = 'https://twitter.com/metrogalaxy_io';
 export const MEDIUM_URL = 'https://medium.com/@metrogalaxy';
-export const DISCORD_URL = 'https://discord.gg/HyEEZAgJ';
+export const DISCORD_URL = 'https://discord.gg/hK7yedzXm7';
 export const ADMIN_EMAIL = 'captain@metrogalaxy.io';
 export const TRAILER_VIDEO_URL = 'https://www.youtube.com/watch?v=1nVdAdgVmy0';
 

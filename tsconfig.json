@@ -20,7 +20,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "outDir": "./build",
-    "rootDir": "./src"
+    "rootDir": "./src",
   },
   "include": ["src", "src/styles/fonts"],
   "exclude": ["node_modules", "build"]
