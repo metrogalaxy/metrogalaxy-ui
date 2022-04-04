@@ -10,7 +10,7 @@ import { City } from './City';
 
 export function LandingPage() {
   return (
-    <PageLayout>
+    <PageLayout isShowConnectWallet={false}>
       <Helmet>
         <title>MetroGalaxy Homepage</title>
         <meta name="description" content="The MetroGalaxy Homepage" />

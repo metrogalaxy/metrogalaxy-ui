@@ -33,7 +33,7 @@ export default class MetamaskService extends BaseWalletService {
   //   });
   // };
 
-  addNewChain = async (chainId: number): Promise<Error> => {
+  addNewChain = async (chainId: number): Promise<void> => {
     if (this.ethereum) {
       await this.ethereum.request({
         method: 'wallet_addEthereumChain',
@@ -51,28 +51,30 @@ export default class MetamaskService extends BaseWalletService {
           },
         ],
       });
+      return;
     }
-    return new Error(ErrorMetamaskNotInstalled);
+    throw new Error(ErrorMetamaskNotInstalled);
   };
 
-  switchChain = async (chainId: number): Promise<Error> => {
+  switchChain = async (chainId: number): Promise<void> => {
     if (this.ethereum) {
       try {
         await this.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: ethers.utils.hexValue(chainId) }],
         });
+        return;
       } catch (error: any) {
         console.log(error);
         if (error?.code === 4902 || error?.code === -32603) {
           return await this.addNewChain(chainId);
         } else {
-          return new Error(error!.message);
+          throw new Error(error!.message);
         }
       }
     }
 
-    return new Error(ErrorMetamaskNotInstalled);
+    throw new Error(ErrorMetamaskNotInstalled);
   };
 
   getCurrentChainId = async (): Promise<number> => {

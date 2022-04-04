@@ -68,14 +68,14 @@ export function ImportWalletModal(props: IImportWalletModalProps) {
       return;
     }
     setIsSwitchChain(true);
-    const err = await metamaskService.switchChain(env.chainId);
-    if (err) {
-      console.log(err);
-      setError(err);
-    } else {
+    try {
+      await metamaskService.switchChain(env.chainId);
       if (env.chainId) {
         dispatch(actions.setCurrentChainId(Number(env.chainId)));
       }
+    } catch (error) {
+      console.log(error);
+      setError(error as Error);
     }
     setIsSwitchChain(false);
   };

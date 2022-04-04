@@ -3,10 +3,10 @@ import { Box } from '@chakra-ui/react';
 import { NavBar } from './NavBar';
 import { Footer } from './Footer';
 
-export function PageLayout({ children }) {
+export function PageLayout({ children, isShowConnectWallet }) {
   return (
     <Box>
-      <NavBar />
+      <NavBar isShowConnectWallet={isShowConnectWallet} />
       {children}
       <Footer />
     </Box>

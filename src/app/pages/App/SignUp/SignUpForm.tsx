@@ -9,46 +9,68 @@ import {
   Input,
   Link,
   Button,
-  Icon,
   Spinner,
   useBoolean,
 } from '@chakra-ui/react';
-import { FcGoogle } from 'react-icons/fc';
 import { useButtonSize } from 'src/app/hooks';
 import { useForm } from 'react-hook-form';
 import {
   signUpWithEmailPassword,
   sendVerificationEmail,
-  signInWithGoogle,
+  fetchUserInfo,
 } from 'src/app/service/Auth';
 import { toast } from 'react-toastify';
 import { ToastConfig } from 'src/app/config';
 import { parseFirebaseAuthError } from 'src/utils/errors';
 import { VerifyEmail } from './VerifyEmail';
-import { useNavigate } from 'react-router-dom';
-
-interface SignUpFormData {
-  email: string;
-  password: string;
-  name: string;
-}
+import { ConnectWallet } from './ConnectWallet';
+import { useAccount } from 'src/app/hooks';
+import { useEthers } from '@quangkeu1995/dappcore';
+import {
+  SignUpFormData,
+  signMessageToConnectWeb3,
+} from 'src/app/service/Auth/';
+import { Web3Provider } from '@ethersproject/providers';
 
 export function SignUpForm() {
   const buttonSize = useButtonSize();
   const [isSubmitting, setIsSubmitting] = useBoolean();
-  const [isSubmittingGoogle, setIsSubmittingGoogle] = useBoolean();
   const [userEmail, setUserEmail] = React.useState<string>('');
-  const { register, formState, handleSubmit } = useForm<SignUpFormData>();
-  const navigate = useNavigate();
+  const { register, formState, handleSubmit, setValue } =
+    useForm<SignUpFormData>();
+  const { isActivated } = useAccount();
+  const { account, library } = useEthers();
+  const provider = library as Web3Provider;
+
+  // register field wallet manually
+  register('wallet', {
+    required: true,
+    validate: value => value !== '' && isActivated,
+  });
+
+  React.useEffect(() => {
+    setValue('wallet', account ? account : '');
+  }, [account, setValue]);
 
   const onSubmit = async (data: SignUpFormData) => {
     setIsSubmitting.on();
+
+    // verify that user wallet is not used
     try {
-      const response = await signUpWithEmailPassword(
-        data.email,
-        data.password,
-        data.name,
-      );
+      const userInfo = await fetchUserInfo(account!);
+      if (userInfo) {
+        toast.error('wallet address is already used', ToastConfig);
+        setIsSubmitting.off();
+        return;
+      }
+    } catch (error) {}
+
+    try {
+      // get user signature
+      const signature = await signMessageToConnectWeb3(provider, account);
+      data.signature = signature;
+
+      const response = await signUpWithEmailPassword(data);
       if (response.user.email) {
         setUserEmail(response.user.email);
         if (!response.user.emailVerified) {
@@ -66,20 +88,20 @@ export function SignUpForm() {
     }
   };
 
-  const onGoogleSignup = async () => {
-    setIsSubmittingGoogle.on();
-    try {
-      await signInWithGoogle();
-      setIsSubmittingGoogle.off();
-      navigate('/profile');
-    } catch (error) {
-      toast.dismiss();
-      const err = parseFirebaseAuthError(error);
-      toast.error(err.message, ToastConfig);
-      setIsSubmitting.off();
-      return;
-    }
-  };
+  // const onGoogleSignup = async () => {
+  //   setIsSubmittingGoogle.on();
+  //   try {
+  //     await signInWithGoogle();
+  //     setIsSubmittingGoogle.off();
+  //     navigate('/profile');
+  //   } catch (error) {
+  //     toast.dismiss();
+  //     const err = parseFirebaseAuthError(error);
+  //     toast.error(err.message, ToastConfig);
+  //     setIsSubmitting.off();
+  //     return;
+  //   }
+  // };
 
   const isMissingEmail =
     formState.errors.email && formState.errors.email.type === 'required';
@@ -95,6 +117,10 @@ export function SignUpForm() {
     formState.errors.name &&
     (formState.errors.name.type === 'minLength' ||
       formState.errors.name.type === 'maxLength');
+  const isMissingWallet =
+    formState.errors.wallet &&
+    (formState.errors.wallet.type === 'required' ||
+      formState.errors.wallet.type === 'validate');
 
   if (userEmail) {
     return <VerifyEmail />;
@@ -113,6 +139,21 @@ export function SignUpForm() {
         Sign Up
       </Text>
       <Stack mt={10} gap={2}>
+        {/* Connect Wallet */}
+        <FormControl isInvalid={isMissingWallet}>
+          <FormLabel
+            textStyle="appNormal"
+            htmlFor="wallet"
+            fontFamily="Acrom-Bold"
+          >
+            Wallet
+          </FormLabel>
+          <ConnectWallet />
+          {isMissingWallet && (
+            <FormErrorMessage>Wallet is not connected</FormErrorMessage>
+          )}
+        </FormControl>
+
         {/* Email */}
         <FormControl isRequired isInvalid={isMissingEmail || isInvalidEmail}>
           <FormLabel
@@ -247,14 +288,14 @@ export function SignUpForm() {
           variant="solid"
           size={buttonSize}
           onClick={handleSubmit(onSubmit)}
-          disabled={isSubmitting || isSubmittingGoogle}
+          disabled={isSubmitting}
           rightIcon={
             isSubmitting ? <Spinner size="sm" color="white" /> : undefined
           }
         >
           Create Account
         </Button>
-        <Text
+        {/* <Text
           textStyle="appNormal"
           color="whiteBlur.200"
           textAlign="center"
@@ -273,7 +314,7 @@ export function SignUpForm() {
           }
         >
           Sign up with Google
-        </Button>
+        </Button> */}
       </Stack>
       <Stack mt={6}>
         <Text
@@ -283,11 +324,24 @@ export function SignUpForm() {
           fontSize={{ base: '12px', lg: '14px' }}
         >
           Already have an account?{' '}
-          <Link href="/login" color="green.200">
-            Log in
+          <Link href="/profile" color="green.200">
+            View profile
           </Link>
         </Text>
       </Stack>
+      {/* <Stack mt={3}>
+        <Text
+          textStyle="appNormal"
+          color="whiteBlur.200"
+          textAlign="center"
+          fontSize={{ base: '12px', lg: '14px' }}
+        >
+          Email not verified?{' '}
+          <Link href="" color="green.200" onClick={sendVerificationEmail}>
+            Send verification email
+          </Link>
+        </Text>
+      </Stack> */}
     </Container>
   );
 }

@@ -1,5 +1,6 @@
 /* --- STATE --- */
-import { User } from 'firebase/auth';
+// import { User } from 'firebase/auth';
+import { UserInfo } from '../service/Auth';
 
 export enum LoginType {
   EMAIL = 'email',
@@ -17,7 +18,5 @@ export interface GoogleUserProfile {
 export interface GlobalState {
   avaxPrice: number;
   metroPrice: number;
-  user: User | null;
-  userName: string;
-  userWeb3Address: string;
+  userInfo: UserInfo | null;
 }

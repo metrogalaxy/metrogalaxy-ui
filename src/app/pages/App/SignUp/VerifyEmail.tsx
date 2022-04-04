@@ -22,8 +22,8 @@ export function VerifyEmail() {
   const buttonSize = useButtonSize();
   const navigate = useNavigate();
 
-  const backToLogin = () => {
-    navigate('/login');
+  const backToProfile = () => {
+    navigate('/profile');
   };
 
   const resendEmail = async () => {
@@ -90,10 +90,10 @@ export function VerifyEmail() {
         <Button
           size={buttonSize}
           variant="outline"
-          onClick={backToLogin}
+          onClick={backToProfile}
           disabled={isSubmitting}
         >
-          Back to login
+          Back to user profile page
         </Button>
       </Stack>
     </Container>

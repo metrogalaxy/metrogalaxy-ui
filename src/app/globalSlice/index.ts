@@ -1,16 +1,14 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'src/utils/@reduxjs/toolkit';
 import { GlobalState } from './types';
-import { User } from 'firebase/auth';
 import { useSelector } from 'react-redux';
 import { selectGlobal } from './selectors';
+import { UserInfo } from 'src/app/service/Auth';
 
 export const initialState: GlobalState = {
   avaxPrice: 0,
   metroPrice: 0.01,
-  user: null,
-  userName: '',
-  userWeb3Address: '',
+  userInfo: null,
 };
 
 const slice = createSlice({
@@ -23,18 +21,12 @@ const slice = createSlice({
     setMetroPrice(state, action: PayloadAction<number>) {
       state.metroPrice = action.payload;
     },
-    setUserProfile(state, action: PayloadAction<User | null>) {
+    setUserInfo(state, action: PayloadAction<UserInfo | null>) {
       if (action.payload) {
-        state.user = JSON.parse(JSON.stringify(action.payload));
+        state.userInfo = JSON.parse(JSON.stringify(action.payload));
       } else {
-        state.user = null;
+        state.userInfo = null;
       }
-    },
-    setUserName(state, action: PayloadAction<string>) {
-      state.userName = action.payload;
-    },
-    setUserWeb3Address(state, action: PayloadAction<string>) {
-      state.userWeb3Address = action.payload;
     },
   },
 });

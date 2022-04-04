@@ -8,7 +8,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   OAuthCredential,
-  User,
   AuthErrorCodes,
   sendPasswordResetEmail,
 } from 'firebase/auth';
@@ -24,6 +23,7 @@ import {
 import { Web3Provider } from '@ethersproject/providers';
 import { useDispatch } from 'react-redux';
 import { globalActions } from 'src/app/globalSlice';
+import { hashEmailPassword } from './';
 
 // init
 const provider = new GoogleAuthProvider();
@@ -37,24 +37,33 @@ export interface GoogleSignInResponse {
   googleCredential: OAuthCredential | null;
 }
 
+// SignUpFormData to register new user
+export interface SignUpFormData {
+  wallet: string;
+  email: string;
+  password: string;
+  name: string;
+  signature: string;
+}
+
 export async function signUpWithEmailPassword(
-  email: string,
-  password: string,
-  name: string,
+  formData: SignUpFormData,
 ): Promise<UserCredential> {
   const auth = getAuth();
   const userCredential = await createUserWithEmailAndPassword(
     auth,
-    email,
-    password,
+    formData.email,
+    formData.password,
   );
 
   // create user in firestore
   await setDoc(
-    doc(db, USER_COLLECTION_NAME, email),
+    doc(db, USER_COLLECTION_NAME, formData.wallet),
     {
-      email: email,
-      name: name,
+      email: formData.email,
+      name: formData.name,
+      hash: hashEmailPassword(formData.email, formData.password),
+      signature: formData.signature,
     },
     { merge: true },
   );
@@ -155,35 +164,41 @@ export async function disconnectAccountWeb3Wallet(
   });
 }
 
-interface UserInfo {
+export interface UserInfo {
   email: string;
   name: string;
-  address: string;
+  wallet: string;
   signature: string;
 }
 
-export async function useWatchUser(user: User | null) {
+export async function useWatchUser(walletAddress: string | null | undefined) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (user && user.email) {
-      console.log('fetch user info');
-      fetchUserInfo(user.email).then(userInfo => {
-        dispatch(globalActions.setUserName(userInfo.name));
-        dispatch(globalActions.setUserWeb3Address(userInfo.address));
-      });
-    }
+    const initialFetch = async function () {
+      try {
+        if (walletAddress) {
+          console.log('fetch user info');
+          const userInfo = await fetchUserInfo(walletAddress);
+          dispatch(globalActions.setUserInfo(userInfo));
+        }
+      } catch (error) {
+        dispatch(globalActions.setUserInfo(null));
+      }
+    };
+
+    initialFetch();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [walletAddress]);
 
   React.useEffect(() => {
-    if (user && user.email) {
-      const docRef = doc(db, USER_COLLECTION_NAME, user.email);
+    if (walletAddress) {
+      const docRef = doc(db, USER_COLLECTION_NAME, walletAddress);
       console.log('subscribe watch user');
       const unsub = onSnapshot(docRef, doc => {
         const docData = doc.data() as UserInfo;
-        dispatch(globalActions.setUserName(docData.name));
-        dispatch(globalActions.setUserWeb3Address(docData.address));
+        dispatch(globalActions.setUserInfo(docData));
       });
       return () => {
         console.log('unsubscribe watch user');
@@ -192,14 +207,20 @@ export async function useWatchUser(user: User | null) {
     }
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [walletAddress]);
 }
 
-async function fetchUserInfo(email: string): Promise<UserInfo> {
-  const docRef = doc(db, USER_COLLECTION_NAME, email);
+export async function fetchUserInfo(wallet: string): Promise<UserInfo> {
+  const docRef = doc(db, USER_COLLECTION_NAME, wallet);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    return docSnap.data() as UserInfo;
+    const data = docSnap.data();
+    return {
+      email: data.email,
+      name: data.name,
+      wallet: data.wallet,
+      signature: data.signature,
+    };
   } else {
     throw new Error('user did not exist');
   }

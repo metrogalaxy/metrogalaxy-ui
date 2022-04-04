@@ -138,9 +138,9 @@ export function ResetPassword() {
             textStyle="appNormal"
             color="white.100"
             fontSize={{ base: '12px', lg: '14px' }}
-            href="/login"
+            href="/profile"
           >
-            Back to log in
+            Back to profile
           </Link>
         </Flex>
       </Container>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Flex, Link, Stack, Text, Button, Icon } from '@chakra-ui/react';
+import { Box, Flex, Link, Stack, Text, Button } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { slide as Menu } from 'react-burger-menu';
 import { Logo } from 'src/app/components/Logo';
@@ -7,7 +7,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Account } from 'src/app/components/Account';
 import { useButtonSize } from 'src/app/hooks';
 import { useGlobalState } from 'src/app/globalSlice';
-import { AiOutlineUser } from 'react-icons/ai';
+import { useAccount } from 'src/app/hooks';
 
 var styles = {
   bmBurgerButton: {
@@ -54,7 +54,10 @@ interface INavBarProps {
 export function NavBar(props: INavBarProps) {
   const buttonSize = useButtonSize();
   const navigate = useNavigate();
-  const { user } = useGlobalState();
+  const { userInfo } = useGlobalState();
+  const { isActivated } = useAccount();
+
+  const showAccount = userInfo && isActivated;
 
   const LoginButton = props.isShowConnectWallet ? null : (
     <Button
@@ -64,15 +67,14 @@ export function NavBar(props: INavBarProps) {
       width="100%"
       mt={{ base: 4, xl: 0 }}
       onClick={() => {
-        if (user) {
-          navigate('profile');
+        if (showAccount) {
+          navigate('/profile');
         } else {
-          navigate('/login');
+          navigate('/signup');
         }
       }}
-      rightIcon={<Icon as={AiOutlineUser} />}
     >
-      {user ? 'Account' : 'Log in'}
+      {showAccount ? 'Account' : 'Join Us'}
     </Button>
   );
 

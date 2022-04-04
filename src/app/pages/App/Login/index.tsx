@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Flex, Box } from '@chakra-ui/react';
 import BannerImg from 'src/app/pages/LandingPage/assets/banner.webp';
-import { LoginForm } from './LoginForm';
+// import { LoginForm } from './LoginForm';
 
 export function Login() {
   return (
@@ -23,7 +23,7 @@ export function Login() {
         height="100%"
         bgColor="rgba(0,0,0,0.5)"
       ></Box>
-      <LoginForm />
+      {/* <LoginForm /> */}
     </Flex>
   );
 }

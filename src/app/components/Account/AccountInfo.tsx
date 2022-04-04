@@ -47,7 +47,7 @@ export function AccountInfo() {
 
   const ethBalance = useEtherBalance(account);
   const metroBalance = useTokenBalance(env.metroToken.contractAddress, account);
-  const formattedAddress = shortenAddress(account!);
+  const formattedAddress = account ? shortenAddress(account!) : '';
   let formattedETHBalance;
 
   if (ethBalance) {
