@@ -17,7 +17,7 @@ import CmoImage from './assets/team/trinh_cong_sang.webp';
 import BusinessDevelopmentImage from './assets/team/pham_hoang_minh.webp';
 import GameDevLeadImage from './assets/team/nguyen_hoang_giang.webp';
 import GameServerLeadImage from './assets/team/dang_hoang_long.webp';
-import ArtDirectorImage from './assets/team/nguyen_duy_vu.webp';
+// import ArtDirectorImage from './assets/team/nguyen_duy_vu.webp';
 import Artist01Image from './assets/team/nguyen_thu_linh.webp';
 import Artist02Image from './assets/team/mac_van_anh.webp';
 import LinkedinImage from './assets/team/linkedin.svg';
@@ -74,17 +74,17 @@ const team = [
     description:
       'Senior game server developer with 7 years experience. Strong skills in backend development and database management.',
   },
-  {
-    avatar: ArtDirectorImage,
-    position: 'Art Director',
-    name: 'Vu Nguyen Duy',
-    linkedIn: 'https://www.linkedin.com/in/nguyen-duy-vu-28b81b149/',
-    description:
-      'An experienced leader in game development with excellent management skills and a strong artistic eye. He has hands-on experience of game projects on e-wallet in Malaysia, in which he has the leading role in managing marketing design, concept art game, and visual design. ',
-  },
+  // {
+  //   avatar: ArtDirectorImage,
+  //   position: 'Art Director',
+  //   name: 'Vu Nguyen Duy',
+  //   linkedIn: 'https://www.linkedin.com/in/nguyen-duy-vu-28b81b149/',
+  //   description:
+  //     'An experienced leader in game development with excellent management skills and a strong artistic eye. He has hands-on experience of game projects on e-wallet in Malaysia, in which he has the leading role in managing marketing design, concept art game, and visual design. ',
+  // },
   {
     avatar: Artist01Image,
-    position: 'Game Artist',
+    position: 'Art Director',
     name: 'Linh Nguyen Thu',
     description:
       'She is a passionate artist with her love of game, anime and manga. She started drawing because she likes to see the world in a different angle. She hopes her works encourage people freely explore themselves.',
