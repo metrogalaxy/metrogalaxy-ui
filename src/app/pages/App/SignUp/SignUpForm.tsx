@@ -111,12 +111,10 @@ export function SignUpForm() {
     formState.errors.password && formState.errors.password.type === 'required';
   const isInvalidPassword =
     formState.errors.password && formState.errors.password.type === 'pattern';
-  const isMissingName =
-    formState.errors.name && formState.errors.name.type === 'required';
-  const isInvalidName =
-    formState.errors.name &&
-    (formState.errors.name.type === 'minLength' ||
-      formState.errors.name.type === 'maxLength');
+  const isMissingUsername =
+    formState.errors.username && formState.errors.username.type === 'required';
+  const isInvalidUsername =
+    formState.errors.username && formState.errors.username.type === 'pattern';
   const isMissingWallet =
     formState.errors.wallet &&
     (formState.errors.wallet.type === 'required' ||
@@ -226,7 +224,7 @@ export function SignUpForm() {
             }}
             {...register('password', {
               required: true,
-              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, // min eight characters, at least one uppercase letter, one lowercase letter and one number
+              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/, // min eight characters, at least one uppercase letter, one lowercase letter and one number
             })}
           />
           {isMissingPassword && (
@@ -239,23 +237,26 @@ export function SignUpForm() {
             </FormErrorMessage>
           )}
         </FormControl>
-        {/* Name */}
-        <FormControl isRequired isInvalid={isMissingName || isInvalidName}>
+        {/* username */}
+        <FormControl
+          isRequired
+          isInvalid={isMissingUsername || isInvalidUsername}
+        >
           <FormLabel
             textStyle="appNormal"
-            htmlFor="name"
+            htmlFor="username"
             fontFamily="Acrom-Bold"
           >
-            Name
+            Username
           </FormLabel>
           <Input
-            id="name"
+            id="username"
             type="text"
-            placeholder="Enter your name"
+            placeholder="Enter your username"
             bgColor="gray.500"
             color="white"
             _focus={
-              isMissingName || isInvalidName
+              isMissingUsername || isInvalidUsername
                 ? {
                     borderColor: 'transparent',
                   }
@@ -266,18 +267,18 @@ export function SignUpForm() {
             _placeholder={{
               color: 'white.100',
             }}
-            {...register('name', {
+            {...register('username', {
               required: true,
-              minLength: 4,
-              maxLength: 50,
+              pattern: /^[a-zA-Z0-9.\-_$]{3,30}$/, // min 3, max 30 characters, allow alpha numberic characters, -, _, ., $
             })}
           />
-          {isMissingName && (
-            <FormErrorMessage>Name is required.</FormErrorMessage>
+          {isMissingUsername && (
+            <FormErrorMessage>Username is required.</FormErrorMessage>
           )}
-          {isInvalidName && (
+          {isInvalidUsername && (
             <FormErrorMessage>
-              Name must have at least 4 characters and maximum 50 characters.
+              Name must have at least 3 characters and maximum 30 characters.
+              Numbers, letters, -, _, $, . are allowed.
             </FormErrorMessage>
           )}
         </FormControl>

@@ -145,7 +145,7 @@ export function ProfilePanel() {
     );
   }
 
-  const username = userInfo ? userInfo.name : '';
+  const username = userInfo ? userInfo.username : '';
   return (
     <Box>
       {!userInfo && (
@@ -170,7 +170,7 @@ export function ProfilePanel() {
             {/* Name */}
             <Stack>
               <Text textStyle="appTitle" textTransform="capitalize">
-                Name
+                Username
               </Text>
               <Text
                 textStyle="appNormal"

@@ -13,12 +13,14 @@ import {
 } from 'firebase/auth';
 import {
   doc,
+  collection,
   setDoc,
   getFirestore,
-  onSnapshot,
-  getDoc,
+  getDocs,
   updateDoc,
   deleteField,
+  query,
+  where,
 } from 'firebase/firestore';
 import { Web3Provider } from '@ethersproject/providers';
 import { useDispatch } from 'react-redux';
@@ -42,7 +44,7 @@ export interface SignUpFormData {
   wallet: string;
   email: string;
   password: string;
-  name: string;
+  username: string;
   signature: string;
 }
 
@@ -58,12 +60,13 @@ export async function signUpWithEmailPassword(
 
   // create user in firestore
   await setDoc(
-    doc(db, USER_COLLECTION_NAME, formData.wallet),
+    doc(db, USER_COLLECTION_NAME, formData.email),
     {
       email: formData.email,
-      name: formData.name,
+      username: formData.username,
       hash: hashEmailPassword(formData.email, formData.password),
       signature: formData.signature,
+      wallet: formData.wallet,
     },
     { merge: true },
   );
@@ -166,7 +169,7 @@ export async function disconnectAccountWeb3Wallet(
 
 export interface UserInfo {
   email: string;
-  name: string;
+  username: string;
   wallet: string;
   signature: string;
 }
@@ -192,38 +195,39 @@ export async function useWatchUser(walletAddress: string | null | undefined) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletAddress]);
 
-  React.useEffect(() => {
-    if (walletAddress) {
-      const docRef = doc(db, USER_COLLECTION_NAME, walletAddress);
-      console.log('subscribe watch user');
-      const unsub = onSnapshot(docRef, doc => {
-        const docData = doc.data() as UserInfo;
-        dispatch(globalActions.setUserInfo(docData));
-      });
-      return () => {
-        console.log('unsubscribe watch user');
-        unsub();
-      };
-    }
-    return () => {};
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [walletAddress]);
+  // React.useEffect(() => {
+  //   if (walletAddress) {
+  //     const docRef = doc(db, USER_COLLECTION_NAME, walletAddress);
+  //     console.log('subscribe watch user');
+  //     const unsub = onSnapshot(docRef, doc => {
+  //       const docData = doc.data() as UserInfo;
+  //       dispatch(globalActions.setUserInfo(docData));
+  //     });
+  //     return () => {
+  //       console.log('unsubscribe watch user');
+  //       unsub();
+  //     };
+  //   }
+  //   return () => {};
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [walletAddress]);
 }
 
 export async function fetchUserInfo(wallet: string): Promise<UserInfo> {
-  const docRef = doc(db, USER_COLLECTION_NAME, wallet);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    const data = docSnap.data();
-    return {
-      email: data.email,
-      name: data.name,
-      wallet: data.wallet,
-      signature: data.signature,
-    };
-  } else {
-    throw new Error('user did not exist');
+  const coll = collection(db, USER_COLLECTION_NAME);
+  const q = query(coll, where('wallet', '==', wallet));
+
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.empty || querySnapshot.docs.length === 0) {
+    throw new Error('user not found');
   }
+  const queryRes = querySnapshot.docs[0];
+  return {
+    email: queryRes.get('email'),
+    username: queryRes.get('username'),
+    wallet: queryRes.get('wallet'),
+    signature: queryRes.get('signature'),
+  };
 }
 
 export * from './hashing';
