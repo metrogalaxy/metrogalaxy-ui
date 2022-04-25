@@ -230,4 +230,14 @@ export async function fetchUserInfo(wallet: string): Promise<UserInfo> {
   };
 }
 
+export async function isUsernameExist(username: string): Promise<void> {
+  const coll = collection(db, USER_COLLECTION_NAME);
+  const q = query(coll, where('username', '==', username));
+
+  const querySnapshot = await getDocs(q);
+  if (!querySnapshot.empty || querySnapshot.docs.length > 0) {
+    throw new Error('username is used');
+  }
+}
+
 export * from './hashing';

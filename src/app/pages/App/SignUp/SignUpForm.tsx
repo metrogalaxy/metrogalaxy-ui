@@ -18,6 +18,7 @@ import {
   signUpWithEmailPassword,
   sendVerificationEmail,
   fetchUserInfo,
+  isUsernameExist,
 } from 'src/app/service/Auth';
 import { toast } from 'react-toastify';
 import { ToastConfig } from 'src/app/config';
@@ -64,6 +65,14 @@ export function SignUpForm() {
         return;
       }
     } catch (error) {}
+    // verify that username is available
+    try {
+      await isUsernameExist(data.username);
+    } catch (error) {
+      toast.error(`${error}`, ToastConfig);
+      setIsSubmitting.off();
+      return;
+    }
 
     try {
       // get user signature
