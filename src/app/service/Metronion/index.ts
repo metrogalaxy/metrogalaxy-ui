@@ -6,6 +6,7 @@ import { BaseResponse, Stats } from 'src/app/service/types';
 import { Signer } from '@ethersproject/abstract-signer';
 import { ITransactionReceipt } from '../types';
 import { BigNumber } from 'ethers';
+import { default as MetronionOnChainHandlerImpl } from './on_chain_handler';
 
 /**
  ========= Interfaces
@@ -13,38 +14,46 @@ import { BigNumber } from 'ethers';
 
 export interface MetronionInfo {
   id: number;
+  name: string;
+  versionId: number;
   createdAtTimestamp: number;
   updatedAtTimestamp: number;
   createdAtBlock: number;
   updatedAtBlock: number;
-  name: string;
-  versionId: number;
-  baseStats: Stats;
-  gender?: string;
   owner: string;
-  lastPrice?: number;
-  currentPrice?: number;
-  topBid?: number;
-  listedBy?: string;
-  image?: string;
-  parts?: MetronionParts[];
+  lastPrice: number;
+  currentPrice: number;
+  topBid: number;
+  listedBy: string;
+  image: string;
+  gender: string;
+  type: string;
+  star: number;
+  specialStar: number;
+  baseStats?: Stats;
+  specialStats?: Stats;
+  wearables: MetronionWearables[];
 }
 
-export interface MetronionParts {
+export interface MetronionWearables {
+  id: string;
   type: string;
   name: string;
-  changable: boolean;
+  gender: string;
+  rarity: string;
+  changeable: boolean;
   isOrigin: boolean;
-  rarity: number;
-  image?: string;
+  isRequired: boolean;
+  image: string;
+  stats?: Stats;
 }
 
 export interface MetronionActivities {
   id: number;
-  activityType: string;
-  price?: number;
-  from: string;
-  to: string;
+  type: string;
+  price: number;
+  fromAccount: string;
+  toAccount: string;
   timestamp: number;
   blockNumber: number;
   txHash: string;
@@ -53,8 +62,7 @@ export interface MetronionActivities {
 export interface MetronionOffers {
   id: number;
   price: number;
-  from: string;
-  to?: string;
+  fromAccount: string;
   timestamp: number;
   blockNumber: number;
   txHash: string;
@@ -82,9 +90,7 @@ export interface MetronionsResponse extends BaseResponse {
   data: MetronionInfo[];
 }
 
-export interface MetronionInfoResponse extends BaseResponse {
-  data: MetronionInfo;
-}
+export interface MetronionInfoResponse extends MetronionInfo {}
 
 export interface MetronionActivitiesResponse extends BaseResponse {
   data: MetronionActivities[];
@@ -103,6 +109,9 @@ export interface MetronionFetcher {
   ) => Promise<MetronionsResponse>;
   getMetronionActivities: (id: number) => Promise<MetronionActivities[]>;
   getMetronionOffers: (id: number) => Promise<MetronionOffers[]>;
+}
+
+export interface MetronionOnChainHandler {
   listMetronion: (
     signer: Signer,
     metronionId: BigNumber,
@@ -136,12 +145,14 @@ export interface MetronionFetcher {
 }
 
 let fetcher: MetronionFetcher;
+let onChainHandler: MetronionOnChainHandler = new MetronionOnChainHandlerImpl();
 
 if (env.useMockData) {
   const Fetcher = require('./mock.ts').default;
   fetcher = new Fetcher();
 } else {
-  const Fetcher = require('./api.ts').default;
+  // const Fetcher = require('./api.ts').default;
+  const Fetcher = require('./grpc.ts').default;
   fetcher = new Fetcher();
 }
 
@@ -187,7 +198,11 @@ export function useListMetronion(
   return useMutation((params: ListMetronionParams) => {
     if (provider && account) {
       const signer = provider.getSigner(account);
-      return fetcher.listMetronion(signer, params.metronionId, params.price);
+      return onChainHandler.listMetronion(
+        signer,
+        params.metronionId,
+        params.price,
+      );
     }
     return Promise.reject('web3 not connected');
   }, options);
@@ -205,7 +220,7 @@ export function useDelistMetronion(
   return useMutation((params: DelistMetronionParams) => {
     if (provider && account) {
       const signer = provider.getSigner(account);
-      return fetcher.delistMetronion(signer, params.metronionId);
+      return onChainHandler.delistMetronion(signer, params.metronionId);
     }
     return Promise.reject('web3 not connected');
   }, options);
@@ -229,7 +244,11 @@ export function useOfferMetronion(
   return useMutation((params: OfferMetronionParams) => {
     if (provider && account) {
       const signer = provider.getSigner(account);
-      return fetcher.offerMetronion(signer, params.metronionId, params.price);
+      return onChainHandler.offerMetronion(
+        signer,
+        params.metronionId,
+        params.price,
+      );
     }
     return Promise.reject('web3 not connected');
   }, options);
@@ -247,7 +266,7 @@ export function useCancelOfferMetronion(
   return useMutation((params: CancelOfferMetronionParams) => {
     if (provider && account) {
       const signer = provider.getSigner(account);
-      return fetcher.cancelOfferMetronion(signer, params.metronionId);
+      return onChainHandler.cancelOfferMetronion(signer, params.metronionId);
     }
     return Promise.reject('web3 not connected');
   }, options);
@@ -267,7 +286,7 @@ export function useTakeOfferMetronion(
   return useMutation((params: TakeOfferMetronionParams) => {
     if (provider && account) {
       const signer = provider.getSigner(account);
-      return fetcher.takeOfferMetronion(
+      return onChainHandler.takeOfferMetronion(
         signer,
         params.metronionId,
         params.price,
@@ -292,7 +311,7 @@ export function useBuyMetronion(
   return useMutation((params: BuyMetronionParams) => {
     if (provider && account) {
       const signer = provider.getSigner(account);
-      return fetcher.buyMetronion(
+      return onChainHandler.buyMetronion(
         signer,
         params.metronionId,
         params.price,

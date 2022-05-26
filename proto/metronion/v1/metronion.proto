@@ -1,0 +1,154 @@
+syntax = "proto3";
+
+package proto.metronion.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+
+/**
+ * Data models
+ */
+message MetronionStats {
+    uint64 creativity = 1;
+    uint64 charisma = 2;
+    uint64 resolve = 3;
+    uint64 fitness = 4;
+    uint64 intellect = 5;
+}
+
+message Wearables {
+    string id = 1;
+    string type = 2;
+    string name = 3;
+    string gender = 4;
+    string rarity = 5;
+    bool changeable = 6;
+    bool is_origin = 7;
+    bool is_required = 8;
+    string image = 9;
+    MetronionStats stats = 10;
+}
+
+message MetronionActivity {
+    uint64 id = 1;
+    string type = 2;
+    string from_account = 3;
+    string to_account = 4;
+    double price = 5;
+    uint64 timestamp = 6;
+    uint64 block_number = 7;
+    string tx_hash = 8;
+}
+
+message MetronionOffers {
+    uint64 id = 1;
+    string from_account = 2;
+    double price = 3;
+    uint64 timestamp = 4;
+    uint64 block_number = 5;
+    string tx_hash = 6;
+}
+
+message MetronionListing {
+    uint64 id = 1;
+    string from_account = 2;
+    double price = 3;
+    uint64 timestamp = 4;
+    uint64 block_number = 5;
+    string tx_hash = 6;
+}
+
+/**
+ * Request/Response models
+ */
+
+message GetMetadataRequest {
+    google.protobuf.UInt64Value id = 1;
+}
+
+message GetMetadataResponse {
+    uint64 id = 1;
+    string name = 2;
+    uint64 version_id = 3;
+    uint64 created_at_timestamp = 4;
+    uint64 updated_at_timestamp = 5;
+    uint64 created_at_block = 6;
+    uint64 updated_at_block = 7;
+    string owner = 8;
+    double last_price = 9;
+    double current_price = 10;
+    double top_bid = 11;
+    string listed_by = 12;
+    string image = 13;
+    string gender = 14;
+    string type = 15;
+    uint64 star = 16;
+    uint64 special_star = 17;
+    MetronionStats base_stats = 18;
+    MetronionStats special_stats = 19;
+    repeated Wearables wearables = 20;
+}
+
+message GetListMetadataRequest {
+    google.protobuf.StringValue account = 1;
+    string sort = 2;
+    int32 offset = 3;
+    int32 limit = 4;
+    google.protobuf.UInt64Value id = 5;
+    repeated string gender = 6;
+    repeated string status = 7;
+    map<string, google.protobuf.ListValue> stat = 8;
+}
+
+message GetListMetadataResponse {
+    repeated GetMetadataResponse data = 1;
+    uint64 count = 2;
+}
+
+message GetMetronionActivitiesRequest {
+    google.protobuf.UInt64Value id = 1;
+    string sort = 2;
+}
+
+message GetMetronionActivitiesResponse {
+    repeated MetronionActivity data = 1;
+}
+
+message GetMetronionListingRequest {
+    google.protobuf.UInt64Value id = 1;
+}
+
+message GetMetronionListingResponse {
+    MetronionListing data = 1;
+}
+
+message GetMetronionOffersRequest {
+    google.protobuf.UInt64Value id = 1;
+    string sort = 2;
+}
+
+message GetMetronionOffersResponse {
+    repeated MetronionOffers data = 1;
+}
+
+service MetronionService {
+    rpc GetMetadata(GetMetadataRequest) returns (GetMetadataResponse) {
+        
+    }
+    
+    rpc GetListMetadata(GetListMetadataRequest) returns (GetListMetadataResponse){
+       
+    }
+
+    rpc GetMetronionActivities(GetMetronionActivitiesRequest) returns (GetMetronionActivitiesResponse) {
+      
+    }
+
+    rpc GetMetronionListing(GetMetronionListingRequest) returns (GetMetronionListingResponse) {
+       
+    }
+
+    rpc GetMetronionOffers(GetMetronionOffersRequest) returns (GetMetronionOffersResponse) {
+       
+    }
+}

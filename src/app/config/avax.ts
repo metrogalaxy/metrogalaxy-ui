@@ -29,6 +29,7 @@ const env: Config = {
   useMockData: false,
   api: {
     endpoint: 'localhost:8080',
+    grpcEndpoint: '',
   },
   googleOAuth: {
     clientId:

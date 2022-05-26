@@ -3,8 +3,7 @@ import { Config } from './index';
 const env: Config = {
   chainId: 43113,
   chainName: 'Avalanche Fuji Testnet',
-  nodeUrl:
-    'https://speedy-nodes-nyc.moralis.io/0f59ddc6e01653ef4c14a6ee/avalanche/testnet',
+  nodeUrl: 'https://api.avax-test.network/ext/bc/C/rpc',
   chainToken: 'AVAX',
   chainTokenName: 'Avalanche',
   chainExplorerName: 'Snowtrace',
@@ -30,6 +29,7 @@ const env: Config = {
   useMockData: false,
   api: {
     endpoint: 'https://dev-api.metrogalaxy.io',
+    grpcEndpoint: 'https://dev-grpc-webproxy.metrogalaxy.io',
   },
   googleOAuth: {
     clientId:

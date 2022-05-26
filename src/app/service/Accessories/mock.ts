@@ -13,12 +13,14 @@ const ImgUrls = [
   AccessoriesImages.GirlHair4,
 ];
 
-const AccessoriesArray: Accessories[] = ImgUrls.map((item, index) => {
+const AccessoriesArray: Accessories[] = ImgUrls.map((_, index) => {
   const baseCreatedAtTimestamp = 1640970000;
   const baseBlockNumber = 4746545;
 
   return {
-    id: index,
+    id: '',
+    onChainId: index,
+    type: 'hair',
     createAtTimestamp: baseCreatedAtTimestamp + index,
     updatedAtTimestamp: baseCreatedAtTimestamp + index,
     createdAtBlock: baseBlockNumber + index,
@@ -28,8 +30,12 @@ const AccessoriesArray: Accessories[] = ImgUrls.map((item, index) => {
     lastPrice: 0.5,
     currency: 'AVAX',
     owner: '0x09B64e3d589AE90ACCE69C75C346722D8EbFB65D',
-    uri: `https://api.metrogalaxy.io/v1.0/accessory_metadata/${index}`,
-    image: item,
+    gender: 'male',
+    rarity: 'common',
+    changeable: false,
+    isOrigin: false,
+    isRequired: false,
+    image: '',
   };
 });
 
@@ -56,14 +62,14 @@ class MockFetcher {
     const data = this.composeAccessoriesArray(account);
     return {
       count: data.length,
-      offset: offset,
       data: data.slice(offset * limit, offset * limit + limit),
     };
   }
 
   composeAccessoriesArray(account: string): Accessories[] {
     return this.accessoriesArray.map(item => {
-      item.owner = account;
+      console.log(account);
+      // item.owner = account;
       return item;
     });
   }

@@ -144,7 +144,7 @@ export function MetronionInfo() {
                 {/* Stats */}
                 <StatsComponent stats={metronionInfo.baseStats} />
                 {/* Accessories */}
-                <AccessoriesPanel parts={metronionInfo.parts} />
+                <AccessoriesPanel parts={metronionInfo.wearables} />
               </Stack>
             </GridItem>
             <GridItem width="100%">
