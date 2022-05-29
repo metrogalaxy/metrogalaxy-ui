@@ -5,11 +5,7 @@ import {
   GetListWearablesResponse,
 } from 'src/proto/wearables/v1/wearables_pb';
 import { WearablesService } from 'src/proto/wearables/v1/wearables_pb_service';
-import {
-  AccessoriesFilterParams,
-  AccessoriesResponse,
-  Accessories,
-} from './index';
+import { AccessoriesFilterParams, AccessoriesResponse } from './index';
 
 class GrpcFetcher {
   grpcEndpoint: string;
