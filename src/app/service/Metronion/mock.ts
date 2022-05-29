@@ -9,9 +9,9 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { ITransactionReceipt } from '../types';
 import { BigNumber } from 'ethers';
 
-import MockListMetronion from './mock_list_metronion.json';
-import MockMetronionActivities from './mock_list_activities.json';
-import MockMetronionOffers from './mock_list_offers.json';
+// import MockListMetronion from './mock_list_metronion.json';
+// import MockMetronionActivities from './mock_list_activities.json';
+// import MockMetronionOffers from './mock_list_offers.json';
 
 class MockFetcher {
   async getMetronionInfo(id: number): Promise<MetronionInfo> {

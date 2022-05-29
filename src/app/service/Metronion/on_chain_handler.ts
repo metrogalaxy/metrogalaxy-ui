@@ -11,11 +11,7 @@ import {
   MetroToken__factory,
 } from 'src/app/contracts';
 import { JsonRpcProvider, Web3Provider } from '@ethersproject/providers';
-import {
-  GENDER,
-  STATUS,
-  DEFAULT_TX_CONFIRMATION_BLOCK,
-} from 'src/app/config/constants';
+import { DEFAULT_TX_CONFIRMATION_BLOCK } from 'src/app/config/constants';
 
 class MetronionOnChainHandler {
   marketplaceContract: string;
