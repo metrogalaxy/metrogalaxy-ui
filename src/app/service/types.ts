@@ -5,7 +5,7 @@ export interface ITransactionReceipt {
 }
 
 export interface BaseResponse {
-  timestamp: number;
+  timestamp?: number;
 }
 
 export interface Stats {

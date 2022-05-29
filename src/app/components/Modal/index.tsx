@@ -8,6 +8,7 @@ interface ModalProps {
   title: string;
   onHide?: () => any;
   onExit?: () => any;
+  children: any;
 }
 
 export const Modal: React.FunctionComponent<ModalProps> = props => {

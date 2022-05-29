@@ -21,7 +21,7 @@ import IntellectImage from 'src/app/assets/icon/intellect.svg';
 import FitnessImage from 'src/app/assets/icon/fitness.svg';
 
 interface StatsProps {
-  stats: Stats;
+  stats: Stats | undefined;
 }
 
 export function StatsComponent(props: StatsProps) {
@@ -56,31 +56,31 @@ export function StatsComponent(props: StatsProps) {
               <ItemComponent
                 image={CreativityImage}
                 label="Creativity"
-                statValue={props.stats.creativity}
+                statValue={props.stats ? props.stats.creativity : 0}
                 barVariant="customGreen"
               />
               <ItemComponent
                 image={CharismaImage}
                 label="Charisma"
-                statValue={props.stats.charisma}
+                statValue={props.stats ? props.stats.charisma : 0}
                 barVariant="customOrange"
               />
               <ItemComponent
                 image={ResolveImage}
                 label="Resolve"
-                statValue={props.stats.resolve}
+                statValue={props.stats ? props.stats.resolve : 0}
                 barVariant="customPink"
               />
               <ItemComponent
                 image={FitnessImage}
                 label="Fitness"
-                statValue={props.stats.fitness}
+                statValue={props.stats ? props.stats.fitness : 0}
                 barVariant="customBlue"
               />
               <ItemComponent
                 image={IntellectImage}
                 label="Intellect"
-                statValue={props.stats.intellect}
+                statValue={props.stats ? props.stats.intellect : 0}
                 barVariant="customPurple"
               />
             </Stack>

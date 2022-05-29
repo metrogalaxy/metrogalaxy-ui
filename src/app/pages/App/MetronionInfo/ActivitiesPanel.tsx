@@ -131,7 +131,7 @@ export function ActivitiesPanel(props: ActivitiesPanelProps) {
                       fontSize={{ base: '12px', md: '14px' }}
                       color="whiteBlur.200"
                     >
-                      {formatActivityType(item.activityType)}
+                      {formatActivityType(item.type)}
                     </Text>
                   </Td>
                   <Td>
@@ -140,7 +140,7 @@ export function ActivitiesPanel(props: ActivitiesPanelProps) {
                       fontSize={{ base: '12px', md: '14px' }}
                       color="whiteBlur.200"
                     >
-                      {shortenAddress(item.from)}
+                      {shortenAddress(item.fromAccount)}
                     </Text>
                   </Td>
                   <Td>
@@ -149,7 +149,7 @@ export function ActivitiesPanel(props: ActivitiesPanelProps) {
                       fontSize={{ base: '12px', md: '14px' }}
                       color="whiteBlur.200"
                     >
-                      {shortenAddress(item.to)}
+                      {shortenAddress(item.toAccount)}
                     </Text>
                   </Td>
                   <Td>

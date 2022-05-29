@@ -15,6 +15,8 @@
       "topBid": 12345678.1212412,
       "gender": "female",
       "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/metronions/0.png",
+      "star": 1,
+      "specialStar": 0,
       "baseStats": {
         "creativity": 12,
         "charisma": 20,
@@ -22,16 +24,27 @@
         "fitness": 7,
         "intellect": 25
       },
-      "parts": [
+      "wearables": [
         {
+          "wearableId": "G_Hair_01",
           "type": "hair",
           "name": "Yellow Long Hair",
+          "gender": "female",
           "changable": true,
           "isOrigin": true,
+          "isRequired": false,
           "rarity": 10,
-          "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/metronions/0.png"
+          "image": "https://metrogalaxy-storage.s3.ap-southeast-1.amazonaws.com/metronions/0.png",
+          "stats": {
+            "creativity": 1,
+            "charisma": 2,
+            "resolve": 3,
+            "intellect": 3,
+            "fitness": 5
+          }
         },
         {
+          "wearableId": "G_Skin_01",
           "type": "skin",
           "name": "Black Skin",
           "changable": false,
