@@ -13,10 +13,10 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react';
 import { METRONION_PARTS } from 'src/app/config/constants';
-import { MetronionParts } from 'src/app/service/Metronion';
+import { MetronionWearables } from 'src/app/service/Metronion';
 
 interface AccessoriesPanelProps {
-  parts?: MetronionParts[];
+  parts?: MetronionWearables[];
 }
 
 const parts = Object.values(METRONION_PARTS)
@@ -76,11 +76,11 @@ export function AccessoriesPanel(props: AccessoriesPanelProps) {
 interface AccessoriesItemProps {
   key: any;
   partType: string;
-  parts?: MetronionParts[];
+  parts?: MetronionWearables[];
 }
 
 function AccessoriesItem(props: AccessoriesItemProps) {
-  const [part, setPart] = React.useState<MetronionParts>();
+  const [part, setPart] = React.useState<MetronionWearables>();
 
   React.useEffect(() => {
     if (props.parts) {

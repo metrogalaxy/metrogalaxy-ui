@@ -132,7 +132,7 @@ export function OffersPanel(props: OffersPanelProps) {
                       fontSize={{ base: '12px', md: '14px' }}
                       color="whiteBlur.200"
                     >
-                      {shortenAddress(item.from)}
+                      {shortenAddress(item.fromAccount)}
                     </Text>
                   </Td>
                   {/* Price */}
@@ -170,24 +170,26 @@ export function OffersPanel(props: OffersPanelProps) {
                   {isOwner &&
                     account &&
                     isActivated &&
-                    !addressEqual(item.from, account) && (
+                    !addressEqual(item.fromAccount, account) && (
                       <Td>
                         <TakeOfferModal
                           metronionId={item.id}
                           offerPrice={item.price}
-                          buyer={item.from}
+                          buyer={item.fromAccount}
                           refetchMetronion={props.refetchMetronion}
                         />
                       </Td>
                     )}
-                  {account && isActivated && addressEqual(item.from, account) && (
-                    <Td>
-                      <CancelOfferModal
-                        metronionId={item.id}
-                        refetchMetronion={props.refetchMetronion}
-                      />
-                    </Td>
-                  )}
+                  {account &&
+                    isActivated &&
+                    addressEqual(item.fromAccount, account) && (
+                      <Td>
+                        <CancelOfferModal
+                          metronionId={item.id}
+                          refetchMetronion={props.refetchMetronion}
+                        />
+                      </Td>
+                    )}
                 </Tr>
               ))}
           </Tbody>

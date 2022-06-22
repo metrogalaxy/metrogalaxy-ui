@@ -6,24 +6,30 @@ import {
   GENDER,
   DEFAULT_SORT,
 } from 'src/app/config/constants';
+import { Stats } from 'src/app/service/types';
 
 /**
  ========= Interfaces
  */
 
 export interface Accessories {
-  id: number;
+  id: string;
+  onChainId: number;
+  name: string;
+  type: string;
   createAtTimestamp: number;
   updatedAtTimestamp: number;
   createdAtBlock: number;
   updatedAtBlock: number;
-  name: string;
   totalSupply: number;
-  owner: string;
-  lastPrice?: number;
-  currency: string;
-  uri: string;
-  image?: string;
+  lastPrice: number;
+  gender: string;
+  rarity: string;
+  changeable: boolean;
+  isOrigin: boolean;
+  isRequired: boolean;
+  image: string;
+  stats?: Stats;
 }
 
 export interface AccessoriesFilterParams {
@@ -47,7 +53,6 @@ export const DEFAULT_ACCESSORIES_FILTER_PARAMS = {
 
 export interface AccessoriesResponse {
   count: number;
-  offset: number;
   data: Accessories[];
 }
 
@@ -65,7 +70,8 @@ if (env.useMockData) {
   const Fetcher = require('./mock.ts').default;
   fetcher = new Fetcher();
 } else {
-  const Fetcher = require('./api.ts').default;
+  // const Fetcher = require('./api.ts').default;
+  const Fetcher = require('./grpc.ts').default;
   fetcher = new Fetcher();
 }
 

@@ -31,6 +31,7 @@ export interface Config {
   useMockData: boolean;
   api: {
     endpoint: string;
+    grpcEndpoint: string;
   };
   googleOAuth: {
     clientId: string;

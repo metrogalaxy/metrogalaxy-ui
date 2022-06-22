@@ -1,0 +1,21 @@
+version: v1
+name: buf.build/metrogalaxy/metrogalaxy-api
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  ignore_only:
+    PACKAGE_DIRECTORY_MATCH:
+      - droppod.proto
+    PACKAGE_VERSION_SUFFIX:
+      - droppod.proto
+    RPC_REQUEST_RESPONSE_UNIQUE:
+      - droppod.proto
+    RPC_RESPONSE_STANDARD_NAME:
+      - droppod.proto
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+  - buf.build/envoyproxy/protoc-gen-validate
