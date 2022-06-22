@@ -26,6 +26,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import { useDispatch } from 'react-redux';
 import { globalActions } from 'src/app/globalSlice';
 import { hashEmailPassword } from './';
+import { v4 as uuidv4 } from 'uuid';
 
 // init
 const provider = new GoogleAuthProvider();
@@ -58,10 +59,13 @@ export async function signUpWithEmailPassword(
     formData.password,
   );
 
+  const userId = uuidv4();
+
   // create user in firestore
   await setDoc(
-    doc(db, USER_COLLECTION_NAME, formData.email),
+    doc(db, USER_COLLECTION_NAME, userId),
     {
+      userId: userId,
       email: formData.email,
       username: formData.username,
       hash: hashEmailPassword(formData.email, formData.password),
@@ -168,6 +172,7 @@ export async function disconnectAccountWeb3Wallet(
 }
 
 export interface UserInfo {
+  userId: string;
   email: string;
   username: string;
   wallet: string;
@@ -223,6 +228,7 @@ export async function fetchUserInfo(wallet: string): Promise<UserInfo> {
   }
   const queryRes = querySnapshot.docs[0];
   return {
+    userId: queryRes.get('userId'),
     email: queryRes.get('email'),
     username: queryRes.get('username'),
     wallet: queryRes.get('wallet'),
