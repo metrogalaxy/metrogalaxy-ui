@@ -46,3 +46,16 @@ export function parseFirebaseAuthError(error: any): FirebaseErrorResponse {
       return err;
   }
 }
+
+export interface GameServerApiErrorResponse {
+  error: string;
+  message: string;
+  statusCode: number;
+}
+
+export function parseGameServerApiError(
+  error: any,
+): GameServerApiErrorResponse {
+  const err = error.response.data as GameServerApiErrorResponse;
+  return err;
+}

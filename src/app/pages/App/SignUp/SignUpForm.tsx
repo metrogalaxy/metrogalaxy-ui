@@ -14,16 +14,9 @@ import {
 } from '@chakra-ui/react';
 import { useButtonSize } from 'src/app/hooks';
 import { useForm } from 'react-hook-form';
-import {
-  signUpWithEmailPassword,
-  sendVerificationEmail,
-  fetchUserInfo,
-  isUsernameExist,
-} from 'src/app/service/Auth';
+import { signUpWithEmailPassword } from 'src/app/service/Auth';
 import { toast } from 'react-toastify';
 import { ToastConfig } from 'src/app/config';
-import { parseFirebaseAuthError } from 'src/utils/errors';
-import { VerifyEmail } from './VerifyEmail';
 import { ConnectWallet } from './ConnectWallet';
 import { useAccount } from 'src/app/hooks';
 import { useEthers } from '@quangkeu1995/dappcore';
@@ -32,6 +25,7 @@ import {
   signMessageToConnectWeb3,
 } from 'src/app/service/Auth/';
 import { Web3Provider } from '@ethersproject/providers';
+import { SignupSuccess } from './SignupSuccess';
 
 export function SignUpForm() {
   const buttonSize = useButtonSize();
@@ -57,60 +51,39 @@ export function SignUpForm() {
     setIsSubmitting.on();
 
     // verify that user wallet is not used
-    try {
-      const userInfo = await fetchUserInfo(account!);
-      if (userInfo) {
-        toast.error('wallet address is already used', ToastConfig);
-        setIsSubmitting.off();
-        return;
-      }
-    } catch (error) {}
-    // verify that username is available
-    try {
-      await isUsernameExist(data.username);
-    } catch (error) {
-      toast.error(`${error}`, ToastConfig);
-      setIsSubmitting.off();
-      return;
-    }
+    // try {
+    //   const userInfo = await fetchUserInfo(account!);
+    //   if (userInfo) {
+    //     toast.error('wallet address is already used', ToastConfig);
+    //     setIsSubmitting.off();
+    //     return;
+    //   }
+    // } catch (error) {}
+    // // verify that username is available
+    // try {
+    //   await isUsernameExist(data.username);
+    // } catch (error) {
+    //   toast.error(`${error}`, ToastConfig);
+    //   setIsSubmitting.off();
+    //   return;
+    // }
 
     try {
       // get user signature
       const signature = await signMessageToConnectWeb3(provider, account);
-      data.signature = signature;
+      data.walletSignature = signature;
 
       const response = await signUpWithEmailPassword(data);
-      if (response.user.email) {
-        setUserEmail(response.user.email);
-        if (!response.user.emailVerified) {
-          // send email verification
-          await sendVerificationEmail();
-        }
-      }
+      setUserEmail(response.email);
       setIsSubmitting.off();
     } catch (error: any) {
       toast.dismiss();
-      const err = parseFirebaseAuthError(error);
+      const err = new Error(error);
       toast.error(err.message, ToastConfig);
       setIsSubmitting.off();
       return;
     }
   };
-
-  // const onGoogleSignup = async () => {
-  //   setIsSubmittingGoogle.on();
-  //   try {
-  //     await signInWithGoogle();
-  //     setIsSubmittingGoogle.off();
-  //     navigate('/profile');
-  //   } catch (error) {
-  //     toast.dismiss();
-  //     const err = parseFirebaseAuthError(error);
-  //     toast.error(err.message, ToastConfig);
-  //     setIsSubmitting.off();
-  //     return;
-  //   }
-  // };
 
   const isMissingEmail =
     formState.errors.email && formState.errors.email.type === 'required';
@@ -130,7 +103,8 @@ export function SignUpForm() {
       formState.errors.wallet.type === 'validate');
 
   if (userEmail) {
-    return <VerifyEmail />;
+    // return <VerifyEmail />;
+    return <SignupSuccess />;
   }
 
   return (

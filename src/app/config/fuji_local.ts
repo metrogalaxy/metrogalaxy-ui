@@ -30,11 +30,13 @@ const env: Config = {
   api: {
     endpoint: 'http://localhost:8080',
     grpcEndpoint: 'http://localhost:8081',
+    gameServerApiEndpoint: 'https://dev-game-server-api.metrogalaxy.io',
   },
   googleOAuth: {
     clientId:
       '421185552601-cciedsseri0im5pru0cc1h0sdai1ob0u.apps.googleusercontent.com',
   },
+  gameWebAppUrl: 'https://dev-game.metrogalaxy.io',
 };
 
 export default env;

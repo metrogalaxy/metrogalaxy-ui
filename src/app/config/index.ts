@@ -32,10 +32,12 @@ export interface Config {
   api: {
     endpoint: string;
     grpcEndpoint: string;
+    gameServerApiEndpoint: string;
   };
   googleOAuth: {
     clientId: string;
   };
+  gameWebAppUrl: string;
 }
 
 const ENV: Config = require(`./${environment}.ts`).default;

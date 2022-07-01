@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
   UserCredential,
@@ -25,8 +24,12 @@ import {
 import { Web3Provider } from '@ethersproject/providers';
 import { useDispatch } from 'react-redux';
 import { globalActions } from 'src/app/globalSlice';
-import { hashEmailPassword } from './';
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+import ENV from 'src/app/config';
+import { HttpStatusCode } from 'src/mocks/constants';
+import { parseGameServerApiError } from 'src/utils';
+
+const WalletSignMessage = 'Connect web3 wallet with MetroGalaxy user account';
 
 // init
 const provider = new GoogleAuthProvider();
@@ -46,36 +49,42 @@ export interface SignUpFormData {
   email: string;
   password: string;
   username: string;
-  signature: string;
+  walletSignature: string;
+}
+
+interface SignupResponse {
+  id: string;
+  wallet: string;
+  email: string;
+  password: string;
+  username: string;
+  walletSignature: string;
 }
 
 export async function signUpWithEmailPassword(
   formData: SignUpFormData,
-): Promise<UserCredential> {
-  const auth = getAuth();
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    formData.email,
-    formData.password,
+): Promise<SignupResponse> {
+  const gameServerApiSignupUrl = new URL(
+    '/auth/signup',
+    ENV.api.gameServerApiEndpoint,
   );
 
-  const userId = uuidv4();
-
-  // create user in firestore
-  await setDoc(
-    doc(db, USER_COLLECTION_NAME, userId),
-    {
-      userId: userId,
-      email: formData.email,
-      username: formData.username,
-      hash: hashEmailPassword(formData.email, formData.password),
-      signature: formData.signature,
-      wallet: formData.wallet,
-    },
-    { merge: true },
-  );
-
-  return userCredential;
+  try {
+    const response = await axios.post<SignupResponse>(
+      gameServerApiSignupUrl.toString(),
+      formData,
+    );
+    if (
+      response.status !== HttpStatusCode.Success &&
+      response.status !== HttpStatusCode.Created
+    ) {
+      throw new Error('error signing up');
+    }
+    return response.data;
+  } catch (error: any) {
+    const err = parseGameServerApiError(error);
+    throw new Error(err.message);
+  }
 }
 
 export async function signInWithGoogle(): Promise<GoogleSignInResponse> {
@@ -137,7 +146,7 @@ export async function signMessageToConnectWeb3(
 ): Promise<string> {
   if (provider && account) {
     const signer = provider.getSigner(account);
-    return await signer.signMessage('Connect web3 wallet with user account');
+    return await signer.signMessage(WalletSignMessage);
   } else {
     return Promise.reject('web3 not connected');
   }
