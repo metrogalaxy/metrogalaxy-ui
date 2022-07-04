@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   getAuth,
   signInWithEmailAndPassword,
-  sendEmailVerification,
   UserCredential,
   GoogleAuthProvider,
   signInWithPopup,
@@ -61,6 +60,12 @@ interface SignupResponse {
   walletSignature: string;
 }
 
+interface GeneralHttpResponse {
+  success: boolean;
+  message: string;
+  error?: string;
+}
+
 export async function signUpWithEmailPassword(
   formData: SignUpFormData,
 ): Promise<SignupResponse> {
@@ -101,13 +106,29 @@ export async function signInWithGoogle(): Promise<GoogleSignInResponse> {
   }
 }
 
-export async function sendVerificationEmail(): Promise<void> {
-  const auth = getAuth();
-  if (!auth.currentUser) {
-    throw new Error('user not found');
-  }
+export async function sendVerificationEmail(email: string): Promise<void> {
+  const gameServerApiSignupUrl = new URL(
+    '/auth/send-verification-email',
+    ENV.api.gameServerApiEndpoint,
+  );
 
-  return sendEmailVerification(auth.currentUser);
+  const formData = {
+    email,
+  };
+
+  try {
+    const response = await axios.post<GeneralHttpResponse>(
+      gameServerApiSignupUrl.toString(),
+      formData,
+    );
+    if (response.status !== HttpStatusCode.Success) {
+      throw new Error('error send verification email');
+    }
+    return;
+  } catch (error: any) {
+    const err = parseGameServerApiError(error);
+    throw new Error(err.message);
+  }
 }
 
 export async function signInWithEmailPassword(
@@ -138,6 +159,31 @@ export async function signOut(): Promise<void> {
 export async function resetPassword(email: string): Promise<void> {
   const auth = getAuth();
   return sendPasswordResetEmail(auth, email);
+}
+
+export async function verifyEmail(accessToken: string): Promise<void> {
+  const gameServerApiSignupUrl = new URL(
+    '/auth/verify',
+    ENV.api.gameServerApiEndpoint,
+  );
+
+  const formData = {
+    token: accessToken,
+  };
+
+  try {
+    const response = await axios.post<GeneralHttpResponse>(
+      gameServerApiSignupUrl.toString(),
+      formData,
+    );
+    if (response.status !== HttpStatusCode.Success) {
+      throw new Error('error verify email');
+    }
+    return;
+  } catch (error: any) {
+    const err = parseGameServerApiError(error);
+    throw new Error(err.message);
+  }
 }
 
 export async function signMessageToConnectWeb3(

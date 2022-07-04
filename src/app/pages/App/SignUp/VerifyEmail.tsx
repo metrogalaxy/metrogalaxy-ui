@@ -17,7 +17,11 @@ import { toast } from 'react-toastify';
 import { ToastConfig } from 'src/app/config';
 import { parseFirebaseAuthError } from 'src/utils/';
 
-export function VerifyEmail() {
+interface VerifyEmailProps {
+  email: string;
+}
+
+export function VerifyEmail(props: VerifyEmailProps) {
   const [isSubmitting, setIsSubmitting] = useBoolean();
   const buttonSize = useButtonSize();
   const navigate = useNavigate();
@@ -29,7 +33,7 @@ export function VerifyEmail() {
   const resendEmail = async () => {
     setIsSubmitting.on();
     try {
-      await sendVerificationEmail();
+      await sendVerificationEmail(props.email);
       toast.dismiss();
       toast.success('Verification email sent!', ToastConfig);
     } catch (error) {

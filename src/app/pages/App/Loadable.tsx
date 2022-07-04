@@ -81,3 +81,11 @@ export const Profile = lazyLoad(
     fallback: <LoadingBackground />,
   },
 );
+
+export const VerifyEmail = lazyLoad(
+  () => import('./VerifyEmail'),
+  module => module.VerifyEmail,
+  {
+    fallback: <LoadingBackground />,
+  },
+);

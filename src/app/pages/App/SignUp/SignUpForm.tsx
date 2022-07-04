@@ -25,7 +25,7 @@ import {
   signMessageToConnectWeb3,
 } from 'src/app/service/Auth/';
 import { Web3Provider } from '@ethersproject/providers';
-import { SignupSuccess } from './SignupSuccess';
+import { VerifyEmail } from './VerifyEmail';
 
 export function SignUpForm() {
   const buttonSize = useButtonSize();
@@ -104,7 +104,7 @@ export function SignUpForm() {
 
   if (userEmail) {
     // return <VerifyEmail />;
-    return <SignupSuccess />;
+    return <VerifyEmail email={userEmail} />;
   }
 
   return (
