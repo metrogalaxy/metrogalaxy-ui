@@ -17,8 +17,7 @@ import {
 import BannerImg from 'src/app/pages/LandingPage/assets/banner.webp';
 import { useButtonSize } from 'src/app/hooks';
 import { useForm } from 'react-hook-form';
-import { resetPassword } from 'src/app/service/Auth';
-import { parseFirebaseAuthError } from 'src/utils/errors';
+import { sendResetPassword } from 'src/app/service/Auth';
 import { toast } from 'react-toastify';
 import { ToastConfig } from 'src/app/config';
 
@@ -35,13 +34,13 @@ export function ResetPassword() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting.on();
     try {
-      await resetPassword(data.email);
+      await sendResetPassword(data.email);
       setIsSubmitted.on();
       setIsSubmitting.off();
       return;
-    } catch (error) {
-      const err = parseFirebaseAuthError(error);
+    } catch (error: any) {
       toast.dismiss();
+      const err = new Error(error);
       toast.error(err.message, ToastConfig);
       setIsSubmitting.off();
       return;
@@ -138,9 +137,9 @@ export function ResetPassword() {
             textStyle="appNormal"
             color="white.100"
             fontSize={{ base: '12px', lg: '14px' }}
-            href="/profile"
+            href="/"
           >
-            Back to profile
+            Back to home
           </Link>
         </Flex>
       </Container>

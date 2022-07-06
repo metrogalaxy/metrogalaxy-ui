@@ -89,3 +89,11 @@ export const VerifyEmail = lazyLoad(
     fallback: <LoadingBackground />,
   },
 );
+
+export const ResetPasswordForm = lazyLoad(
+  () => import('./ResetPasswordForm'),
+  module => module.ResetPasswordForm,
+  {
+    fallback: <LoadingBackground />,
+  },
+);

@@ -19,6 +19,7 @@ import {
   ResetPassword,
   Profile,
   VerifyEmail,
+  ResetPasswordForm,
 } from './pages/App/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
@@ -80,6 +81,7 @@ export function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
+        <Route path="/reset-password-form" element={<ResetPasswordForm />} />
 
         <Route element={<NotFoundPage />} />
       </Routes>

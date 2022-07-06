@@ -7,7 +7,6 @@ import {
   FormLabel,
   FormErrorMessage,
   Input,
-  Link,
   Button,
   Spinner,
   useBoolean,
@@ -26,6 +25,7 @@ import {
 } from 'src/app/service/Auth/';
 import { Web3Provider } from '@ethersproject/providers';
 import { VerifyEmail } from './VerifyEmail';
+import { parseError } from 'src/utils';
 
 export function SignUpForm() {
   const buttonSize = useButtonSize();
@@ -69,6 +69,10 @@ export function SignUpForm() {
     // }
 
     try {
+      if (data.password !== data.confirmPassword) {
+        throw new Error('confirm password does not match');
+      }
+
       // get user signature
       const signature = await signMessageToConnectWeb3(provider, account);
       data.walletSignature = signature;
@@ -78,7 +82,7 @@ export function SignUpForm() {
       setIsSubmitting.off();
     } catch (error: any) {
       toast.dismiss();
-      const err = new Error(error);
+      const err = parseError(error);
       toast.error(err.message, ToastConfig);
       setIsSubmitting.off();
       return;
@@ -220,6 +224,30 @@ export function SignUpForm() {
             </FormErrorMessage>
           )}
         </FormControl>
+        {/* Confirm Password */}
+        <FormControl isRequired>
+          <FormLabel
+            textStyle="appNormal"
+            htmlFor="confirmPassword"
+            fontFamily="Acrom-Bold"
+          >
+            Confirm Password
+          </FormLabel>
+          <Input
+            id="confirmPassword"
+            type="password"
+            placeholder="Confirm your password"
+            bgColor="gray.500"
+            color="white"
+            _focus={{
+              borderColor: 'greenBlur.100',
+            }}
+            _placeholder={{
+              color: 'white.100',
+            }}
+            {...register('confirmPassword')}
+          />
+        </FormControl>
         {/* username */}
         <FormControl
           isRequired
@@ -279,28 +307,8 @@ export function SignUpForm() {
         >
           Create Account
         </Button>
-        {/* <Text
-          textStyle="appNormal"
-          color="whiteBlur.200"
-          textAlign="center"
-          fontSize={{ base: '12px', lg: '14px' }}
-        >
-          OR
-        </Text>
-        <Button
-          leftIcon={<Icon as={FcGoogle} />}
-          variant="outline"
-          size={buttonSize}
-          disabled={isSubmitting || isSubmittingGoogle}
-          onClick={onGoogleSignup}
-          rightIcon={
-            isSubmittingGoogle ? <Spinner size="sm" color="white" /> : undefined
-          }
-        >
-          Sign up with Google
-        </Button> */}
       </Stack>
-      <Stack mt={6}>
+      {/* <Stack mt={6}>
         <Text
           textStyle="appNormal"
           color="whiteBlur.200"
@@ -312,7 +320,7 @@ export function SignUpForm() {
             View profile
           </Link>
         </Text>
-      </Stack>
+      </Stack> */}
       {/* <Stack mt={3}>
         <Text
           textStyle="appNormal"

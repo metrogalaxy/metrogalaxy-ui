@@ -7,7 +7,6 @@ import {
   signInWithPopup,
   OAuthCredential,
   AuthErrorCodes,
-  sendPasswordResetEmail,
 } from 'firebase/auth';
 import {
   doc,
@@ -27,6 +26,7 @@ import axios from 'axios';
 import ENV from 'src/app/config';
 import { HttpStatusCode } from 'src/mocks/constants';
 import { parseGameServerApiError } from 'src/utils';
+import { ethers } from 'ethers';
 
 const WalletSignMessage = 'Connect web3 wallet with MetroGalaxy user account';
 
@@ -49,6 +49,7 @@ export interface SignUpFormData {
   password: string;
   username: string;
   walletSignature: string;
+  confirmPassword: string;
 }
 
 interface SignupResponse {
@@ -156,9 +157,58 @@ export async function signOut(): Promise<void> {
   return auth.signOut();
 }
 
-export async function resetPassword(email: string): Promise<void> {
-  const auth = getAuth();
-  return sendPasswordResetEmail(auth, email);
+export async function sendResetPassword(email: string): Promise<void> {
+  const url = new URL(
+    '/auth/send-reset-password',
+    ENV.api.gameServerApiEndpoint,
+  );
+
+  const formData = {
+    email,
+  };
+
+  try {
+    const response = await axios.post<GeneralHttpResponse>(
+      url.toString(),
+      formData,
+    );
+    if (response.status !== HttpStatusCode.Success) {
+      throw new Error('error send reset password email');
+    }
+    return;
+  } catch (error: any) {
+    const err = parseGameServerApiError(error);
+    throw new Error(err.message);
+  }
+}
+
+export async function resetPassword(
+  password: string,
+  accessToken: string,
+): Promise<void> {
+  const url = new URL('/auth/reset-password', ENV.api.gameServerApiEndpoint);
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
+  const formData = {
+    password,
+  };
+
+  try {
+    const response = await axios.post<GeneralHttpResponse>(
+      url.toString(),
+      formData,
+      config,
+    );
+    if (response.status !== HttpStatusCode.Success) {
+      throw new Error('error reset password');
+    }
+    return;
+  } catch (error: any) {
+    const err = parseGameServerApiError(error);
+    throw new Error(err.message);
+  }
 }
 
 export async function verifyEmail(accessToken: string): Promise<void> {
@@ -192,7 +242,13 @@ export async function signMessageToConnectWeb3(
 ): Promise<string> {
   if (provider && account) {
     const signer = provider.getSigner(account);
-    return await signer.signMessage(WalletSignMessage);
+
+    const message = ethers.utils.solidityKeccak256(
+      ['string', 'string'],
+      [account, WalletSignMessage],
+    );
+
+    return await signer.signMessage(ethers.utils.arrayify(message));
   } else {
     return Promise.reject('web3 not connected');
   }
