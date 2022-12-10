@@ -11,7 +11,7 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import CeoImage from './assets/team/dinh_anh_tuyen.webp';
-import CtoImage from './assets/team/nguyen_le_quang.webp';
+// import CtoImage from './assets/team/nguyen_le_quang.webp';
 import HeadProductImage from './assets/team/le_minh_hoang.webp';
 import CmoImage from './assets/team/trinh_cong_sang.webp';
 import BusinessDevelopmentImage from './assets/team/pham_hoang_minh.webp';
@@ -30,14 +30,14 @@ const team = [
     linkedIn: 'https://www.linkedin.com/in/tuyen-dinh-anh-3a033611b/',
     description: `Marketing and Business Development specialist with 5 years of experience in growth hacking and product management. 2 years of experience in growing blockchain products. Kyber Network & Krystal DeFi Alumni.`,
   },
-  {
-    avatar: CtoImage,
-    position: 'CTO, Co-Founder',
-    name: 'Quang Nguyen',
-    linkedIn: 'https://www.linkedin.com/in/le-quang-nguyen-a42120135/',
-    description: `Full-stack engineer with 5 years experience in software development and blockchain. 
-    Dapp builder, Kyber Network Alumni.`,
-  },
+  // {
+  //   avatar: CtoImage,
+  //   position: 'CTO, Co-Founder',
+  //   name: 'Quang Nguyen',
+  //   linkedIn: 'https://www.linkedin.com/in/le-quang-nguyen-a42120135/',
+  //   description: `Full-stack engineer with 5 years experience in software development and blockchain.
+  //   Dapp builder, Kyber Network Alumni.`,
+  // },
   {
     avatar: HeadProductImage,
     position: 'Head of Product',
