@@ -99,8 +99,8 @@ export function NavBar(props: INavBarProps) {
           flexGrow={1}
           mt={{ base: 4, xl: 0 }}
         >
-          <LinkComponent to="/">About us</LinkComponent>
-          <LinkComponent to="/">White paper</LinkComponent>
+          {/* <LinkComponent to="/about">About us</LinkComponent> */}
+          {/* <LinkComponent to="/">White paper</LinkComponent> */}
           <Button
             // onClick={joinUs}
             variant="outline"

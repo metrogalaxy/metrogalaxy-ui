@@ -5,17 +5,15 @@ import {
   useMediaQuery,
   Button,
   Center,
-  createIcon,
 } from '@chakra-ui/react';
-import RoadmapBgImg from './assets/roadmap_bg.webp';
-import { TELEGRAM_URL, TWITTER_URL } from 'src/app/config/constants';
+import { DISCORD_URL, TWITTER_URL } from 'src/app/config/constants';
 import { useButtonSize } from 'src/app/hooks';
 import ExcitedYetNftImg from './assets/excited-yet-nft-img.webp';
 import { DiscordIcon, TwitterIcon } from 'src/app/components/Icon';
 
 export function Roadmap() {
   const joinUs = () => {
-    window.open(TELEGRAM_URL, '_blank');
+    window.open(DISCORD_URL, '_blank');
   };
   const [isMobile] = useMediaQuery('(max-width: 576px)');
 

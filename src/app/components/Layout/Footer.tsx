@@ -1,6 +1,8 @@
 import { Box, Container, Flex, Link, Text, IconButton } from '@chakra-ui/react';
+import TermsPdf from 'src/app/assets/terms_and_conditions.pdf';
 import { Logo } from 'src/app/components/Logo';
 import {
+  ADMIN_EMAIL,
   DISCORD_URL,
   MEDIUM_URL,
   TELEGRAM_URL,
@@ -26,15 +28,9 @@ export function Footer() {
             </Text>
           </Box>
           <Flex borderLeft="1px solid #A1A7AD">
-            <Text color="white.100" textAlign="start" mt={1} pl="54px">
-              Contact
-            </Text>
-            <Text color="white.100" textAlign="start" mt={1} pl="54px">
-              Disclaimer
-            </Text>
-            <Text color="white.100" textAlign="start" mt={1} pl="54px">
-              Term of Services
-            </Text>
+            <CustomLink href={`mailto:${ADMIN_EMAIL}`}>Contact Us</CustomLink>
+            <CustomLink>Disclaimer</CustomLink>
+            <CustomLink href={TermsPdf}>Term of Services</CustomLink>
           </Flex>
           <Flex gap={4}>
             <IconButton
@@ -163,6 +159,8 @@ const CustomLink = props => {
       href={props.href}
       target={props.target ? props.target : '_blank'}
       color="white.100"
+      mt={1}
+      pl="54px"
     >
       {props.children}
     </Link>
