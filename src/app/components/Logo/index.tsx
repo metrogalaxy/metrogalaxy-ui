@@ -14,10 +14,10 @@ export const Logo = () => {
     >
       <Image src={LogoImg} width="52px" height="52px" />
       <Center ml="1.5">
-        <Text as="span" color="white">
+        <Text as="span" color="white" fontWeight={700}>
           Metro
         </Text>
-        <Text as="span" color="green.200">
+        <Text as="span" color="green.200" fontWeight={700}>
           Galaxy
         </Text>
       </Center>

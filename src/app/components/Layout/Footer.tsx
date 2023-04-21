@@ -1,35 +1,105 @@
-import * as React from 'react';
-import { Box, Container, Flex, Link, Text, Grid } from '@chakra-ui/react';
+import { Box, Container, Flex, Link, Text, IconButton } from '@chakra-ui/react';
 import { Logo } from 'src/app/components/Logo';
 import {
+  DISCORD_URL,
+  MEDIUM_URL,
   TELEGRAM_URL,
   TWITTER_URL,
-  ADMIN_EMAIL,
-  MEDIUM_URL,
-  DISCORD_URL,
-  CAREER_URL,
 } from 'src/app/config/constants';
-import Pitchdeck from 'src/app/assets/pitchdeck.pdf';
-import TermsPdf from 'src/app/assets/terms_and_conditions.pdf';
+import { DiscordIcon, MediumIcon, TelegramIcon, TwitterIcon } from '../Icon';
 
 export function Footer() {
   return (
-    <Box py={{ base: 16 }} px={{ base: 6 }} bg="gray.300">
+    <Box py={{ base: 6 }} px={{ base: 6 }} bg="gray.200">
       <Container maxW="container.xl">
         <Flex
           direction={{ base: 'column', md: 'row' }}
           w="100%"
           margin="0 auto"
           justify="space-between"
-          alignItems={{ base: 'center', md: 'flex-start' }}
+          alignItems={{ base: 'center', md: 'center' }}
         >
-          <Box mb={8}>
+          <Box>
             <Logo />
-            <Text color="white.100" textAlign="start" mt={1} pl="54px">
+            <Text color="white.100" textAlign="start" mt={-3} pl="54px">
               @MetroGalaxy
             </Text>
           </Box>
-          <Grid
+          <Flex borderLeft="1px solid #A1A7AD">
+            <Text color="white.100" textAlign="start" mt={1} pl="54px">
+              Contact
+            </Text>
+            <Text color="white.100" textAlign="start" mt={1} pl="54px">
+              Disclaimer
+            </Text>
+            <Text color="white.100" textAlign="start" mt={1} pl="54px">
+              Term of Services
+            </Text>
+          </Flex>
+          <Flex gap={4}>
+            <IconButton
+              aria-label="medium"
+              width={42}
+              height={42}
+              bgColor="#ffffff"
+              border="none"
+              _hover={{
+                bgColor: '#a59f9f',
+              }}
+              onClick={() => {
+                window.open(MEDIUM_URL, '_blank');
+              }}
+            >
+              <MediumIcon color="#000000" fontSize={30} />
+            </IconButton>
+            <IconButton
+              aria-label="discord"
+              width={42}
+              height={42}
+              bgColor="#5566E3"
+              border="none"
+              _hover={{
+                bgColor: '#3a4dd8',
+              }}
+              onClick={() => {
+                window.open(DISCORD_URL, '_blank');
+              }}
+            >
+              <DiscordIcon color="#ffffff" fontSize={30} />
+            </IconButton>
+            <IconButton
+              aria-label="telegram"
+              width={42}
+              height={42}
+              bg={'linear-gradient(0deg, #1D93D2 0%, #38B0E3 100%)'}
+              border="none"
+              _hover={{
+                bgColor: '#288ab4',
+              }}
+              onClick={() => {
+                window.open(TELEGRAM_URL, '_blank');
+              }}
+            >
+              <TelegramIcon color="#ffffff" fontSize={42} />
+            </IconButton>
+            <IconButton
+              aria-label="twitter"
+              width={42}
+              height={42}
+              bgColor="#5A99EC"
+              border="none"
+              _hover={{
+                bgColor: '#4587dd',
+              }}
+              onClick={() => {
+                window.open(TWITTER_URL, '_blank');
+              }}
+            >
+              <TwitterIcon color="#ffffff" fontSize={24} />
+            </IconButton>
+          </Flex>
+
+          {/* <Grid
             templateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
             gap={{ base: 1, md: 6 }}
             textAlign="center"
@@ -75,7 +145,7 @@ export function Footer() {
               <CustomLink href={TermsPdf}>Terms & Conditions</CustomLink>
               <CustomLink>Offical Token</CustomLink>
             </Flex>
-          </Grid>
+          </Grid> */}
         </Flex>
       </Container>
     </Box>

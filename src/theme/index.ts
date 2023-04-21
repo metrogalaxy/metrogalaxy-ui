@@ -47,6 +47,7 @@ export const theme = extendTheme({
       100: 'rgba(5, 15, 26, 0.4)',
       200: 'rgba(5, 15, 26, 0.6)',
       300: 'rgba(5, 15, 26, 0.8)',
+      400: 'rgba(20, 36, 51, 0.9)',
     },
     white: {
       100: '#F6FFF8BF',
