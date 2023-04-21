@@ -12,7 +12,7 @@ import { DiscordIcon, MediumIcon, TelegramIcon, TwitterIcon } from '../Icon';
 
 export function Footer() {
   return (
-    <Box py={{ base: 6 }} px={{ base: 6 }} bg="gray.200">
+    <Box py={{ base: 3, lg: 6 }} px={{ base: 3, lg: 6 }} bg="gray.200">
       <Container maxW="container.xl">
         <Flex
           direction={{ base: 'column', md: 'row' }}
@@ -20,6 +20,7 @@ export function Footer() {
           margin="0 auto"
           justify="space-between"
           alignItems={{ base: 'center', md: 'center' }}
+          gap={{ base: 2, lg: 'initial' }}
         >
           <Box>
             <Logo />
@@ -27,7 +28,7 @@ export function Footer() {
               @MetroGalaxy
             </Text>
           </Box>
-          <Flex borderLeft="1px solid #A1A7AD">
+          <Flex borderLeft={{ base: 'none', lg: '1px solid #A1A7AD' }}>
             <CustomLink href={`mailto:${ADMIN_EMAIL}`}>Contact Us</CustomLink>
             <CustomLink>Disclaimer</CustomLink>
             <CustomLink href={TermsPdf}>Term of Services</CustomLink>
@@ -160,7 +161,7 @@ const CustomLink = props => {
       target={props.target ? props.target : '_blank'}
       color="white.100"
       mt={1}
-      pl="54px"
+      pl={{ base: 1, lg: '54px' }}
     >
       {props.children}
     </Link>

@@ -1,21 +1,8 @@
-import * as React from 'react';
-import {
-  Box,
-  Text,
-  Container,
-  Grid,
-  ListItem,
-  UnorderedList,
-  GridItem,
-  Image,
-} from '@chakra-ui/react';
-import IslandImg from './assets/island.webp';
-import CreateToEarnImg from './assets/create_to_earn.webp';
+import { Box, Text, Container, Grid, GridItem, Image } from '@chakra-ui/react';
 import IdentityImg from './assets/identity-img.webp';
 import CommunityImg from './assets/community-img.webp';
 import InnovationImg from './assets/innovation-img.webp';
 import TransformationImg from './assets/transformation-img.webp';
-import CreateToEarnBgImg from './assets/create_to_earn_bg.webp';
 import Cloud5Img from './assets/cloud_5.webp';
 import Cloud6Img from './assets/cloud_6.webp';
 import WhyYouShouldBe from './assets/why-you-should-be-bg.webp';
@@ -80,7 +67,7 @@ export function Features() {
   return (
     <Box
       // px="4"
-      pt={40}
+      pt={{ lg: 40, base: 2 }}
       pb={40}
       bgImg={WhyYouShouldBe}
       backgroundPosition="center center"
@@ -112,7 +99,7 @@ export function Features() {
           maxW="container.lg"
           display="flex"
           flexDirection="column"
-          gap={36}
+          gap={{ lg: 36, base: 12 }}
         >
           <Box textAlign="center">
             <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
@@ -126,13 +113,14 @@ export function Features() {
                 base: 'repeat(1, 1fr)',
                 lg: 'repeat(12, 1fr)',
               }}
-              gap={{ base: 2, md: 14 }}
+              gap={{ base: 10, md: 14 }}
             >
               <GridItem
                 colSpan={{ base: 1, md: 4 }}
-                order={el.isReverse ? 1 : 0}
+                order={{ lg: el.isReverse ? 1 : 0, base: 0 }}
                 display="flex"
                 alignItems="center"
+                justifyContent={{ base: 'center', lg: 'initial' }}
               >
                 <Box>
                   <Image
@@ -147,13 +135,15 @@ export function Features() {
               </GridItem>
               <GridItem
                 colSpan={{ base: 1, md: 8 }}
-                order={el.isReverse ? 0 : 1}
+                order={{ lg: el.isReverse ? 0 : 1, base: 1 }}
                 display="flex"
                 alignItems="center"
+                justifyContent={{ base: 'center', lg: 'initial' }}
               >
                 <Box w="100%" textAlign="left">
                   <Text
                     textStyle="h2"
+                    textAlign={{ base: 'center', lg: 'initial' }}
                     data-aos="fade-right"
                     data-aos-duration="500"
                   >
@@ -174,7 +164,7 @@ export function Features() {
               </GridItem>
             </Grid>
           ))}
-          <Box mt={250} textAlign="center">
+          <Box mt={{ base: 100, lg: 250 }} textAlign="center">
             <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
               Our humble origins
             </Text>
@@ -216,7 +206,7 @@ export function Features() {
             xl: '280px',
           }}
           bottom={{
-            base: '40px',
+            base: '-100px',
             sm: '40px',
             md: '60px',
             lg: '120px',
@@ -242,7 +232,7 @@ export function Features() {
             xl: '260px',
           }}
           bottom={{
-            base: '40px',
+            base: '-100px',
             sm: '40px',
             md: '60px',
             lg: '120px',
