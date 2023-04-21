@@ -76,6 +76,7 @@ export const theme = extendTheme({
       200: '#0D5180',
       300: '#1BC4FF',
       400: '#2D9DE3',
+      800: '#085C8F',
     },
   },
   breakpoints,
