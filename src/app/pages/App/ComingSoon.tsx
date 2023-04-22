@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Text, Image, Flex } from '@chakra-ui/react';
 import { NavBar } from 'src/app/components/Layout/NavBar';
-import BgImg from 'src/app/assets/app/background.webp';
 import ComingSoonImg from 'src/app/assets/app/coming_soon.webp';
 
 export function ComingSoon() {
@@ -11,7 +10,7 @@ export function ComingSoon() {
       <Box
         w="full"
         height="100%"
-        bgImage={BgImg}
+        bgColor="pageLayoutBg"
         bgSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"

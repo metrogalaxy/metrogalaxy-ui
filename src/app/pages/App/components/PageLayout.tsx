@@ -15,7 +15,7 @@ export function PageLayout(props: PageLayoutProps) {
       w="full"
       minHeight="100vh"
       height="100%"
-      bgColor="#0B1926"
+      bgColor="pageLayoutBg"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       overflow="hidden"

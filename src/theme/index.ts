@@ -85,6 +85,7 @@ export const theme = extendTheme({
       300: '#1BC4FF',
       400: '#2D9DE3',
     },
+    pageLayoutBg: '#0B1926',
   },
   breakpoints,
   components,
