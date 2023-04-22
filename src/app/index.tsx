@@ -23,6 +23,7 @@ import env from 'src/app/config';
 import { useGlobalSlice } from 'src/app/globalSlice';
 import { useDispatch } from 'react-redux';
 import { useGetTokenUSDPrice } from 'src/app/service/Coingecko';
+import { HomePage } from './pages/Home';
 
 const FETCH_TOKEN_PRICE_INTERVAL = 30 * 1000;
 
@@ -55,7 +56,8 @@ export function App() {
         <link rel="icon" type="image/png" href={FavIcon} sizes="16x16" />
       </Helmet>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/theworld" element={<LandingPage />} />
         {/* <Route path="/metronion" element={<Metronion />} /> */}
         <Route path="/metronion" element={<ComingSoon />} />
         <Route path="/marketplace" element={<ComingSoon />} />
