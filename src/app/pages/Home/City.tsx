@@ -13,8 +13,8 @@ export function City() {
     <Box
       bgImg={MainsquareImg}
       w="full"
-      height="900px"
-      bgSize="cover"
+      height="740px"
+      bgSize={{ base: 'cover', lg: 'contain', xl: 'cover' }}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       borderTop="2px solid"
