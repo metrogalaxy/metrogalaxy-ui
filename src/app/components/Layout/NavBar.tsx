@@ -6,6 +6,7 @@ import { Logo } from 'src/app/components/Logo';
 import { Link as RouterLink } from 'react-router-dom';
 import { Account } from 'src/app/components/Account';
 import { useButtonSize } from 'src/app/hooks';
+import { DISCORD_URL } from 'src/app/config/constants';
 
 var styles = {
   bmBurgerButton: {
@@ -50,6 +51,10 @@ interface INavBarProps {
 }
 
 export function NavBar(props: INavBarProps) {
+  const joinUs = () => {
+    window.open(DISCORD_URL, '_blank');
+  };
+
   return (
     <Flex
       as="nav"
@@ -102,7 +107,7 @@ export function NavBar(props: INavBarProps) {
           {/* <LinkComponent to="/about">About us</LinkComponent> */}
           {/* <LinkComponent to="/">White paper</LinkComponent> */}
           <Button
-            // onClick={joinUs}
+            onClick={joinUs}
             variant="outline"
             size={useButtonSize()}
             // borderColor=""
