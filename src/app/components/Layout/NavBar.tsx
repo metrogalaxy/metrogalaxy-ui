@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Box, Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Spacer, Flex, Link, Stack, Text, Button } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { slide as Menu } from 'react-burger-menu';
 import { Logo } from 'src/app/components/Logo';
 import { Link as RouterLink } from 'react-router-dom';
 import { Account } from 'src/app/components/Account';
+import { useButtonSize } from 'src/app/hooks';
+import { DISCORD_URL } from 'src/app/config/constants';
 
 var styles = {
   bmBurgerButton: {
@@ -49,6 +51,10 @@ interface INavBarProps {
 }
 
 export function NavBar(props: INavBarProps) {
+  const joinUs = () => {
+    window.open(DISCORD_URL, '_blank');
+  };
+
   return (
     <Flex
       as="nav"
@@ -56,7 +62,7 @@ export function NavBar(props: INavBarProps) {
       justify="space-between"
       wrap="wrap"
       width="full"
-      bg="grayBlur.200"
+      bgColor="grayBlur.400"
       color="white"
       position="absolute"
       zIndex="100"
@@ -80,10 +86,45 @@ export function NavBar(props: INavBarProps) {
           flexGrow={1}
           mt={{ base: 4, xl: 0 }}
         >
-          <LinkComponent to="/metronion">Metronions</LinkComponent>
+          <LinkComponent to="/theworld">THE WORLD</LinkComponent>
+          {/* <LinkComponent to="/metronion">Metronions</LinkComponent>
           <LinkComponent to="/marketplace">Marketplace</LinkComponent>
           <LinkComponent to="/staking">Staking</LinkComponent>
-          <LinkComponent to="/land">Land</LinkComponent>
+          <LinkComponent to="/land">Land</LinkComponent> */}
+        </Stack>
+      </Flex>
+      <Spacer />
+      <Flex>
+        <Stack
+          direction={{ base: 'column', xl: 'row' }}
+          display={{ base: 'none', xl: 'flex' }}
+          width={{ base: 'full', xl: 'auto' }}
+          spacing={{ base: 5, xl: 10 }}
+          alignItems="center"
+          flexGrow={1}
+          mt={{ base: 4, xl: 0 }}
+        >
+          {/* <LinkComponent to="/about">About us</LinkComponent> */}
+          {/* <LinkComponent to="/">White paper</LinkComponent> */}
+          <Button
+            onClick={joinUs}
+            variant="outline"
+            size={useButtonSize()}
+            // borderColor=""
+            boxShadow="0px 12px 28px rgba(0, 0, 0, 0.25)"
+            _hover={{
+              color: 'green.200',
+              bgColor: 'gray.500',
+            }}
+            // data-aos="fade-up"
+            // data-aos-duration="1000"
+          >
+            Join Us Now
+          </Button>
+          {/* <LinkComponent to="/metronion">Metronions</LinkComponent>
+          <LinkComponent to="/marketplace">Marketplace</LinkComponent>
+          <LinkComponent to="/staking">Staking</LinkComponent>
+          <LinkComponent to="/land">Land</LinkComponent> */}
         </Stack>
       </Flex>
       <Flex>
