@@ -14,7 +14,7 @@ export function LandingPageBanner() {
       bgImage={BannerImg}
       w="full"
       height={{ base: '640px', md: '640px', lg: '100vh', '2xl': '1400px' }}
-      bgSize={{ base: 'cover', lg: 'contain', xl: 'contain', '2xl': 'cover' }}
+      bgSize={{ base: 'cover', lg: 'contain', xl: 'contain', '2xl': 'contain' }}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       position="relative"
