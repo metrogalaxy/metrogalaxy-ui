@@ -64,7 +64,7 @@ export function Welcome() {
             data-aos-duration="700"
             textAlign="center"
           >
-            Introducing the Metrionion PFP
+            Introducing the Metronion PFP
           </Text>
           <Box position="relative" zIndex="2">
             <Text

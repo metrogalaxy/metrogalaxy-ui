@@ -121,7 +121,7 @@ export function Features() {
             left={{
               base: '50px',
               lg: '100px',
-              xl: '170px',
+              xl: '100px',
             }}
             bottom={{
               base: '50px',
@@ -153,7 +153,7 @@ export function Features() {
               gap={{ base: 10, md: 14 }}
             >
               <GridItem
-                colSpan={{ base: 1, md: 4 }}
+                colSpan={{ base: 1, md: 5 }}
                 order={{ lg: el.isReverse ? 1 : 0, base: 0 }}
                 display="flex"
                 alignItems="center"
@@ -171,7 +171,7 @@ export function Features() {
                 </Box>
               </GridItem>
               <GridItem
-                colSpan={{ base: 1, md: 8 }}
+                colSpan={{ base: 1, md: 7 }}
                 order={{ lg: el.isReverse ? 0 : 1, base: 1 }}
                 display="flex"
                 alignItems="center"

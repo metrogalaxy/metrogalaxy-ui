@@ -23,8 +23,9 @@ export function Roadmap() {
       px={{ base: 8 }}
       bgColor="#084F7A"
       bgImg={ExcitedYetNftImg}
-      bgPosition="center left"
-      height={430}
+      backgroundSize={{ base: 'contain', '2xl': 'cover' }}
+      bgPosition="center"
+      height={400}
       display="flex"
       alignItems="center"
       bgRepeat="no-repeat"
