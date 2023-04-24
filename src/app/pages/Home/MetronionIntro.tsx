@@ -84,7 +84,8 @@ export function MetronionIntro() {
         position="absolute"
         src={DotImg}
         height={240}
-        width={1150}
+        display={{ base: 'none', lg: 'initial' }}
+        width={{ xl: 1150 }}
         left={{
           base: '50px',
           lg: '100px',

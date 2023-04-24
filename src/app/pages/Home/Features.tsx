@@ -116,7 +116,8 @@ export function Features() {
             position="absolute"
             src={DotImg}
             height={240}
-            width={1150}
+            display={{ base: 'none', lg: 'initial' }}
+            width={{ xl: 1150 }}
             left={{
               base: '50px',
               lg: '100px',
@@ -228,7 +229,7 @@ export function Features() {
                 </Box>
               </GridItem>
               <GridItem colSpan={{ base: 1, md: 8 }}>
-                <Box pl="100">
+                <Box pl={{ base: 0, lg: 100 }}>
                   <Box mb={4} pl={70}>
                     <Image
                       src={LineBreakImg}
@@ -239,7 +240,7 @@ export function Features() {
                     />
                   </Box>
                   <Text
-                    textAlign="left"
+                    textAlign={{ lg: 'left', base: 'center' }}
                     textStyle="h1"
                     data-aos="fade-right"
                     data-aos-duration="500"
