@@ -87,7 +87,7 @@ export function Features() {
       bgSize={{
         base: 'contain', // TODO:
         lg: 'cover',
-        xl: 'cover',
+        xl: 'contain',
       }}
       className="WhyYouShouldBe"
       bgColor="blue.800"
@@ -203,7 +203,7 @@ export function Features() {
           ))}
         </Container>
         <Container maxW="container.xl">
-          <Box mt={{ base: 100, lg: 250 }} textAlign="center">
+          <Box mt={{ base: 100, lg: 350 }} textAlign="center">
             <Grid
               templateColumns={{
                 base: 'repeat(1, 1fr)',
@@ -276,7 +276,7 @@ export function Features() {
             </Grid>
           </Box>
         </Container>
-        <Image
+        {/* <Image
           src={Cloud6Img}
           position="absolute"
           zIndex="1"
@@ -326,7 +326,7 @@ export function Features() {
             '2xl': '15%',
             '3xl': '25%',
           }}
-        />
+        /> */}
         {/* <Box
           height={{
             base: '300px',

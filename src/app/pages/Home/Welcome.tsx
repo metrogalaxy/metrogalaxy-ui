@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Center, Image, Box, Text } from '@chakra-ui/react';
-import Cloud2Img from './assets/cloud_2.webp';
-import Cloud4Img from './assets/cloud_4.webp';
+// import Cloud2Img from './assets/cloud_2.webp';
+// import Cloud4Img from './assets/cloud_4.webp';
 import ReactPlayer from 'react-player/lazy';
 import { TRAILER_VIDEO_URL } from 'src/app/config/constants';
 import WelcomeBgImg from './assets/welcome-bg-img.webp';
@@ -13,10 +13,10 @@ export function Welcome() {
       bg="blue.800"
       bgImage={WelcomeBgImg}
       w="full"
-      // height={{ base: '640px', md: '640px', lg: '100vh' }}
+      height={{ base: '640px', md: '640px', lg: '1500px', '2xl': '1600px' }}
       backgroundPosition="center bottom"
       backgroundRepeat="no-repeat"
-      backgroundSize="contain"
+      backgroundSize={{ base: 'contain', '2xl': 'cover' }}
     >
       <Container maxW="container.lg" px={{ base: 8 }} position="relative">
         <Box
@@ -114,7 +114,8 @@ export function Welcome() {
             xl: '-350px',
           }}
         /> */}
-        <Image
+        {/* Cloud image left */}
+        {/* <Image
           src={Cloud2Img}
           position="absolute"
           zIndex="1"
@@ -134,7 +135,7 @@ export function Welcome() {
             lg: '-100px',
             xl: '-250px',
           }}
-        />
+        /> */}
 
         {/* <Image
           src={Cloud3Img}
@@ -158,7 +159,7 @@ export function Welcome() {
             xl: '-80px',
           }}
         /> */}
-        <Image
+        {/* <Image
           src={Cloud4Img}
           position="absolute"
           zIndex="1"
@@ -179,7 +180,7 @@ export function Welcome() {
             md: '20px',
             xl: '-80px',
           }}
-        />
+        /> */}
       </Container>
     </Box>
   );
