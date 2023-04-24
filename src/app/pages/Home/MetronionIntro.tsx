@@ -138,11 +138,11 @@ export function MetronionIntro() {
           backgroundPosition="top center"
           backgroundRepeat="no-repeat"
           bgSize={{
-            base: 'cover', // TODO:
+            base: 'contain',
             lg: 'contain',
             xl: 'contain',
           }}
-          height={{ lg: 550 }}
+          height={{ base: 240, lg: 550 }}
           // data-aos="flip-down"
           // data-aos-duration="900"
         >

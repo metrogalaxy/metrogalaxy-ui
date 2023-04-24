@@ -13,7 +13,7 @@ export function Welcome() {
       bg="blue.800"
       bgImage={WelcomeBgImg}
       w="full"
-      height={{ base: '640px', md: '640px', lg: '1500px', '2xl': '1600px' }}
+      height={{ base: 'initial', md: '640px', lg: '1500px', '2xl': '1600px' }}
       backgroundPosition="center bottom"
       backgroundRepeat="no-repeat"
       backgroundSize={{ base: 'contain', '2xl': 'cover' }}
