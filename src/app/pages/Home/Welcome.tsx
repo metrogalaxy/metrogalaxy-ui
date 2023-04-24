@@ -49,13 +49,6 @@ export function Welcome() {
             data-aos-duration="900"
           />
         </Center>
-        <Image
-          src={LineBreakImg}
-          my={8}
-          data-aos="flip-up"
-          data-aos-delay="100"
-          data-aos-duration="900"
-        />
         <Center flexDirection="column">
           {/* <Text
             textStyle="h1"

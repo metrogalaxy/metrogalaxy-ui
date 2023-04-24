@@ -69,7 +69,6 @@ export function MetronionIntro() {
       backgroundPosition="top left"
       backgroundRepeat="no-repeat"
       position="relative"
-      overflow="hidden"
       pt={{ md: 16 }}
       height={{
         lg: '980px',
