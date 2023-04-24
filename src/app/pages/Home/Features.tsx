@@ -16,6 +16,7 @@ import Cloud6Img from './assets/cloud_6.webp';
 import WhyYouShouldBe from './assets/why-you-should-be-bg.webp';
 import LineBreakImg from './assets/line_break_2.webp';
 import CarImg from './assets/car-img.webp';
+import DotImg from './assets/dot-bg.webp';
 
 function createData(
   tittle: string,
@@ -111,6 +112,22 @@ export function Features() {
           flexDirection="column"
           gap={{ lg: 36, base: 12 }}
         >
+          <Image
+            position="absolute"
+            src={DotImg}
+            height={240}
+            width={1150}
+            left={{
+              base: '50px',
+              lg: '100px',
+              xl: '170px',
+            }}
+            bottom={{
+              base: '50px',
+              lg: '100px',
+              xl: '820px',
+            }}
+          />
           <Box textAlign="center">
             <Center mb={4}>
               <Image
