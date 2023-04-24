@@ -87,7 +87,7 @@ export function Features() {
       bgSize={{
         base: 'contain', // TODO:
         lg: 'cover',
-        xl: 'cover',
+        xl: 'contain',
       }}
       className="WhyYouShouldBe"
       bgColor="blue.800"
@@ -116,11 +116,12 @@ export function Features() {
             position="absolute"
             src={DotImg}
             height={240}
-            width={1150}
+            display={{ base: 'none', xl: 'initial' }}
+            width={{ xl: 1150 }}
             left={{
               base: '50px',
               lg: '100px',
-              xl: '170px',
+              xl: '100px',
             }}
             bottom={{
               base: '50px',
@@ -152,7 +153,7 @@ export function Features() {
               gap={{ base: 10, md: 14 }}
             >
               <GridItem
-                colSpan={{ base: 1, md: 4 }}
+                colSpan={{ base: 1, md: 5 }}
                 order={{ lg: el.isReverse ? 1 : 0, base: 0 }}
                 display="flex"
                 alignItems="center"
@@ -170,7 +171,7 @@ export function Features() {
                 </Box>
               </GridItem>
               <GridItem
-                colSpan={{ base: 1, md: 8 }}
+                colSpan={{ base: 1, md: 7 }}
                 order={{ lg: el.isReverse ? 0 : 1, base: 1 }}
                 display="flex"
                 alignItems="center"
@@ -202,7 +203,7 @@ export function Features() {
           ))}
         </Container>
         <Container maxW="container.xl">
-          <Box mt={{ base: 100, lg: 250 }} textAlign="center">
+          <Box mt={{ base: 100, lg: 350 }} textAlign="center">
             <Grid
               templateColumns={{
                 base: 'repeat(1, 1fr)',
@@ -228,7 +229,7 @@ export function Features() {
                 </Box>
               </GridItem>
               <GridItem colSpan={{ base: 1, md: 8 }}>
-                <Box pl="100">
+                <Box pl={{ base: 0, lg: 100 }}>
                   <Box mb={4} pl={70}>
                     <Image
                       src={LineBreakImg}
@@ -239,7 +240,7 @@ export function Features() {
                     />
                   </Box>
                   <Text
-                    textAlign="left"
+                    textAlign={{ lg: 'left', base: 'center' }}
                     textStyle="h1"
                     data-aos="fade-right"
                     data-aos-duration="500"
@@ -275,7 +276,7 @@ export function Features() {
             </Grid>
           </Box>
         </Container>
-        <Image
+        {/* <Image
           src={Cloud6Img}
           position="absolute"
           zIndex="1"
@@ -325,7 +326,7 @@ export function Features() {
             '2xl': '15%',
             '3xl': '25%',
           }}
-        />
+        /> */}
         {/* <Box
           height={{
             base: '300px',

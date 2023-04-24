@@ -32,7 +32,7 @@ export function Roadmap() {
       bgRepeat="no-repeat"
     >
       <Container maxW="container.lg">
-        <Flex direction="column" w="100%" margin="0 auto" textAlign="center">
+        {/* <Flex direction="column" w="100%" margin="0 auto" textAlign="center">
           <Text textStyle="h1" data-aos="fade-down" data-aos-duration="500">
             Roadmap
           </Text>
@@ -52,14 +52,14 @@ export function Roadmap() {
               data-aos-duration="700"
             />
           )}
-        </Flex>
-        <Image
+        </Flex> */}
+        {/* <Image
           src={LineBreakImg}
           my={8}
           data-aos="flip-up"
           data-aos-delay="100"
           data-aos-duration="900"
-        />
+        /> */}
         <Box
           bgColor="blue.200"
           py={{ base: 6 }}

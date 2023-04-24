@@ -69,7 +69,7 @@ export function MetronionIntro() {
       backgroundPosition="top left"
       backgroundRepeat="no-repeat"
       position="relative"
-      pt={{ md: 16 }}
+      // pt={{ md: 16 }}
       height={{
         lg: '980px',
       }}
@@ -84,16 +84,19 @@ export function MetronionIntro() {
         position="absolute"
         src={DotImg}
         height={240}
-        width={1150}
+        display={{ base: 'none', xl: 'initial' }}
+        width={{ xl: 1150 }}
         left={{
           base: '50px',
           lg: '100px',
           xl: '170px',
+          '2xl': '700px',
         }}
         top={{
           base: '50px',
           lg: '100px',
           xl: '420px',
+          '2xl': '350px',
         }}
       />
       <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
@@ -113,7 +116,7 @@ export function MetronionIntro() {
           <Text
             textStyle="paragraph"
             mt="10"
-            textAlign="justify"
+            textAlign="center"
             data-aos="fade-right"
             data-aos-duration="700"
           >
@@ -135,11 +138,11 @@ export function MetronionIntro() {
           backgroundPosition="top center"
           backgroundRepeat="no-repeat"
           bgSize={{
-            base: 'cover', // TODO:
+            base: 'contain',
             lg: 'contain',
             xl: 'contain',
           }}
-          height={{ lg: 550 }}
+          height={{ base: 240, lg: 550 }}
           // data-aos="flip-down"
           // data-aos-duration="900"
         >

@@ -13,7 +13,7 @@ export function City() {
     <Box
       bgImg={MainsquareImg}
       w="full"
-      height="740px"
+      height={{ base: '530px', xl: '740px', '2xl': '1320px' }}
       bgSize={{ base: 'cover', lg: 'contain', xl: 'cover' }}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
@@ -29,7 +29,7 @@ export function City() {
         transform="translateX(-50%) translateY(-50%)"
       >
         <Box
-          bgColor="grayBlur.200"
+          bgColor="grayBlur.400"
           color="white"
           border="2px solid"
           borderColor="green.200"
