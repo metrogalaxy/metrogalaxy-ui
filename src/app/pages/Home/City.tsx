@@ -2,12 +2,15 @@ import * as React from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
 import MainsquareImg from './assets/mainsquare.webp';
 import { useButtonSize } from 'src/app/hooks/useSize';
+import { useNavigate } from 'react-router-dom';
 // import { TELEGRAM_URL } from 'src/app/config/constants';
 
 export function City() {
   // const joinUs = () => {
   //   window.open(TELEGRAM_URL, '_blank');
   // };
+
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -72,6 +75,9 @@ export function City() {
           }}
           data-aos="fade-up"
           data-aos-duration="1000"
+          onClick={() => {
+            navigate('theworld');
+          }}
         >
           Learn More About The World
         </Button>
