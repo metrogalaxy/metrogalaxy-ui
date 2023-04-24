@@ -21,7 +21,7 @@ import G2Image from './assets/metronion/G2.webp';
 import G3Image from './assets/metronion/G3.webp';
 import G4Image from './assets/metronion/G4.webp';
 import G5Image from './assets/metronion/G5.webp';
-import BgImg from './assets/metronion_intro.webp';
+import DotImg from './assets/dot-bg.webp';
 import DynamicNFT from './assets/dynamic-nft.webp';
 
 const MetronionImages = [
@@ -69,12 +69,33 @@ export function MetronionIntro() {
       backgroundPosition="top left"
       backgroundRepeat="no-repeat"
       position="relative"
-      overflow="hidden"
       pt={{ md: 16 }}
       height={{
         lg: '980px',
       }}
     >
+      {/* <Container
+        bgImg={BgImg}
+        bgSize="contain"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+      ></Container> */}
+      <Image
+        position="absolute"
+        src={DotImg}
+        height={240}
+        width={1150}
+        left={{
+          base: '50px',
+          lg: '100px',
+          xl: '170px',
+        }}
+        top={{
+          base: '50px',
+          lg: '100px',
+          xl: '420px',
+        }}
+      />
       <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
         <Center mb={4}>
           <Image
