@@ -1,11 +1,12 @@
 import * as React from 'react';
+import LineBreakImg from './assets/line_break_2.webp';
 import {
   Box,
   Container,
   Text,
   Flex,
   Image,
-  Button,
+  Center,
   useMediaQuery,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
@@ -75,6 +76,15 @@ export function MetronionIntro() {
       }}
     >
       <Container maxW="container.md" py={{ base: 16 }} px={{ base: 8 }}>
+        <Center mb={4}>
+          <Image
+            src={LineBreakImg}
+            my={8}
+            data-aos="flip-up"
+            data-aos-delay="100"
+            data-aos-duration="900"
+          />
+        </Center>
         <Box textAlign="center">
           <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
             Dynamic NFT

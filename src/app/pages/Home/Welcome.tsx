@@ -4,10 +4,20 @@ import Cloud2Img from './assets/cloud_2.webp';
 import Cloud4Img from './assets/cloud_4.webp';
 import ReactPlayer from 'react-player/lazy';
 import { TRAILER_VIDEO_URL } from 'src/app/config/constants';
+import WelcomeBgImg from './assets/welcome-bg-img.webp';
+import LineBreakImg from './assets/line_break_2.webp';
 
 export function Welcome() {
   return (
-    <Box bg="blue.800">
+    <Box
+      bg="blue.800"
+      bgImage={WelcomeBgImg}
+      w="full"
+      // height={{ base: '640px', md: '640px', lg: '100vh' }}
+      backgroundPosition="center bottom"
+      backgroundRepeat="no-repeat"
+      backgroundSize="contain"
+    >
       <Container maxW="container.lg" px={{ base: 8 }} position="relative">
         <Box
           border="6px solid rgba(15, 82, 123, 0.8)"
@@ -30,6 +40,22 @@ export function Welcome() {
         px={{ base: 8 }}
         position="relative"
       >
+        <Center mb={4}>
+          <Image
+            src={LineBreakImg}
+            my={8}
+            data-aos="flip-up"
+            data-aos-delay="100"
+            data-aos-duration="900"
+          />
+        </Center>
+        <Image
+          src={LineBreakImg}
+          my={8}
+          data-aos="flip-up"
+          data-aos-delay="100"
+          data-aos-duration="900"
+        />
         <Center flexDirection="column">
           {/* <Text
             textStyle="h1"

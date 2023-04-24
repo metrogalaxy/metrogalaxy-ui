@@ -1,4 +1,12 @@
-import { Box, Text, Container, Grid, GridItem, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Container,
+  Grid,
+  GridItem,
+  Image,
+  Center,
+} from '@chakra-ui/react';
 import IdentityImg from './assets/identity-img.webp';
 import CommunityImg from './assets/community-img.webp';
 import InnovationImg from './assets/innovation-img.webp';
@@ -6,6 +14,8 @@ import TransformationImg from './assets/transformation-img.webp';
 import Cloud5Img from './assets/cloud_5.webp';
 import Cloud6Img from './assets/cloud_6.webp';
 import WhyYouShouldBe from './assets/why-you-should-be-bg.webp';
+import LineBreakImg from './assets/line_break_2.webp';
+import CarImg from './assets/car-img.webp';
 
 function createData(
   tittle: string,
@@ -102,6 +112,15 @@ export function Features() {
           gap={{ lg: 36, base: 12 }}
         >
           <Box textAlign="center">
+            <Center mb={4}>
+              <Image
+                src={LineBreakImg}
+                my={8}
+                data-aos="flip-up"
+                data-aos-delay="100"
+                data-aos-duration="900"
+              />
+            </Center>
             <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
               Why You Should Be A Part Of MetroGalaxy
             </Text>
@@ -164,34 +183,79 @@ export function Features() {
               </GridItem>
             </Grid>
           ))}
+        </Container>
+        <Container maxW="container.xl">
           <Box mt={{ base: 100, lg: 250 }} textAlign="center">
-            <Text textStyle="h1" data-aos="fade-right" data-aos-duration="500">
-              Our humble origins
-            </Text>
-            <Text
-              textStyle="paragraph"
-              mt="10"
-              textAlign="justify"
-              data-aos="fade-right"
-              data-aos-duration="700"
-              as="div"
+            <Grid
+              templateColumns={{
+                base: 'repeat(1, 1fr)',
+                lg: 'repeat(12, 1fr)',
+              }}
+              gap={{ base: 10, md: 14 }}
             >
-              <Text>
-                We started off the project as a social and gaming platform on
-                Avalanche a year ago. The MetroGalaxy platform uniquely blends a
-                social platform together with an online virtual game that lets
-                its players role-play, form meaningful connections, create NFTs
-                and use popular blockchain services in an ever-expanding
-                decentralized world.
-              </Text>
-              <Text>
-                Currently we are still developing the MetroGalaxy platform step
-                by step, albeit at a slow rate due to the small team size. We
-                sincerely hope that with the support from the Metro community,
-                we’ll be able to scale up and realize the potential of this
-                platform.
-              </Text>
-            </Text>
+              <GridItem
+                colSpan={{ base: 1, md: 3 }}
+                display="flex"
+                alignItems="end"
+                justifyContent={{ base: 'center', lg: 'end' }}
+              >
+                <Box>
+                  <Image
+                    src={CarImg}
+                    width="auto"
+                    height="auto"
+                    mt={{ base: 10, md: 0 }}
+                    data-aos="fade-left"
+                    data-aos-duration="500"
+                  />
+                </Box>
+              </GridItem>
+              <GridItem colSpan={{ base: 1, md: 8 }}>
+                <Box pl="100">
+                  <Box mb={4} pl={70}>
+                    <Image
+                      src={LineBreakImg}
+                      my={8}
+                      data-aos="flip-up"
+                      data-aos-delay="100"
+                      data-aos-duration="900"
+                    />
+                  </Box>
+                  <Text
+                    textAlign="left"
+                    textStyle="h1"
+                    data-aos="fade-right"
+                    data-aos-duration="500"
+                  >
+                    Our humble origins
+                  </Text>
+                </Box>
+                <Text
+                  textStyle="paragraph"
+                  mt="10"
+                  textAlign="justify"
+                  data-aos="fade-right"
+                  data-aos-duration="700"
+                  as="div"
+                >
+                  <Text>
+                    We started off the project as a social and gaming platform
+                    on Avalanche a year ago. The MetroGalaxy platform uniquely
+                    blends a social platform together with an online virtual
+                    game that lets its players role-play, form meaningful
+                    connections, create NFTs and use popular blockchain services
+                    in an ever-expanding decentralized world.
+                  </Text>
+                  <Text mt={5}>
+                    Currently we are still developing the MetroGalaxy platform
+                    step by step, albeit at a slow rate due to the small team
+                    size. We sincerely hope that with the support from the Metro
+                    community, we’ll be able to scale up and realize the
+                    potential of this platform.
+                  </Text>
+                </Text>
+              </GridItem>
+            </Grid>
           </Box>
         </Container>
         <Image

@@ -14,7 +14,7 @@ export function LandingPageBanner() {
       bgImage={BannerImg}
       w="full"
       height={{ base: '640px', md: '640px', lg: '100vh' }}
-      bgSize="cover"
+      bgSize={{ base: 'cover', lg: 'contain' }}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       position="relative"
@@ -25,7 +25,7 @@ export function LandingPageBanner() {
         position="absolute"
         flexDirection="column"
         right="50%"
-        bottom={{ base: 14, lg: 24 }}
+        bottom={{ base: 14, lg: 20 }}
         transform="translateX(50%)"
         w="full"
         zIndex={2}
