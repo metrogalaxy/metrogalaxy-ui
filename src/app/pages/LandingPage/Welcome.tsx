@@ -3,7 +3,7 @@ import { Container, Center, Image, Box, Text } from '@chakra-ui/react';
 import Cloud2Img from './assets/cloud_2.webp';
 import Cloud4Img from './assets/cloud_4.webp';
 import ReactPlayer from 'react-player/lazy';
-import { TRAILER_VIDEO_URL } from 'src/app/config/constants';
+import { TRAILER_VIDEO_URL_THE_WORLD } from 'src/app/config/constants';
 
 export function Welcome() {
   return (
@@ -15,7 +15,7 @@ export function Welcome() {
           height={{ base: '320px', lg: '640px' }}
         >
           <ReactPlayer
-            url={TRAILER_VIDEO_URL}
+            url={TRAILER_VIDEO_URL_THE_WORLD}
             width="100%"
             height="100%"
             className="react-player-wrapper"

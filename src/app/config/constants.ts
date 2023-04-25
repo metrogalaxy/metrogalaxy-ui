@@ -4,6 +4,8 @@ export const TWITTER_URL = 'https://twitter.com/metrogalaxy_io';
 export const MEDIUM_URL = 'https://medium.com/@metrogalaxy';
 export const DISCORD_URL = 'https://discord.com/invite/vy4YsBWEDt';
 export const ADMIN_EMAIL = 'captain@metrogalaxy.io';
+export const TRAILER_VIDEO_URL_THE_WORLD =
+  'https://www.youtube.com/watch?v=1nVdAdgVmy0';
 export const TRAILER_VIDEO_URL = 'https://youtu.be/4Kjd1pGeiBE';
 export const CAREER_URL = 'https://metrogalaxy.super.site/';
 
