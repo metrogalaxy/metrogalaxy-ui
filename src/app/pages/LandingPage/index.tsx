@@ -7,10 +7,12 @@ import { MetronionIntro } from './MetronionIntro';
 import { Features } from './Features';
 import { Roadmap } from './Roadmap';
 import { City } from './City';
+import ScrollToTop from 'src/app/components/ScrollToTop';
 
 export function LandingPage() {
   return (
     <PageLayout>
+      <ScrollToTop />
       <Helmet>
         <title>MetroGalaxy Homepage</title>
         <meta name="description" content="The MetroGalaxy Homepage" />
