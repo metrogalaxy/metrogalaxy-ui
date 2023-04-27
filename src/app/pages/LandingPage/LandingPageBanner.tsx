@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, Button, Center, Text } from '@chakra-ui/react';
 import BannerImg from './assets/banner.webp';
-import { TELEGRAM_URL } from 'src/app/config/constants';
+import { DISCORD_URL } from 'src/app/config/constants';
 import { useButtonSize } from 'src/app/hooks/useSize';
 
 export function LandingPageBanner() {
   const joinUs = () => {
-    window.open(TELEGRAM_URL, '_blank');
+    window.open(DISCORD_URL, '_blank');
   };
 
   return (
