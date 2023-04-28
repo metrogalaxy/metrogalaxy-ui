@@ -17,7 +17,7 @@ export function City() {
       bgImg={MainsquareImg}
       w="full"
       height={{ base: '530px', xl: '740px', '2xl': '1320px' }}
-      bgSize={{ base: 'cover', lg: 'contain', xl: 'contain' }}
+      bgSize={{ base: 'cover', lg: 'contain', xl: 'contain', '2xl': 'cover' }}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       borderTop="2px solid"
