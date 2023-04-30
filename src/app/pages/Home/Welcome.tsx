@@ -17,6 +17,7 @@ export function Welcome() {
       backgroundPosition="center bottom"
       backgroundRepeat="no-repeat"
       backgroundSize={{ base: 'contain', '2xl': 'cover' }}
+      pt={20}
     >
       <Container maxW="container.lg" px={{ base: 8 }} position="relative">
         <Box
