@@ -27,7 +27,8 @@ export function LandingPageBanner() {
       bgImage={BannerImg}
       w="full"
       // height={{ base: '640px', md: '640px', lg: '100vh', '2xl': '1400px' }}
-      bgSize={{ base: 'cover', lg: 'contain' }}
+      // bgSize={{ base: 'cover', lg: 'cover' }}
+      bgSize="cover"
       height={{
         base: '640px',
         md: '640px',
