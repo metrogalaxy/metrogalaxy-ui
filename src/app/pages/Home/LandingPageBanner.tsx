@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button, Center } from '@chakra-ui/react';
 import BannerImg from './assets/banner.webp';
 import { DISCORD_URL } from 'src/app/config/constants';
@@ -21,22 +21,43 @@ export function LandingPageBanner() {
   const joinUs = () => {
     window.open(DISCORD_URL, '_blank');
   };
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function getWindowDimensions() {
+      const { innerWidth: width, innerHeight: height } = window;
+      return {
+        width,
+        height,
+      };
+    }
+
+    function handleResize() {
+      setWidth(getWindowDimensions().width);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <Box
       bgImage={BannerImg}
-      w="full"
+      // w="full"
       // height={{ base: '640px', md: '640px', lg: '100vh', '2xl': '1400px' }}
       // bgSize={{ base: 'cover', lg: 'cover' }}
-      bgSize="cover"
-      height={{
-        base: '640px',
-        md: '640px',
-        lg: heights.lg,
-        xl: heights.xl,
-        '2xl': heights['2xl'],
-      }}
-      // bgSize="contain"
+      // bgSize={{ base: 'cover', lg: 'contain', xl: 'contain', '2xl': 'cover' }}
+      // height={{
+      //   base: '640px',
+      //   md: '640px',
+      //   lg: heights.lg,
+      //   xl: heights.xl,
+      //   '2xl': heights['2xl'],
+      // }}
+      width={'100%'}
+      height={0}
+      pt={(HEIGHT_IMG_BANNER / WIDTH_IMG_BANNER) * width}
+      bgSize="contain"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       position="relative"
