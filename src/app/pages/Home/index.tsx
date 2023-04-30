@@ -7,6 +7,7 @@ import { MetronionIntro } from './MetronionIntro';
 import { Features } from './Features';
 import { Roadmap } from './Roadmap';
 import { City } from './City';
+import { Box } from '@chakra-ui/layout';
 
 export function HomePage() {
   return (
@@ -15,6 +16,8 @@ export function HomePage() {
         <title>MetroGalaxy Homepage</title>
         <meta name="description" content="The MetroGalaxy Homepage" />
       </Helmet>
+      {/* For fullfil gap absolute navbar */}
+      <Box height={92} />
       <LandingPageBanner />
       <Welcome />
       <MetronionIntro />

@@ -4,6 +4,19 @@ import BannerImg from './assets/banner.webp';
 import { DISCORD_URL } from 'src/app/config/constants';
 import { useButtonSize } from 'src/app/hooks/useSize';
 
+const HEIGHT_IMG_BANNER = 1390;
+const WIDTH_IMG_BANNER = 3200;
+const ratios = {
+  '2xl': 2560 / WIDTH_IMG_BANNER,
+  xl: 1440 / WIDTH_IMG_BANNER,
+  lg: 1040 / WIDTH_IMG_BANNER,
+};
+const heights = {
+  '2xl': ratios['2xl'] * HEIGHT_IMG_BANNER,
+  xl: ratios['xl'] * HEIGHT_IMG_BANNER,
+  lg: ratios['lg'] * HEIGHT_IMG_BANNER,
+};
+
 export function LandingPageBanner() {
   const joinUs = () => {
     window.open(DISCORD_URL, '_blank');
@@ -13,19 +26,29 @@ export function LandingPageBanner() {
     <Box
       bgImage={BannerImg}
       w="full"
-      height={{ base: '640px', md: '640px', lg: '100vh', '2xl': '1400px' }}
-      bgSize={{ base: 'cover', lg: 'contain', xl: 'contain', '2xl': 'contain' }}
+      // height={{ base: '640px', md: '640px', lg: '100vh', '2xl': '1400px' }}
+      // bgSize={{ base: 'cover', lg: 'cover' }}
+      bgSize="cover"
+      height={{
+        base: '640px',
+        md: '640px',
+        lg: heights.lg,
+        xl: heights.xl,
+        '2xl': heights['2xl'],
+      }}
+      // bgSize="contain"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       position="relative"
-      overflow="hidden"
+      // overflow="hidden"
       bgColor="blue.800"
     >
       <Center
         position="absolute"
         flexDirection="column"
         right="50%"
-        bottom={{ base: 14, lg: 20 }}
+        // bottom={{ base: 14, lg: 14 }}
+        bottom={-4}
         transform="translateX(50%)"
         w="full"
         zIndex={2}
